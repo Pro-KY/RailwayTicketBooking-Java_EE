@@ -13,8 +13,12 @@
     <br/>
     Status code: ${pageContext.errorData.statusCode}
     <br/>
-    Exception: ${pageContext.exception}
+    <c:if test="${not empty pageContext.exception}">
+        Exception: ${pageContext.exception}
+    </c:if>
     <br/>
-    Message from exception: ${pageContext.exception.message}
+    <c:if test="${not empty pageContext.exception.message}">
+        Exception: ${pageContext.exception.message}
+    </c:if>
 </body>
 </html>

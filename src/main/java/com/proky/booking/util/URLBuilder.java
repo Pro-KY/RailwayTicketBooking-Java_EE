@@ -34,9 +34,7 @@ public class URLBuilder {
         if (parameters != null) {
             sb.append("?");
 
-            parameters.forEach((parameter,value) -> {
-                sb.append(parameter).append("=").append(value);
-            });
+            parameters.forEach((parameter,value) -> sb.append(parameter).append("=").append(value));
         }
 
         return sb.toString();

@@ -1,4 +1,4 @@
-package com.proky.booking.presentation;
+package com.proky.booking.presentation.controller;
 import com.proky.booking.presentation.command.CommandFactory;
 import com.proky.booking.presentation.command.ICommand;
 import com.proky.booking.util.constans.Command;

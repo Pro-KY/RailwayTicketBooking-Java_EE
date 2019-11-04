@@ -1,4 +1,9 @@
 package com.proky.booking.presentation;
+import com.proky.booking.presentation.command.CommandFactory;
+import com.proky.booking.presentation.command.ICommand;
+import com.proky.booking.util.constans.Command;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +25,16 @@ public class FrontController extends HttpServlet {
     }
 
     private void handleRequest (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // stub
+        final ICommand command = CommandFactory.getCommand(request);
+        final String view = command.execute(request);
+
+        if (view == null) {
+            response.sendRedirect("/error.jsp");
+        } else if (view.startsWith(Command.REDIRECT)) {
+            response.sendRedirect(view.replace("redirect:", ""));
+        } else {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(view);
+            dispatcher.forward(request, response);
+        }
     }
 }

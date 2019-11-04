@@ -39,10 +39,14 @@
             </div>
 
             <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Enter</button>
+            <div class="modal-footer justify-content-center align-items-center">
+                <div class="row">
+                    <button type="button" class="btn btn-primary col-12" data-dismiss="modal">Enter</button>
+                    <div class="col-12 pt-2 pl-5 mr-md-n4">
+                        <a href="#">Sign up</a>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -1,7 +1,7 @@
 package com.proky.booking.util;
 import java.util.Map;
 
-import static com.proky.booking.util.constans.Command.REDIRECT;
+import static com.proky.booking.util.constans.Commands.REDIRECT;
 
 public class URLBuilder {
     private StringBuilder sb = new StringBuilder();

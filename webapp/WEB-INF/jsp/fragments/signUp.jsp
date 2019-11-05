@@ -1,3 +1,5 @@
+
+
 <form name="SignUpForm" method="POST" action ="${pageContext.request.contextPath}/booking/">
     <input type="hidden" name="command" value="${Commands.SIGN_UP}">
 

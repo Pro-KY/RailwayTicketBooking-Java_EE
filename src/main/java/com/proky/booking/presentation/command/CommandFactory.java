@@ -1,6 +1,8 @@
 package com.proky.booking.presentation.command;
 
-import com.proky.booking.presentation.command.impl.EmptyCommand;
+import com.proky.booking.presentation.command.fragment.SignUpFragmentCommand;
+import com.proky.booking.util.constans.Commands;
+import com.proky.booking.util.constans.Parameters;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,20 +16,14 @@ public class CommandFactory {
     private static HashMap<String, ICommand> commandHashMap = new HashMap<>();
 
     static {
-
+        commandHashMap.put(Commands.GET_SIGN_UP_FRAGMENT, new SignUpFragmentCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {
-        ICommand command;
-        final String clientCommand = request.getParameter("command");
+        final String clientCommand = request.getParameter(Parameters.COMMAND);
         log.info("command - {}", clientCommand);
 
-        if (clientCommand == null || clientCommand.isEmpty() || commandHashMap.get(clientCommand) == null) {
-            command = new EmptyCommand();
-        } else {
-            command = commandHashMap.get(clientCommand);
-        }
-
-        return command;
+        boolean isCommandInvalid = clientCommand == null || clientCommand.isEmpty() || commandHashMap.get(clientCommand) == null;
+        return isCommandInvalid ? new EmptyCommand() : commandHashMap.get(clientCommand);
     }
 }

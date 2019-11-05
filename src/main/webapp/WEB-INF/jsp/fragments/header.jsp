@@ -1,4 +1,3 @@
-
 <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
@@ -43,7 +42,7 @@
                 <div class="row">
                     <button type="button" class="btn btn-primary col-12" data-dismiss="modal">Enter</button>
                     <div class="col-12 pt-2 pl-5 mr-md-n4">
-                        <a href="#">Sign up</a>
+                        <a href="booking/?${Parameters.COMMAND}=${Commands.GET_SIGN_UP_FRAGMENT}">Sign up</a>
                     </div>
                 </div>
             </div>

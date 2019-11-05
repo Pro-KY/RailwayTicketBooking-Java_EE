@@ -2,6 +2,7 @@ package com.proky.booking.presentation.controller;
 import com.proky.booking.presentation.command.CommandFactory;
 import com.proky.booking.presentation.command.ICommand;
 import com.proky.booking.util.constans.Commands;
+import com.proky.booking.util.properties.ViewPath;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,9 +33,10 @@ public class FrontController extends HttpServlet {
         final String view = command.execute(request);
 
         if (view == null) {
-            response.sendRedirect("/error.jsp");
+            response.sendRedirect(ViewPath.ERROR);
         } else if (view.startsWith(Commands.REDIRECT)) {
-            response.sendRedirect(view.replace("redirect:", ""));
+            System.out.println("REDIRECT!!!");
+            response.sendRedirect(view.replace(Commands.REDIRECT, ""));
         } else {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(view);
             dispatcher.forward(request, response);

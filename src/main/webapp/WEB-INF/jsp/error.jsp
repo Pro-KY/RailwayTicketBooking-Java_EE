@@ -18,7 +18,7 @@
     </c:if>
     <br/>
     <c:if test="${not empty pageContext.exception.message}">
-        Exception: ${pageContext.exception.message}
+        Message: ${pageContext.exception.message}
     </c:if>
 </body>
 </html>

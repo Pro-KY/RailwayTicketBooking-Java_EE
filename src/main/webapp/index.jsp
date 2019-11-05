@@ -15,6 +15,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="<c:url value="/css/bootstrap/bootstrap.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/css/main.css"/>">
+    <link rel="stylesheet" href="<c:url value="/css/flag-icon.min.css"/>">
+
     <script src="<c:url value="/jquery/jquery.js"/>"></script>
     <script src="<c:url value="/js/bootstrap/popper.js"/>"></script>
     <script src="<c:url value="/js/bootstrap/bootstrap.min.js"/>"></script>

@@ -1,6 +1,8 @@
 package com.proky.booking.presentation.command;
 
+import com.proky.booking.exception.ServiceException;
 import com.proky.booking.persistence.entity.User;
+import com.proky.booking.service.SignUpService;
 import com.proky.booking.service.ValidationService;
 import com.proky.booking.util.PasswordEncryptor;
 import com.proky.booking.util.command.HttpRequestDataBinder;
@@ -24,6 +26,9 @@ public class SignUpCommand implements ICommand {
         final ValidationService validationService = ValidationService.getInstance();
         final ValidationResult validate = validationService.validate(user);
 //
+        final SignUpService signUpService = new SignUpService(null);
+        signUpService.signUp(null);
+
 //        log.info("is valid - {}", validate.isValid());
 //
 //        validate.getErrorMessages().forEach((k,v) -> {
@@ -35,13 +40,13 @@ public class SignUpCommand implements ICommand {
         final PasswordEncryptor passwordEncryptor = PasswordEncryptor.getInstance();
         final String encryptedPassword = passwordEncryptor.encryptPassword(user.getPassword());
 
+        final String contextPath = request.getContextPath();
+        log.info("contextPath {}", contextPath);
+
         // get by email
-        // if empty => save user -> else =>
+        // if empty => save user -> else => send error message
 
         System.out.println(encryptedPassword);
-
-
-
 
         // set attributes
         // return page

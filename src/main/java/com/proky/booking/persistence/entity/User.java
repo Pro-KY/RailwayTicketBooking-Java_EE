@@ -16,6 +16,8 @@ public class User extends Entity<Long> {
     private String password;
     private UserType userType;
 
+    public User() {}
+
     public User(Long id, String firstName, String lastName, String email, String password, UserType userType) {
         super(id);
         this.firstName = firstName;

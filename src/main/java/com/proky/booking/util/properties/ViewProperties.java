@@ -3,7 +3,7 @@ package com.proky.booking.util.properties;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-public class ViewPath {
+public class ViewProperties {
     private static ResourceBundle viewPathProperties;
     private static final String fileName = "view";
 

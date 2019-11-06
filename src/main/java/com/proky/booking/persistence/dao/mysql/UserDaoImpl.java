@@ -2,6 +2,7 @@ package com.proky.booking.persistence.dao.mysql;
 
 import com.proky.booking.persistence.dao.IUserDao;
 import com.proky.booking.persistence.entity.User;
+import com.proky.booking.util.properties.SqlProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,6 +21,7 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public Optional<User> findByEmail(String email) {
+        final String findByEmailQuery = SqlProperties.FIND_BY_EMAIL;
         return Optional.empty();
     }
 

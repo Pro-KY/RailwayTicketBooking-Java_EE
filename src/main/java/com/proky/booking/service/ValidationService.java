@@ -10,8 +10,7 @@ import java.lang.reflect.Field;
 public class ValidationService {
     private static ValidationService mInstance;
 
-    private ValidationService() {
-    }
+    private ValidationService() {}
 
     public static ValidationService getInstance() {
         if (mInstance == null) {
@@ -20,20 +19,28 @@ public class ValidationService {
         return mInstance;
     }
 
-    public <T> void validate(T object) {
+    public <T> ValidationResult validate(T object) {
+
+        final ValidationResult validationResult = new ValidationResult();
 
         final Class<?> aClass = object.getClass();
         Field[] fields = aClass.getDeclaredFields();
 
         for (Field field : fields) {
-            // field might have two or more annotations
-            final Annotation[] declaredAnnotations = field.getDeclaredAnnotations();
+            final Annotation[] declaredAnnotations = field.getDeclaredAnnotations(); // field might have two or more annotations
             for (Annotation declaredAnnotation : declaredAnnotations) {
                 final Validator validator = getValidator(declaredAnnotation);
-                validator.validate(field, object);
-                // break
+
+                final boolean isInvalid = validator.validate(field, object);
+                if (isInvalid) {
+                    validationResult.setValid(false);
+                    validationResult.addErrorMessage(validator.getValidatedField(), validator.getErrorMessage());
+                    break;
+                }
             }
         }
+
+        return validationResult;
     }
 
     private Validator getValidator(Annotation annotation) {
@@ -54,5 +61,4 @@ public class ValidationService {
         }
         return validator;
     }
-
 }

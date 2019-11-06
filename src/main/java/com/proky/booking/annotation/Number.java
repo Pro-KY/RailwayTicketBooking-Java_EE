@@ -8,4 +8,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Number {
+    String pattern() default "\\d{1,3}(\\.\\d{1,3})?";
 }

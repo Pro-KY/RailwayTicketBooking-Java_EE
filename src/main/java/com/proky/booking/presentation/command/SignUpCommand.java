@@ -35,6 +35,9 @@ public class SignUpCommand implements ICommand {
         final PasswordEncryptor passwordEncryptor = PasswordEncryptor.getInstance();
         final String encryptedPassword = passwordEncryptor.encryptPassword(user.getPassword());
 
+        // get by email
+        // if empty => save user -> else =>
+
         System.out.println(encryptedPassword);
 
 

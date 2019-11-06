@@ -1,6 +1,8 @@
 package com.proky.booking.presentation.command;
 
 import com.proky.booking.persistence.entity.User;
+import com.proky.booking.service.ValidationService;
+import com.proky.booking.util.PasswordEncryptor;
 import com.proky.booking.util.command.HttpRequestDataBinder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,8 +20,14 @@ public class SignUpCommand implements ICommand {
         System.out.println(user);
 
         // validate
+        final ValidationService validationService = ValidationService.getInstance();
+        validationService.validate(user);
 
         // pass to service
+        final PasswordEncryptor passwordEncryptor = PasswordEncryptor.getInstance();
+        final String encryptedPassword = passwordEncryptor.encryptPassword(user.getPassword());
+
+        System.out.println(encryptedPassword);
 
         // set attributes
         // return page

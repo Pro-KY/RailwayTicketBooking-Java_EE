@@ -1,11 +1,20 @@
 package com.proky.booking.persistence.entity;
 
+import com.proky.booking.annotation.Email;
+import com.proky.booking.annotation.NotNull;
+import com.proky.booking.annotation.Text;
+
 public class User extends Entity<Long> {
+    @NotNull
+    @Text
     private String firstName;
+    @NotNull
+    @Text
     private String lastName;
+    @Email
     private String email;
     private String password;
-    private Long userTypeId;
+    private UserType userType;
 
     public String getFirstName() {
         return firstName;
@@ -14,7 +23,6 @@ public class User extends Entity<Long> {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
 
     public String getLastName() {
         return lastName;
@@ -42,13 +50,12 @@ public class User extends Entity<Long> {
         this.password = password;
     }
 
-
-    public long getUserTypeId() {
-        return userTypeId;
+    public UserType getUserType() {
+        return userType;
     }
 
-    public void setUserTypeId(long userTypeId) {
-        this.userTypeId = userTypeId;
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
     @Override
@@ -58,7 +65,6 @@ public class User extends Entity<Long> {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", userTypeId=" + userTypeId +
                 '}';
     }
 }

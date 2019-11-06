@@ -1,4 +1,4 @@
-package com.proky.booking.presentation.command;
+package com.proky.booking.util.command;
 
 import javax.servlet.http.HttpServletRequest;
 

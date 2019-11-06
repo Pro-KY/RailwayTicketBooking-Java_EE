@@ -20,4 +20,12 @@ public class TrainType extends Entity<Long> {
     public void setSeatPrice(BigDecimal seatPrice) {
         this.seatPrice = seatPrice;
     }
+
+    @Override
+    public String toString() {
+        return "TrainType{" +
+                "type='" + type + '\'' +
+                ", seatPrice=" + seatPrice +
+                '}';
+    }
 }

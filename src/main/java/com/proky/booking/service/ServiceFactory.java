@@ -42,10 +42,10 @@ public class ServiceFactory {
             final MysqlDaoFactory daoFactory = MysqlDaoFactory.getInstance();
             TransactionalProxy tTransactionalProxy = new TransactionalProxy(daoFactory);
             service = aClass.cast(tTransactionalProxy.createProxy(aClass));
-            System.out.println("create proxy");
+            log.info("create proxy");
         } else {
             service = instance;
-            System.out.println("create instance");
+            log.info("create instance");
         }
         return service;
     }
@@ -57,7 +57,7 @@ public class ServiceFactory {
 
 
     public SignUpService getSignUpService() {
-        return getServiceFromMap(signUpServiceClass);
+        return getService(getServiceFromMap(signUpServiceClass), signUpServiceClass);
     }
 
 }

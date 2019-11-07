@@ -37,8 +37,7 @@ public class SignUpCommand implements ICommand {
 //        });
 
         // pass to service
-        final PasswordEncryptor passwordEncryptor = PasswordEncryptor.getInstance();
-        final String encryptedPassword = passwordEncryptor.encryptPassword(user.getPassword());
+
 
         final String contextPath = request.getContextPath();
         log.info("contextPath {}", contextPath);
@@ -46,7 +45,6 @@ public class SignUpCommand implements ICommand {
         // get by email
         // if empty => save user -> else => send error message
 
-        System.out.println(encryptedPassword);
 
         // set attributes
         // return page

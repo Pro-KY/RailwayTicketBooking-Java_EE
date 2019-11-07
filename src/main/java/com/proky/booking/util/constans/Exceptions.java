@@ -5,7 +5,12 @@ public enum Exceptions {
 
     public final String name;
 
-    private Exceptions(String name) {
+    Exceptions(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

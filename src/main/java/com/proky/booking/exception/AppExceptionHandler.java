@@ -1,6 +1,5 @@
 package com.proky.booking.exception;
 
-import com.proky.booking.util.constans.Exceptions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServlet;
@@ -42,5 +41,4 @@ public class AppExceptionHandler extends HttpServlet {
         String url = request.getContextPath() + "?errMsg=" + msg;
         response.sendRedirect(url);
     }
-
 }

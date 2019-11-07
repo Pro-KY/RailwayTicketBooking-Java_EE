@@ -13,6 +13,12 @@ public class URLBuilder {
         this.viewPath = viewPath;
     }
 
+
+    public URLBuilder(boolean redirect, String viewPath) {
+        this.viewPath = viewPath;
+        this.redirect = redirect;
+    }
+
     public URLBuilder(String viewPath, Map<String, String> parameters) {
         this.viewPath = viewPath;
         this.parameters = parameters;
@@ -22,6 +28,10 @@ public class URLBuilder {
         this.viewPath = viewPath;
         this.parameters = parameters;
         this.redirect = redirect;
+    }
+
+    public void addParameter(String name, String value) {
+        parameters.put(name, value);
     }
 
     public String buildURL() {

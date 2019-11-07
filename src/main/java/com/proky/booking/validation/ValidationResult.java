@@ -4,17 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ValidationResult {
-    private boolean isValid = true;
+    private boolean isSuccessfull = true;
     // field, ErrorMessage
     private Map<String, String> errorMessages = new HashMap<>();
 
 
-    public boolean isValid() {
-        return isValid;
+    public boolean isSuccessfull() {
+        return isSuccessfull;
     }
 
-    public void setValid(boolean valid) {
-        isValid = valid;
+    public void setSuccessfull(boolean successfull) {
+        this.isSuccessfull = successfull;
     }
 
     public void addErrorMessage(String fieldName, String message) {

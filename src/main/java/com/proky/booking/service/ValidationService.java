@@ -33,7 +33,7 @@ public class ValidationService {
 
                 final boolean isInvalid = validator.validate(field, object);
                 if (isInvalid) {
-                    validationResult.setValid(false);
+                    validationResult.setSuccessfull(false);
                     validationResult.addErrorMessage(validator.getValidatedField(), validator.getErrorMessage());
                     break;
                 }

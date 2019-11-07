@@ -3,11 +3,14 @@ package com.proky.booking.persistence.dao.mysql;
 import com.proky.booking.persistence.dao.IUserTypeDao;
 import com.proky.booking.persistence.entity.UserType;
 import com.proky.booking.persistence.jdbc.JdbcTemplate;
+import com.proky.booking.persistence.mapper.UserTypeMapper;
 import com.proky.booking.util.properties.SqlProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
+
+import static com.proky.booking.util.properties.SqlProperties.FIND_USER_TYPE_BY_TYPE;
 
 public class UserTypeDaoImpl implements IUserTypeDao {
     private JdbcTemplate jdbcTemplate;
@@ -33,7 +36,9 @@ public class UserTypeDaoImpl implements IUserTypeDao {
 
     @Override
     public Optional<UserType> findByType(String type) {
-        return null;
+        final String sqlQuery = SqlProperties.getQuery(FIND_USER_TYPE_BY_TYPE);
+        final UserTypeMapper userMapper = new UserTypeMapper(false);
+        return jdbcTemplate.findByQuery(sqlQuery, userMapper, type);
     }
 
     @Override

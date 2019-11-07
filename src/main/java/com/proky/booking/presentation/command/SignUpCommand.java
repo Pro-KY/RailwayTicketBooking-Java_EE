@@ -29,9 +29,8 @@ public class SignUpCommand implements ICommand {
         log.info("user sign up");
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
         final User user = requestDataBinder.bindToEntity(request, User.class);
-        System.out.println(user);
+        log.info(user);
 
-        // validate
         final ValidationService validationService = ValidationService.getInstance();
         final ValidationResult validation = validationService.validate(user);
 
@@ -43,8 +42,6 @@ public class SignUpCommand implements ICommand {
             session.setAttribute(Attributes.VALIDATION, validation);
         }
 
-        final String s = urlBuilder.buildURL();
-        log.info("s {}", s);
-        return s;
+        return urlBuilder.buildURL();
     }
 }

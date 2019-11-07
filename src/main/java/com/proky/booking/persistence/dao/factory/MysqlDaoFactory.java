@@ -6,13 +6,17 @@ import com.proky.booking.persistence.dao.mysql.UserDaoImpl;
 import com.proky.booking.persistence.dao.mysql.UserTypeDaoImpl;
 
 public class MysqlDaoFactory implements DaoFactory {
-    private static MysqlDaoFactory instance = null;
+    private static MysqlDaoFactory mInstance;
 
-    private MysqlDaoFactory() { }
+    private MysqlDaoFactory() {}
 
     public static MysqlDaoFactory getInstance() {
-        return (instance == null) ? new MysqlDaoFactory() : instance;
+        if (mInstance == null) {
+            mInstance = new MysqlDaoFactory();
+        }
+        return mInstance;
     }
+
 
     @Override
     public IUserDao getUserDao() {

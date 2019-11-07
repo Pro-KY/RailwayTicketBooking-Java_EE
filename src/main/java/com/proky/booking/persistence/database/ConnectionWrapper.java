@@ -1,5 +1,6 @@
 package com.proky.booking.persistence.database;
 
+import com.proky.booking.persistence.jdbc.JdbcTemplate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,16 +9,20 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class ConnectionWrapper implements AutoCloseable {
-    private static final Logger log = LogManager.getLogger();
-    private static final ConnectionWrapper mInstance = new ConnectionWrapper();
+    private static final Logger log = LogManager.getLogger(ConnectionWrapper.class);
+    private static ConnectionWrapper mInstance;
     private ThreadLocal<Connection> connectionThreadLocal = ThreadLocal.withInitial(() -> MysqlDataSource.getInstance().getConnection());
     private ThreadLocal<Boolean> usedInTransactionThreadLocal = ThreadLocal.withInitial(() -> false);
 
     private ConnectionWrapper() {}
 
     public static ConnectionWrapper getInstance() {
+        if (mInstance == null) {
+            mInstance = new ConnectionWrapper();
+        }
         return mInstance;
     }
+
 
     public Connection getConnection() {
         initConnection();
@@ -58,7 +63,6 @@ public class ConnectionWrapper implements AutoCloseable {
                 final Connection connection = connectionThreadLocal.get();
                 log.info("close connection = {}", connection.toString());
                 connection.close();
-
 //                connectionThreadLocal.get().close();
             } catch (SQLException e) {
                 log.error("failed to close a connection", e);

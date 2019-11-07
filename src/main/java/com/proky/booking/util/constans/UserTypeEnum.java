@@ -1,7 +1,7 @@
 package com.proky.booking.util.constans;
 
 public enum UserTypeEnum {
-    USER("user"), GUEST("guest"), ADMIN("admin");
+    USER("passenger"), GUEST("guest"), ADMIN("administrator");
 
     public final String type;
 

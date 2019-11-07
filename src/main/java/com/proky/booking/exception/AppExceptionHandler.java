@@ -23,14 +23,13 @@ public class AppExceptionHandler extends HttpServlet {
     }
 
     private void handleError(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        log.info("Here!!");
-
         Throwable throwable = (Throwable) request.getAttribute("javax.servlet.error.exception");
 
         String msg = "default";
 
         final String message = throwable.getMessage();
-        if(message.startsWith(SERVICE_EXCEPTION.name)) {
+
+        if(message != null && message.startsWith(SERVICE_EXCEPTION.name)) {
             log.info(SERVICE_EXCEPTION.name);
             msg = message.replace(SERVICE_EXCEPTION.name, "");
         } else {

@@ -11,13 +11,16 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
+import static com.proky.booking.util.properties.SqlProperties.FIND_USER_BY_EMAIL;
+import static com.proky.booking.util.properties.SqlProperties.SAVE_USER;
+
 public class UserDaoImpl implements IUserDao {
     private static UserDaoImpl instance;
     private JdbcTemplate jdbcTemplate;
 
     private static final Logger log = LogManager.getLogger(UserDaoImpl.class);
 
-    public UserDaoImpl() {
+    private UserDaoImpl() {
         jdbcTemplate = JdbcTemplate.getInstance();
     }
 
@@ -30,7 +33,7 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        final String sqlQuery = SqlProperties.FIND_BY_EMAIL;
+        final String sqlQuery = SqlProperties.getQuery(FIND_USER_BY_EMAIL);
         final UserMapper userMapper = new UserMapper(true);
         userMapper.mapUserTypeRelation(new UserTypeMapper(true));
         return jdbcTemplate.findByQuery(sqlQuery, userMapper, email);
@@ -38,7 +41,11 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public Long save(User entity) {
-        return null;
+        Object[] params = {entity.getFirstName(), entity.getLastName(), entity.getEmail(), entity.getPassword(), entity.getUserType().getId()};
+
+        String sqlQuery = SqlProperties.getQuery(SAVE_USER);
+        final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
+        return jdbcTemplate.saveOrUpdate(sqlQuery, params);
     }
 
     @Override

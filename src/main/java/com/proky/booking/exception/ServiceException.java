@@ -1,5 +1,5 @@
 package com.proky.booking.exception;
-import static com.proky.booking.util.constans.Exceptions.SERVICE_EXCEPTION;
+import static com.proky.booking.util.constans.ExceptionsEnum.SERVICE_EXCEPTION;
 
 public class ServiceException extends RuntimeException {
     public ServiceException(String message) {

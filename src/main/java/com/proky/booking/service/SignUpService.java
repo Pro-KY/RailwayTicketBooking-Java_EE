@@ -5,6 +5,7 @@ import com.proky.booking.persistence.dao.IUserDao;
 import com.proky.booking.persistence.dao.factory.DaoFactory;
 import com.proky.booking.persistence.entity.User;
 import com.proky.booking.util.PasswordEncryptor;
+import com.proky.booking.util.constans.UserTypeEnum;
 import com.proky.booking.util.properties.MessageProperties;
 
 import java.util.Optional;
@@ -27,7 +28,9 @@ public class SignUpService {
             final String encryptedPassword = passwordEncryptor.encrypt(user.getPassword());
             user.setPassword(encryptedPassword);
 
-
+            final String type = UserTypeEnum.USER.type;
+            // find by type
+            // set into user
 
             userDao.save(user);
         }

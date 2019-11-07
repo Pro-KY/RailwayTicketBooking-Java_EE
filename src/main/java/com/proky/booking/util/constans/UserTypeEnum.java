@@ -1,11 +1,11 @@
 package com.proky.booking.util.constans;
 
-public enum UserType {
+public enum UserTypeEnum {
     USER("user"), GUEST("guest"), ADMIN("admin");
 
     public final String type;
 
-    UserType(String type) {
+    UserTypeEnum(String type) {
         this.type = type;
     }
 

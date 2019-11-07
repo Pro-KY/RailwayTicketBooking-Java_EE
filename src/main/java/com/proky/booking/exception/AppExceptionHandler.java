@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.proky.booking.util.constans.Exceptions.SERVICE_EXCEPTION;
+import static com.proky.booking.util.constans.ExceptionsEnum.SERVICE_EXCEPTION;
 
 public class AppExceptionHandler extends HttpServlet {
     private static final Logger log = LogManager.getLogger(AppExceptionHandler.class);

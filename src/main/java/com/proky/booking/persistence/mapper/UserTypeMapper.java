@@ -27,7 +27,7 @@ public class UserTypeMapper extends EntityMapper<UserType> {
             final String type = resultSet.getString(columnNames[1]);
             mappedEntity =  new UserType(id, type);
         } catch (SQLException e) {
-            log.error("Could not map to UserType entity", e);
+            log.error("Could not map to UserTypeEnum entity", e);
         }
         return mappedEntity;
     }

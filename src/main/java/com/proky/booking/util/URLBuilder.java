@@ -1,4 +1,5 @@
 package com.proky.booking.util;
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.proky.booking.util.constans.Commands.REDIRECT;
@@ -6,7 +7,7 @@ import static com.proky.booking.util.constans.Commands.REDIRECT;
 public class URLBuilder {
     private StringBuilder sb = new StringBuilder();
     private String viewPath;
-    private Map<String, String> parameters;
+    private Map<String, String> parameters = new HashMap<>();
     private boolean redirect;
 
     public URLBuilder(String viewPath) {

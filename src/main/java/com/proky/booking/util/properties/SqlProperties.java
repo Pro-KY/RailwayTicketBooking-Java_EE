@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 public class SqlProperties {
     private static ResourceBundle viewPathProperties;
     private static final String fileName = "sql";
-
     public static final String FIND_BY_EMAIL;
 
     static {
@@ -16,7 +15,7 @@ public class SqlProperties {
 
     private static String getQuery(String propertyName) {
         if (propertyName == null || propertyName.isEmpty()) {
-            throw new IllegalArgumentException("propertyName can't be null or empty!");
+            throw new IllegalArgumentException(MessageProperties.NOT_VALID_PROPERTY);
         }
 
        return viewPathProperties.getString(propertyName);

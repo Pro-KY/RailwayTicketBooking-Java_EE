@@ -8,6 +8,7 @@ import com.proky.booking.util.URLBuilder;
 import com.proky.booking.util.command.HttpRequestDataBinder;
 import com.proky.booking.util.constans.Attributes;
 import com.proky.booking.util.constans.Commands;
+import com.proky.booking.util.constans.Parameters;
 import com.proky.booking.util.properties.ViewProperties;
 import com.proky.booking.validation.ValidationResult;
 import org.apache.logging.log4j.LogManager;
@@ -16,7 +17,6 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static com.proky.booking.util.constans.Commands.REDIRECT;
 
 public class SignUpCommand implements ICommand {
     private static final Logger log = LogManager.getLogger(SignUpCommand.class);
@@ -24,6 +24,7 @@ public class SignUpCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         final HttpSession session = request.getSession();
+        final URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.INDEX);
 
         log.info("user sign up");
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
@@ -38,10 +39,12 @@ public class SignUpCommand implements ICommand {
             final SignUpService signUpService = ServiceFactory.getInstance().getSignUpService();
             signUpService.signUp(user);
         } else {
+            urlBuilder.addParameter(Parameters.SIGN_UP_FRAGMENT, ViewProperties.FRAGMENT_SIGN_UP);
             session.setAttribute(Attributes.VALIDATION, validation);
         }
 
-        final URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.INDEX);
-        return urlBuilder.buildURL();
+        final String s = urlBuilder.buildURL();
+        log.info("s {}", s);
+        return s;
     }
 }

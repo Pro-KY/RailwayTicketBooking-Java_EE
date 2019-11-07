@@ -15,7 +15,7 @@ public class PasswordEncryptor {
         return mInstance;
     }
 
-    public String encryptPassword(String password) {
+    public String encrypt(String password) {
         return DigestUtils.sha256Hex(password);
     }
 }

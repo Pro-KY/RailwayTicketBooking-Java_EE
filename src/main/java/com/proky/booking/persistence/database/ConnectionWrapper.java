@@ -1,6 +1,5 @@
 package com.proky.booking.persistence.database;
 
-import com.proky.booking.persistence.jdbc.JdbcTemplate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,24 +26,32 @@ public class ConnectionWrapper implements AutoCloseable {
     public Connection getConnection() {
         initConnection();
         final Connection connection = connectionThreadLocal.get();
-        log.info("connection = {}", connection.toString());
+        log.debug("connection = {}", connection.toString());
         return connection;
     }
 
     private void initConnection() {
         if (Objects.isNull(connectionThreadLocal.get())) {
-            log.info("connection is null = {}", Objects.isNull(connectionThreadLocal.get()));
+            log.debug("connection is null = {}", Objects.isNull(connectionThreadLocal.get()));
             connectionThreadLocal.set(MysqlDataSource.getInstance().getConnection());
         } else {
-            log.info("connection is not null");
+            log.debug("connection is not null");
         }
     }
 
     public void useInTransaction(boolean useInTransaction) {
-        log.info("useInTransaction = {}", useInTransaction);
+        log.debug("useInTransaction = {}", useInTransaction);
         usedInTransactionThreadLocal.set(useInTransaction);
-        log.info("usedInTransactionThreadLocal.get() = {}", usedInTransactionThreadLocal.get());
+        log.debug("usedInTransactionThreadLocal.get() = {}", usedInTransactionThreadLocal.get());
         setAutoCommit(!useInTransaction);
+    }
+
+    public void setReadOnly(boolean readOnly) {
+        try {
+            getConnection().setReadOnly(readOnly);
+        } catch (SQLException e) {
+            log.error("couldn't set readOnly mode to connection");
+        }
     }
 
     private void setAutoCommit(boolean autoCommit) {
@@ -58,16 +65,16 @@ public class ConnectionWrapper implements AutoCloseable {
     @Override
     public void close() {
         if (!usedInTransactionThreadLocal.get()) {
-            log.info("usedInTransactionThreadLocal.get() = {}", usedInTransactionThreadLocal.get());
+            log.debug("usedInTransactionThreadLocal.get() = {}", usedInTransactionThreadLocal.get());
             try {
                 final Connection connection = connectionThreadLocal.get();
-                log.info("close connection = {}", connection.toString());
+                log.debug("close connection = {}", connection.toString());
                 connection.close();
 //                connectionThreadLocal.get().close();
             } catch (SQLException e) {
                 log.error("failed to close a connection", e);
             } finally {
-                log.info("release resources");
+                log.debug("release resources");
                 connectionThreadLocal.remove();
                 usedInTransactionThreadLocal.remove();
             }

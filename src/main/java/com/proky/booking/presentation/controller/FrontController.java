@@ -33,6 +33,7 @@ public class FrontController extends HttpServlet {
     private void handleRequest (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final ICommand command = CommandFactory.getCommand(request);
         final String view = command.execute(request);
+        log.info("view - {}", view);
 
         if (view == null) {
             response.sendRedirect(ViewProperties.getPath(ERROR));
@@ -40,6 +41,7 @@ public class FrontController extends HttpServlet {
             System.out.println("REDIRECT!!!");
             response.sendRedirect(view.replace(Commands.REDIRECT, ""));
         } else {
+            System.out.println("FORWARD!!!");
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(view);
             dispatcher.forward(request, response);
         }

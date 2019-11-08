@@ -11,7 +11,7 @@
             <div class="card border-info text-center">
                 <div class="card-body">
 
-                    <form name="fuck" method="POST" action ="booking/">
+                    <form name="signIn" method="POST" action ="booking/">
                         <input type="hidden" name="command" value="${Commands.SIGN_IN}">
 
                         <div class="form-group">

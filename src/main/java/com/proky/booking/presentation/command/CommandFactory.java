@@ -1,5 +1,6 @@
 package com.proky.booking.presentation.command;
 
+import com.proky.booking.presentation.command.fragment.SignInFragmentCommand;
 import com.proky.booking.presentation.command.fragment.SignUpFragmentCommand;
 import com.proky.booking.util.constans.Commands;
 import com.proky.booking.util.constans.Parameters;
@@ -17,7 +18,9 @@ public class CommandFactory {
 
     static {
         commandHashMap.put(Commands.GET_SIGN_UP_FRAGMENT, new SignUpFragmentCommand());
+        commandHashMap.put(Commands.GET_SIGN_IN_FRAGMENT, new SignInFragmentCommand());
         commandHashMap.put(Commands.SIGN_UP, new SignUpCommand());
+        commandHashMap.put(Commands.SIGN_IN, new SignInCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

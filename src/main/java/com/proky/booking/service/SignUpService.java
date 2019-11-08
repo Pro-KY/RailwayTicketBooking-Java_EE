@@ -15,7 +15,7 @@ import java.util.Optional;
 public class SignUpService {
     private DaoFactory daoFactory;
 
-    public SignUpService(DaoFactory daoFactory) {
+    SignUpService(DaoFactory daoFactory) {
         this.daoFactory = daoFactory;
     }
 

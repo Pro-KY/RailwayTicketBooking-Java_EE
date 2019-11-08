@@ -10,6 +10,7 @@ public class MessageProperties {
     public static final String NOT_VALID_PROPERTY = "NOT_VALID_PROPERTY";
     public static final String NOT_FOUND_ENTITY = "NOT_FOUND_ENTITY";
     public static final String TRANSACTION_ERROR = "TRANSACTION_ERROR";
+    public static final String AUTHORIZATION_ERROR = "AUTHORIZATION_ERROR";
 
     static {
         messageProperties = PropertyResourceBundle.getBundle(fileName);

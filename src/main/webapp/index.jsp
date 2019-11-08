@@ -24,19 +24,37 @@
 </head>
 
 <body>
+    <!-- HEADER -->
     <%@ include file="/WEB-INF/jsp/fragments/header.jsp" %>
+    <!-- HEADER -->
 
     <!--MAIN CONTENT-->
     <c:choose>
         <c:when test="${pageContext.request.getAttribute(Attributes.SIGN_UP_FRAGMENT) ne null}">
             <%@include file="/WEB-INF/jsp/fragments/signUp.jsp" %>
         </c:when>
+        <c:when test="${pageContext.request.getAttribute(Attributes.GET_SIGN_IN_FRAGMENT) ne null}">
+            <%@include file="/WEB-INF/jsp/fragments/signIn.jsp" %>
+        </c:when>
         <c:otherwise>
             <%@include file="/WEB-INF/jsp/fragments/main.jsp" %>
         </c:otherwise>
     </c:choose>
+    ${not empty alertMessage}
     <!--MAIN CONTENT-->
 
-    <%@ include file="/WEB-INF/jsp/fragments/footer.jsp" %>
+
+    <div class="container-fluid row">
+        <!-- ALERT -->
+        <c:if test="${(not empty alertError and alertError eq true) or (not empty alertSuccess and alertSuccess eq true)}">
+            <%@ include file="/WEB-INF/jsp/alert.jsp"%>
+        </c:if>
+        <!-- ALERT -->
+
+        <!-- FOOTER -->
+            <%@ include file="/WEB-INF/jsp/fragments/footer.jsp" %>
+        <!-- FOOTER -->
+    </div>
+
 </body>
 </html>

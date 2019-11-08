@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.proky.booking.util.properties.ViewProperties.ERROR;
+
 public class FrontController extends HttpServlet {
     private static final Logger log = LogManager.getLogger(FrontController.class);
 
@@ -33,7 +35,7 @@ public class FrontController extends HttpServlet {
         final String view = command.execute(request);
 
         if (view == null) {
-            response.sendRedirect(ViewProperties.ERROR);
+            response.sendRedirect(ViewProperties.getPath(ERROR));
         } else if (view.startsWith(Commands.REDIRECT)) {
             System.out.println("REDIRECT!!!");
             response.sendRedirect(view.replace(Commands.REDIRECT, ""));

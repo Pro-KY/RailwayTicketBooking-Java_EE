@@ -7,5 +7,4 @@
     <c:forEach var="entry" items="${sessionScope.validation.errorMessages}">
         <tr><td><c:out value="${entry.key}"/></td> <td><c:out value="${entry.value}"/> </td></tr>
     </c:forEach>
-
 </div>

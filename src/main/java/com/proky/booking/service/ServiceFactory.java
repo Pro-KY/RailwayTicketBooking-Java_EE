@@ -13,6 +13,7 @@ import java.util.HashMap;
 public class ServiceFactory {
     private static final Logger log = LogManager.getLogger(ServiceFactory.class);
     private Class<SignUpService> signUpServiceClass = SignUpService.class;
+    private Class<SignInService> signInServiceClass = SignInService.class;
 
     private static ServiceFactory mInstance;
     private HashMap<Class<?>, Object> servicesMap = new HashMap<>();
@@ -20,8 +21,10 @@ public class ServiceFactory {
     private ServiceFactory() {
         DaoFactory daoFactory = MysqlDaoFactory.getInstance();
         final SignUpService signUpService = new SignUpService(daoFactory);
+        final SignInService signInService = new SignInService(daoFactory);
 
         servicesMap.put(signUpServiceClass, signUpService);
+        servicesMap.put(signInServiceClass, signInService);
     }
 
     public static ServiceFactory getInstance() {
@@ -58,6 +61,10 @@ public class ServiceFactory {
 
     public SignUpService getSignUpService() {
         return getService(getServiceFromMap(signUpServiceClass), signUpServiceClass);
+    }
+
+    public SignInService getSignInService() {
+        return getService(getServiceFromMap(signInServiceClass), signInServiceClass);
     }
 
 }

@@ -47,16 +47,12 @@ public class ValidationService {
         Validator validator = null;
 
         if (annotation instanceof NotNull) {
-            System.out.println("is null");
             validator = new NullValidator();
         } else if (annotation instanceof Number) {
-            System.out.println("number");
             validator = new NumberValidator();
         } else if (annotation instanceof Text) {
-            System.out.println("text");
             validator = new TextValidator();
         } else if (annotation instanceof Email) {
-            System.out.println("email");
             validator = new EmailValidator();
         }
         return validator;

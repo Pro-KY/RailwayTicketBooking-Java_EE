@@ -36,7 +36,7 @@ public class SignInCommand implements ICommand {
         log.info(user);
 
         final ValidationService validationService = ValidationService.getInstance();
-        final ValidationResult validation = validationService.validate(user);
+        final ValidationResult validation = validationService.validate(user, "email", "password");
 
         if (validation.isSuccessfull()) {
             final SignInService signInService = ServiceFactory.getInstance().getSignInService();

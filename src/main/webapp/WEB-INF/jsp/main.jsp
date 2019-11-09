@@ -14,13 +14,13 @@
     <title>Main page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="<c:url value="assets/css/bootstrap/bootstrap.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="assets/css/main.css"/>">
-    <link rel="stylesheet" href="<c:url value="assets/css/flag-icon.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/bootstrap/bootstrap.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/main.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/flag-icon.min.css"/>">
 
-    <script src="<c:url value="assets/jquery/jquery.js"/>"></script>
-    <script src="<c:url value="assets/js/bootstrap/popper.js"/>"></script>
-    <script src="<c:url value="assets/js/bootstrap/bootstrap.min.js"/>"></script>
+    <script src="<c:url value="/assets/jquery/jquery.js"/>"></script>
+    <script src="<c:url value="/assets/js/bootstrap/popper.js"/>"></script>
+    <script src="<c:url value="/assets/js/bootstrap/bootstrap.min.js"/>"></script>
 </head>
 
 <body>
@@ -56,6 +56,6 @@
         <!-- FOOTER -->
     </div>
 
-    <script src="<c:url value="assets/js/main.js"/>"></script>
+    <script src="<c:url value="../../assets/js/main.js"/>"></script>
 </body>
 </html>

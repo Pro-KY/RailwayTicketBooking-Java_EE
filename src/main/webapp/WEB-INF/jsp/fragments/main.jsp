@@ -3,9 +3,9 @@
 <html>
 <head>
     <title>main fragment</title>
-    <script type="text/javascript" src="assets/js/moment.js"></script>
-    <script type="text/javascript" src="assets/js/tempusdominus-bootstrap-4.min.js"></script>
-    <link rel="stylesheet" href="<c:url value="assets/css/tempusdominus-bootstrap-4.min.css"/>">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/moment.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="<c:url value="/assets/css/tempusdominus-bootstrap-4.min.css"/>">
     <link rel="stylesheet" href="<c:url value="/assets/fonts/fontawesome/css/font-awesome.min.css"/>"/>
 </head>
     <body>
@@ -19,8 +19,14 @@
                     <%--GOING_TO--%>
                     <div class="col-2">
                         <div class="form-group">
+
+                            ${requestScope.findTrainDto.stringStringMap eq null}
                             <label for="usertype"><fmt:message key="going.to" bundle="${rb}"/></label>
                             <select class="form-control" id="usertype" name="${Parameters.GOING_TO}">
+                                    <c:forEach var="entry" items="${requestScope.findTrainDto.stringStringMap}">
+                                        <option value="${entry.key}" selected><fmt:message key="${entry.value}" bundle="${rb}"/></option>
+                                    </c:forEach>
+
                                 <%--                            <option value="1" selected><fmt:message key="signup.user.type.individual" bundle="${rb}"/></option>--%>
                                 <%--                            loop through list of cities (id, key.message, )--%>
                             </select>
@@ -59,16 +65,14 @@
                     </div>
                 </div>
             </form>
-
-
-
-            <%--    ${not empty sessionScope.validation}--%>
-            <%--    <c:forEach var="entry" items="${sessionScope.validation.errorMessages}">--%>
-            <%--        <tr><td><c:out value="${entry.key}"/></td> <td><c:out value="${entry.value}"/> </td></tr>--%>
-            <%--    </c:forEach>--%>
         </div>
     </body>
 </html>
 
+
+<%--${not empty sessionScope.validation}--%>
+<%--<c:forEach var="entry" items="${sessionScope.validation.errorMessages}">--%>
+<%--    <tr><td><c:out value="${entry.key}"/></td> <td><c:out value="${entry.value}"/> </td></tr>--%>
+<%--</c:forEach>--%>
 
 

@@ -1479,8 +1479,8 @@
      */
     function getOppositeVariation(variation) {
         if (variation === 'end') {
-            return 'start';
-        } else if (variation === 'start') {
+            return 'index.jsp';
+        } else if (variation === 'index.jsp') {
             return 'end';
         }
         return variation;
@@ -1610,7 +1610,7 @@
 
             // flip the variation if required
             var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
-            var flippedVariation = !!options.flipVariations && (isVertical && variation === 'start' && overflowsLeft || isVertical && variation === 'end' && overflowsRight || !isVertical && variation === 'start' && overflowsTop || !isVertical && variation === 'end' && overflowsBottom);
+            var flippedVariation = !!options.flipVariations && (isVertical && variation === 'index.jsp' && overflowsLeft || isVertical && variation === 'end' && overflowsRight || !isVertical && variation === 'index.jsp' && overflowsTop || !isVertical && variation === 'end' && overflowsBottom);
 
             if (overlapsRef || overflowsBoundaries || flippedVariation) {
                 // this boolean to detect any flip loop

@@ -17,9 +17,11 @@ public class ServiceFactory {
 
     private static ServiceFactory mInstance;
     private HashMap<Class<?>, Object> servicesMap = new HashMap<>();
+    private static DaoFactory daoFactory = MysqlDaoFactory.getInstance();
+
 
     private ServiceFactory() {
-        DaoFactory daoFactory = MysqlDaoFactory.getInstance();
+//        DaoFactory daoFactory = MysqlDaoFactory.getInstance();
         final SignUpService signUpService = new SignUpService(daoFactory);
         final SignInService signInService = new SignInService(daoFactory);
 
@@ -42,7 +44,7 @@ public class ServiceFactory {
         T service;
 
         if (isPresent) {
-            final MysqlDaoFactory daoFactory = MysqlDaoFactory.getInstance();
+//            final MysqlDaoFactory daoFactory = MysqlDaoFactory.getInstance();
             TransactionalProxy tTransactionalProxy = new TransactionalProxy(daoFactory);
             service = aClass.cast(tTransactionalProxy.createProxy(aClass));
             log.info("create proxy");

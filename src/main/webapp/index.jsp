@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="<c:url value="/assets/css/bootstrap/bootstrap.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/assets/css/main.css"/>">
+    <link rel="stylesheet" href="<c:url value="${pageContext.request.contextPath}/assets/css/main.css"/>">
     <link rel="stylesheet" href="<c:url value="/assets/css/flag-icon.min.css"/>">
 
     <script src="<c:url value="/assets/jquery/jquery.js"/>"></script>
@@ -29,18 +29,21 @@
     <!-- HEADER -->
 
     <!--MAIN CONTENT-->
-    <c:choose>
-        <c:when test="${pageContext.request.getAttribute(Attributes.SIGN_UP_FRAGMENT) ne null}">
-            <%@include file="/WEB-INF/jsp/fragments/signUp.jsp" %>
-        </c:when>
-        <c:when test="${pageContext.request.getAttribute(Attributes.GET_SIGN_IN_FRAGMENT) ne null}">
-            <%@include file="/WEB-INF/jsp/fragments/signIn.jsp" %>
-        </c:when>
-        <c:otherwise>
-            <%@include file="/WEB-INF/jsp/fragments/main.jsp" %>
-        </c:otherwise>
-    </c:choose>
-    ${not empty alertMessage}
+    <div class="container-fluid row mr-1 ml-1">
+        <c:choose>
+            <c:when test="${pageContext.request.getAttribute(Attributes.SIGN_UP_FRAGMENT) ne null}">
+                <%@include file="/WEB-INF/jsp/fragments/signUp.jsp" %>
+            </c:when>
+            <c:when test="${pageContext.request.getAttribute(Attributes.GET_SIGN_IN_FRAGMENT) ne null}">
+                <%@include file="/WEB-INF/jsp/fragments/signIn.jsp" %>
+            </c:when>
+            <c:otherwise>
+                <%@include file="/WEB-INF/jsp/fragments/main.jsp" %>
+            </c:otherwise>
+        </c:choose>
+        ${not empty alertMessage}
+    </div>
+
     <!--MAIN CONTENT-->
 
 
@@ -56,6 +59,6 @@
         <!-- FOOTER -->
     </div>
 
-    <script src="<c:url value="../../assets/js/main.js"/>"></script>
+    <script src="<c:url value="assets/js/main.js"/>"></script>
 </body>
 </html>

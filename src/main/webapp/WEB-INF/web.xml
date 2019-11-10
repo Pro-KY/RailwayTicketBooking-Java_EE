@@ -4,9 +4,10 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-<!--    <welcome-file-list>-->
-<!--        <welcome-file>main.jsp</welcome-file>-->
-<!--    </welcome-file-list>-->
+    <welcome-file-list>
+<!--        <welcome-file>index.jsp</welcome-file>-->
+        <welcome-file>booking</welcome-file>
+    </welcome-file-list>
 
     <servlet>
         <servlet-name>frontController</servlet-name>
@@ -14,10 +15,10 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>frontController</servlet-name>
+        <url-pattern>/booking</url-pattern>
         <url-pattern>/booking/*</url-pattern>
-        <url-pattern/>
+<!--        <url-pattern/>-->
     </servlet-mapping>
-
 
     <servlet>
         <servlet-name>exceptionHandler</servlet-name>

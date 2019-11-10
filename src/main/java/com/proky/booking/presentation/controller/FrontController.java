@@ -32,17 +32,17 @@ public class FrontController extends HttpServlet {
 
     private void handleRequest (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final ICommand command = CommandFactory.getCommand(request);
-        final String view = command.execute(request);
-        log.info("view - {}", view);
+        final String viewPath = command.execute(request);
+        log.info("viewPath - {}", viewPath);
 
-        if (view == null) {
+        if (viewPath == null) {
             response.sendRedirect(ViewProperties.getPath(ERROR));
-        } else if (view.startsWith(Commands.REDIRECT)) {
+        } else if (viewPath.startsWith(Commands.REDIRECT)) {
             System.out.println("REDIRECT!!!");
-            response.sendRedirect(view.replace(Commands.REDIRECT, ""));
+            response.sendRedirect(viewPath.replace(Commands.REDIRECT, ""));
         } else {
             System.out.println("FORWARD!!!");
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(view);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(viewPath);
             dispatcher.forward(request, response);
         }
     }

@@ -20,11 +20,9 @@
                         <%--GOING_TO--%>
                         <div class="col-2">
                             <div class="form-group">
-
-                                ${requestScope.findTrainDto.stringStringMap eq null}
                                 <label for="usertype"><fmt:message key="going.to" bundle="${rb}"/></label>
                                 <select class="form-control" id="usertype" name="${Parameters.GOING_TO}">
-                                    <c:forEach var="entry" items="${requestScope.findTrainDto.stringStringMap}">
+                                    <c:forEach var="entry" items="${requestScope.findTrainDto.stationsMap}">
                                         <option value="${entry.key}" selected><fmt:message key="${entry.value}" bundle="${rb}"/></option>
                                     </c:forEach>
                                 </select>
@@ -36,7 +34,7 @@
                             <div class="form-group">
                                 <label for="dateInput"><fmt:message key="departure.date" bundle="${rb}"/></label>
                                 <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                    <input type="text" id="dateInput" class="form-control datetimepicker-input" data-target="#datetimepicker4"/>
+                                    <input type="text" id="dateInput" class="form-control datetimepicker-input" data-target="#datetimepicker4" name="${Parameters.DEPARTURE_DATE}"/>
                                     <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
@@ -49,7 +47,7 @@
                             <div class="form-group">
                                 <label for="timeInput"><fmt:message key="departure.time" bundle="${rb}"/></label>
                                 <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
-                                    <input type="text" id = "timeInput" class="form-control datetimepicker-input" data-target="#datetimepicker3"/>
+                                    <input type="text" id = "timeInput" class="form-control datetimepicker-input" data-target="#datetimepicker3" name="${Parameters.DEPARTURE_TIME}"/>
                                     <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
                                     </div>
@@ -64,6 +62,7 @@
                     </div>
                 </form>
             </div>
+
             <%--TABLE--%>
             <div class="row" id="table_wrapper">
                 <div style="border: #0b2e13">

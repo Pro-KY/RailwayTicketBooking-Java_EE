@@ -5,6 +5,16 @@ public class TrainType extends Entity<Long> {
     private String type;
     private BigDecimal seatPrice;
 
+    public TrainType(Long id) {
+        super(id);
+    }
+
+    public TrainType(Long id, String type, BigDecimal seatPrice) {
+        super(id);
+        this.type = type;
+        this.seatPrice = seatPrice;
+    }
+
     public String getType() {
         return type;
     }

@@ -12,4 +12,11 @@ public class Parameters {
     public static final String GOING_TO = "goingTo";
     public static final String DEPARTURE_DATE = "departureDate";
     public static final String DEPARTURE_TIME = "departureTime";
+
+    public static final String PAGE_SIZE = "pageSize";
+    public static final String SELECTED_PAGE_INDEX = "pageIndex";
+    public static final String NEXT_PAGE_CLICK = "nextPageClick";
+    public static final String PREV_PAGE_CLICK = "prevPageClick";
+
+
 }

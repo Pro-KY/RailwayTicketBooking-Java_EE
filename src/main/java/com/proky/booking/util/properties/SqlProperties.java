@@ -10,6 +10,8 @@ public class SqlProperties {
     public static final String FIND_USER_TYPE_BY_TYPE = "FIND_USER_TYPE_BY_TYPE";
     public static final String SAVE_USER = "SAVE_USER";
 
+    public static final String FIND_TRAINS_BY_DATE_TIME_STATION = "FIND_TRAINS_BY_DATE_TIME_STATION";
+
     static {
         viewPathProperties = PropertyResourceBundle.getBundle(fileName);
     }

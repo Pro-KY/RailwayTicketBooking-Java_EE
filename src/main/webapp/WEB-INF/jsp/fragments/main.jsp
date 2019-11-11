@@ -22,7 +22,7 @@
                             <div class="form-group">
                                 <label for="usertype"><fmt:message key="going.to" bundle="${rb}"/></label>
                                 <select class="form-control" id="usertype" name="${Parameters.GOING_TO}">
-                                    <c:forEach var="entry" items="${requestScope.findTrainDto.stationsMap}">
+                                    <c:forEach var="entry" items="${requestScope.routeDto.stationsMap}">
                                         <option value="${entry.key}" selected><fmt:message key="${entry.value}" bundle="${rb}"/></option>
                                     </c:forEach>
                                 </select>

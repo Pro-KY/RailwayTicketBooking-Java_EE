@@ -14,6 +14,7 @@ public class ServiceFactory {
     private static final Logger log = LogManager.getLogger(ServiceFactory.class);
     private Class<SignUpService> signUpServiceClass = SignUpService.class;
     private Class<SignInService> signInServiceClass = SignInService.class;
+    private Class<FindTrainService> findTrainServiceClass = FindTrainService.class;
 
     private static ServiceFactory mInstance;
     private HashMap<Class<?>, Object> servicesMap = new HashMap<>();
@@ -24,9 +25,11 @@ public class ServiceFactory {
 //        DaoFactory daoFactory = MysqlDaoFactory.getInstance();
         final SignUpService signUpService = new SignUpService(daoFactory);
         final SignInService signInService = new SignInService(daoFactory);
+        final FindTrainService findTrainService = new FindTrainService(daoFactory);
 
         servicesMap.put(signUpServiceClass, signUpService);
         servicesMap.put(signInServiceClass, signInService);
+        servicesMap.put(findTrainServiceClass, findTrainService);
     }
 
     public static ServiceFactory getInstance() {
@@ -67,6 +70,10 @@ public class ServiceFactory {
 
     public SignInService getSignInService() {
         return getService(getServiceFromMap(signInServiceClass), signInServiceClass);
+    }
+
+    public FindTrainService getFindTrainService() {
+        return getService(getServiceFromMap(findTrainServiceClass), findTrainServiceClass);
     }
 
 }

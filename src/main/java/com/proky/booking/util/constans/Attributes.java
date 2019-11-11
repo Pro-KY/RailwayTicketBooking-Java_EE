@@ -14,5 +14,6 @@ public class Attributes {
     public static final String ALERT_SUCCESS = "alertSuccess";
     public static final String ALERT_MESSAGE = "alertMessage";
 
+    public static final String PAGINATION_INFO = "paginationInfo";
 
 }

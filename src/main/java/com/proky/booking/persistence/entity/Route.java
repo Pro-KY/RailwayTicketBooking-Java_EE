@@ -12,6 +12,20 @@ public class Route extends Entity<Long> {
     private Time arrivalTime;
     private Double routeLengthFactor;
 
+    public Route(Long id, String name, Date departureDate, Date arrivalDate, Time departureTime, Time arrivalTime, Double routeLengthFactor) {
+        super(id);
+        this.name = name;
+        this.departureDate = departureDate;
+        this.arrivalDate = arrivalDate;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
+        this.routeLengthFactor = routeLengthFactor;
+    }
+
+    public Route(Long id) {
+        super(id);
+    }
+
     public String getName() {
         return name;
     }

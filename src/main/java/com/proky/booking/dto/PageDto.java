@@ -41,18 +41,18 @@ public class PageDto implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public List getPaginationList() {
-        return pageList;
-    }
-
-    public void setPaginationList(List pageList) {
-        this.pageList = pageList;
-    }
-
     public PageDto() {
         currentPageIndex = DEFAULT_START_INDEX;
         this.isNextClicked =  false;
         this.isPreviousClicked = false;
+    }
+
+    public List getPageList() {
+        return pageList;
+    }
+
+    public void setPageList(List pageList) {
+        this.pageList = pageList;
     }
 
     public Long getCurrentPageIndex() {

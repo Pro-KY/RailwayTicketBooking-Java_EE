@@ -1,11 +1,7 @@
 package com.proky.booking.persistence.dao.factory;
 
-import com.proky.booking.persistence.dao.ITrainDao;
-import com.proky.booking.persistence.dao.IUserDao;
-import com.proky.booking.persistence.dao.IUserTypeDao;
-import com.proky.booking.persistence.dao.mysql.TrainDaoImpl;
-import com.proky.booking.persistence.dao.mysql.UserDaoImpl;
-import com.proky.booking.persistence.dao.mysql.UserTypeDaoImpl;
+import com.proky.booking.persistence.dao.*;
+import com.proky.booking.persistence.dao.mysql.*;
 
 public class MysqlDaoFactory implements DaoFactory {
     private static MysqlDaoFactory mInstance;
@@ -18,7 +14,6 @@ public class MysqlDaoFactory implements DaoFactory {
         }
         return mInstance;
     }
-
 
     @Override
     public IUserDao getUserDao() {
@@ -33,5 +28,15 @@ public class MysqlDaoFactory implements DaoFactory {
     @Override
     public ITrainDao getTrainDao() {
         return TrainDaoImpl.getInstance();
+    }
+
+    @Override
+    public IRouteStationDao getRouteStationDao() {
+        return RouteStationDaoImpl.getInstance();
+    }
+
+    @Override
+    public IStationDao getStationDao() {
+        return IStationDaoImpl.getInstance();
     }
 }

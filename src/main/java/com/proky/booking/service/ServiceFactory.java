@@ -14,7 +14,8 @@ public class ServiceFactory {
     private static final Logger log = LogManager.getLogger(ServiceFactory.class);
     private Class<SignUpService> signUpServiceClass = SignUpService.class;
     private Class<SignInService> signInServiceClass = SignInService.class;
-    private Class<FindTrainService> findTrainServiceClass = FindTrainService.class;
+    private Class<TrainService> trainServiceClass = TrainService.class;
+    private Class<StationService> stationServiceClass = StationService.class;
 
     private static ServiceFactory mInstance;
     private HashMap<Class<?>, Object> servicesMap = new HashMap<>();
@@ -25,11 +26,13 @@ public class ServiceFactory {
 //        DaoFactory daoFactory = MysqlDaoFactory.getInstance();
         final SignUpService signUpService = new SignUpService(daoFactory);
         final SignInService signInService = new SignInService(daoFactory);
-        final FindTrainService findTrainService = new FindTrainService(daoFactory);
+        final TrainService trainService = new TrainService(daoFactory);
+        final StationService stationService = new StationService(daoFactory);
 
         servicesMap.put(signUpServiceClass, signUpService);
         servicesMap.put(signInServiceClass, signInService);
-        servicesMap.put(findTrainServiceClass, findTrainService);
+        servicesMap.put(trainServiceClass, trainService);
+        servicesMap.put(stationServiceClass, stationService);
     }
 
     public static ServiceFactory getInstance() {
@@ -72,8 +75,12 @@ public class ServiceFactory {
         return getService(getServiceFromMap(signInServiceClass), signInServiceClass);
     }
 
-    public FindTrainService getFindTrainService() {
-        return getService(getServiceFromMap(findTrainServiceClass), findTrainServiceClass);
+    public TrainService getFindTrainService() {
+        return getService(getServiceFromMap(trainServiceClass), trainServiceClass);
+    }
+
+    public StationService getStationService() {
+        return getService(getServiceFromMap(stationServiceClass), stationServiceClass);
     }
 
 }

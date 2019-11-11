@@ -36,8 +36,8 @@ public class TrainMapper extends EntityMapper<Train> {
             final TrainType trainType = mapTrainType ? trainTypeEntityMapper.mapToEntity(resultSet) : new TrainType(trainTypeId);
             final Route route = mapRoute ? routeEntityMapper.mapToEntity(resultSet) : new Route(routeId);
 
-            mappedEntity.setTrainType(trainType);
-            mappedEntity.setRoute(route);
+//            mappedEntity.setTrainType(trainType);
+//            mappedEntity.setRoute(route);
             mappedEntity = new Train(id, trainType, route);
         } catch (SQLException e) {
             log.error("Could not map to Train entity", e);

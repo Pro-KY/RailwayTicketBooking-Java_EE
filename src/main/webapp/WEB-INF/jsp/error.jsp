@@ -7,7 +7,6 @@
     <meta charset="utf-8">
 </head>
 <body>
-heloo(
     Request from ${sessionScope.errorData.requestURI} is failed
     <br/>
     Servlet name: ${sessionScope.errorData.servletName}

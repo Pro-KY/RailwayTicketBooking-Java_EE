@@ -1,7 +1,6 @@
 package com.proky.booking.persistence.mapper;
 
 import com.proky.booking.persistence.entity.Route;
-import com.proky.booking.persistence.entity.UserType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +13,7 @@ public class RouteMapper extends EntityMapper<Route> {
     private static final Logger log = LogManager.getLogger(RouteMapper.class);
 
     private static final String ID = "id";
-    private static final String ROUTE_ALIAS_IN_JOIN = "r_id";
+    private static final String ID_ALIAS_IN_JOIN = "r_id";
     private static final String NAME = "name";
     private static final String DEPARTURE_DATE = "departure_date";
     private static final String ARRIVAL_DATE = "arrival_date";
@@ -23,7 +22,7 @@ public class RouteMapper extends EntityMapper<Route> {
     private static final String ROUTE_LENGTH_FACTOR = "route_length_factor";
 
     public RouteMapper(boolean useInJoin) {
-        String idColumn = useInJoin ? ROUTE_ALIAS_IN_JOIN : ID;
+        String idColumn = useInJoin ? ID_ALIAS_IN_JOIN : ID;
         columnNames = new String[]{idColumn, NAME, DEPARTURE_DATE, ARRIVAL_DATE, DEPARTURE_TIME, ARRIVAL_TIME, ROUTE_LENGTH_FACTOR};
     }
 

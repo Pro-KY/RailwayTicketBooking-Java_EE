@@ -9,4 +9,6 @@ public class Commands {
     public static final String FIND_TRAIN = "findTrain";
     public static final String CHANGE_LANGUAGE = "changeLanguage";
 
+    public static final String TICKET_PURCHASE_REQUEST = "ticketPurchaseRequest";
+
 }

@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="pageDto" value="${sessionScope.pageDto}" scope="session"/>
 
-
 <html>
 <head>
     <title>main fragment</title>
@@ -25,8 +24,9 @@
                                 <label for="usertype"><fmt:message key="going.to" bundle="${rb}"/></label>
                                 <select class="form-control" id="usertype" name="${Parameters.GOING_TO}">
 <%--                                    <c:forEach var="entry" items="${requestScope.trainDto.stationsMap}">--%>
-                                    <c:forEach var="entry" items="${sessionScope.trainDto.stationsMap}">
-                                        <option value="${entry.key}" selected><fmt:message key="${entry.value}" bundle="${rb}"/></option>
+<%--                                    <c:forEach var="entry" items="${sessionScope.trainDto.stationsMap}">--%>
+                                    <c:forEach var="station" items="${sessionScope.stations}">
+                                        <option value="${station.id}" selected><fmt:message key="station.${station.id}" bundle="${rb}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -67,40 +67,32 @@
             </div>
 
             <%--TABLE--%>
-            <div class="row" id="table_wrapper">
-                <div style="border: #0b2e13">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col"><fmt:message key="table.header.train" bundle="${rb}"/></th>
-                            <th scope="col"><fmt:message key="table.header.route" bundle="${rb}"/></th>
-                            <th scope="col"><fmt:message key="table.header.date" bundle="${rb}"/></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="report" items="${paginationInfo.paginationList}" >
-                            <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.REPORT_APPROVAL_ID}=${report.reportApprovalId}&command=${command_1}">
-                                <td>${report.reportId}</td>
-                                <td>${report.state eq 'changed' ? 'processing' : report.state}</td>
-                                <td>
-                                    <c:choose>
-                                        <c:when test="${not empty report.inspectorName}">
-                                            ${report.inspectorName}
-                                        </c:when>
-                                        <c:when test="${not empty report.userName}">
-                                            ${report.userName}
-                                        </c:when>
-                                        <c:otherwise>
-                                            ${not_signed_label}
-                                        </c:otherwise>
-                                    </c:choose>
-                                </td>
+            <c:if test="${not empty pageDto and not empty pageDto.pageList}">
+                <div class="row" id="table_wrapper">
+                    <div style="border: #0b2e13">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col"><fmt:message key="table.header.train" bundle="${rb}"/></th>
+                                <th scope="col"><fmt:message key="table.header.route" bundle="${rb}"/></th>
+                                <th scope="col"><fmt:message key="table.header.date" bundle="${rb}"/></th>
+                                <th scope="col"><fmt:message key="table.header.time" bundle="${rb}"/></th>
                             </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="train" items="${pageDto.pageList}">
+                                <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.TRAIN_ID}=${train.trainId}&command=${Commands.TICKET_PURCHASE_REQUEST}">
+                                    <td>${train.trainId} ${train.trainType}</td>
+                                    <td>${train.routeName}</td>
+                                    <td>${train.routeDepartureDate} <br> ${train.routeArrivalDate}</td>
+                                    <td>${train.routeDepartureTime} <br> ${train.routeArrivalTime}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            </c:if>
             <%--TABLE--%>
 
             <%--PAGINATION--%>

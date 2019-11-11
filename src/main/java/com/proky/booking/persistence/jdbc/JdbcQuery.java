@@ -22,12 +22,14 @@ public class JdbcQuery {
         this.sql = sql;
     }
     private void setParameters(Object... parameters) {
-        try {
-            for (int i = 0; i < parameters.length; i++) {
-                ps.setObject(i+1, parameters[i]);
+        if (parameters != null) {
+            try {
+                for (int i = 0; i < parameters.length; i++) {
+                    ps.setObject(i+1, parameters[i]);
+                }
+            } catch (SQLException e) {
+                throw new DataAccessException(e);
             }
-        } catch (SQLException e) {
-            throw new DataAccessException(e);
         }
     }
 

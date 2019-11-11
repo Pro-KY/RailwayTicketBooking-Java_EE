@@ -9,8 +9,10 @@ public class SqlProperties {
     public static final String FIND_USER_BY_EMAIL = "FIND_USER_BY_EMAIL";
     public static final String FIND_USER_TYPE_BY_TYPE = "FIND_USER_TYPE_BY_TYPE";
     public static final String SAVE_USER = "SAVE_USER";
+    public static final String FIND_ROUTE_STATION_BY_ROUTE_ID = "FIND_ROUTE_STATION_BY_ROUTE_ID";
 
     public static final String FIND_TRAINS_BY_DATE_TIME_STATION = "FIND_TRAINS_BY_DATE_TIME_STATION";
+    public static final String FIND_ALL_STATIONS = "FIND_ALL_STATIONS";
 
     static {
         viewPathProperties = PropertyResourceBundle.getBundle(fileName);

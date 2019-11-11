@@ -18,5 +18,7 @@ public class Parameters {
     public static final String NEXT_PAGE_CLICK = "nextPageClick";
     public static final String PREV_PAGE_CLICK = "prevPageClick";
 
+    public static final String TRAIN_ID = "trainId";
+
 
 }

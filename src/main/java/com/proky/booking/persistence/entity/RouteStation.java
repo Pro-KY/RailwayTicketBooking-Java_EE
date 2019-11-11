@@ -4,6 +4,12 @@ public class RouteStation extends Entity<Long> {
     private Route route;
     private Station station;
 
+    public RouteStation(Long id, Route route, Station station) {
+        super(id);
+        this.route = route;
+        this.station = station;
+    }
+
     public Route getRoute() {
         return route;
     }

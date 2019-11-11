@@ -21,7 +21,7 @@ public class CommandFactory {
         commandHashMap.put(Commands.GET_SIGN_IN_FRAGMENT, new SignInFragmentCommand());
         commandHashMap.put(Commands.SIGN_UP, new SignUpCommand());
         commandHashMap.put(Commands.SIGN_IN, new SignInCommand());
-        commandHashMap.put(Commands.FIND_TRAIN, new FindTrainCommand());
+        commandHashMap.put(Commands.FIND_TRAIN, new FindTrainsCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

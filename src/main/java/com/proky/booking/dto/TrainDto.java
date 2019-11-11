@@ -2,7 +2,7 @@ package com.proky.booking.dto;
 
 import java.util.Map;
 
-public class RouteDto {
+public class TrainDto {
     String trainName;
     Integer routeId;
     String routeName;
@@ -12,8 +12,7 @@ public class RouteDto {
     String arrivalTime;
     private Map<String, String> stationsMap;
 
-
-    public RouteDto(Map<String, String> stationsMap) {
+    public TrainDto(Map<String, String> stationsMap) {
         this.stationsMap = stationsMap;
     }
 

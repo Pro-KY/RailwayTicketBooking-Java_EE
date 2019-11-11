@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.List;
 
-public class PageDto<T> implements Serializable {
+public class PageDto implements Serializable {
     private static final Logger log = LogManager.getLogger(PageDto.class);
 
     private Long currentPageIndex;
@@ -23,7 +23,7 @@ public class PageDto<T> implements Serializable {
     private long allPagesAmount;
 
     private Long userId;
-    private List<T> pageList;
+    private List pageList;
 
     public void setPaginationRequestContent(HttpServletRequest request) {
         String selectedPageIndex = request.getParameter(Parameters.SELECTED_PAGE_INDEX);
@@ -35,9 +35,9 @@ public class PageDto<T> implements Serializable {
             selectedPageIndex = currentPageIndex.toString();
         }
 
-        this.currentPageIndex = (selectedPageIndex != null) ? Long.valueOf(selectedPageIndex) : DEFAULT_START_INDEX;
-        this.isNextClicked = (isNextClicked != null) ? Boolean.valueOf(isNextClicked) : false;
-        this.isPreviousClicked = (isPreviousClicked != null) ? Boolean.valueOf(isPreviousClicked) : false;
+        this.currentPageIndex = (selectedPageIndex != null) ? Long.parseLong(selectedPageIndex) : DEFAULT_START_INDEX;
+        this.isNextClicked = Boolean.parseBoolean(isNextClicked);
+        this.isPreviousClicked = Boolean.parseBoolean(isPreviousClicked);
         this.pageSize = pageSize;
     }
 

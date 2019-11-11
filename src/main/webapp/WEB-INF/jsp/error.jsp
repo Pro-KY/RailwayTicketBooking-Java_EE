@@ -7,18 +7,21 @@
     <meta charset="utf-8">
 </head>
 <body>
-    Request from ${pageContext.errorData.requestURI} is failed
+heloo(
+    Request from ${sessionScope.errorData.requestURI} is failed
     <br/>
-    Servlet name: ${pageContext.errorData.servletName}
+    Servlet name: ${sessionScope.errorData.servletName}
     <br/>
-    Status code: ${pageContext.errorData.statusCode}
+    Status code: ${sessionScope.errorData.statusCode}
     <br/>
-    <c:if test="${not empty pageContext.exception}">
-        Exception: ${pageContext.exception}
+    <c:if test="${not empty sessionScope.errorData.exceptionName}">
+        Exception: ${sessionScope.errorData.exceptionName}
     </c:if>
     <br/>
-    <c:if test="${not empty pageContext.exception.message}">
-        Message: ${pageContext.exception.message}
+    <c:if test="${not empty sessionScope.errorData.exceptionMessage}">
+        Message: ${sessionScope.errorData.exceptionMessage}
     </c:if>
+    <br/>
+    <a href="${pageContext.request.contextPath}/booking/">Home page</a>
 </body>
 </html>

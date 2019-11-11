@@ -6,8 +6,7 @@ import com.proky.booking.persistence.entity.Station;
 import com.proky.booking.persistence.entity.Train;
 import com.proky.booking.persistence.entity.User;
 import com.proky.booking.persistence.jdbc.JdbcTemplate;
-import com.proky.booking.persistence.mapper.UserMapper;
-import com.proky.booking.persistence.mapper.UserTypeMapper;
+import com.proky.booking.persistence.mapper.*;
 import com.proky.booking.util.properties.SqlProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,10 +36,13 @@ public class TrainDaoImpl implements ITrainDao {
     }
 
     @Override
-    public List<Train> findTrainByDateAndTimeAndStation(Date departureDate, Time departureTime, Station station) {
+    public List<Train> findTrainByDateAndTimeAndStation(Date departureDate, Time departureTime, Station station, long pageSize, long offSet) {
         final String sqlQuery = SqlProperties.getQuery(FIND_TRAINS_BY_DATE_TIME_STATION);
+        final TrainMapper trainMapper = new TrainMapper(true);
+        trainMapper.mapRouteRelation(new RouteMapper(true));
+        trainMapper.mapTrainTypeRelation(new TrainTypeMapper(true));
 
-        return null;
+        return jdbcTemplate.findAll(sqlQuery, trainMapper, departureDate, departureTime, departureTime, station.getId(), pageSize, offSet);
     }
 
     @Override

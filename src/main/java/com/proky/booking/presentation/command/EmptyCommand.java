@@ -1,6 +1,7 @@
 package com.proky.booking.presentation.command;
 
-import com.proky.booking.dto.RouteDto;
+import com.proky.booking.dto.TrainDto;
+import com.proky.booking.util.constans.Commands;
 import com.proky.booking.util.constans.LocaleEnum;
 import com.proky.booking.util.properties.LocalizationProperties;
 import com.proky.booking.util.properties.ViewProperties;
@@ -23,10 +24,8 @@ public class EmptyCommand implements ICommand {
         final LocalizationProperties localizationProperties = new LocalizationProperties(LocaleEnum.EN);
         final Map<String, String> stations = localizationProperties.getStations();
 
-        final RouteDto routeDto = new RouteDto(stations);
-        request.setAttribute("findTrainDto", routeDto);
-
-        return ViewProperties.getPath(INDEX);
-//        return Commands.REDIRECT + ViewProperties.getPath(INDEX);
+        final TrainDto trainDto = new TrainDto(stations);
+        request.getSession().setAttribute("trainDto", trainDto);
+        return Commands.REDIRECT + ViewProperties.getPath(INDEX);
     }
 }

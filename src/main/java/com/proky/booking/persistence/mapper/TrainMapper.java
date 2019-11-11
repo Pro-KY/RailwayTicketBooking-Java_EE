@@ -23,7 +23,7 @@ public class TrainMapper extends EntityMapper<Train> {
 
     public TrainMapper(boolean useInJoin) {
         String idColumn = useInJoin ? TRAIN_ALIAS_IN_JOIN : ID;
-        columnNames = new String[]{idColumn, TRAIN_TYPE_ID, ROUTE_ID};
+        columnNames = new String[] {idColumn, TRAIN_TYPE_ID, ROUTE_ID};
     }
 
     @Override

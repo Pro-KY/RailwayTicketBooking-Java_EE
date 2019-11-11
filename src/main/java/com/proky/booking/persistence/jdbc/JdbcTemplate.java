@@ -26,7 +26,7 @@ public class JdbcTemplate {
         return instance;
     }
 
-    public <T> List<T> finAll(String sql, EntityMapper<T> entityMapper, Object... parameters) {
+    public <T> List<T> findAll(String sql, EntityMapper<T> entityMapper, Object... parameters) {
         List<T> resultList = new ArrayList<>();
 
         final Connection connection = connectionWrapper.getConnection();

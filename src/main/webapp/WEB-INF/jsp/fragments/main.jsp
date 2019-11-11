@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="pageDto" value="${sessionScope.pageDto}" scope="session"/>
+
 
 <html>
 <head>
@@ -10,7 +12,7 @@
 </head>
     <body>
         <div class="container-fluid">
-<%--            ${param.errMsg}--%>
+            pageDto is ${empty pageDto}
 
             <div class="row">
                 <form name = "findTrain" method="POST"  action="booking/">
@@ -22,7 +24,8 @@
                             <div class="form-group">
                                 <label for="usertype"><fmt:message key="going.to" bundle="${rb}"/></label>
                                 <select class="form-control" id="usertype" name="${Parameters.GOING_TO}">
-                                    <c:forEach var="entry" items="${requestScope.routeDto.stationsMap}">
+<%--                                    <c:forEach var="entry" items="${requestScope.trainDto.stationsMap}">--%>
+                                    <c:forEach var="entry" items="${sessionScope.trainDto.stationsMap}">
                                         <option value="${entry.key}" selected><fmt:message key="${entry.value}" bundle="${rb}"/></option>
                                     </c:forEach>
                                 </select>
@@ -104,7 +107,7 @@
             <div class="row mt-4">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
-                    <c:if test="${sessionScope.paginationInfo.allPagesAmount > 1}">
+                    <c:if test="${sessionScope.pageDto.allPagesAmount > 1}">
                         <nav aria-label="...">
                             <ul class="pagination" style="list-style-type: none;">
                                 <div class="container-fluid">

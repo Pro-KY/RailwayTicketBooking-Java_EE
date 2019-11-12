@@ -10,5 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ITrainDao extends IDao<Train> {
-    List<Train> findTrainByDateAndTimeAndStation(Date departureDate, Time departureTime, Station station,  long pageSize, long offSet);
+    List<Train> findTrainsByDateAndTimeAndStation(Date departureDate, Time departureTime, Station station, long pageSize, long offSet);
+    long countTrainsByDateAndTimeAndStation(Date departureDate, Time departureTime, Station station);
 }

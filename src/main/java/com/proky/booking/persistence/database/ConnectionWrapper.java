@@ -26,23 +26,23 @@ public class ConnectionWrapper implements AutoCloseable {
     public Connection getConnection() {
         initConnection();
         final Connection connection = connectionThreadLocal.get();
-        log.debug("connection = {}", connection.toString());
+//        log.debug("connection = {}", connection.toString());
         return connection;
     }
 
     private void initConnection() {
         if (Objects.isNull(connectionThreadLocal.get())) {
-            log.debug("connection is null = {}", Objects.isNull(connectionThreadLocal.get()));
+//            log.debug("connection is null = {}", Objects.isNull(connectionThreadLocal.get()));
             connectionThreadLocal.set(MysqlDataSource.getInstance().getConnection());
         } else {
-            log.debug("connection is not null");
+//            log.debug("connection is not null");
         }
     }
 
     public void useInTransaction(boolean useInTransaction) {
         log.debug("useInTransaction = {}", useInTransaction);
         usedInTransactionThreadLocal.set(useInTransaction);
-        log.debug("usedInTransactionThreadLocal.get() = {}", usedInTransactionThreadLocal.get());
+//        log.debug("usedInTransactionThreadLocal.get() = {}", usedInTransactionThreadLocal.get());
         setAutoCommit(!useInTransaction);
     }
 
@@ -65,16 +65,16 @@ public class ConnectionWrapper implements AutoCloseable {
     @Override
     public void close() {
         if (!usedInTransactionThreadLocal.get()) {
-            log.debug("usedInTransactionThreadLocal.get() = {}", usedInTransactionThreadLocal.get());
+//            log.debug("usedInTransactionThreadLocal.get() = {}", usedInTransactionThreadLocal.get());
             try {
                 final Connection connection = connectionThreadLocal.get();
-                log.debug("close connection = {}", connection.toString());
+//                log.debug("close connection = {}", connection.toString());
                 connection.close();
 //                connectionThreadLocal.get().close();
             } catch (SQLException e) {
                 log.error("failed to close a connection", e);
             } finally {
-                log.debug("release resources");
+//                log.debug("release resources");
                 connectionThreadLocal.remove();
                 usedInTransactionThreadLocal.remove();
             }

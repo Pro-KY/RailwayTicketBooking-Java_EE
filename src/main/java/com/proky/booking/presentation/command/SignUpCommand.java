@@ -7,7 +7,6 @@ import com.proky.booking.service.ValidationService;
 import com.proky.booking.util.URLBuilder;
 import com.proky.booking.util.command.HttpRequestDataBinder;
 import com.proky.booking.util.constans.Attributes;
-import com.proky.booking.util.constans.Commands;
 import com.proky.booking.util.constans.Parameters;
 import com.proky.booking.util.properties.ViewProperties;
 import com.proky.booking.validation.ValidationResult;
@@ -38,7 +37,7 @@ public class SignUpCommand implements ICommand {
             final SignUpService signUpService = ServiceFactory.getInstance().getSignUpService();
             signUpService.signUp(user);
         } else {
-            urlBuilder.addParameter(Parameters.SIGN_UP_FRAGMENT, ViewProperties.FRAGMENT_SIGN_UP);
+            urlBuilder.setAttribute(Parameters.SIGN_UP_FRAGMENT, ViewProperties.FRAGMENT_SIGN_UP);
             session.setAttribute(Attributes.VALIDATION, validation);
         }
 

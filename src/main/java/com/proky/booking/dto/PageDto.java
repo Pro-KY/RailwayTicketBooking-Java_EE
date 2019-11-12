@@ -25,7 +25,7 @@ public class PageDto implements Serializable {
     private Long userId;
     private List pageList;
 
-    public void setPaginationRequestContent(HttpServletRequest request) {
+    public void setRequestParameters(HttpServletRequest request) {
         String selectedPageIndex = request.getParameter(Parameters.SELECTED_PAGE_INDEX);
         final String pageSize = request.getParameter(Parameters.PAGE_SIZE);
         final String isNextClicked = request.getParameter(Parameters.NEXT_PAGE_CLICK);

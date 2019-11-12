@@ -31,7 +31,7 @@ public class URLBuilder {
         this.redirect = redirect;
     }
 
-    public void addParameter(String name, String value) {
+    public void setAttribute(String name, String value) {
         parameters.put(name, value);
     }
 
@@ -42,10 +42,21 @@ public class URLBuilder {
 
         sb.append(viewPath);
 
-        if (parameters != null) {
+        if (parameters.size() > 0) {
             sb.append("?");
 
-            parameters.forEach((parameter,value) -> sb.append(parameter).append("=").append(value));
+            boolean isFirst = true;
+            for (Map.Entry<String, String> entry : parameters.entrySet()) {
+                String parameter = entry.getKey();
+                String value = entry.getValue();
+
+                if (isFirst) {
+                    sb.append(parameter).append("=").append(value);
+                    isFirst = false;
+                } else {
+                    sb.append("&").append(parameter).append("=").append(value);
+                }
+            }
         }
 
         return sb.toString();

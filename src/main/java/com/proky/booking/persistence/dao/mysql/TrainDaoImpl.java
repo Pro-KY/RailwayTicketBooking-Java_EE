@@ -36,13 +36,18 @@ public class TrainDaoImpl implements ITrainDao {
     }
 
     @Override
-    public List<Train> findTrainByDateAndTimeAndStation(Date departureDate, Time departureTime, Station station, long pageSize, long offSet) {
+    public List<Train> findTrainsByDateAndTimeAndStation(Date departureDate, Time departureTime, Station station, long pageSize, long offSet) {
         final String sqlQuery = SqlProperties.getQuery(FIND_TRAINS_BY_DATE_TIME_STATION);
         final TrainMapper trainMapper = new TrainMapper(true);
         trainMapper.mapRouteRelation(new RouteMapper(true));
         trainMapper.mapTrainTypeRelation(new TrainTypeMapper(true));
 
         return jdbcTemplate.findAll(sqlQuery, trainMapper, departureDate, departureTime, departureTime, station.getId(), pageSize, offSet);
+    }
+
+    public long countTrainsByDateAndTimeAndStation(Date departureDate, Time departureTime, Station station) {
+        final String sqlQuery = SqlProperties.getQuery(COUNT_TRAINS_BY_DATE_TIME_STATION);
+        return jdbcTemplate.countRows(sqlQuery, departureDate, departureTime, departureTime, station.getId());
     }
 
     @Override

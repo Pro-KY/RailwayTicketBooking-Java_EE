@@ -78,7 +78,9 @@ public class PaginationService {
 
     public void calculateAllPagesAmount() {
         allPagesAmount = allRowsAmount / this.pageSize;
-        allPagesAmount += allPagesAmount % this.pageSize > 0 ? 1 : 0;
+        log.info("exp: {}", allPagesAmount % this.pageSize);
+//        allPagesAmount += allPagesAmount % this.pageSize > 0 ? 1 : 0;
+        allPagesAmount += allRowsAmount % this.pageSize > 0 ? 1 : 0;
     }
 
     public void calculateEndVisibleIndex() {

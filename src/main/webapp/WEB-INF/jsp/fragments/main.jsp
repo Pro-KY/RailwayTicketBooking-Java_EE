@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="pageDto" value="${sessionScope.pageDto}" scope="session"/>
+<c:set var="findTrainCommand" value="${Commands.FIND_TRAIN}" scope="page"/>
+<c:set var="findTrainParameters" value="${Attributes.GOING_TO}=${param.goingTo}&${Attributes.DEPARTURE_DATE}=${param.departureDate}&${Attributes.DEPARTURE_TIME}=${param.departureTime}" scope="page"/>
+
 
 <html>
 <head>
@@ -10,21 +13,17 @@
     <link rel="stylesheet" href="<c:url value="/assets/fonts/fontawesome/css/font-awesome.min.css"/>"/>
 </head>
     <body>
-        <div class="container-fluid">
-            pageDto is ${empty pageDto}
-
-            <div class="row">
+    <%--        <div class="container">--%>
+            <div class="row justify">
                 <form name = "findTrain" method="POST"  action="booking/">
-                    <input type="hidden" name="command" value="${Commands.FIND_TRAIN}">
+                    <input type="hidden" name="command" value="${findTrainCommand}">
 
                     <div class="row">
                         <%--GOING_TO--%>
-                        <div class="col-2">
+                        <div class="col-3">
                             <div class="form-group">
                                 <label for="usertype"><fmt:message key="going.to" bundle="${rb}"/></label>
                                 <select class="form-control" id="usertype" name="${Parameters.GOING_TO}">
-<%--                                    <c:forEach var="entry" items="${requestScope.trainDto.stationsMap}">--%>
-<%--                                    <c:forEach var="entry" items="${sessionScope.trainDto.stationsMap}">--%>
                                     <c:forEach var="station" items="${sessionScope.stations}">
                                         <option value="${station.id}" selected><fmt:message key="station.${station.id}" bundle="${rb}"/></option>
                                     </c:forEach>
@@ -33,7 +32,7 @@
                         </div>
                         <%--GOING_TO--%>
                         <%--DATE--%>
-                        <div class="col-2">
+                        <div class="col-3">
                             <div class="form-group">
                                 <label for="dateInput"><fmt:message key="departure.date" bundle="${rb}"/></label>
                                 <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
@@ -46,7 +45,7 @@
                         </div>
                         <%--DATE--%>
                         <%--TIME--%>
-                        <div class="col-2">
+                        <div class="col-3">
                             <div class="form-group">
                                 <label for="timeInput"><fmt:message key="departure.time" bundle="${rb}"/></label>
                                 <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
@@ -58,7 +57,7 @@
                             </div>
                         </div>
                         <%--TIME--%>
-                        <div class="col-6">
+                        <div class="col-3">
                             <br/>
                             <button type="submit" class="btn btn-primary mt-2" data-dismiss="modal"><fmt:message key="find.train.btn" bundle="${rb}"/></button>
                         </div>
@@ -67,9 +66,27 @@
             </div>
 
             <%--TABLE--%>
-            <c:if test="${not empty pageDto and not empty pageDto.pageList}">
-                <div class="row" id="table_wrapper">
-                    <div style="border: #0b2e13">
+<%--            <c:if test="${not empty pageDto and not empty pageDto.pageList}">--%>
+<%--                <div class="row" id="table_wrapper">--%>
+                    <div id="elementsAmountSelect" class="row">
+                        <div class="col-md-10"></div>
+                        <%--page size--%>
+                        <div class="col-md-2">
+                            <div class="dropdown show">
+                                <a class="dropdown-toggle nav-link" href="#" id="pageSizeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <fmt:message key="sent.reports.page.size" bundle="${rb}"/>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="pageSizeDropdown">
+                                    <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=3&command=${findTrainCommand}&${findTrainParameters}"/>"> 3 </a>
+                                    <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=5&command=${findTrainCommand}&${findTrainParameters}"/>"> 5 </a>
+                                    <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=10&command=${findTrainCommand}&${findTrainParameters}"/>">10</a>
+                                </div>
+                            </div>
+                        </div>
+                        <%--page size--%>
+                    </div>
+
+                    <div style="border: #0b2e13" class="row">
                         <table class="table">
                             <thead>
                             <tr>
@@ -91,8 +108,8 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </c:if>
+<%--                </div>--%>
+<%--            </c:if>--%>
             <%--TABLE--%>
 
             <%--PAGINATION--%>
@@ -128,10 +145,20 @@
                     </c:if>
                 </div>
             <%--PAGINATION--%>
-        </div>
+<%--        </div>--%>
     </body>
 </html>
 
+<%--TESTING--%>
+<div class="float-left">
+    <p>isLeftButtonDisabled : ${sessionScope.pageDto.isLeftButtonDisabled}</p>
+    <p>isRightButtonDisabled : ${sessionScope.pageDto.isRightButtonDisabled}</p>
+    <p>currentPageIndex ${sessionScope.pageDto.currentPageIndex}</p>
+    <p>allPagesAmount ${sessionScope.pageDto.allPagesAmount}</p>
+    <p>startPageIndex : ${sessionScope.pageDto.startPageIndex}</p>
+    <p>endPageIndex : ${sessionScope.pageDto.endPageIndex}</p>
+</div>
+<%--TESTING--%>
 
 <%--${not empty sessionScope.validation}--%>
 <%--<c:forEach var="entry" items="${sessionScope.validation.errorMessages}">--%>

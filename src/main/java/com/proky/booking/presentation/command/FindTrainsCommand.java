@@ -3,8 +3,8 @@ package com.proky.booking.presentation.command;
 import com.proky.booking.dto.PageDto;
 import com.proky.booking.service.TrainService;
 import com.proky.booking.service.ServiceFactory;
+import com.proky.booking.util.URLBuilder;
 import com.proky.booking.util.constans.Attributes;
-import com.proky.booking.util.constans.Commands;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,18 +20,26 @@ public class FindTrainsCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
+        final URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.getPath(INDEX));
+
         final String stationId = request.getParameter(GOING_TO);
         final String dateUI = request.getParameter(DEPARTURE_DATE);
         final String timeUI = request.getParameter(DEPARTURE_TIME);
 
         final HttpSession session = request.getSession();
         final PageDto sessionPageDto = getCurrentPageDto(session);
+        sessionPageDto.setRequestParameters(request);
 
         final TrainService trainService = ServiceFactory.getInstance().getFindTrainService();
         final PageDto foundTrainsPerPage = trainService.findTrains(sessionPageDto, dateUI, timeUI, stationId);
 
         session.setAttribute(Attributes.PAGE_DTO, foundTrainsPerPage);
-        return Commands.REDIRECT + ViewProperties.getPath(INDEX);
+
+        urlBuilder.setAttribute(GOING_TO, stationId);
+        urlBuilder.setAttribute(DEPARTURE_DATE, dateUI);
+        urlBuilder.setAttribute(DEPARTURE_TIME, timeUI);
+
+        return urlBuilder.buildURL();
     }
 
     private PageDto getCurrentPageDto(HttpSession session) {

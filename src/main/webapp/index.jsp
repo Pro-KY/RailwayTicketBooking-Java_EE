@@ -29,7 +29,8 @@
     <!-- HEADER -->
 
     <!--MAIN CONTENT-->
-    <div class="container-fluid row mr-1 ml-1">
+<%--    row mr-1 ml-1--%>
+    <div class="container float-left ml-3">
         <c:choose>
             <c:when test="${pageContext.request.getAttribute(Attributes.SIGN_UP_FRAGMENT) ne null}">
                 <%@include file="/WEB-INF/jsp/fragments/signUp.jsp" %>
@@ -43,7 +44,6 @@
         </c:choose>
         ${not empty alertMessage}
     </div>
-
     <!--MAIN CONTENT-->
 
 

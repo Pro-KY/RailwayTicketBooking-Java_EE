@@ -32,8 +32,8 @@ public class FrontController extends HttpServlet {
 
     private void handleRequest (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final ICommand command = CommandFactory.getCommand(request);
+
         final String viewPath = command.execute(request);
-        log.info("viewPath - {}", viewPath);
 
         if (viewPath == null) {
             response.sendRedirect(ViewProperties.getPath(ERROR));

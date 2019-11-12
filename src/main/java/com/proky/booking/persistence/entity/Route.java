@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class Route extends Entity<Long> {
-
     private String name;
     private Date departureDate;
     private Date arrivalDate;

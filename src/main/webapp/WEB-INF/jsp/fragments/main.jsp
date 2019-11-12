@@ -3,7 +3,6 @@
 <c:set var="findTrainCommand" value="${Commands.FIND_TRAIN}" scope="page"/>
 <c:set var="findTrainParameters" value="${Attributes.GOING_TO}=${param.goingTo}&${Attributes.DEPARTURE_DATE}=${param.departureDate}&${Attributes.DEPARTURE_TIME}=${param.departureTime}" scope="page"/>
 
-
 <html>
 <head>
     <title>main fragment</title>
@@ -112,40 +111,36 @@
 <%--            </c:if>--%>
             <%--TABLE--%>
 
-            <%--PAGINATION--%>
-            <div class="row mt-4">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <c:if test="${sessionScope.pageDto.allPagesAmount > 1}">
+            <c:if test="${sessionScope.pageDto.allPagesAmount > 1}">
+                <%--PAGINATION--%>
+                <div class="row mt-4">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
                         <nav aria-label="...">
                             <ul class="pagination" style="list-style-type: none;">
                                 <div class="container-fluid">
                                     <div class="btn-group">
-                                        <c:if test="${sessionScope.paginationInfo.allPagesAmount > 1}">
-                                            <li class="${sessionScope.paginationInfo.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                                <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${command}">Previous</a>
-                                            </li>
-                                        </c:if>
+                                        <li class="${sessionScope.pageDto.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                                            <a class="page-link" href="booking/?${Parameters.PAGE_SIZE}=${sessionScope.pageDto.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}">Previous</a>
+                                        </li>
 
-                                        <c:forEach begin="${sessionScope.paginationInfo.startPageIndex}" end="${sessionScope.paginationInfo.endPageIndex}" varStatus="counter">
-                                            <li class="${(sessionScope.paginationInfo.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
-                                                <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${command}"> ${counter.index+1} </a>
+                                        <c:forEach begin="${sessionScope.pageDto.startPageIndex}" end="${sessionScope.pageDto.endPageIndex}" varStatus="counter">
+                                            <li class="${(sessionScope.pageDto.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
+                                                <a class="page-link" href="booking/?${Parameters.PAGE_SIZE}=${sessionScope.pageDto.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${findTrainCommand}&${findTrainParameters}"> ${counter.index+1} </a>
                                             </li>
                                         </c:forEach>
 
-                                        <c:if test="${sessionScope.paginationInfo.allPagesAmount > 1}">
-                                            <li class="${sessionScope.paginationInfo.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                                <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${command}">Next</a>
-                                            </li>
-                                        </c:if>
+                                        <li class="${sessionScope.pageDto.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                                            <a class="page-link" href="booking/?${Parameters.PAGE_SIZE}=${sessionScope.pageDto.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}">Next</a>
+                                        </li>
                                     </div>
                                 </div>
                             </ul>
                         </nav>
-                    </c:if>
+                    </div>
                 </div>
-            <%--PAGINATION--%>
-<%--        </div>--%>
+                <%--PAGINATION--%>
+            </c:if>
     </body>
 </html>
 

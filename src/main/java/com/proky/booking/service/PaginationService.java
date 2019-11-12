@@ -1,11 +1,8 @@
 package com.proky.booking.service;
 
 import com.proky.booking.dto.PageDto;
-import com.proky.booking.util.constans.Attributes;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.servlet.http.HttpSession;
 
 public class PaginationService {
     private long pageSize;
@@ -31,7 +28,8 @@ public class PaginationService {
 
     private static final Logger log = LogManager.getLogger(PaginationService.class);
 
-    public PaginationService() { }
+    public PaginationService() {
+    }
 
     public PaginationService(PageDto pageDto) {
         this.pageDto = pageDto;
@@ -52,7 +50,7 @@ public class PaginationService {
         calculateEndVisibleIndex();
         changeButtonsState();
 
-        if(pageDto.getNextClicked()) {
+        if (pageDto.getNextClicked()) {
             handleNextButtonClick();
         } else if (pageDto.getPreviousClicked()) {
             handlePreviousButtonClick();
@@ -87,13 +85,12 @@ public class PaginationService {
         log.info("endVisibleIndex before - {}", endVisibleIndex);
         if (allPagesAmount == 0) {
             endVisibleIndex = 0;
-        } else if(endVisibleIndex == 0 & allPagesAmount > DEFAULT_END_INDEX) {
+        } else if (endVisibleIndex == 0 & allPagesAmount > DEFAULT_END_INDEX) {
             endVisibleIndex = DEFAULT_END_INDEX;
-        } else if(allPagesAmount < DEFAULT_END_INDEX) {
-            endVisibleIndex = allPagesAmount-1;
+        } else if (allPagesAmount < DEFAULT_END_INDEX) {
+            endVisibleIndex = allPagesAmount - 1;
         }
         log.info("endVisibleIndex after - {}", endVisibleIndex);
-
     }
 
     // 3
@@ -102,9 +99,9 @@ public class PaginationService {
     }
 
     public void handleNextButtonClick() {
-        if(currentPageIndex < endVisibleIndex) {
+        if (currentPageIndex < endVisibleIndex) {
             currentPageIndex += 1;
-        } else if(currentPageIndex == endVisibleIndex) {
+        } else if (currentPageIndex == endVisibleIndex) {
             shiftPagesIndexes(true);
         }
         changeButtonsState();
@@ -112,10 +109,10 @@ public class PaginationService {
     }
 
     public void handlePreviousButtonClick() {
-        if(currentPageIndex > startVisibleIndex) {
-            currentPageIndex-=1;
-        } else if(currentPageIndex == startVisibleIndex) {
-                shiftPagesIndexes(false);
+        if (currentPageIndex > startVisibleIndex) {
+            currentPageIndex -= 1;
+        } else if (currentPageIndex == startVisibleIndex) {
+            shiftPagesIndexes(false);
         }
         changeButtonsState();
         calculateOffset();
@@ -123,7 +120,7 @@ public class PaginationService {
 
     public void changeButtonsState() {
         isLeftButtonDisabled = (currentPageIndex == startVisibleIndex) & (currentPageIndex == DEFAULT_START_INDEX);
-        isRightButtonDisabled = currentPageIndex == allPagesAmount-1;
+        isRightButtonDisabled = currentPageIndex == allPagesAmount - 1;
     }
 
     private void shiftPagesIndexes(boolean forward) {

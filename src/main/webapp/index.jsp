@@ -42,7 +42,6 @@
                 <%@include file="/WEB-INF/jsp/fragments/main.jsp" %>
             </c:otherwise>
         </c:choose>
-        ${not empty alertMessage}
     </div>
     <!--MAIN CONTENT-->
 

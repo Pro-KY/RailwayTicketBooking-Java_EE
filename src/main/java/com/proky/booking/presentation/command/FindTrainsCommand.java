@@ -28,10 +28,13 @@ public class FindTrainsCommand implements ICommand {
 
         final HttpSession session = request.getSession();
         final PageDto sessionPageDto = getCurrentPageDto(session);
+//        log.info("before sessionPageDto: {}", sessionPageDto);
         sessionPageDto.setRequestParameters(request);
+//        log.info("after sessionPageDto: {}", sessionPageDto);
 
         final TrainService trainService = ServiceFactory.getInstance().getFindTrainService();
         final PageDto foundTrainsPerPage = trainService.findTrains(sessionPageDto, dateUI, timeUI, stationId);
+//        log.info("foundTrainsPerPage == null {}", foundTrainsPerPage == null);
 
         session.setAttribute(Attributes.PAGE_DTO, foundTrainsPerPage);
 

@@ -10,6 +10,8 @@ public class ViewProperties {
     public static final String FRAGMENT_SIGN_UP = "FRAGMENT_SIGN_UP";
     public static final String FRAGMENT_SIGN_IN = "FRAGMENT_SIGN_IN";
     public static final String FRAGMENT_MAIN = "FRAGMENT_MAIN";
+    public static final String FRAGMENT_TICKET_BOOKING = "FRAGMENT_TICKET_BOOKING";
+
     public static final String INDEX = "INDEX";
     public static final String ERROR = "ERROR";
 

@@ -2,6 +2,7 @@ package com.proky.booking.presentation.command;
 
 import com.proky.booking.presentation.command.fragment.SignInFragmentCommand;
 import com.proky.booking.presentation.command.fragment.SignUpFragmentCommand;
+import com.proky.booking.presentation.command.fragment.TicketBookingFragmentCommand;
 import com.proky.booking.util.constans.Commands;
 import com.proky.booking.util.constans.Parameters;
 import org.apache.logging.log4j.LogManager;
@@ -22,6 +23,7 @@ public class CommandFactory {
         commandHashMap.put(Commands.SIGN_UP, new SignUpCommand());
         commandHashMap.put(Commands.SIGN_IN, new SignInCommand());
         commandHashMap.put(Commands.FIND_TRAIN, new FindTrainsCommand());
+        commandHashMap.put(Commands.GET_TICKET_BOOKING_FRAGMENT, new TicketBookingFragmentCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

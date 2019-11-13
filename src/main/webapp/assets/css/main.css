@@ -6,6 +6,18 @@
     background-color: #9fcdff;
 }
 
-/*#table_wrapper {*/
-/*    display: none;*/
-/*}*/
+.table-row{
+    cursor:pointer;
+}
+
+.table-row:hover {
+    background-color: #ebf1f7;
+}
+
+#shit {
+    color: #005cbf;
+}
+
+#shit:hover {
+    cursor:pointer;
+}

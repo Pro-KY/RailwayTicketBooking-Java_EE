@@ -18,13 +18,12 @@ $('#myModal').on('show.bs.modal', function (e) {
     $(this).find('.modal-body input').val(stations);
 });
 
+$(document).ready(function($) {
+    $(".table-row").click(function() {
+        window.document.location = $(this).data("href");
+    });
+});
 
 $('.example-popover').popover({
     trigger: 'focus'
 });
-
-// $(function () {
-//     $('#example-popover').popover({
-//         container: 'body'
-//     })
-// });

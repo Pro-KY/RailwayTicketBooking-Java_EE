@@ -7,6 +7,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
+
 <html>
 <head>
     <title>main fragment</title>
@@ -14,6 +15,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/tempusdominus-bootstrap-4.min.js"></script>
     <link rel="stylesheet" href="<c:url value="/assets/css/tempusdominus-bootstrap-4.min.css"/>">
     <link rel="stylesheet" href="<c:url value="/assets/fonts/fontawesome/css/font-awesome.min.css"/>"/>
+<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/main.css">--%>
 </head>
     <body>
     <%--        <div class="container">--%>
@@ -102,7 +104,7 @@
                             <tbody>
 
                                 <c:forEach var="train" items="${pageDto.pageList}">
-                                    <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.TRAIN_ID}=${train.trainId}&command=${Commands.TICKET_PURCHASE_REQUEST}">
+                                    <tr class="table-row" data-href="/booking/?${Parameters.TRAIN_ID}=${train.trainId}&command=${Commands.GET_TICKET_BOOKING_FRAGMENT}">
                                         <td>${train.trainId} ${train.trainType}</td>
                                         <td>
                                             <c:set var="stations" value="" />
@@ -122,9 +124,6 @@
 <%--                </div>--%>
 <%--            </c:if>--%>
             <%--TABLE--%>
-
-            <%--MODAL--%>
-            <%@include file="/WEB-INF/jsp/fragments/modal.jsp" %>
 
             <c:if test="${sessionScope.pageDto.allPagesAmount > 1}">
                 <%--PAGINATION--%>

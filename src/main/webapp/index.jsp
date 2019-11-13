@@ -38,6 +38,9 @@
             <c:when test="${pageContext.request.getAttribute(Attributes.GET_SIGN_IN_FRAGMENT) ne null}">
                 <%@include file="/WEB-INF/jsp/fragments/signIn.jsp" %>
             </c:when>
+            <c:when test="${pageContext.request.getAttribute(Attributes.GET_FRAGMENT_TICKET_BOOKING) ne null}">
+                <%@include file="/WEB-INF/jsp/fragments/ticketBooking.jsp" %>
+            </c:when>
             <c:otherwise>
                 <%@include file="/WEB-INF/jsp/fragments/main.jsp" %>
             </c:otherwise>

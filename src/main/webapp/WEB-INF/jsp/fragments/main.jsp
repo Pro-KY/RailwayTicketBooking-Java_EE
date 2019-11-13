@@ -2,6 +2,10 @@
 <c:set var="pageDto" value="${sessionScope.pageDto}" scope="session"/>
 <c:set var="findTrainCommand" value="${Commands.FIND_TRAIN}" scope="page"/>
 <c:set var="findTrainParameters" value="${Attributes.GOING_TO}=${param.goingTo}&${Attributes.DEPARTURE_DATE}=${param.departureDate}&${Attributes.DEPARTURE_TIME}=${param.departureTime}" scope="page"/>
+<fmt:message var="route" key="table.header.route" bundle="${rb}"/>
+
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <html>
 <head>
@@ -96,20 +100,31 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="train" items="${pageDto.pageList}">
-                                <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.TRAIN_ID}=${train.trainId}&command=${Commands.TICKET_PURCHASE_REQUEST}">
-                                    <td>${train.trainId} ${train.trainType}</td>
-                                    <td>${train.routeName}</td>
-                                    <td>${train.routeDepartureDate} <br> ${train.routeArrivalDate}</td>
-                                    <td>${train.routeDepartureTime} <br> ${train.routeArrivalTime}</td>
-                                </tr>
-                            </c:forEach>
+
+                                <c:forEach var="train" items="${pageDto.pageList}">
+                                    <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.TRAIN_ID}=${train.trainId}&command=${Commands.TICKET_PURCHASE_REQUEST}">
+                                        <td>${train.trainId} ${train.trainType}</td>
+                                        <td>
+                                            <c:set var="stations" value="" />
+                                            <c:forEach var="st" items="${train.stations}">
+                                                <fmt:message var ="station" key="station.${st.stationId}" bundle="${rb}" scope="page"/>
+                                                <c:set var="stations" value="${stations += station} "/>
+                                            </c:forEach>
+                                            <button type="button" class="btn btn-link example-popover" data-toggle="popover" title="${route}" data-content="${stations}">${train.routeName}</button>
+                                        </td>
+                                        <td>${train.routeDepartureDate} <br> ${train.routeArrivalDate}</td>
+                                        <td>${train.routeDepartureTime} <br> ${train.routeArrivalTime}</td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
 <%--                </div>--%>
 <%--            </c:if>--%>
             <%--TABLE--%>
+
+            <%--MODAL--%>
+            <%@include file="/WEB-INF/jsp/fragments/modal.jsp" %>
 
             <c:if test="${sessionScope.pageDto.allPagesAmount > 1}">
                 <%--PAGINATION--%>
@@ -143,6 +158,8 @@
             </c:if>
     </body>
 </html>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 
 <%--TESTING--%>
 <div class="float-left">

@@ -61,8 +61,10 @@ public class TrainService {
         final IRouteStationDao routeStationDao = daoFactory.getRouteStationDao();
         final ModelMapper modelMapper = new ModelMapper();
         final TrainDto trainDto = modelMapper.map(train, TrainDto.class);
+
         final List<StationDto> routeStations = routeStationDao.findAllByRouteId(trainDto.getRouteId())
                 .stream().map(routeStation -> modelMapper.map(routeStation, StationDto.class)).collect(Collectors.toList());
+
         trainDto.setStations(routeStations);
         return trainDto;
     }

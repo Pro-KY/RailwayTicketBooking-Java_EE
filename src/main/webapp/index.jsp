@@ -57,7 +57,5 @@
             <%@ include file="/WEB-INF/jsp/fragments/footer.jsp" %>
         <!-- FOOTER -->
     </div>
-
-    <script src="<c:url value="assets/js/main.js"/>"></script>
 </body>
 </html>

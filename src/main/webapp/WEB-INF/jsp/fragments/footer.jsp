@@ -6,12 +6,13 @@
         <div class="col-4 d-flex justify-content-end" >
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-item nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <fmt:message key="footer.language" bundle="${rb}"/>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        <i class="fa fa-language" aria-hidden="true"></i>
+                        ${language eq 'en' ? 'EN' : 'RU'}
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="booking/?command=${Commands.CHANGE_LANGUAGE}&language=ua"><span class="flag-icon flag-icon-ua"> </span> Ukrainian</a>
-                        <a class="dropdown-item" href="booking/?command=${Commands.CHANGE_LANGUAGE}&language=en"><span class="flag-icon flag-icon-us"> </span> English</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="booking/?command=${Commands.CHANGE_LANGUAGE}&language=en"> EN </a>
+                        <a class="dropdown-item" href="booking/?command=${Commands.CHANGE_LANGUAGE}&language=ru"> RU </a>
                     </div>
                 </li>
             </ul>

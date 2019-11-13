@@ -22,4 +22,6 @@ public class Attributes {
     public static final String DEPARTURE_DATE = "departureDate";
     public static final String DEPARTURE_TIME = "departureTime";
 
+    public static final String LANGUAGE = "language";
+
 }

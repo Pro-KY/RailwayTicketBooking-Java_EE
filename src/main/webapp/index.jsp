@@ -16,7 +16,6 @@
 
     <link rel="stylesheet" href="<c:url value="/assets/css/bootstrap/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value="${pageContext.request.contextPath}/assets/css/main.css"/>">
-    <link rel="stylesheet" href="<c:url value="/assets/css/flag-icon.min.css"/>">
 
     <script src="<c:url value="/assets/jquery/jquery.js"/>"></script>
     <script src="<c:url value="/assets/js/bootstrap/popper.js"/>"></script>

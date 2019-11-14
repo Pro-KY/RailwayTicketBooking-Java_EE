@@ -12,6 +12,7 @@
 <c:set var="signUpFragmentPath" value="/WEB-INF/jsp/fragments/signUp.jsp" scope="page"/>
 <c:set var="signInFragmentPath" value="/WEB-INF/jsp/fragments/signIn.jsp" scope="page"/>
 <c:set var="getTicketBookingFragmentPath" value="/WEB-INF/jsp/fragments/ticketBooking.jsp" scope="page"/>
+<c:set var="billForTicketsFragmentPath" value="/WEB-INF/jsp/fragments/billForTickets.jsp" scope="page"/>
 
 
 <html>
@@ -47,6 +48,9 @@
 <%--            <c:when test="${pageContext.request.getAttribute(Attributes.GET_FRAGMENT_TICKET_BOOKING) ne null}">--%>
             <c:when test="${sessionScope.currentFragment eq getTicketBookingFragmentPath}">
                 <%@include file="/WEB-INF/jsp/fragments/ticketBooking.jsp" %>
+            </c:when>
+            <c:when test="${sessionScope.currentFragment eq billForTicketsFragmentPath}">
+                <%@include file="/WEB-INF/jsp/fragments/billForTickets.jsp" %>
             </c:when>
             <c:otherwise>
                 <%@include file="/WEB-INF/jsp/fragments/main.jsp" %>

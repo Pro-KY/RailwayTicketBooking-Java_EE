@@ -2,11 +2,12 @@
 <fmt:message var="lastName" key="user.lastName" bundle="${sessionScope.rb}" scope="page"/>
 
 <form method="POST" action ="booking/" id="ticketBooking">
+    <input type="hidden" name="command" value="${Commands.BILL_FOR_TICKETS}">
+
     <div class="row align-items-start justify-content-start mb-3">
         <div class="col-md-3 mt-3">
     <%--        firstName/lastName (guest)--%>
             <c:if test="${empty sessionScope.user}">
-                    <input type="hidden" name="command" value="${Commands.SIGN_IN}">
 
                     <label for="inputFirstName">FirstName</label>
                     <div class="form-group">
@@ -18,25 +19,37 @@
                         <input type="text" class="form-control" id="inputLastName" placeholder="${lastName}" name="${Parameters.USER_LAST_NAME}">
                     </div>
             </c:if>
+            <div class="form-group">
+                <label for="numberInput">seats amount</label>
+                <input class="form-control" type="number" value="1" id="numberInput" name="seatAmount">
+            </div>
         </div>
         <div class="col-md-9">
-    <%--        result table--%>
-            <%@include file="/WEB-INF/jsp/fragments/resultTable.jsp" %>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"><fmt:message key="table.header.train" bundle="${rb}"/></th>
+                        <th scope="col"><fmt:message key="table.header.route" bundle="${rb}"/></th>
+                        <th scope="col"><fmt:message key="table.header.date" bundle="${rb}"/></th>
+                        <th scope="col"><fmt:message key="table.header.time" bundle="${rb}"/></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-row">
+                        <td>${train.trainId} ${train.trainType}</td>
+                        <td>${train.routeName}</td>
+                        <td>${train.routeDepartureDate} <br> ${train.routeArrivalDate}</td>
+                        <td>${train.routeDepartureTime} <br> ${train.routeArrivalTime}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="row align-items-start justify-content-center">
-        <div class="col-md-3">
-    <%--        ticket amount counter--%>
-            <div class="qty">
-                <span class="minus bg-primary">-</span>
-                <input type="number" class="count" name="qty" value="1">
-                <span class="plus bg-primary">+</span>
-            </div>
-        </div>
-        <div class="col-md-3"></div>
+        <div class="col-md-6"></div>
         <div class="col-md-3">
     <%--        get payment invoice button--%>
-            <button type="submit" class="btn btn-primary col-12" data-dismiss="modal"> get Payment </button>
+            <button type="submit" class="btn btn-primary col-12" data-dismiss="modal"> Bill for ticket </button>
         </div>
         <div class="col-md-3"></div>
     </div>

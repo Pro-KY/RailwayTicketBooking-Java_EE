@@ -9,6 +9,7 @@ public class Commands {
     public static final String FIND_TRAIN = "findTrain";
     public static final String CHANGE_LANGUAGE = "changeLanguage";
 
-    public static final String GET_TICKET_BOOKING_FRAGMENT = "GetTicketBookingFragment";
+    public static final String GET_TICKET_BOOKING_FRAGMENT = "getTicketBookingFragment";
+    public static final String BILL_FOR_TICKETS = "billForTickets";
 
 }

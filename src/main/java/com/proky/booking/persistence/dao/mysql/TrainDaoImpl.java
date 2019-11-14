@@ -51,6 +51,16 @@ public class TrainDaoImpl implements ITrainDao {
     }
 
     @Override
+    public Optional<Train> findTrainById(Long id) {
+        final String sqlQuery = SqlProperties.getQuery(FIND_TRAIN_BY_ID);
+        final TrainMapper trainMapper = new TrainMapper(true);
+        trainMapper.mapRouteRelation(new RouteMapper(true));
+        trainMapper.mapTrainTypeRelation(new TrainTypeMapper(true));
+
+        return jdbcTemplate.findByQuery(sqlQuery, trainMapper, id);
+    }
+
+    @Override
     public Long save(Train entity) {
         return null;
     }

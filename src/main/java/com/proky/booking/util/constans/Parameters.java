@@ -21,5 +21,5 @@ public class Parameters {
     public static final String TRAIN_ID = "trainId";
     public static final String LANGUAGE = "language";
 
-
+    public static final String FOUND_TRAIN = "train";
 }

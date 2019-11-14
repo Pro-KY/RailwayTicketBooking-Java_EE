@@ -1,30 +1,33 @@
 <fmt:message var="firstName" key="user.firstName" bundle="${sessionScope.rb}" scope="page"/>
 <fmt:message var="lastName" key="user.lastName" bundle="${sessionScope.rb}" scope="page"/>
 
-<form method="POST" action ="booking/" id="ticketBooking">
+<form method="POST" action ="booking/" name="ticketBooking">
     <input type="hidden" name="command" value="${Commands.BILL_FOR_TICKETS}">
+    <input type="hidden" name="${Parameters.TRAIN_ID}" value="${train.trainId}">
 
     <div class="row align-items-start justify-content-start mb-3">
-        <div class="col-md-3 mt-3">
+        <div class="col-md-4 mt-3">
     <%--        firstName/lastName (guest)--%>
             <c:if test="${empty sessionScope.user}">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputFirstName">FirstName</label>
+                            <input type="text" class="form-control" id="inputFirstName" placeholder="${firstName}" name="${Parameters.USER_FIRST_NAME}">
+                        </div>
 
-                    <label for="inputFirstName">FirstName</label>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="inputFirstName" placeholder="${firstName}" name="${Parameters.USER_FIRST_NAME}">
+                        <div class="form-group col-md-6">
+                            <label for="inputLastName">LastName</label>
+                            <input type="text" class="form-control" id="inputLastName" placeholder="${lastName}" name="${Parameters.USER_LAST_NAME}">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputLastName">LastName</label>
-                        <input type="text" class="form-control" id="inputLastName" placeholder="${lastName}" name="${Parameters.USER_LAST_NAME}">
-                    </div>
             </c:if>
             <div class="form-group">
-                <label for="numberInput">seats amount</label>
+                <label for="numberInput">Seats</label>
                 <input class="form-control" type="number" value="1" id="numberInput" name="seatAmount">
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <table class="table">
                 <thead>
                     <tr>

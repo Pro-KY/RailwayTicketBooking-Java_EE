@@ -32,7 +32,7 @@ public class FindTrainsCommand implements ICommand {
         sessionPageDto.setRequestParameters(request);
 //        log.info("after sessionPageDto: {}", sessionPageDto);
 
-        final TrainService trainService = ServiceFactory.getInstance().getFindTrainService();
+        final TrainService trainService = ServiceFactory.getInstance().getTrainService();
         final PageDto foundTrainsPerPage = trainService.findTrains(sessionPageDto, dateUI, timeUI, stationId);
 //        log.info("foundTrainsPerPage == null {}", foundTrainsPerPage == null);
 

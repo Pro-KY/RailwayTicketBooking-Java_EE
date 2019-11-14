@@ -75,7 +75,7 @@ public class ServiceFactory {
         return getService(getServiceFromMap(signInServiceClass), signInServiceClass);
     }
 
-    public TrainService getFindTrainService() {
+    public TrainService getTrainService() {
         return getService(getServiceFromMap(trainServiceClass), trainServiceClass);
     }
 

@@ -19,15 +19,9 @@ public class TrainDto implements Serializable {
     private Time routeArrivalTime;
     private Double routeLengthFactor;
 
-    private Map<String, String> stationsMap;
     private List<StationDto> stations;
 
     public TrainDto() {}
-
-    public TrainDto(Map<String, String> stationsMap) {
-        this.stationsMap = stationsMap;
-    }
-
 
     public List<StationDto> getStations() {
         return stations;
@@ -109,13 +103,6 @@ public class TrainDto implements Serializable {
         this.routeLengthFactor = routeLengthFactor;
     }
 
-    public Map<String, String> getStationsMap() {
-        return stationsMap;
-    }
-
-    public void setStationsMap(Map<String, String> stationsMap) {
-        this.stationsMap = stationsMap;
-    }
 
     public Integer getTrainId() {
         return trainId;

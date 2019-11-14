@@ -17,7 +17,7 @@ public class TicketBookingFragmentCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         log.info("TicketBookingFragmentCommand CALLED");
-        request.setAttribute(Attributes.GET_FRAGMENT_TICKET_BOOKING, ViewProperties.getPath(FRAGMENT_TICKET_BOOKING));
+        request.getSession().setAttribute(Attributes.CURRENT_FRAGMENT, ViewProperties.getPath(FRAGMENT_TICKET_BOOKING));
         return ViewProperties.getPath(INDEX);
     }
 }

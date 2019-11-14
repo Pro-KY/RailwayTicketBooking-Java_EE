@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light" id="header">
         <div class="collapse navbar-collapse">
-            <a class="navbar-brand" href="#">LOGO</a>
+            <a class="navbar-brand" href="booking/">LOGO</a>
         </div>
         <span class="navbar-text mr-4">Hello, guest! </span>
 

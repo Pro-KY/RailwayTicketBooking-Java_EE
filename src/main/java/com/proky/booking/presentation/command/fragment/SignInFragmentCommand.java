@@ -19,7 +19,7 @@ public class SignInFragmentCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         log.info("SignInFragmentCommand CALLED");
-        request.setAttribute(Attributes.GET_SIGN_IN_FRAGMENT, ViewProperties.getPath(FRAGMENT_SIGN_IN));
+        request.getSession().setAttribute(Attributes.CURRENT_FRAGMENT, ViewProperties.getPath(FRAGMENT_SIGN_IN));
         return ViewProperties.getPath(INDEX);
     }
 }

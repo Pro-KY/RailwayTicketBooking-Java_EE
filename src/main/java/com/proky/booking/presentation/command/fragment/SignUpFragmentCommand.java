@@ -13,7 +13,7 @@ public class SignUpFragmentCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        request.setAttribute(Attributes.SIGN_UP_FRAGMENT, ViewProperties.getPath(FRAGMENT_SIGN_UP));
+        request.getSession().setAttribute(Attributes.CURRENT_FRAGMENT, ViewProperties.getPath(FRAGMENT_SIGN_UP));
         return ViewProperties.getPath(INDEX);
     }
 }

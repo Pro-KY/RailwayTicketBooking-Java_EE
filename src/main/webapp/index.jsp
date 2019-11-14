@@ -9,6 +9,11 @@
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="i18n.messages" var = "rb" scope="session"/>
 
+<c:set var="signUpFragmentPath" value="/WEB-INF/jsp/fragments/signUp.jsp" scope="page"/>
+<c:set var="signInFragmentPath" value="/WEB-INF/jsp/fragments/signIn.jsp" scope="page"/>
+<c:set var="getTicketBookingFragmentPath" value="/WEB-INF/jsp/fragments/ticketBooking.jsp" scope="page"/>
+
+
 <html>
 <head>
     <title>Main page</title>
@@ -31,13 +36,16 @@
 <%--    row mr-1 ml-1--%>
     <div class="container float-left ml-3">
         <c:choose>
-            <c:when test="${pageContext.request.getAttribute(Attributes.SIGN_UP_FRAGMENT) ne null}">
+<%--            <c:when test="${pageContext.request.getAttribute(Attributes.SIGN_UP_FRAGMENT) ne null}">--%>
+            <c:when test="${sessionScope.currentFragment eq signUpFragmentPath}">
                 <%@include file="/WEB-INF/jsp/fragments/signUp.jsp" %>
             </c:when>
-            <c:when test="${pageContext.request.getAttribute(Attributes.GET_SIGN_IN_FRAGMENT) ne null}">
+<%--            <c:when test="${pageContext.request.getAttribute(Attributes.GET_SIGN_IN_FRAGMENT) ne null}">--%>
+            <c:when test="${sessionScope.currentFragment eq signInFragmentPath}">
                 <%@include file="/WEB-INF/jsp/fragments/signIn.jsp" %>
             </c:when>
-            <c:when test="${pageContext.request.getAttribute(Attributes.GET_FRAGMENT_TICKET_BOOKING) ne null}">
+<%--            <c:when test="${pageContext.request.getAttribute(Attributes.GET_FRAGMENT_TICKET_BOOKING) ne null}">--%>
+            <c:when test="${sessionScope.currentFragment eq getTicketBookingFragmentPath}">
                 <%@include file="/WEB-INF/jsp/fragments/ticketBooking.jsp" %>
             </c:when>
             <c:otherwise>

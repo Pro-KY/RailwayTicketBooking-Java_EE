@@ -14,7 +14,6 @@ $('#myModal').on('show.bs.modal', function (e) {
     console.log(this);
     let stations = $(e.relatedTarget).data('stations');
     console.log(stations);
-    // $(this).find('.modal-content .modal-body p').val(stations)
     $(this).find('.modal-body input').val(stations);
 });
 
@@ -26,4 +25,19 @@ $(document).ready(function($) {
 
 $('.example-popover').popover({
     trigger: 'focus'
+});
+
+$(document).ready(function(){
+    let countSelector = $('.count');
+
+    countSelector.prop('disabled', true);
+    $(document).on('click','.plus',function(){
+        countSelector.val(parseInt(countSelector.val()) + 1 );
+    });
+    $(document).on('click','.minus',function(){
+        countSelector.val(parseInt(countSelector.val()) - 1 );
+        if (countSelector.val() === 0) {
+            countSelector.val(1);
+        }
+    });
 });

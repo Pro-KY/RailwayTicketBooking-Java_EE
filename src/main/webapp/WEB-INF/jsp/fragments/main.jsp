@@ -1,12 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <c:set var="pageDto" value="${sessionScope.pageDto}" scope="session"/>
 <c:set var="findTrainCommand" value="${Commands.FIND_TRAIN}" scope="page"/>
 <c:set var="findTrainParameters" value="${Attributes.GOING_TO}=${param.goingTo}&${Attributes.DEPARTURE_DATE}=${param.departureDate}&${Attributes.DEPARTURE_TIME}=${param.departureTime}" scope="page"/>
 <fmt:message var="route" key="table.header.route" bundle="${rb}"/>
-
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
 
 <html>
 <head>
@@ -70,62 +67,34 @@
                 </form>
             </div>
 
-            <%--TABLE--%>
-<%--            <c:if test="${not empty pageDto and not empty pageDto.pageList}">--%>
-<%--                <div class="row" id="table_wrapper">--%>
-                    <div id="elementsAmountSelect" class="row">
-                        <div class="col-md-10"></div>
-                        <%--page size--%>
-                        <div class="col-md-2">
-                            <div class="dropdown show">
-                                <a class="dropdown-toggle nav-link" href="#" id="pageSizeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <fmt:message key="sent.reports.page.size" bundle="${rb}"/>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="pageSizeDropdown">
-                                    <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=3&command=${findTrainCommand}&${findTrainParameters}"/>"> 3 </a>
-                                    <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=5&command=${findTrainCommand}&${findTrainParameters}"/>"> 5 </a>
-                                    <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=10&command=${findTrainCommand}&${findTrainParameters}"/>">10</a>
-                                </div>
-                            </div>
+    <%--            <c:if test="${not empty pageDto and not empty pageDto.pageList}">--%>
+    <%--PAGE_SIZE--%>
+            <div id="elementsAmountSelect" class="row">
+                <div class="col-md-10"></div>
+                <div class="col-md-2">
+                    <div class="dropdown show">
+                        <a class="dropdown-toggle nav-link" href="#" id="pageSizeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <fmt:message key="sent.reports.page.size" bundle="${rb}"/>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="pageSizeDropdown">
+                            <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=3&command=${findTrainCommand}&${findTrainParameters}"/>"> 3 </a>
+                            <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=5&command=${findTrainCommand}&${findTrainParameters}"/>"> 5 </a>
+                            <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=10&command=${findTrainCommand}&${findTrainParameters}"/>">10</a>
                         </div>
-                        <%--page size--%>
                     </div>
+                </div>
+            </div>
+            <%--PAGE_SIZE--%>
 
-                    <div style="border: #0b2e13" class="row">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col"><fmt:message key="table.header.train" bundle="${rb}"/></th>
-                                <th scope="col"><fmt:message key="table.header.route" bundle="${rb}"/></th>
-                                <th scope="col"><fmt:message key="table.header.date" bundle="${rb}"/></th>
-                                <th scope="col"><fmt:message key="table.header.time" bundle="${rb}"/></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                                <c:forEach var="train" items="${pageDto.pageList}">
-                                    <tr class="table-row" data-href="/booking/?${Parameters.TRAIN_ID}=${train.trainId}&command=${Commands.GET_TICKET_BOOKING_FRAGMENT}">
-                                        <td>${train.trainId} ${train.trainType}</td>
-                                        <td>
-                                            <c:set var="stations" value="" />
-                                            <c:forEach var="st" items="${train.stations}">
-                                                <fmt:message var ="station" key="station.${st.stationId}" bundle="${rb}" scope="page"/>
-                                                <c:set var="stations" value="${stations += station} "/>
-                                            </c:forEach>
-                                            <button type="button" class="btn btn-link example-popover" data-toggle="popover" title="${route}" data-content="${stations}">${train.routeName}</button>
-                                        </td>
-                                        <td>${train.routeDepartureDate} <br> ${train.routeArrivalDate}</td>
-                                        <td>${train.routeDepartureTime} <br> ${train.routeArrivalTime}</td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-<%--                </div>--%>
-<%--            </c:if>--%>
             <%--TABLE--%>
+    <div style="border: #0b2e13" class="row">
+        <%@include file="/WEB-INF/jsp/fragments/resultTable.jsp" %>
+    </div>
+            <%--TABLE--%>
+    <%--            </c:if>--%>
 
-            <c:if test="${sessionScope.pageDto.allPagesAmount > 1}">
+
+    <c:if test="${sessionScope.pageDto.allPagesAmount > 1}">
                 <%--PAGINATION--%>
                 <div class="row mt-4">
                     <div class="col-md-3"></div>
@@ -158,7 +127,7 @@
     </body>
 </html>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+<%--<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/main.js"></script>--%>
 
 <%--TESTING--%>
 <div class="float-left">

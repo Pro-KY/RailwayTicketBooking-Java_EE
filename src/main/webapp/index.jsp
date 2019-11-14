@@ -55,7 +55,6 @@
     </div>
     <!--MAIN CONTENT-->
 
-
     <div class="container-fluid row">
         <!-- ALERT -->
         <c:if test="${(not empty alertError and alertError eq true) or (not empty alertSuccess and alertSuccess eq true)}">
@@ -67,5 +66,7 @@
             <%@ include file="/WEB-INF/jsp/fragments/footer.jsp" %>
         <!-- FOOTER -->
     </div>
+
+    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 </body>
 </html>

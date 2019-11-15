@@ -1,1 +1,0 @@
-bill for ticket fragment

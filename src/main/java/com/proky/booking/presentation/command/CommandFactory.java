@@ -25,7 +25,7 @@ public class CommandFactory {
         commandHashMap.put(Commands.FIND_TRAIN, new FindTrainsCommand());
         commandHashMap.put(Commands.GET_TICKET_BOOKING_FRAGMENT, new TicketBookingFragmentCommand());
         commandHashMap.put(Commands.CHANGE_LANGUAGE, new ChangeLanguageCommand());
-        commandHashMap.put(Commands.BILL_FOR_TICKETS, new BillForTicketsCommand());
+        commandHashMap.put(Commands.INVOICE, new InvoiceCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

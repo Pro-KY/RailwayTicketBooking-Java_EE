@@ -1,9 +1,6 @@
 package com.proky.booking.dto;
 
 
-import com.proky.booking.persistence.entity.Entity;
-import com.proky.booking.service.ServiceFactory;
-
 import java.io.Serializable;
 
 public class StationDto implements Serializable {

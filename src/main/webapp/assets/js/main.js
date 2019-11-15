@@ -18,26 +18,11 @@ $('#myModal').on('show.bs.modal', function (e) {
 });
 
 $(document).ready(function($) {
-    $(".table-row").click(function() {
+    $(".clickable-row").click(function() {
         window.document.location = $(this).data("href");
     });
 });
 
 $('.example-popover').popover({
     trigger: 'focus'
-});
-
-$(document).ready(function(){
-    let countSelector = $('.count');
-
-    countSelector.prop('disabled', true);
-    $(document).on('click','.plus',function(){
-        countSelector.val(parseInt(countSelector.val()) + 1 );
-    });
-    $(document).on('click','.minus',function(){
-        countSelector.val(parseInt(countSelector.val()) - 1 );
-        if (countSelector.val() === 0) {
-            countSelector.val(1);
-        }
-    });
 });

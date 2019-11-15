@@ -11,7 +11,7 @@
         <tbody>
 
         <c:forEach var="train" items="${pageDto.pageList}">
-            <tr class="table-row" data-href="/booking/?${Parameters.TRAIN_ID}=${train.trainId}&command=${Commands.GET_TICKET_BOOKING_FRAGMENT}">
+            <tr class="table-row clickable-row" data-href="/booking/?${Parameters.TRAIN_ID}=${train.trainId}&command=${Commands.GET_TICKET_BOOKING_FRAGMENT}">
                 <td>${train.trainId} ${train.trainType}</td>
                 <td>
                     <c:set var="stations" value="" />

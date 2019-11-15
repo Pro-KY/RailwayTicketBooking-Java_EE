@@ -12,7 +12,7 @@
 <c:set var="signUpFragmentPath" value="/WEB-INF/jsp/fragments/signUp.jsp" scope="page"/>
 <c:set var="signInFragmentPath" value="/WEB-INF/jsp/fragments/signIn.jsp" scope="page"/>
 <c:set var="getTicketBookingFragmentPath" value="/WEB-INF/jsp/fragments/ticketBooking.jsp" scope="page"/>
-<c:set var="billForTicketsFragmentPath" value="/WEB-INF/jsp/fragments/billForTickets.jsp" scope="page"/>
+<c:set var="invoiceFragmentPath" value="/WEB-INF/jsp/fragments/invoice.jsp" scope="page"/>
 
 
 <html>
@@ -49,8 +49,8 @@
             <c:when test="${sessionScope.currentFragment eq getTicketBookingFragmentPath}">
                 <%@include file="/WEB-INF/jsp/fragments/ticketBooking.jsp" %>
             </c:when>
-            <c:when test="${sessionScope.currentFragment eq billForTicketsFragmentPath}">
-                <%@include file="/WEB-INF/jsp/fragments/billForTickets.jsp" %>
+            <c:when test="${sessionScope.currentFragment eq invoiceFragmentPath}">
+                <%@include file="/WEB-INF/jsp/fragments/invoice.jsp" %>
             </c:when>
             <c:otherwise>
                 <%@include file="/WEB-INF/jsp/fragments/main.jsp" %>

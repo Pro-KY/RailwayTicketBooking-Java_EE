@@ -2,7 +2,7 @@
 <fmt:message var="lastName" key="user.lastName" bundle="${sessionScope.rb}" scope="page"/>
 
 <form method="POST" action ="booking/" name="ticketBooking">
-    <input type="hidden" name="command" value="${Commands.BILL_FOR_TICKETS}">
+    <input type="hidden" name="command" value="${Commands.INVOICE}">
     <input type="hidden" name="${Parameters.TRAIN_ID}" value="${train.trainId}">
 
     <div class="row align-items-start justify-content-start mb-3">
@@ -24,7 +24,7 @@
             </c:if>
             <div class="form-group">
                 <label for="numberInput">Seats</label>
-                <input class="form-control" type="number" value="1" id="numberInput" name="seatAmount">
+                <input class="form-control" type="number" value="1" id="numberInput" min="1" max="5" name="${Parameters.SEATS}">
             </div>
         </div>
         <div class="col-md-8">

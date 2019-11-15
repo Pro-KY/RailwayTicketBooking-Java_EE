@@ -12,7 +12,7 @@
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="booking/?command=${Commands.CHANGE_LANGUAGE}&language=en"> EN </a>
-                        <a class="dropdown-item" href="booking/?command=${Commands.CHANGE_LANGUAGE}&language=ru=${pageContext}"> RU </a>
+                        <a class="dropdown-item" href="booking/?command=${Commands.CHANGE_LANGUAGE}&language=ru"> RU </a>
                     </div>
                 </li>
             </ul>

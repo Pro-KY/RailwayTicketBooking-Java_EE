@@ -1,6 +1,7 @@
 package com.proky.booking.dto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
@@ -9,7 +10,8 @@ import java.util.Map;
 public class TrainDto implements Serializable {
     private Integer trainId;
     private String trainType;
-    private String trainSeatPrice;
+//    private String trainSeatPrice;
+    private BigDecimal trainSeatPrice;
 
     private Long routeId;
     private String routeName;
@@ -39,11 +41,11 @@ public class TrainDto implements Serializable {
         this.trainType = trainType;
     }
 
-    public String getTrainSeatPrice() {
+    public BigDecimal getTrainSeatPrice() {
         return trainSeatPrice;
     }
 
-    public void setTrainSeatPrice(String trainSeatPrice) {
+    public void setTrainSeatPrice(BigDecimal trainSeatPrice) {
         this.trainSeatPrice = trainSeatPrice;
     }
 

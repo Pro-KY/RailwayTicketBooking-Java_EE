@@ -25,4 +25,6 @@ public class Attributes {
 
     public static final String LANGUAGE = "language";
 
+    public static final String MODEL = "model";
+
 }

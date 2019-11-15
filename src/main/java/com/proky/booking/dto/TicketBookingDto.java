@@ -1,13 +1,12 @@
 package com.proky.booking.dto;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
 public class TicketBookingDto implements Serializable {
     private String trainId;
     private String firstName;
     private String lastName;
-    private String seats;
+    private String seatsAmount;
 
     public TicketBookingDto() {}
 
@@ -35,12 +34,12 @@ public class TicketBookingDto implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getSeats() {
-        return seats;
+    public String getSeatsAmount() {
+        return seatsAmount;
     }
 
-    public void setSeats(String seats) {
-        this.seats = seats;
+    public void setSeatsAmount(String seatsAmount) {
+        this.seatsAmount = seatsAmount;
     }
 
     @Override
@@ -49,7 +48,7 @@ public class TicketBookingDto implements Serializable {
                 "trainId=" + trainId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", seats=" + seats +
+                ", seats=" + seatsAmount +
                 '}';
     }
 }

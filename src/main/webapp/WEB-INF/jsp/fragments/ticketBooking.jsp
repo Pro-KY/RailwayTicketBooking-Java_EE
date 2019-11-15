@@ -24,7 +24,7 @@
             </c:if>
             <div class="form-group">
                 <label for="numberInput">Seats</label>
-                <input class="form-control" type="number" value="1" id="numberInput" min="1" max="5" name="${Parameters.SEATS}">
+                <input class="form-control" type="number" value="1" id="numberInput" min="1" max="5" name="${Parameters.SEATS_AMOUNT}">
             </div>
         </div>
         <div class="col-md-8">

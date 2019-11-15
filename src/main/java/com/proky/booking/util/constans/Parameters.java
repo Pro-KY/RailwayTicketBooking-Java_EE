@@ -22,5 +22,5 @@ public class Parameters {
     public static final String LANGUAGE = "language";
 
     public static final String FOUND_TRAIN = "train";
-    public static final String SEATS = "seats";
+    public static final String SEATS_AMOUNT = "seatsAmount";
 }

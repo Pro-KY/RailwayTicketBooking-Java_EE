@@ -16,6 +16,7 @@ public class ServiceFactory {
     private Class<SignInService> signInServiceClass = SignInService.class;
     private Class<TrainService> trainServiceClass = TrainService.class;
     private Class<StationService> stationServiceClass = StationService.class;
+    private Class<InvoiceService> invoiceServiceClass = InvoiceService.class;
 
     private static ServiceFactory mInstance;
     private HashMap<Class<?>, Object> servicesMap = new HashMap<>();
@@ -28,11 +29,13 @@ public class ServiceFactory {
         final SignInService signInService = new SignInService(daoFactory);
         final TrainService trainService = new TrainService(daoFactory);
         final StationService stationService = new StationService(daoFactory);
+        final InvoiceService invoiceService = new InvoiceService(daoFactory);
 
         servicesMap.put(signUpServiceClass, signUpService);
         servicesMap.put(signInServiceClass, signInService);
         servicesMap.put(trainServiceClass, trainService);
         servicesMap.put(stationServiceClass, stationService);
+        servicesMap.put(invoiceServiceClass, invoiceService);
     }
 
     public static ServiceFactory getInstance() {
@@ -81,6 +84,10 @@ public class ServiceFactory {
 
     public StationService getStationService() {
         return getService(getServiceFromMap(stationServiceClass), stationServiceClass);
+    }
+
+    public InvoiceService getInvoiceService() {
+        return getService(getServiceFromMap(invoiceServiceClass), invoiceServiceClass);
     }
 
 }

@@ -4,6 +4,8 @@ import com.proky.booking.annotation.Email;
 import com.proky.booking.annotation.NotNull;
 import com.proky.booking.annotation.Text;
 
+import java.util.Objects;
+
 public class User extends Entity<Long> {
     @NotNull
     @Text
@@ -67,6 +69,25 @@ public class User extends Entity<Long> {
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(this.getId(), user.getId()) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(userType, user.userType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getId(), firstName, lastName, email, password, userType);
     }
 
     @Override

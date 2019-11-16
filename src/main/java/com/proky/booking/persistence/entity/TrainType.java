@@ -1,5 +1,6 @@
 package com.proky.booking.persistence.entity;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class TrainType extends Entity<Long> {
     private String type;
@@ -29,6 +30,22 @@ public class TrainType extends Entity<Long> {
 
     public void setSeatPrice(BigDecimal seatPrice) {
         this.seatPrice = seatPrice;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TrainType trainType = (TrainType) o;
+        return  Objects.equals(this.getId(), trainType.getId()) &&
+                Objects.equals(type, trainType.type) &&
+                Objects.equals(seatPrice, trainType.seatPrice);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getId(), type, seatPrice);
     }
 
     @Override

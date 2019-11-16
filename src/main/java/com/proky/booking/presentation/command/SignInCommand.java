@@ -30,6 +30,8 @@ public class SignInCommand implements ICommand {
         final String indexViewPath = ViewProperties.getPath(INDEX);
         URLBuilder urlBuilder = new URLBuilder(true, indexViewPath);
 
+        // if user admin?
+
         log.info("user sign in");
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
         final User user = requestDataBinder.bindToEntity(request, User.class);
@@ -41,6 +43,7 @@ public class SignInCommand implements ICommand {
         if (validation.isSuccessfull()) {
             final SignInService signInService = ServiceFactory.getInstance().getSignInService();
             final User authenticatedUser = signInService.signIn(user);
+
 
             session.setAttribute(Attributes.IS_USER_AUTHORIZED, true);
             session.setAttribute(Attributes.USER, authenticatedUser);

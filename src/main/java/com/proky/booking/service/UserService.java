@@ -28,12 +28,14 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public PageDto findAllRegisteredUsers(PageDto pageDto) {
-        final ServiceException serviceException = new ServiceException(MessageProperties.NOT_FOUND_ENTITY);
 
         final IUserDao userDao = daoFactory.getUserDao();
         final IUserTypeDao userTypeDao = daoFactory.getUserTypeDao();
 
-        final UserType userType = userTypeDao.findByType(UserTypeEnum.USER.type).orElseThrow(() -> serviceException);
+        final UserType userType = userTypeDao.
+                findByType(UserTypeEnum.USER.type)
+                .orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
+
         final Long allUsersAmount = userDao.countAllByType(userType);
 
         final PaginationService paginationService = new PaginationService(pageDto);
@@ -51,5 +53,16 @@ public class UserService {
         log.info("pageDto: {}", pageDto.toString());
 
         return pageDto;
+    }
+
+    public boolean isAdministrator(User authenticatedUser) {
+        final UserType userType = authenticatedUser.getUserType();
+        final IUserTypeDao userTypeDao = daoFactory.getUserTypeDao();
+
+        final UserType adminUserType = userTypeDao.
+                findByType(UserTypeEnum.ADMIN.type)
+                .orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
+
+        return false; // stub
     }
 }

@@ -2,6 +2,7 @@ package com.proky.booking.persistence.entity;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Objects;
 
 public class Route extends Entity<Long> {
     private String name;
@@ -77,4 +78,22 @@ public class Route extends Entity<Long> {
         this.routeLengthFactor = routeLengthFactor;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Route route = (Route) o;
+        return Objects.equals(this.getId(), route.getId()) &&
+                Objects.equals(name, route.name) &&
+                Objects.equals(departureDate, route.departureDate) &&
+                Objects.equals(arrivalDate, route.arrivalDate) &&
+                Objects.equals(departureTime, route.departureTime) &&
+                Objects.equals(arrivalTime, route.arrivalTime) &&
+                Objects.equals(routeLengthFactor, route.routeLengthFactor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getId(), name, departureDate, arrivalDate, departureTime, arrivalTime, routeLengthFactor);
+    }
 }

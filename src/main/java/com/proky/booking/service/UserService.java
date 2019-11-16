@@ -63,6 +63,6 @@ public class UserService {
                 findByType(UserTypeEnum.ADMIN.type)
                 .orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
 
-        return false; // stub
+        return userType.equals(adminUserType);
     }
 }

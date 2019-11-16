@@ -6,14 +6,13 @@ import static com.proky.booking.util.constans.Commands.REDIRECT;
 
 public class URLBuilder {
     private StringBuilder sb = new StringBuilder();
-    private String viewPath;
     private Map<String, String> parameters = new HashMap<>();
+    private String viewPath;
     private boolean redirect;
 
     public URLBuilder(String viewPath) {
         this.viewPath = viewPath;
     }
-
 
     public URLBuilder(boolean redirect, String viewPath) {
         this.viewPath = viewPath;
@@ -28,6 +27,14 @@ public class URLBuilder {
     public URLBuilder(boolean redirect, String viewPath, Map<String, String> parameters) {
         this.viewPath = viewPath;
         this.parameters = parameters;
+        this.redirect = redirect;
+    }
+
+    public void setViewPath(String viewPath) {
+        this.viewPath = viewPath;
+    }
+
+    public void setRedirect(boolean redirect) {
         this.redirect = redirect;
     }
 

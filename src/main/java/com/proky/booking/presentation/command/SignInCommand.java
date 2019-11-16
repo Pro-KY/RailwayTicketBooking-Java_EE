@@ -1,8 +1,10 @@
 package com.proky.booking.presentation.command;
 
+import com.proky.booking.dto.PageDto;
 import com.proky.booking.persistence.entity.User;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.SignInService;
+import com.proky.booking.service.UserService;
 import com.proky.booking.service.ValidationService;
 import com.proky.booking.util.URLBuilder;
 import com.proky.booking.util.command.HttpRequestDataBinder;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpSession;
 
 import static com.proky.booking.util.properties.MessageProperties.AUTHORIZATION_ERROR;
 import static com.proky.booking.util.properties.ViewProperties.INDEX;
+import static com.proky.booking.util.properties.ViewProperties.USERS;
 
 
 public class SignInCommand implements ICommand {
@@ -27,10 +30,9 @@ public class SignInCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         final HttpSession session = request.getSession();
 
-        final String indexViewPath = ViewProperties.getPath(INDEX);
-        URLBuilder urlBuilder = new URLBuilder(true, indexViewPath);
-
-        // if user admin?
+        URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.getPath(INDEX));
+        final SignInService signInService = ServiceFactory.getInstance().getSignInService();
+        final UserService userService = ServiceFactory.getInstance().getUserService();
 
         log.info("user sign in");
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
@@ -40,18 +42,24 @@ public class SignInCommand implements ICommand {
         final ValidationService validationService = ValidationService.getInstance();
         final ValidationResult validation = validationService.validate(user, "email", "password");
 
+
         if (validation.isSuccessfull()) {
-            final SignInService signInService = ServiceFactory.getInstance().getSignInService();
             final User authenticatedUser = signInService.signIn(user);
+            final boolean isAdministrator = userService.isAdministrator(authenticatedUser);
 
-
-            session.setAttribute(Attributes.IS_USER_AUTHORIZED, true);
-            session.setAttribute(Attributes.USER, authenticatedUser);
-
+            if (isAdministrator) {
+                PageDto pageDto = new PageDto();
+                final PageDto allRegisteredUsers = userService.findAllRegisteredUsers(pageDto);
+                session.setAttribute(Attributes.MODEL, allRegisteredUsers);
+                urlBuilder.setViewPath(ViewProperties.getPath(USERS));
+            } else {
+                session.setAttribute(Attributes.IS_USER_AUTHORIZED, true);
+                session.setAttribute(Attributes.USER, authenticatedUser);
+            }
         } else {
             request.setAttribute(Attributes.ALERT_ERROR, true);
             request.setAttribute(Attributes.ALERT_MESSAGE, MessageProperties.getMessage(AUTHORIZATION_ERROR));
-            urlBuilder = new URLBuilder(false, indexViewPath);
+            urlBuilder.setRedirect(false);
         }
 
         return urlBuilder.buildURL();

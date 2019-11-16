@@ -10,7 +10,7 @@ public class Commands {
     public static final String TRAIN_BOOKING = "trainBooking";
     public static final String INVOICE = "invoice";
 
-    public static final String CHANGE_USER = "changeUser";
+    public static final String MANAGE_USER = "manageUser";
     public static final String FIND_ALL_USERS = "findAllUsers";
 
 }

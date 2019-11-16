@@ -37,7 +37,7 @@ public class SignUpCommand implements ICommand {
             final SignUpService signUpService = ServiceFactory.getInstance().getSignUpService();
             signUpService.signUp(user);
         } else {
-            urlBuilder.setAttribute(Parameters.SIGN_UP_FRAGMENT, ViewProperties.FRAGMENT_SIGN_UP);
+            urlBuilder.setAttribute(Parameters.SIGN_UP_FRAGMENT, ViewProperties.SIGN_UP);
             session.setAttribute(Attributes.VALIDATION, validation);
         }
 

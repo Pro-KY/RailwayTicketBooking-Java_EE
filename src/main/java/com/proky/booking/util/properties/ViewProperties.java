@@ -7,11 +7,10 @@ public class ViewProperties {
     private static ResourceBundle viewPathProperties;
     private static final String fileName = "view";
 
-    public static final String FRAGMENT_SIGN_UP = "FRAGMENT_SIGN_UP";
-    public static final String FRAGMENT_SIGN_IN = "FRAGMENT_SIGN_IN";
-    public static final String FRAGMENT_MAIN = "FRAGMENT_MAIN";
-    public static final String FRAGMENT_TICKET_BOOKING = "FRAGMENT_TICKET_BOOKING";
-    public static final String FRAGMENT_INVOICE = "FRAGMENT_INVOICE";
+    public static final String SIGN_UP = "SIGN_UP";
+    public static final String SIGN_IN = "SIGN_IN";
+    public static final String TRAIN_BOOKING = "TRAIN_BOOKING";
+    public static final String INVOICE = "INVOICE";
 
     public static final String INDEX = "INDEX";
     public static final String ERROR = "ERROR";

@@ -20,9 +20,7 @@ public class ChangeLanguageCommand implements ICommand {
         final String chosenLanguage = request.getParameter(Parameters.LANGUAGE);
         final HttpSession session = request.getSession();
         session.setAttribute(Attributes.LANGUAGE, chosenLanguage);
-
         return new URLBuilder(true, ViewProperties.getPath(INDEX)).buildURL();
-//        return new URLBuilder(true, "booking/?command=billForTickets").buildURL();
     }
 }
 

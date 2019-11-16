@@ -1,8 +1,5 @@
 package com.proky.booking.presentation.command;
 
-import com.proky.booking.presentation.command.fragment.SignInFragmentCommand;
-import com.proky.booking.presentation.command.fragment.SignUpFragmentCommand;
-import com.proky.booking.presentation.command.fragment.TicketBookingFragmentCommand;
 import com.proky.booking.util.constans.Commands;
 import com.proky.booking.util.constans.Parameters;
 import org.apache.logging.log4j.LogManager;
@@ -18,12 +15,10 @@ public class CommandFactory {
     private static HashMap<String, ICommand> commandHashMap = new HashMap<>();
 
     static {
-        commandHashMap.put(Commands.GET_SIGN_UP_FRAGMENT, new SignUpFragmentCommand());
-        commandHashMap.put(Commands.GET_SIGN_IN_FRAGMENT, new SignInFragmentCommand());
         commandHashMap.put(Commands.SIGN_UP, new SignUpCommand());
         commandHashMap.put(Commands.SIGN_IN, new SignInCommand());
         commandHashMap.put(Commands.FIND_TRAIN, new FindTrainsCommand());
-        commandHashMap.put(Commands.GET_TICKET_BOOKING_FRAGMENT, new TicketBookingFragmentCommand());
+        commandHashMap.put(Commands.TRAIN_BOOKING, new TrainBookingCommand());
         commandHashMap.put(Commands.CHANGE_LANGUAGE, new ChangeLanguageCommand());
         commandHashMap.put(Commands.INVOICE, new InvoiceCommand());
     }

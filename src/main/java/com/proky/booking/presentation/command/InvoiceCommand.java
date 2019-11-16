@@ -45,8 +45,7 @@ public class InvoiceCommand implements ICommand {
         log.info("invoiceDto {}", invoiceDto);
 
         request.getSession().setAttribute(Attributes.MODEL, invoiceDto);
-        request.getSession().setAttribute(Attributes.CURRENT_FRAGMENT, ViewProperties.getPath(FRAGMENT_INVOICE));
-        final String viewPath = ViewProperties.getPath(INDEX);
+        final String viewPath = ViewProperties.getPath(INVOICE);
         URLBuilder urlBuilder = new URLBuilder(true, viewPath);
 
         return urlBuilder.buildURL();

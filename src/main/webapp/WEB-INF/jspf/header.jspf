@@ -5,6 +5,6 @@
         </div>
         <span class="navbar-text mr-4">Hello, guest! </span>
 
-        <a class="btn btn-link" href="booking/?${Parameters.COMMAND}=${Commands.GET_SIGN_IN_FRAGMENT}" role="button">Authorize</a>
+        <a class="btn btn-link" href="<c:url value="${pageContext.request.contextPath}/jsp/signIn.jsp"/>" role="button">Authorize</a>
     </nav>
 </div>

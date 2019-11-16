@@ -6,6 +6,7 @@ import com.proky.booking.dto.UserDto;
 import com.proky.booking.persistence.entity.User;
 import com.proky.booking.service.InvoiceService;
 import com.proky.booking.service.ServiceFactory;
+import com.proky.booking.service.UserService;
 import com.proky.booking.util.URLBuilder;
 import com.proky.booking.util.command.HttpRequestDataBinder;
 import com.proky.booking.util.constans.Attributes;
@@ -29,6 +30,11 @@ public class ManageUserCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         final String userId = request.getParameter(Parameters.USER_ID);
 
-        return null;
+        final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+        final UserService userService = serviceFactory.getUserService();
+        final UserDto userDto = userService.findUserById(Long.parseLong(userId));
+
+        request.setAttribute(Attributes.MODEL, userDto);
+        return ViewProperties.getPath(ViewProperties.ADMIN_MANAGE_USER);
     }
 }

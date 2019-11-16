@@ -18,6 +18,7 @@ public class SqlProperties {
 
     public static final String FIND_ALL_USERS_BY_TYPE = "FIND_ALL_USERS_BY_TYPE";
     public static final String COUNT_ALL_USERS_BY_TYPE = "COUNT_ALL_USERS_BY_TYPE";
+    public static final String FIND_USER_BY_ID = "FIND_USER_BY_ID";
 
     static {
         viewPathProperties = PropertyResourceBundle.getBundle(fileName);

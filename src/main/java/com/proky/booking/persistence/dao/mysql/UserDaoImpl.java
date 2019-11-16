@@ -74,6 +74,8 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public Optional<User> findById(Long id) {
-        return Optional.empty();
+        final String sqlQuery = SqlProperties.getQuery(FIND_USER_BY_ID);
+        final UserMapper userMapper = new UserMapper(false);
+        return jdbcTemplate.findByQuery(sqlQuery, userMapper, id);
     }
 }

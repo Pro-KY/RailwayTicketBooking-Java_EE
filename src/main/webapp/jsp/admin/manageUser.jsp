@@ -3,7 +3,7 @@
 
 <html>
 <head>
-    <title>Main page</title>
+    <title>Manage user</title>
     <%@ include file="/WEB-INF/jspf/headImports.jspf" %>
 </head>
 
@@ -44,7 +44,7 @@
                 <div class="col-md-3"></div>
             </div>
             <div class="row">
-                <div class="col-md-2"><a class="btn btn-primary" type="submit">Update</a></div>
+                <div class="col-md-2"><button class="btn btn-primary" type="submit"> Update </button></div>
                 <div class="col-md-2"><a class="btn btn-danger" href="${pageContext.request.contextPath}/booking/?${Parameters.USER_ID}=${model.id}&command=${Commands.DELETE_USER}" role="button">Delete</a></div>
                 <div class="col-md-8"></div>
             </div>

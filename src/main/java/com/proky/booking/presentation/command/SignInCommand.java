@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 import static com.proky.booking.util.properties.MessageProperties.AUTHORIZATION_ERROR;
 import static com.proky.booking.util.properties.ViewProperties.INDEX;
-import static com.proky.booking.util.properties.ViewProperties.USERS;
+import static com.proky.booking.util.properties.ViewProperties.ADMIN_USERS;
 
 
 public class SignInCommand implements ICommand {
@@ -50,7 +50,7 @@ public class SignInCommand implements ICommand {
                 PageDto pageDto = new PageDto();
                 final PageDto allRegisteredUsers = userService.findAllRegisteredUsers(pageDto);
                 session.setAttribute(Attributes.MODEL, allRegisteredUsers);
-                urlBuilder.setViewPath(ViewProperties.getPath(USERS));
+                urlBuilder.setViewPath(ViewProperties.getPath(ADMIN_USERS));
             } else {
                 session.setAttribute(Attributes.IS_USER_AUTHORIZED, true);
                 session.setAttribute(Attributes.USER, authenticatedUser);

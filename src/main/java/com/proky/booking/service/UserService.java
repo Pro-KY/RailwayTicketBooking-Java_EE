@@ -16,6 +16,7 @@ import com.proky.booking.util.properties.MessageProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.bytebuddy.dynamic.loading.ClassInjector;
 
 import java.util.List;
 import java.util.Optional;
@@ -75,5 +76,15 @@ public class UserService {
                 .orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
 
         return userType.equals(adminUserType);
+    }
+
+    public UserDto findUserById(Long id) {
+        final IUserDao userDao = daoFactory.getUserDao();
+        final ModelMapper modelMapper = new ModelMapper();
+
+        return userDao.
+                findById(id)
+                .map(user -> modelMapper.map(user, UserDto.class))
+                .orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
     }
 }

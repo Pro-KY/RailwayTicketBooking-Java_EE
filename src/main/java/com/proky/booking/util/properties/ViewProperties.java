@@ -15,7 +15,8 @@ public class ViewProperties {
     public static final String INDEX = "INDEX";
     public static final String ERROR = "ERROR";
 
-    public static final String USERS = "USERS";
+    public static final String ADMIN_USERS = "ADMIN_USERS";
+    public static final String ADMIN_MANAGE_USER = "ADMIN_MANAGE_USER";
 
     static {
         viewPathProperties = PropertyResourceBundle.getBundle(fileName);

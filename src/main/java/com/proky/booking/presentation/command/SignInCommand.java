@@ -42,7 +42,6 @@ public class SignInCommand implements ICommand {
         final ValidationService validationService = ValidationService.getInstance();
         final ValidationResult validation = validationService.validate(user, "email", "password");
 
-
         if (validation.isSuccessfull()) {
             final User authenticatedUser = signInService.signIn(user);
             final boolean isAdministrator = userService.isAdministrator(authenticatedUser);

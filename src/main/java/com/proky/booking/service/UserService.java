@@ -2,6 +2,8 @@ package com.proky.booking.service;
 
 import com.proky.booking.annotation.Transactional;
 import com.proky.booking.dto.PageDto;
+import com.proky.booking.dto.TrainDto;
+import com.proky.booking.dto.UserDto;
 import com.proky.booking.exception.ServiceException;
 import com.proky.booking.persistence.dao.IUserDao;
 import com.proky.booking.persistence.dao.IUserTypeDao;
@@ -13,9 +15,11 @@ import com.proky.booking.util.constans.UserTypeEnum;
 import com.proky.booking.util.properties.MessageProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.modelmapper.ModelMapper;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class UserService {
     private static final Logger log = LogManager.getLogger(UserService.class);
@@ -45,7 +49,14 @@ public class UserService {
         final long pageSize = paginationService.getPageSize();
         final long offSet = paginationService.getOffSet();
 
-        final List<User> allPassengers = userDao.findAllByType(userType, pageSize, offSet);
+        final ModelMapper modelMapper = new ModelMapper();
+
+        final List<UserDto> allPassengers = userDao
+                .findAllByType(userType, pageSize, offSet)
+                .stream()
+                .map(user -> modelMapper.map(user, UserDto.class))
+                .peek(userDto -> log.info("userDto: {}", userDto))
+                .collect(Collectors.toList());
 
         pageDto.setPageList(allPassengers);
         paginationService.updatePageDto();

@@ -26,7 +26,7 @@ public class ConnectionWrapper implements AutoCloseable {
     public Connection getConnection() {
         initConnection();
         final Connection connection = connectionThreadLocal.get();
-        log.debug("get connection = {}", connection.toString());
+//        log.debug("get connection = {}", connection.toString());
         return connection;
     }
 
@@ -68,13 +68,13 @@ public class ConnectionWrapper implements AutoCloseable {
 //            log.debug("usedInTransactionThreadLocal.get() = {}", usedInTransactionThreadLocal.get());
             try {
                 final Connection connection = connectionThreadLocal.get();
-                log.debug("close connection = {}", connection.toString());
+//                log.debug("close connection = {}", connection.toString());
                 connection.close();
 //                connectionThreadLocal.get().close();
             } catch (SQLException e) {
-                log.error("failed to close a connection", e);
+//                log.error("failed to close a connection", e);
             } finally {
-                log.debug("release resources");
+//                log.debug("release resources");
                 connectionThreadLocal.remove();
                 usedInTransactionThreadLocal.remove();
             }

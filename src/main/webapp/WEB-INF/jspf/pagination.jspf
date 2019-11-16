@@ -1,0 +1,30 @@
+<%--PAGINATION--%>
+<div class="row mt-4">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <nav aria-label="...">
+            <ul class="pagination" style="list-style-type: none;">
+                <div class="container-fluid">
+                    <div class="btn-group">
+                        <li class="${sessionScope.pageDto.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                            <a class="page-link" href="booking/?${Parameters.PAGE_SIZE}=${sessionScope.pageDto.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}">Previous</a>
+                        </li>
+
+                        <c:forEach begin="${sessionScope.pageDto.startPageIndex}" end="${sessionScope.pageDto.endPageIndex}" varStatus="counter">
+                            <li class="${(sessionScope.pageDto.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
+                                <a class="page-link" href="booking/?${Parameters.PAGE_SIZE}=${sessionScope.pageDto.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${findTrainCommand}&${findTrainParameters}"> ${counter.index+1} </a>
+                            </li>
+                        </c:forEach>
+
+                        <li class="${sessionScope.pageDto.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                            <a class="page-link" href="booking/?${Parameters.PAGE_SIZE}=${sessionScope.pageDto.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}">Next</a>
+                        </li>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+    </div>
+</div>
+<%--PAGINATION--%>
+
+

@@ -16,6 +16,9 @@ public class SqlProperties {
     public static final String FIND_ALL_STATIONS = "FIND_ALL_STATIONS";
     public static final String FIND_TRAIN_BY_ID = "FIND_TRAIN_BY_ID";
 
+    public static final String FIND_ALL_USERS_BY_TYPE = "FIND_ALL_USERS_BY_TYPE";
+    public static final String COUNT_ALL_USERS_BY_TYPE = "COUNT_ALL_USERS_BY_TYPE";
+
     static {
         viewPathProperties = PropertyResourceBundle.getBundle(fileName);
     }

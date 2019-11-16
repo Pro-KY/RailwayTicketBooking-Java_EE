@@ -9,6 +9,10 @@
 <head>
     <title>Main page</title>
     <%@ include file="/WEB-INF/jspf/headImports.jspf" %>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/moment.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="<c:url value="/assets/css/tempusdominus-bootstrap-4.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/fonts/fontawesome/css/font-awesome.min.css"/>"/>
 </head>
 
 <body>
@@ -20,12 +24,30 @@
 <%--    row mr-1 ml-1--%>
     <div class="container float-left ml-3">
         <%@include file="/WEB-INF/jspf/findTrains.jspf" %>
+
+        <%--PAGINATION--%>
+        <c:if test="${sessionScope.pageDto.allPagesAmount > 1}">
+            <%@include file="/WEB-INF/jspf/pagination.jspf" %>
+        </c:if>
+        <%--PAGINATION--%>
+
+        <%--TESTING--%>
+        <div class="float-left">
+            <p>isLeftButtonDisabled : ${sessionScope.pageDto.isLeftButtonDisabled}</p>
+            <p>isRightButtonDisabled : ${sessionScope.pageDto.isRightButtonDisabled}</p>
+            <p>currentPageIndex ${sessionScope.pageDto.currentPageIndex}</p>
+            <p>allPagesAmount ${sessionScope.pageDto.allPagesAmount}</p>
+            <p>startPageIndex : ${sessionScope.pageDto.startPageIndex}</p>
+            <p>endPageIndex : ${sessionScope.pageDto.endPageIndex}</p>
+        </div>
+        <%--TESTING--%>
     </div>
     <!--MAIN CONTENT-->
 
     <div class="container-fluid row">
         <!-- ALERT -->
-        <c:if test="${(not empty alertError and alertError eq true) or (not empty alertSuccess and alertSuccess eq true)}">
+        <c:if test="${(not empty alertError and alertError eq true) or
+         (not empty alertSuccess and alertSuccess eq true)}">
             <%@ include file="/WEB-INF/jspf/alert.jspf"%>
         </c:if>
         <!-- ALERT -->

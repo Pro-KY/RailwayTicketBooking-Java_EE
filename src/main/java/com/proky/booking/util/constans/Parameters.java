@@ -23,4 +23,6 @@ public class Parameters {
 
     public static final String FOUND_TRAIN = "train";
     public static final String SEATS_AMOUNT = "seatsAmount";
+
+    public static final String USER_ID = "userId";
 }

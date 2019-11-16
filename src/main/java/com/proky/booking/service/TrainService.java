@@ -29,6 +29,7 @@ public class TrainService {
         this.daoFactory = daoFactory;
     }
 
+    //TODO: add transactional
     public PageDto findTrains(PageDto pageDto, String dateUI, String timeUI, String stationId) {
         final ITrainDao trainDao = daoFactory.getTrainDao();
 
@@ -46,7 +47,6 @@ public class TrainService {
 
         final long offSet = paginationService.getOffSet();
         final long pageSize = paginationService.getPageSize();
-
 
         final List<TrainDto> foundTrains = trainDao.findTrainsByDateAndTimeAndStation(date, time, station, pageSize, offSet)
                 .stream().map(this::mapTrainToDto).collect(Collectors.toList());

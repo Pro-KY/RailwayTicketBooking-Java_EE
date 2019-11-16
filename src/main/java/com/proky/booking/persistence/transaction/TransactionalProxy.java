@@ -45,7 +45,7 @@ public class TransactionalProxy {
                     tm.commit();
                 } catch (Throwable throwable) {
                     tm.rollback();
-                    throw new TransactionException(MessageProperties.getMessage(TRANSACTION_ERROR));
+                    throw new TransactionException(MessageProperties.getMessage(TRANSACTION_ERROR), throwable.getCause());
                 } finally {
                     tm.setReadOnly(false);
                     tm.endTransaction();

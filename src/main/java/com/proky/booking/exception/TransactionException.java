@@ -5,10 +5,6 @@ public class TransactionException extends RuntimeException {
         super(message);
     }
 
-    public TransactionException(String message, Object entityId) {
-        super(message + entityId);
-    }
-
     public TransactionException(String message, Throwable cause) {
         super(message, cause);
     }

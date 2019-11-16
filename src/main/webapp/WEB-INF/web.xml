@@ -34,11 +34,11 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/jsp/error.jsp</location>
+        <location>/jsp/error.jsp</location>
     </error-page>
 
     <error-page>
-        <location>/WEB-INF/jsp/error.jsp</location>
+        <location>/jsp/error.jsp</location>
     </error-page>
 
     <error-page>
@@ -47,7 +47,7 @@
     </error-page>
 
     <session-config>
-        <session-timeout>5</session-timeout>
+        <session-timeout>10</session-timeout>
     </session-config>
 
 </web-app>

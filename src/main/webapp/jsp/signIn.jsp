@@ -3,8 +3,8 @@
 
 <fmt:message var="firstName" key="user.firstName" bundle="${sessionScope.rb}" scope="page"/>
 <fmt:message var="lastName" key="user.lastName" bundle="${sessionScope.rb}" scope="page"/>
-<fmt:message var="email" key="email" bundle="${sessionScope.rb}" scope="page"/>
-<fmt:message var="password" key="password" bundle="${sessionScope.rb}" scope="page"/>
+<fmt:message var="email" key="user.email" bundle="${sessionScope.rb}" scope="page"/>
+<fmt:message var="password" key="user.password" bundle="${sessionScope.rb}" scope="page"/>
 
 <html>
 <head>
@@ -20,10 +20,9 @@
     <div class="container pt-md-3">
         <div class="row justify-content-sm-center">
             <div class="col-sm-6 col-md-4">
-                <div class="card border-info text-center">
+                <div class="card border-info">
                     <div class="card-body">
-
-                        <form name="signIn" method="POST" action ="booking/">
+                        <form name="signIn" method="POST" action ="${pageContext.request.contextPath}/booking/">
                             <input type="hidden" name="command" value="${Commands.SIGN_IN}">
 
                             <div class="form-group">

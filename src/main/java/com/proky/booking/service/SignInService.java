@@ -26,8 +26,9 @@ public class SignInService {
 
         return foundUser.filter(user -> {
             final String enteredPassword = enteredData.getPassword();
-            final String encryptedPassword = PasswordEncryptor.getInstance().encrypt(enteredPassword);
-            return enteredPassword.equals(encryptedPassword);
+//            final String encryptedPassword = PasswordEncryptor.getInstance().encrypt(enteredPassword);
+//            return encryptedPassword.equals(user.getPassword()); // true
+            return enteredPassword.equals(user.getPassword());
         }).orElseThrow(() -> new ServiceException(MessageProperties.AUTHORIZATION_ERROR));
     }
 }

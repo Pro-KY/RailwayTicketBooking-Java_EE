@@ -44,7 +44,7 @@ public class UserDaoImpl implements IUserDao {
     public List<User> findAllByType(UserType userType, long pageSize, long offSet) {
         final String sqlQuery = SqlProperties.getQuery(FIND_ALL_USERS_BY_TYPE);
         final UserMapper userMapper = new UserMapper(false);
-        return jdbcTemplate.findAll(sqlQuery, userMapper, userType.getId());
+        return jdbcTemplate.findAll(sqlQuery, userMapper, userType.getId(), pageSize, offSet);
     }
 
     @Override

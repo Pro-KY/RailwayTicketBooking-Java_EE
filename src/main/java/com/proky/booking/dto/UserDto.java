@@ -3,18 +3,19 @@ package com.proky.booking.dto;
 import java.io.Serializable;
 
 public class UserDto implements Serializable {
-   private Integer id;
+   private Long id;
    private String firstName;
    private String lastName;
    private String email;
+   private String password;
 
    public UserDto() {}
 
-   public Integer getId() {
+   public Long getId() {
       return id;
    }
 
-   public void setId(Integer id) {
+   public void setId(Long id) {
       this.id = id;
    }
 
@@ -42,6 +43,14 @@ public class UserDto implements Serializable {
       this.email = email;
    }
 
+   public String getPassword() {
+      return password;
+   }
+
+   public void setPassword(String password) {
+      this.password = password;
+   }
+
    @Override
    public String toString() {
       return "UserDto{" +
@@ -49,6 +58,7 @@ public class UserDto implements Serializable {
               ", firstName='" + firstName + '\'' +
               ", lastName='" + lastName + '\'' +
               ", email='" + email + '\'' +
+              ", password='" + password + '\'' +
               '}';
    }
 }

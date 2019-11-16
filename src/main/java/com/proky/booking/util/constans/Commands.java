@@ -11,6 +11,8 @@ public class Commands {
     public static final String INVOICE = "invoice";
 
     public static final String MANAGE_USER = "manageUser";
+    public static final String DELETE_USER = "deleteUser";
+    public static final String UPDATE_USER = "updateUser";
     public static final String FIND_ALL_USERS = "findAllUsers";
 
 }

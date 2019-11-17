@@ -25,6 +25,7 @@ public class CommandFactory {
         commandHashMap.put(Commands.UPDATE_USER, new UpdateUserCommand());
         commandHashMap.put(Commands.ALL_USERS, new AllUsersCommand());
         commandHashMap.put(Commands.DELETE_USER, new DeleteUserCommand());
+        commandHashMap.put(Commands.SIGN_OUT, new SignOutCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

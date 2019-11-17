@@ -11,6 +11,7 @@ public class SqlProperties {
     public static final String SAVE_USER = "SAVE_USER";
     public static final String FIND_ROUTE_STATION_BY_ROUTE_ID = "FIND_ROUTE_STATION_BY_ROUTE_ID";
     public static final String UPDATE_USER = "UPDATE_USER";
+    public static final String DELETE_USER_BY_ID = "DELETE_USER_BY_ID";
 
     public static final String FIND_TRAINS_BY_DATE_TIME_STATION = "FIND_TRAINS_BY_DATE_TIME_STATION";
     public static final String COUNT_TRAINS_BY_DATE_TIME_STATION = "COUNT_TRAINS_BY_DATE_TIME_STATION";

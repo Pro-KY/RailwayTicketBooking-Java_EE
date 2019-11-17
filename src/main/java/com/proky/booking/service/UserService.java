@@ -100,5 +100,11 @@ public class UserService {
         final IUserDao userDao = daoFactory.getUserDao();
         userDao.update(user);
     }
+
+    public boolean deleteUser(Long userId) {
+        final User user = daoFactory.getUserDao().findById(userId).orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
+        final IUserDao userDao = daoFactory.getUserDao();
+        return userDao.delete(user);
+    }
 }
 

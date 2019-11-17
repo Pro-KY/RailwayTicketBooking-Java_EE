@@ -12,6 +12,7 @@ public class MessageProperties {
     public static final String TRANSACTION_ERROR = "TRANSACTION_ERROR";
     public static final String AUTHORIZATION_ERROR = "AUTHORIZATION_ERROR";
     public static final String USER_UPDATED = "USER_UPDATED";
+    public static final String USER_DELETED = "USER_DELETED";
 
     static {
         messageProperties = PropertyResourceBundle.getBundle(fileName);

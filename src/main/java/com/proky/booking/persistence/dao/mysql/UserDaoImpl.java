@@ -73,7 +73,8 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public boolean delete(User entity) {
-        return false;
+        final String sqlQuery = SqlProperties.getQuery(DELETE_USER_BY_ID);
+        return jdbcTemplate.delete(sqlQuery, entity.getId());
     }
 
     @Override

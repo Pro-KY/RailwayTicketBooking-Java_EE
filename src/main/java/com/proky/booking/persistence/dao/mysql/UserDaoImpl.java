@@ -64,7 +64,11 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public Long update(User entity) {
-        return null;
+        Object[] params = {entity.getFirstName(), entity.getLastName(), entity.getEmail(), entity.getPassword(), entity.getUserType().getId()};
+
+        String sqlQuery = SqlProperties.getQuery(UPDATE_USER);
+        final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
+        return jdbcTemplate.saveOrUpdate(sqlQuery, params);
     }
 
     @Override

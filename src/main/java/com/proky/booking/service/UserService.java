@@ -78,13 +78,25 @@ public class UserService {
         return userType.equals(adminUserType);
     }
 
-    public UserDto findUserById(Long id) {
-        final IUserDao userDao = daoFactory.getUserDao();
-        final ModelMapper modelMapper = new ModelMapper();
+    public User findUserById(Long id) {
+        return daoFactory.getUserDao().findById(id).orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
+    }
 
-        return userDao.
-                findById(id)
-                .map(user -> modelMapper.map(user, UserDto.class))
-                .orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
+    public UserDto mapUserToDto(User user) {
+        return new ModelMapper().map(user, UserDto.class);
+    }
+
+    @Transactional
+    public void updateUser(User formUserData) {
+        final Long userId = formUserData.getId();
+        final User user = findUserById(userId);
+        user.setFirstName(formUserData.getFirstName());
+        user.setLastName(formUserData.getLastName());
+        user.setEmail(formUserData.getEmail());
+        user.setPassword(formUserData.getPassword());
+
+        final IUserDao userDao = daoFactory.getUserDao();
+        userDao.update(user);
     }
 }
+

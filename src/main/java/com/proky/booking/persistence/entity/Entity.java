@@ -3,7 +3,7 @@ package com.proky.booking.persistence.entity;
 import java.io.Serializable;
 
 public class Entity<T> implements Serializable {
-    private T id;
+    protected T id;
 
     public Entity() {}
 

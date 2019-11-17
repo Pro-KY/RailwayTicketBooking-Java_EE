@@ -16,28 +16,30 @@
     <div class="container float-left ml-3">
         <form name="userCredentials" method="POST" action ="${pageContext.request.contextPath}/booking/">
             <input type="hidden" name="command" value="${Commands.UPDATE_USER}">
+            <input type="hidden" name="${Parameters.ID}" value="${model.id}">
+
             <div class="row">
                 <div class="col-md-9">
                     <table class="table">
                         <tr class="table-row">
-                            <td><fmt:message key="user.id" bundle="${rb}"/> <fmt:message key="user.lastName" bundle="${rb}"/></td>
-                            <td><input type="text" class="form-control" value="${model.id}"></td>
+                            <td><fmt:message key="user.id" bundle="${rb}"/></td>
+                            <td><input type="text" class="form-control" value="${model.id}" disabled ></td>
                         </tr>
                         <tr class="table-row">
-                            <td><fmt:message key="user.firstName" bundle="${rb}"/> <fmt:message key="user.lastName" bundle="${rb}"/></td>
-                            <td><input type="text" class="form-control" value="${model.firstName}"></td>
+                            <td><fmt:message key="user.firstName" bundle="${rb}"/></td>
+                            <td><input type="text" class="form-control" value="${model.firstName}" name="${Parameters.USER_FIRST_NAME}"></td>
                         </tr>
                         <tr class="table-row">
                             <td><fmt:message key="user.lastName" bundle="${rb}"/></td>
-                            <td><input type="text" class="form-control" value="${model.lastName}"></td>
+                            <td><input type="text" class="form-control" value="${model.lastName}" name="${Parameters.USER_LAST_NAME}"></td>
                         </tr>
                         <tr class="table-row">
                             <td><fmt:message key="user.email" bundle="${rb}"/></td>
-                            <td><input type="text" class="form-control" value="${model.email}"></td>
+                            <td><input type="text" class="form-control" value="${model.email}" name="${Parameters.EMAIL}"></td>
                         </tr>
                         <tr class="table-row">
                             <td><fmt:message key="user.password" bundle="${rb}"/></td>
-                            <td><input type="text" class="form-control" value="${model.password}"></td>
+                            <td><input type="text" class="form-control" value="${model.password}" name="${Parameters.PASSWORD}"></td>
                         </tr>
                     </table>
                 </div>

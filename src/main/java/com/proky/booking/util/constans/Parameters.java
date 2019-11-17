@@ -25,4 +25,5 @@ public class Parameters {
     public static final String SEATS_AMOUNT = "seatsAmount";
 
     public static final String USER_ID = "userId";
+    public static final String ID = "id";
 }

@@ -3,8 +3,8 @@
 
 <fmt:message var="firstName" key="user.firstName" bundle="${sessionScope.rb}" scope="page"/>
 <fmt:message var="lastName" key="user.lastName" bundle="${sessionScope.rb}" scope="page"/>
-<fmt:message var="email" key="email" bundle="${sessionScope.rb}" scope="page"/>
-<fmt:message var="password" key="password" bundle="${sessionScope.rb}" scope="page"/>
+<fmt:message var="email" key="user.email" bundle="${sessionScope.rb}" scope="page"/>
+<fmt:message var="password" key="user.password" bundle="${sessionScope.rb}" scope="page"/>
 
 <html>
 <head>
@@ -29,8 +29,8 @@
                                 <input type="text" class="form-control m-1" placeholder="${firstName}" id="firstName" name="${Parameters.USER_FIRST_NAME}">
                             </div>
                             <div class="row">
-                                <input type="text" class="form-control m-1" placeholder="${lastName}" name="${Parameters.USER_LAST_NAME}">
                             </div>
+                            <input type="text" class="form-control m-1" placeholder="${lastName}" name="${Parameters.USER_LAST_NAME}">
                             <div class="row">
                                 <input type="text" class="form-control m-1" placeholder="${email}" name="${Parameters.EMAIL}">
                             </div>

@@ -1,6 +1,7 @@
 package com.proky.booking.presentation.command;
 
 import com.proky.booking.dto.PageDto;
+import com.proky.booking.service.PaginationService;
 import com.proky.booking.service.TrainService;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.util.URLBuilder;
@@ -27,7 +28,7 @@ public class FindTrainsCommand implements ICommand {
         final String timeUI = request.getParameter(DEPARTURE_TIME);
 
         final HttpSession session = request.getSession();
-        final PageDto sessionPageDto = getCurrentPageDto(session);
+        final PageDto sessionPageDto = PaginationService.getCurrentPageDto(session);
 //        log.info("before sessionPageDto: {}", sessionPageDto);
         sessionPageDto.setRequestParameters(request);
 //        log.info("after sessionPageDto: {}", sessionPageDto);
@@ -38,19 +39,10 @@ public class FindTrainsCommand implements ICommand {
 
         session.setAttribute(Attributes.PAGE_DTO, foundTrainsPerPage);
 
-        urlBuilder.setAttribute(GOING_TO, stationId);
-        urlBuilder.setAttribute(DEPARTURE_DATE, dateUI);
-        urlBuilder.setAttribute(DEPARTURE_TIME, timeUI);
+        urlBuilder.setParameter(GOING_TO, stationId);
+        urlBuilder.setParameter(DEPARTURE_DATE, dateUI);
+        urlBuilder.setParameter(DEPARTURE_TIME, timeUI);
 
         return urlBuilder.buildURL();
-    }
-
-    private PageDto getCurrentPageDto(HttpSession session) {
-        PageDto currentPageDto = (PageDto) session.getAttribute(Attributes.PAGE_DTO);
-        if (currentPageDto == null) {
-            currentPageDto = new PageDto();
-        }
-
-        return currentPageDto;
     }
 }

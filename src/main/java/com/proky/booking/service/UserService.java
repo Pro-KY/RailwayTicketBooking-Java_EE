@@ -49,6 +49,8 @@ public class UserService {
 
         final long pageSize = paginationService.getPageSize();
         final long offSet = paginationService.getOffSet();
+        log.info("pageSize {}", pageSize);
+        log.info("offSet {}", offSet);
 
         final ModelMapper modelMapper = new ModelMapper();
 

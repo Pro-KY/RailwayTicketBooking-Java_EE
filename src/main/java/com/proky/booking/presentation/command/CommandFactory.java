@@ -23,6 +23,7 @@ public class CommandFactory {
         commandHashMap.put(Commands.INVOICE, new InvoiceCommand());
         commandHashMap.put(Commands.MANAGE_USER, new ManageUserCommand());
         commandHashMap.put(Commands.UPDATE_USER, new UpdateUserCommand());
+        commandHashMap.put(Commands.ALL_USERS, new AllUsersCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

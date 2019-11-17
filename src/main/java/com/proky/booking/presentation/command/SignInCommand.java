@@ -48,8 +48,8 @@ public class SignInCommand implements ICommand {
 
             if (isAdministrator) {
                 PageDto pageDto = new PageDto();
-                final PageDto allRegisteredUsers = userService.findAllRegisteredUsers(pageDto);
-                session.setAttribute(Attributes.MODEL, allRegisteredUsers);
+                final PageDto usersPerPage = userService.findAllRegisteredUsers(pageDto);
+                session.setAttribute(Attributes.MODEL, usersPerPage);
                 urlBuilder.setViewPath(ViewProperties.getPath(ADMIN_USERS));
             } else {
                 session.setAttribute(Attributes.IS_USER_AUTHORIZED, true);

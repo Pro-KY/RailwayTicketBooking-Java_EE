@@ -1,8 +1,11 @@
 package com.proky.booking.service;
 
 import com.proky.booking.dto.PageDto;
+import com.proky.booking.util.constans.Attributes;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.servlet.http.HttpSession;
 
 public class PaginationService {
     private long pageSize;
@@ -139,5 +142,13 @@ public class PaginationService {
 
     public long getOffSet() {
         return offSet;
+    }
+
+    public static PageDto getCurrentPageDto(HttpSession session) {
+        PageDto currentPageDto = (PageDto) session.getAttribute(Attributes.MODEL);
+        if (currentPageDto == null) {
+            currentPageDto = new PageDto();
+        }
+        return currentPageDto;
     }
 }

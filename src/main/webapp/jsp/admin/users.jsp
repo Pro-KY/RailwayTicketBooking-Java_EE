@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/jspf/utilImports.jspf" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <html>
 <head>
@@ -24,9 +25,9 @@
                         <fmt:message key="sent.reports.page.size" bundle="${rb}"/>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="pageSizeDropdown">
-                        <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=3&command=${Commands.FIND_ALL_USERS}"/>">  3  </a>
-                        <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=5&command=${Commands.FIND_ALL_USERS}"/>">  5  </a>
-                        <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=10&command=${Commands.FIND_ALL_USERS}"/>"> 10 </a>
+                        <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=3&command=${Commands.ALL_USERS}"/>">  3  </a>
+                        <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=5&command=${Commands.ALL_USERS}"/>">  5  </a>
+                        <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=10&command=${Commands.ALL_USERS}"/>"> 10 </a>
                     </div>
                 </div>
             </div>
@@ -59,26 +60,42 @@
         </div>
         <%--TABLE--%>
 
+        <%--PAGINATION--%>
         <c:if test="${sessionScope.model.allPagesAmount > 1}">
-            <%--PAGINATION--%>
-            <%@include file="/WEB-INF/jspf/pagination.jspf" %>
-            <%--PAGINATION--%>
+        <div class="row mt-4">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <nav aria-label="...">
+                    <ul class="pagination" style="list-style-type: none;">
+                        <div class="container-fluid">
+                            <div class="btn-group">
+                                <li class="${sessionScope.model.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                                    <a class="page-link" href="${contextPath}/booking/?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${Commands.ALL_USERS}">Previous</a>
+                                </li>
+
+                                <c:forEach begin="${sessionScope.model.startPageIndex}" end="${sessionScope.model.endPageIndex}" varStatus="counter">
+                                    <li class="${(sessionScope.model.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
+                                        <a class="page-link" href="${contextPath}/booking/?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${Commands.ALL_USERS}"> ${counter.index+1} </a>
+                                    </li>
+                                </c:forEach>
+
+                                <li class="${sessionScope.model.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                                    <a class="page-link" href="${contextPath}/booking/?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${Commands.ALL_USERS}">Next</a>
+                                </li>
+                            </div>
+                        </div>
+                    </ul>
+                </nav>
+            </div>
+        </div>
         </c:if>
+        <%--PAGINATION--%>
     </div>
     <!--MAIN CONTENT-->
 
-    <div class="container-fluid row">
-        <!-- ALERT -->
-        <c:if test="${(not empty alertError and alertError eq true) or
-             (not empty alertSuccess and alertSuccess eq true)}">
-            <%@ include file="/WEB-INF/jspf/alert.jspf"%>
-        </c:if>
-        <!-- ALERT -->
-
-        <!-- FOOTER -->
-        <%@ include file="/WEB-INF/jspf/footer.jspf" %>
-        <!-- FOOTER -->
-    </div>
+    <!-- FOOTER -->
+    <%@ include file="/WEB-INF/jspf/footer.jspf" %>
+    <!-- FOOTER -->
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 </body>

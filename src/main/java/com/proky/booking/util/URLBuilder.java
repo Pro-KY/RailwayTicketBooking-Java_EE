@@ -6,7 +6,7 @@ import static com.proky.booking.util.constans.Commands.REDIRECT;
 
 public class URLBuilder {
     private StringBuilder sb = new StringBuilder();
-    private Map<String, String> parameters = new HashMap<>();
+    private Map<String, Object> parameters = new HashMap<>();
     private String viewPath;
     private boolean redirect;
 
@@ -19,12 +19,12 @@ public class URLBuilder {
         this.redirect = redirect;
     }
 
-    public URLBuilder(String viewPath, Map<String, String> parameters) {
+    public URLBuilder(String viewPath, Map<String, Object> parameters) {
         this.viewPath = viewPath;
         this.parameters = parameters;
     }
 
-    public URLBuilder(boolean redirect, String viewPath, Map<String, String> parameters) {
+    public URLBuilder(boolean redirect, String viewPath, Map<String, Object> parameters) {
         this.viewPath = viewPath;
         this.parameters = parameters;
         this.redirect = redirect;
@@ -38,7 +38,7 @@ public class URLBuilder {
         this.redirect = redirect;
     }
 
-    public void setAttribute(String name, String value) {
+    public void setParameter(String name, Object value) {
         parameters.put(name, value);
     }
 
@@ -53,9 +53,9 @@ public class URLBuilder {
             sb.append("?");
 
             boolean isFirst = true;
-            for (Map.Entry<String, String> entry : parameters.entrySet()) {
+            for (Map.Entry<String, Object> entry : parameters.entrySet()) {
                 String parameter = entry.getKey();
-                String value = entry.getValue();
+                Object value = entry.getValue();
 
                 if (isFirst) {
                     sb.append(parameter).append("=").append(value);

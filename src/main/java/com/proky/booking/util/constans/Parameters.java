@@ -26,4 +26,10 @@ public class Parameters {
 
     public static final String USER_ID = "userId";
     public static final String ID = "id";
+
+    public static final String ERROR_REQUEST_URI = "requestURI";
+    public static final String ERROR_SERVLET_NAME = "servletName";
+    public static final String ERROR_STATUS_CODE = "statusCode";
+    public static final String ERROR_EXCEPTION_NAME = "exceptionName";
+    public static final String ERROR_EXCEPTION_MSG = "exceptionMessage";
 }

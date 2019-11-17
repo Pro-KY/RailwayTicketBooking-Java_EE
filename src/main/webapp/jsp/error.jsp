@@ -7,18 +7,18 @@
     <meta charset="utf-8">
 </head>
 <body>
-    Request from ${sessionScope.errorData.requestURI} is failed
+    Request from ${param.requestURI} is failed
     <br/>
-    Servlet name: ${sessionScope.errorData.servletName}
+    Servlet name: ${param.servletName}
     <br/>
-    Status code: ${sessionScope.errorData.statusCode}
+    Status code: ${param.statusCode}
     <br/>
-    <c:if test="${not empty sessionScope.errorData.exceptionName}">
-        Exception: ${sessionScope.errorData.exceptionName}
+    <c:if test="${not empty param.exceptionName and param.exceptionName ne 'null'}">
+        Exception: ${param.exceptionName}
     </c:if>
     <br/>
-    <c:if test="${not empty sessionScope.errorData.exceptionMessage}">
-        Message: ${sessionScope.errorData.exceptionMessage}
+    <c:if test="${not empty param.exceptionMessage and param.exceptionMessage ne 'null'}">
+        Message: ${param.exceptionMessage}
     </c:if>
     <br/>
     <a href="${pageContext.request.contextPath}/booking/">Home page</a>

@@ -87,13 +87,13 @@ public class UserService {
     }
 
     @Transactional
-    public void updateUser(User formUserData) {
-        final Long userId = formUserData.getId();
+    public void updateUser(UserDto userDto) {
+        final Long userId = Long.parseLong(userDto.getId());
         final User user = findUserById(userId);
-        user.setFirstName(formUserData.getFirstName());
-        user.setLastName(formUserData.getLastName());
-        user.setEmail(formUserData.getEmail());
-        user.setPassword(formUserData.getPassword());
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
 
         final IUserDao userDao = daoFactory.getUserDao();
         userDao.update(user);

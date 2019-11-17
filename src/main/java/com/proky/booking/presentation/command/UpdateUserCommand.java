@@ -1,5 +1,6 @@
 package com.proky.booking.presentation.command;
 
+import com.proky.booking.dto.UserDto;
 import com.proky.booking.persistence.entity.User;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.UserService;
@@ -24,7 +25,7 @@ public class UpdateUserCommand implements ICommand {
 
         log.debug("update user data");
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
-        final User user = requestDataBinder.bindToEntity(request, User.class);
+        final UserDto user = requestDataBinder.bindToEntity(request, UserDto.class);
         log.debug("mapped form-user: {}", user);
 
         final UserService userService = ServiceFactory.getInstance().getUserService();

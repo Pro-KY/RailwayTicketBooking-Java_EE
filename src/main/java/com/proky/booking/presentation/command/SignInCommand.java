@@ -1,6 +1,7 @@
 package com.proky.booking.presentation.command;
 
 import com.proky.booking.dto.PageDto;
+import com.proky.booking.dto.UserDto;
 import com.proky.booking.persistence.entity.User;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.SignInService;
@@ -36,25 +37,27 @@ public class SignInCommand implements ICommand {
 
         log.info("user sign in");
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
-        final User user = requestDataBinder.bindToEntity(request, User.class);
-        log.info(user);
+        final UserDto enteredUserData = requestDataBinder.bindToDto(request, UserDto.class);
+        log.info(enteredUserData);
 
         final ValidationService validationService = ValidationService.getInstance();
-        final ValidationResult validation = validationService.validate(user, "email", "password");
+        final ValidationResult validation = validationService.validate(enteredUserData, "email", "password");
 
         if (validation.isSuccessfull()) {
-            final User authenticatedUser = signInService.signIn(user);
+            final User authenticatedUser = signInService.signIn(enteredUserData);
             final boolean isAdministrator = userService.isAdministrator(authenticatedUser);
+            final UserDto userDto = userService.mapUserToDto(authenticatedUser);
+            log.info("mapped userDto {}", userDto);
 
             if (isAdministrator) {
                 PageDto pageDto = new PageDto();
                 final PageDto usersPerPage = userService.findAllRegisteredUsers(pageDto);
                 session.setAttribute(Attributes.MODEL, usersPerPage);
                 urlBuilder.setViewPath(ViewProperties.getPath(ADMIN_USERS));
-            } else {
-                session.setAttribute(Attributes.IS_USER_AUTHORIZED, true);
-                session.setAttribute(Attributes.USER, authenticatedUser);
             }
+
+            session.setAttribute(Attributes.USER, userDto);
+            session.setAttribute(Attributes.IS_USER_AUTHORIZED, true);
         } else {
             request.setAttribute(Attributes.ALERT_ERROR, true);
             request.setAttribute(Attributes.ALERT_MESSAGE, MessageProperties.getMessage(AUTHORIZATION_ERROR));

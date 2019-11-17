@@ -1,5 +1,6 @@
 package com.proky.booking.service;
 
+import com.proky.booking.dto.UserDto;
 import com.proky.booking.exception.ServiceException;
 import com.proky.booking.persistence.dao.IUserDao;
 import com.proky.booking.persistence.dao.factory.DaoFactory;
@@ -20,7 +21,7 @@ public class SignInService {
     }
 
     //tODO: refactor later
-    public User signIn(User enteredData) {
+    public User signIn(UserDto enteredData) {
         final IUserDao userDao = daoFactory.getUserDao();
         final Optional<User> foundUser = userDao.findByEmail(enteredData.getEmail());
 

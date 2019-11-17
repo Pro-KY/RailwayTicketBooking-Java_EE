@@ -3,8 +3,23 @@
         <div class="collapse navbar-collapse">
             <a class="navbar-brand" href="booking/">LOGO</a>
         </div>
-        <span class="navbar-text mr-4">Hello, guest! </span>
+        <span class="navbar-text mr-3">
+            <fmt:message key="header.greeting" bundle="${rb}"/>,
+            <c:choose>
+                <c:when test="${user ne null}"> ${user.firstName} ${user.lastName} !</c:when>
+                <c:otherwise><fmt:message key="header.guest" bundle="${rb}"/>! </c:otherwise>
+            </c:choose>
+        </span>
 
-        <a class="btn btn-link" href="<c:url value="${pageContext.request.contextPath}/jsp/signIn.jsp"/>" role="button">Authorize</a>
+        <c:if test="${sessionScope.user eq null}">
+            <a class="btn btn-link" href="<c:url value="${pageContext.request.contextPath}/jsp/signIn.jsp"/>" role="button">
+                <fmt:message key="header.authorize" bundle="${rb}"/>
+            </a>
+        </c:if>
+        <c:if test="${sessionScope.user ne null}">
+            <a class="btn btn-link mr-1" href="<c:url value="${pageContext.request.contextPath}/booking/?command=${Commands.SIGN_OUT}"/>" role="button">
+                <fmt:message key="sing.out" bundle="${rb}"/>
+            </a>
+        </c:if>
     </nav>
 </div>

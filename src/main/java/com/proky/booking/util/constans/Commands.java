@@ -4,6 +4,7 @@ public class Commands {
     public static final String REDIRECT = "redirect:";
     public static final String SIGN_UP = "signUp";
     public static final String SIGN_IN = "signIn";
+    public static final String SIGN_OUT = "signOut";
     public static final String FIND_TRAIN = "findTrain";
     public static final String CHANGE_LANGUAGE = "changeLanguage";
 

@@ -21,8 +21,8 @@
                         ${language eq 'en' ? 'EN' : 'RU'}
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="booking/?command=${Commands.CHANGE_LANGUAGE}&language=en"> EN </a>
-                        <a class="dropdown-item" href="booking/?command=${Commands.CHANGE_LANGUAGE}&language=ru"> RU </a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/booking/?command=${Commands.CHANGE_LANGUAGE}&language=en"> EN </a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/booking/?command=${Commands.CHANGE_LANGUAGE}&language=ru"> RU </a>
                     </div>
                 </li>
             </ul>

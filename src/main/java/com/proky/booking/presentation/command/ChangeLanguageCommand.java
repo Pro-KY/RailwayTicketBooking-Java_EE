@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import static com.proky.booking.util.properties.ViewProperties.INDEX;
+import static com.proky.booking.util.properties.ViewProperties.SIGN_IN;
 
 public class ChangeLanguageCommand implements ICommand {
     private static final Logger log = LogManager.getLogger(ChangeLanguageCommand.class);

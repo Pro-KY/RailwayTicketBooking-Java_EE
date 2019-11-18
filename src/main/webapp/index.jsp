@@ -13,7 +13,6 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/moment.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/tempusdominus-bootstrap-4.min.js"></script>
     <link rel="stylesheet" href="<c:url value="/assets/css/tempusdominus-bootstrap-4.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/assets/fonts/fontawesome/css/font-awesome.min.css"/>"/>
 </head>
 
 <body>

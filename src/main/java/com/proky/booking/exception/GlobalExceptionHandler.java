@@ -2,14 +2,11 @@ package com.proky.booking.exception;
 
 import com.proky.booking.dto.ErrorData;
 import com.proky.booking.util.URLBuilder;
-import com.proky.booking.util.constans.Attributes;
 import com.proky.booking.util.constans.Parameters;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +15,8 @@ import java.io.IOException;
 import static com.proky.booking.util.constans.ExceptionsEnum.SERVICE_EXCEPTION;
 import static com.proky.booking.util.properties.ViewProperties.ERROR;
 
-public class AppExceptionHandler extends HttpServlet {
-    private static final Logger log = LogManager.getLogger(AppExceptionHandler.class);
+public class GlobalExceptionHandler extends HttpServlet {
+    private static final Logger log = LogManager.getLogger(GlobalExceptionHandler.class);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -40,6 +37,8 @@ public class AppExceptionHandler extends HttpServlet {
         if(exceptionMessage != null && exceptionMessage.startsWith(SERVICE_EXCEPTION.name)) {
             log.info(SERVICE_EXCEPTION.name);
             errorData.setExceptionMessage(exceptionMessage.replace(SERVICE_EXCEPTION.name, ""));
+            // set allert parameters
+            // forward or redirect to a page where user was when error occur
         }
 
         final URLBuilder urlBuilder = new URLBuilder(false,  ViewProperties.getPath(ERROR));

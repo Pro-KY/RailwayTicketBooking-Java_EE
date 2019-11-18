@@ -9,5 +9,6 @@ public interface DaoFactory {
     ITrainDao getTrainDao();
     IRouteStationDao getRouteStationDao();
     IStationDao getStationDao();
+    IInvoiceDao getInvoiceDao();
 
 }

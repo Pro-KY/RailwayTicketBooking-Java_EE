@@ -38,6 +38,10 @@ public class InvoiceCommand implements ICommand {
         final User user = (User)session.getAttribute(Attributes.USER);
         final boolean isUserPresent = Objects.nonNull(user);
 
+        if (isUserPresent) {
+
+        }
+
         String firstName = isUserPresent ? user.getFirstName() : ticketBookingDto.getFirstName();
         String lastName = isUserPresent ? user.getLastName() : ticketBookingDto.getLastName();
         invoiceDto.setUserFirstName(firstName);

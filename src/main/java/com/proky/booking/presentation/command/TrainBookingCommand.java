@@ -17,7 +17,7 @@ public class TrainBookingCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        log.info("TicketBookingFragmentCommand CALLED");
+        log.info("TrainBookingCommand CALLED");
         final String trainId = request.getParameter(Parameters.TRAIN_ID); // TODO: validate
 
         final ServiceFactory serviceFactory = ServiceFactory.getInstance();

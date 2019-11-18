@@ -22,6 +22,8 @@ public class SqlProperties {
     public static final String COUNT_ALL_USERS_BY_TYPE = "COUNT_ALL_USERS_BY_TYPE";
     public static final String FIND_USER_BY_ID = "FIND_USER_BY_ID";
 
+    public static final String SAVE_INVOICE = "SAVE_INVOICE";
+
     static {
         viewPathProperties = PropertyResourceBundle.getBundle(fileName);
     }

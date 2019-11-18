@@ -24,7 +24,7 @@
 
     <servlet>
         <servlet-name>exceptionHandler</servlet-name>
-        <servlet-class>com.proky.booking.exception.AppExceptionHandler</servlet-class>
+        <servlet-class>com.proky.booking.exception.GlobalExceptionHandler</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>exceptionHandler</servlet-name>

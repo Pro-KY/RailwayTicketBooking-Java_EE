@@ -20,6 +20,10 @@ public class User extends Entity<Long> {
 
     public User() {}
 
+    public User(Long id) {
+        super(id);
+    }
+
     public User(Long id, String firstName, String lastName, String email, String password, UserType userType) {
         super(id);
         this.firstName = firstName;

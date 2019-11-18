@@ -6,6 +6,10 @@ public class Train extends Entity<Long> {
     private TrainType trainType;
     private Route route;
 
+    public Train(Long id) {
+        super(id);
+    }
+
     public Train(Long id, TrainType trainType, Route route) {
         super(id);
         this.trainType = trainType;

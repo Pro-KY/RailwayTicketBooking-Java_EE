@@ -35,9 +35,10 @@ public class InvoiceService {
         invoiceDto.setSum(sum);
         invoiceDto.setSeatsAmount(seatsAmount);
 
-        // if guest just return dto
-        // else save data to invoice table and return dto
-
         return invoiceDto;
+    }
+
+    public void saveInvoice(InvoiceDto invoiceDto) {
+
     }
 }

@@ -56,9 +56,7 @@ public class UserDaoImpl implements IUserDao {
     @Override
     public Long save(User entity) {
         Object[] params = {entity.getFirstName(), entity.getLastName(), entity.getEmail(), entity.getPassword(), entity.getUserType().getId()};
-
         String sqlQuery = SqlProperties.getQuery(SAVE_USER);
-        final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
         return jdbcTemplate.saveOrUpdate(sqlQuery, params);
     }
 

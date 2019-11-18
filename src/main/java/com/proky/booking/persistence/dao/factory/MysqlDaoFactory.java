@@ -39,4 +39,9 @@ public class MysqlDaoFactory implements DaoFactory {
     public IStationDao getStationDao() {
         return IStationDaoImpl.getInstance();
     }
+
+    @Override
+    public IInvoiceDao getInvoiceDao() {
+        return InvoiceDaoImpl.getInstance();
+    }
 }

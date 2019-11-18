@@ -47,4 +47,13 @@ public class Train extends Entity<Long> {
     public int hashCode() {
         return Objects.hash(this.getId(), trainType, route);
     }
+
+    @Override
+    public String toString() {
+        return "Train{" +
+                "trainType=" + trainType +
+                ", route=" + route +
+                ", id=" + id +
+                '}';
+    }
 }

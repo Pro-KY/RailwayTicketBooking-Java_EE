@@ -2,6 +2,7 @@ package com.proky.booking.presentation.command;
 
 import com.proky.booking.dto.InvoiceDto;
 import com.proky.booking.dto.TicketBookingDto;
+import com.proky.booking.dto.UserDto;
 import com.proky.booking.persistence.entity.User;
 import com.proky.booking.service.InvoiceService;
 import com.proky.booking.service.ServiceFactory;
@@ -35,15 +36,16 @@ public class InvoiceCommand implements ICommand {
         final InvoiceService invoiceService = serviceFactory.getInvoiceService();
         final InvoiceDto invoiceDto = invoiceService.calculateInvoice(ticketBookingDto);
 
-        final User user = (User)session.getAttribute(Attributes.USER);
-        final boolean isUserPresent = Objects.nonNull(user);
+        final UserDto userDto = (UserDto)session.getAttribute(Attributes.USER);
+        final boolean isUserPresent = Objects.nonNull(userDto);
 
         if (isUserPresent) {
-
+            invoiceDto.setUserId(Long.parseLong(userDto.getId()));
+            invoiceService.saveInvoice(invoiceDto);
         }
 
-        String firstName = isUserPresent ? user.getFirstName() : ticketBookingDto.getFirstName();
-        String lastName = isUserPresent ? user.getLastName() : ticketBookingDto.getLastName();
+        String firstName = isUserPresent ? userDto.getFirstName() : ticketBookingDto.getFirstName();
+        String lastName = isUserPresent ? userDto.getLastName() : ticketBookingDto.getLastName();
         invoiceDto.setUserFirstName(firstName);
         invoiceDto.setUserLastName(lastName);
         log.info("invoiceDto {}", invoiceDto);

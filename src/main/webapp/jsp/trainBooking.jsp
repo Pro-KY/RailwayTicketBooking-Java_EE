@@ -67,8 +67,7 @@
             <div class="row align-items-start justify-content-center">
                 <div class="col-md-6"></div>
                 <div class="col-md-3">
-                    <%--        get payment invoice button--%>
-                    <button type="submit" class="btn btn-primary col-12" data-dismiss="modal"> Bill for ticket </button>
+                    <button type="submit" class="btn btn-primary col-12" data-dismiss="modal"> <fmt:message key="invoice.get" bundle="${rb}"/> </button>
                 </div>
                 <div class="col-md-3"></div>
             </div>

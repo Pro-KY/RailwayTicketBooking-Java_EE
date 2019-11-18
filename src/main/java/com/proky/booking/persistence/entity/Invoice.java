@@ -11,8 +11,18 @@ public class Invoice extends Entity<Long> {
     private BigDecimal price;
     private Timestamp dateTime;
 
+    public Invoice() {}
+
     public Invoice(Long id, User user, Train train, Integer seatsAmount, BigDecimal price, Timestamp dateTime) {
         super(id);
+        this.user = user;
+        this.train = train;
+        this.seatsAmount = seatsAmount;
+        this.price = price;
+        this.dateTime = dateTime;
+    }
+
+    public Invoice(User user, Train train, Integer seatsAmount, BigDecimal price, Timestamp dateTime) {
         this.user = user;
         this.train = train;
         this.seatsAmount = seatsAmount;
@@ -76,5 +86,17 @@ public class Invoice extends Entity<Long> {
     @Override
     public int hashCode() {
         return Objects.hash(this.getId(), user, train, seatsAmount, price, dateTime);
+    }
+
+    @Override
+    public String toString() {
+        return "Invoice{" +
+                "user=" + user +
+                ", train=" + train +
+                ", seatsAmount=" + seatsAmount +
+                ", price=" + price +
+                ", dateTime=" + dateTime +
+                ", id=" + id +
+                '}';
     }
 }

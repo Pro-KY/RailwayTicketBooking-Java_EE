@@ -6,9 +6,10 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class InvoiceDto implements Serializable {
+    private Long userId;
     private String userFirstName;
     private String userLastName;
-    private Integer trainId;
+    private Long trainId;
     private String trainType;
     private String routeName;
     private Date routeDepartureDate;
@@ -36,11 +37,11 @@ public class InvoiceDto implements Serializable {
         this.userLastName = userLastName;
     }
 
-    public Integer getTrainId() {
+    public Long getTrainId() {
         return trainId;
     }
 
-    public void setTrainId(Integer trainId) {
+    public void setTrainId(Long trainId) {
         this.trainId = trainId;
     }
 
@@ -108,9 +109,18 @@ public class InvoiceDto implements Serializable {
         this.sum = sum;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     @Override
     public String toString() {
         return "InvoiceDto{" +
+                "userId='" + userId + '\'' +
                 "userFirstName='" + userFirstName + '\'' +
                 ", userLastName='" + userLastName + '\'' +
                 ", trainId=" + trainId +

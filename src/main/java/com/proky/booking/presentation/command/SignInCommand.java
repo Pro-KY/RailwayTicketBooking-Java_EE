@@ -10,6 +10,7 @@ import com.proky.booking.service.ValidationService;
 import com.proky.booking.util.URLBuilder;
 import com.proky.booking.util.command.HttpRequestDataBinder;
 import com.proky.booking.util.constans.Attributes;
+import com.proky.booking.util.constans.Commands;
 import com.proky.booking.util.properties.MessageProperties;
 import com.proky.booking.util.properties.ViewProperties;
 import com.proky.booking.validation.ValidationResult;
@@ -20,8 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import static com.proky.booking.util.properties.MessageProperties.AUTHORIZATION_ERROR;
-import static com.proky.booking.util.properties.ViewProperties.INDEX;
-import static com.proky.booking.util.properties.ViewProperties.ADMIN_USERS;
+import static com.proky.booking.util.properties.ViewProperties.*;
 
 
 public class SignInCommand implements ICommand {
@@ -35,10 +35,12 @@ public class SignInCommand implements ICommand {
         final SignInService signInService = ServiceFactory.getInstance().getSignInService();
         final UserService userService = ServiceFactory.getInstance().getUserService();
 
-        log.info("user sign in");
+        log.debug("user sign in");
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
         final UserDto enteredUserData = requestDataBinder.bindToDto(request, UserDto.class);
-        log.info(enteredUserData);
+//        log.debug(enteredUserData);
+
+        session.setAttribute(Attributes.CURRENT_PAGE, ViewProperties.getPath(SIGN_IN));
 
         final ValidationService validationService = ValidationService.getInstance();
         final ValidationResult validation = validationService.validate(enteredUserData, "email", "password");
@@ -47,7 +49,7 @@ public class SignInCommand implements ICommand {
             final User authenticatedUser = signInService.signIn(enteredUserData);
             final boolean isAdministrator = userService.isAdministrator(authenticatedUser);
             final UserDto userDto = userService.mapUserToDto(authenticatedUser);
-            log.info("mapped userDto {}", userDto);
+            log.debug("mapped userDto {}", userDto);
 
             if (isAdministrator) {
                 PageDto pageDto = new PageDto();

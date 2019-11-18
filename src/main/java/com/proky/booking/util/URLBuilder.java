@@ -14,6 +14,7 @@ public class URLBuilder {
         this.viewPath = viewPath;
     }
 
+
     public URLBuilder(boolean redirect, String viewPath) {
         this.viewPath = viewPath;
         this.redirect = redirect;

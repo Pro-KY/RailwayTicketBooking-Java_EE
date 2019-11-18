@@ -1,9 +1,16 @@
 package com.proky.booking.util.properties;
 
+import com.proky.booking.exception.GlobalExceptionHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.MissingResourceException;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 public class MessageProperties {
+    private static final Logger log = LogManager.getLogger(MessageProperties.class);
+
     private static ResourceBundle messageProperties;
     private static final String fileName = "message";
     public static final String USER_EXIST = "USER_EXIST";
@@ -19,6 +26,14 @@ public class MessageProperties {
     }
 
     public static String getMessage(String propertyName) {
-           return messageProperties.getString(propertyName);
+        String propertyValue = "";
+
+        try {
+            propertyValue =  messageProperties.getString(propertyName);
+        } catch (MissingResourceException e) {
+            log.error("could not find property for propertyName - {}, ", propertyName);
+        }
+
+        return propertyValue;
     }
 }

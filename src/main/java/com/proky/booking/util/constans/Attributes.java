@@ -1,13 +1,8 @@
 package com.proky.booking.util.constans;
 
 public class Attributes {
-    public static final String FRAGMENT_PATH = "fragmentPath";
-    public static final String SIGN_UP_FRAGMENT = "signUpFragment";
-    public static final String GET_SIGN_IN_FRAGMENT = "getSignInFragment";
-    public static final String GET_FRAGMENT_TICKET_BOOKING = "getFragmentTicketBooking";
-    public static final String CURRENT_FRAGMENT = "currentFragment";
+    public static final String CURRENT_PAGE = "currentPage";
 
-    public static final String MAIN_FRAGMENT = "mainFragment";
     public static final String VALIDATION = "validation";
     public static final String IS_USER_AUTHORIZED = "isUserAuthorized";
     public static final String USER = "user";

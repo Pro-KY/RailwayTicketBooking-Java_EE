@@ -12,6 +12,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
+import static com.proky.booking.util.properties.MessageProperties.AUTHORIZATION_ERROR;
+
 public class SignInService {
     private static final Logger log = LogManager.getLogger(SignInService.class);
     private DaoFactory daoFactory;
@@ -30,6 +32,6 @@ public class SignInService {
 //            final String encryptedPassword = PasswordEncryptor.getInstance().encrypt(enteredPassword);
 //            return encryptedPassword.equals(user.getPassword()); // true
             return enteredPassword.equals(user.getPassword());
-        }).orElseThrow(() -> new ServiceException(MessageProperties.AUTHORIZATION_ERROR));
+        }).orElseThrow(() -> new ServiceException(MessageProperties.getMessage(AUTHORIZATION_ERROR)));
     }
 }

@@ -1,7 +1,7 @@
 
 <div class="container-fluid mb-4 fixed-bottom">
     <!-- ALERT -->
-    <c:if test="${(not empty alertError and alertError eq true) or (not empty param.alertSuccess and param.alertSuccess eq true)}">
+    <c:if test="${(not empty param.alertError and param.alertError eq true) or (not empty param.alertSuccess and param.alertSuccess eq true)}">
         <%@ include file="/WEB-INF/jspf/alert.jspf"%>
     </c:if>
     <!-- ALERT -->

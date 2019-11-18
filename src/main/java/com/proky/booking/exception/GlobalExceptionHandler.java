@@ -24,38 +24,38 @@ public class GlobalExceptionHandler extends HttpServlet {
     private static final Logger log = LogManager.getLogger(GlobalExceptionHandler.class);
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         handleError(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         handleError(request, response);
     }
 
-    private void handleError(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        log.debug("handle error");
+    private void handleError(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        log.debug("handle error data");
         ErrorData errorData = new ErrorData(request);
         final String exceptionMessage = errorData.getExceptionMessage();
 
-        if(exceptionMessage != null && exceptionMessage.startsWith(SERVICE_EXCEPTION.name)) {
-            log.info(SERVICE_EXCEPTION.name);
-            errorData.setExceptionMessage(exceptionMessage.replace(SERVICE_EXCEPTION.name, ""));
-            final String currentPage = (String)request.getSession().getAttribute(Attributes.CURRENT_PAGE);
+        String currentPage = (String)request.getSession().getAttribute(Attributes.CURRENT_PAGE);
 
-            final URLBuilder urlBuilder = new URLBuilder(currentPage);
-            urlBuilder.setAlertParameters(false, errorData.getExceptionMessage());
-            response.sendRedirect(urlBuilder.buildURL());
-            return;
+        if(exceptionMessage != null && exceptionMessage.startsWith(SERVICE_EXCEPTION.name)) {
+            log.debug("handle {}", SERVICE_EXCEPTION.name);
+            errorData.setExceptionMessage(exceptionMessage.replace(SERVICE_EXCEPTION.name, ""));
+
+            request.setAttribute(Attributes.ALERT_ERROR, true);
+            request.setAttribute(Attributes.ALERT_MESSAGE, errorData.getExceptionMessage());
+            request.getRequestDispatcher(currentPage).forward(request, response);
+        } else {
+            request.setAttribute(Attributes.ERROR_REQUEST_URI, errorData.getRequestURI());
+            request.setAttribute(Attributes.ERROR_SERVLET_NAME, errorData.getServletName());
+            request.setAttribute(Attributes.ERROR_STATUS_CODE, errorData.getStatusCode());
+            request.setAttribute(Attributes.ERROR_EXCEPTION_NAME, errorData.getExceptionName());
+            request.setAttribute(Attributes.ERROR_EXCEPTION_MSG, errorData.getExceptionMessage());
+            currentPage = ViewProperties.getPath(ERROR);
         }
 
-        final URLBuilder urlBuilder = new URLBuilder(false,  ViewProperties.getPath(ERROR));
-        urlBuilder.setParameter(Parameters.ERROR_REQUEST_URI, errorData.getRequestURI());
-        urlBuilder.setParameter(Parameters.ERROR_SERVLET_NAME, errorData.getServletName());
-        urlBuilder.setParameter(Parameters.ERROR_STATUS_CODE, errorData.getStatusCode());
-        urlBuilder.setParameter(Parameters.ERROR_EXCEPTION_NAME, errorData.getExceptionName());
-        urlBuilder.setParameter(Parameters.ERROR_EXCEPTION_MSG, errorData.getExceptionMessage());
-
-        response.sendRedirect(urlBuilder.buildURL());
+        request.getRequestDispatcher(currentPage).forward(request, response);
     }
 }

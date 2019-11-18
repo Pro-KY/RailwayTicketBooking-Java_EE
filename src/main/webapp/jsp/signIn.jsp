@@ -35,8 +35,9 @@
 
                             <button type="submit" class="btn btn-primary col-12" data-dismiss="modal">Enter</button>
                         </form>
-
-                        <div><fmt:message key="msg.signup" bundle="${rb}"/> <a href="${pageContext.request.contextPath}/jsp/signUp.jsp"><fmt:message key="sing.up" bundle="${rb}"/></a></div>
+                        <div class="row justify-content-center">
+                            <div><fmt:message key="msg.signup" bundle="${rb}"/> <a href="${pageContext.request.contextPath}/jsp/signUp.jsp"><fmt:message key="sing.up" bundle="${rb}"/></a></div>
+                        </div>
                     </div>
                 </div>
             </div>

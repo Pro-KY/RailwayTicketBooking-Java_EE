@@ -1,5 +1,5 @@
-<c:set var="isAlertSuccess" value="${not empty param.alertSuccess and param.alertSuccess eq true}" scope="page"/>
-<c:set var="isAlertError" value="${not empty param.alertError and param.alertError eq true}" scope="page"/>
+<c:set var="isAlertSuccess" value="${not empty alertSuccess and alertSuccess eq true}" scope="page"/>
+<c:set var="isAlertError" value="${not empty alertError and alertError eq true}" scope="page"/>
 
 <div class="container-fluid mb-4 fixed-bottom">
     <!-- ALERT -->

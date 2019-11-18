@@ -2,8 +2,8 @@
     <div class="col-md-3"></div>
     <div class="col-md-6">
         <div class="alert ${isAlertSuccess ? "alert-success" : "alert-danger"} alert-dismissible fade show" type="alert">
-            <c:if test="${not empty param.alertMessage}">
-                ${param.alertMessage}
+            <c:if test="${not empty alertMessage}">
+                ${alertMessage}
             </c:if>
             <c:if test="${not empty validation}">
                 <c:forEach items="${validation.errorMessages}" var="message">
@@ -17,6 +17,3 @@
     </div>
     <div class="col-md-3"></div>
 </div>
-
-
-

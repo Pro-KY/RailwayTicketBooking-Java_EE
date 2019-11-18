@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static com.proky.booking.util.constans.ExceptionsEnum.SERVICE_EXCEPTION;
+import static com.proky.booking.util.properties.MessageProperties.USER_CREATED;
 import static com.proky.booking.util.properties.MessageProperties.USER_DELETED;
 import static com.proky.booking.util.properties.ViewProperties.ERROR;
 
@@ -43,8 +44,7 @@ public class GlobalExceptionHandler extends HttpServlet {
             final String currentPage = (String)request.getSession().getAttribute(Attributes.CURRENT_PAGE);
 
             final URLBuilder urlBuilder = new URLBuilder(currentPage);
-            urlBuilder.setParameter(Attributes.ALERT_ERROR, true);
-            urlBuilder.setParameter(Attributes.ALERT_MESSAGE, errorData.getExceptionMessage());
+            urlBuilder.setAlertParameters(false, errorData.getExceptionMessage());
             response.sendRedirect(urlBuilder.buildURL());
             return;
         }

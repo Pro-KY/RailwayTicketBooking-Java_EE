@@ -1,10 +1,21 @@
 package com.proky.booking.util;
+import com.proky.booking.exception.GlobalExceptionHandler;
+import com.proky.booking.util.constans.Attributes;
+import com.proky.booking.util.properties.MessageProperties;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.proky.booking.util.constans.Commands.REDIRECT;
+import static com.proky.booking.util.properties.MessageProperties.USER_CREATED;
 
 public class URLBuilder {
+    private static final Logger log = LogManager.getLogger(URLBuilder.class);
+
     private StringBuilder sb = new StringBuilder();
     private Map<String, Object> parameters = new HashMap<>();
     private String viewPath;
@@ -41,6 +52,12 @@ public class URLBuilder {
 
     public void setParameter(String name, Object value) {
         parameters.put(name, value);
+    }
+
+    public void setAlertParameters(boolean alertSuccess, String alertMessage) {
+        String alertType = alertSuccess ? Attributes.ALERT_SUCCESS : Attributes.ALERT_ERROR;
+        setParameter(alertType, true);
+        setParameter(Attributes.ALERT_MESSAGE, alertMessage);
     }
 
     public String buildURL() {

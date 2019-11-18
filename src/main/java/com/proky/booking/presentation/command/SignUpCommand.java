@@ -8,6 +8,7 @@ import com.proky.booking.util.URLBuilder;
 import com.proky.booking.util.command.HttpRequestDataBinder;
 import com.proky.booking.util.constans.Attributes;
 import com.proky.booking.util.constans.Parameters;
+import com.proky.booking.util.properties.MessageProperties;
 import com.proky.booking.util.properties.ViewProperties;
 import com.proky.booking.validation.ValidationResult;
 import org.apache.logging.log4j.LogManager;
@@ -16,6 +17,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import static com.proky.booking.util.properties.MessageProperties.USER_CREATED;
+import static com.proky.booking.util.properties.ViewProperties.*;
+
 
 public class SignUpCommand implements ICommand {
     private static final Logger log = LogManager.getLogger(SignUpCommand.class);
@@ -23,7 +27,11 @@ public class SignUpCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         final HttpSession session = request.getSession();
-        final URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.INDEX);
+        final String signUpViewpath = ViewProperties.getPath(SIGN_UP);
+        final String signInViewpath = ViewProperties.getPath(SIGN_IN);
+
+        session.setAttribute(Attributes.CURRENT_PAGE, signUpViewpath);
+        final URLBuilder urlBuilder = new URLBuilder(true, signUpViewpath);
 
         log.info("user sign up");
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
@@ -36,9 +44,14 @@ public class SignUpCommand implements ICommand {
         if (validation.isSuccessfull()) {
             final SignUpService signUpService = ServiceFactory.getInstance().getSignUpService();
             signUpService.signUp(user);
+
+            urlBuilder.setAlertParameters(true, MessageProperties.getMessage(USER_CREATED));
+            urlBuilder.setViewPath(signInViewpath);
+            session.setAttribute(Attributes.CURRENT_PAGE, signInViewpath);
         } else {
-            urlBuilder.setParameter(Parameters.SIGN_UP_FRAGMENT, ViewProperties.SIGN_UP);
-            session.setAttribute(Attributes.VALIDATION, validation);
+            urlBuilder.setRedirect(false);
+            request.setAttribute(Attributes.ALERT_ERROR, true);
+            request.setAttribute(Attributes.VALIDATION, validation);
         }
 
         return urlBuilder.buildURL();

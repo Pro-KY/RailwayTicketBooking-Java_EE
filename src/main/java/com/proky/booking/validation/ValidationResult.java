@@ -8,7 +8,6 @@ public class ValidationResult {
     // field, ErrorMessage
     private Map<String, String> errorMessages = new HashMap<>();
 
-
     public boolean isSuccessfull() {
         return isSuccessfull;
     }

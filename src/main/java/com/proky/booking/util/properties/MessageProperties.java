@@ -20,6 +20,7 @@ public class MessageProperties {
     public static final String AUTHORIZATION_ERROR = "AUTHORIZATION_ERROR";
     public static final String USER_UPDATED = "USER_UPDATED";
     public static final String USER_DELETED = "USER_DELETED";
+    public static final String USER_CREATED = "USER_CREATED";
 
     static {
         messageProperties = PropertyResourceBundle.getBundle(fileName);

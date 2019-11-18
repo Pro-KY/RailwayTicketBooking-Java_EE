@@ -12,6 +12,8 @@ import com.proky.booking.util.properties.MessageProperties;
 
 import java.util.Optional;
 
+import static com.proky.booking.util.properties.MessageProperties.USER_EXIST;
+
 public class SignUpService {
     private DaoFactory daoFactory;
 
@@ -25,7 +27,7 @@ public class SignUpService {
 
         final Optional<User> foundUser = userDao.findByEmail(user.getEmail());
         if (foundUser.isPresent()) {
-            throw new ServiceException(MessageProperties.USER_EXIST);
+            throw new ServiceException(MessageProperties.getMessage(USER_EXIST));
         } else {
             final PasswordEncryptor passwordEncryptor = PasswordEncryptor.getInstance();
             final String encryptedPassword = passwordEncryptor.encrypt(user.getPassword());

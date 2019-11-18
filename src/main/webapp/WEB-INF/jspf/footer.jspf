@@ -1,15 +1,15 @@
+<c:set var="isAlertSuccess" value="${not empty param.alertSuccess and param.alertSuccess eq true}" scope="page"/>
+<c:set var="isAlertError" value="${not empty param.alertError and param.alertError eq true}" scope="page"/>
 
 <div class="container-fluid mb-4 fixed-bottom">
     <!-- ALERT -->
-    <c:if test="${(not empty param.alertError and param.alertError eq true) or (not empty param.alertSuccess and param.alertSuccess eq true)}">
+    <c:if test="${isAlertSuccess or isAlertError or (not empty validation)}">
         <%@ include file="/WEB-INF/jspf/alert.jspf"%>
     </c:if>
     <!-- ALERT -->
 </div>
 
 <div class="container-fluid p-2 fixed-bottom" id="footer">
-    <!-- PAGINATION -->
-    <!-- PAGINATION -->
     <div class="row">
         <div class="col-4 d-flex justify-content-start">Railway Ticket Booking, 2019</div>
         <div class="col-4"></div>

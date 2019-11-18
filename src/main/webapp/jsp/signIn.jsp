@@ -1,10 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/jspf/utilImports.jspf" %>
 
-<fmt:message var="firstName" key="user.firstName" bundle="${sessionScope.rb}" scope="page"/>
-<fmt:message var="lastName" key="user.lastName" bundle="${sessionScope.rb}" scope="page"/>
-<fmt:message var="email" key="user.email" bundle="${sessionScope.rb}" scope="page"/>
-<fmt:message var="password" key="user.password" bundle="${sessionScope.rb}" scope="page"/>
+<fmt:message var="email" key="user.email" bundle="${rb}" scope="page"/>
+<fmt:message var="password" key="user.password" bundle="${rb}" scope="page"/>
 
 <html>
 <head>
@@ -26,13 +24,13 @@
                             <input type="hidden" name="command" value="${Commands.SIGN_IN}">
 
                             <div class="form-group">
-                                <label for="inputEmail">Email</label>
-                                <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="${Parameters.EMAIL}">
+                                <label for="inputEmail">${email}</label>
+                                <input type="email" class="form-control" id="inputEmail" placeholder="${email}" name="${Parameters.EMAIL}">
                             </div>
 
                             <div class="form-group">
-                                <label for="inputPassword">Password</label>
-                                <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="${Parameters.PASSWORD}">
+                                <label for="inputPassword">${password}</label>
+                                <input type="password" class="form-control" id="inputPassword" placeholder="${password}" name="${Parameters.PASSWORD}">
                             </div>
 
                             <button type="submit" class="btn btn-primary col-12" data-dismiss="modal">Enter</button>

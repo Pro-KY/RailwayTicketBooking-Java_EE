@@ -13,7 +13,7 @@ public class ViewProperties {
     public static final String INVOICE = "INVOICE";
 
     public static final String INDEX = "INDEX";
-    public static final String ERROR = "ERROR";
+    public static final String ERROR_RUNTIME = "ERROR_RUNTIME";
     public static final String ERROR_ACCESS_DENIED = "ERROR_ACCESS_DENIED";
     public static final String ERROR_NOT_FOUND = "ERROR_NOT_FOUND";
 

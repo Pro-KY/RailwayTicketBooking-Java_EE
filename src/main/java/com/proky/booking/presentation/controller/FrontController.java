@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.proky.booking.util.properties.ViewProperties.ERROR;
+import static com.proky.booking.util.properties.ViewProperties.ERROR_RUNTIME;
 
 public class FrontController extends HttpServlet {
     private static final Logger log = LogManager.getLogger(FrontController.class);
@@ -36,7 +36,7 @@ public class FrontController extends HttpServlet {
         final String viewPath = command.execute(request);
 
         if (viewPath == null) {
-            response.sendRedirect(ViewProperties.getValue(ERROR));
+            response.sendRedirect(ViewProperties.getValue(ERROR_RUNTIME));
         } else if (viewPath.startsWith(Commands.REDIRECT)) {
             System.out.println("REDIRECT!!!");
             response.sendRedirect(viewPath.replace(Commands.REDIRECT, ""));

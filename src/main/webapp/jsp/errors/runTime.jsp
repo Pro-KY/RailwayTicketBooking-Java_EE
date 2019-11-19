@@ -5,22 +5,31 @@
 <head>
     <title>Error page</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="<c:url value="/assets/css/bootstrap/bootstrap.min.css"/>">
 </head>
 <body>
-    Request from ${param.requestURI} is failed
-    <br/>
-    Servlet name: ${param.servletName}
-    <br/>
-    Status code: ${param.statusCode}
-    <br/>
-    <c:if test="${not empty param.exceptionName and param.exceptionName ne 'null'}">
-        Exception: ${param.exceptionName}
-    </c:if>
-    <br/>
-    <c:if test="${not empty param.exceptionMessage and param.exceptionMessage ne 'null'}">
-        Message: ${param.exceptionMessage}
-    </c:if>
-    <br/>
-    <a href="${pageContext.request.contextPath}/booking/">Home page</a>
+    <div class="container d-flex flex-column h-100">
+        <div class="jumbotron mt-4 pb-4 text-center">
+            <h1 class="display-4 text-danger">Oops.. An error occured! </h1>
+
+            <p class="lead">Request from ${requestURI} is failed</p>
+            <p class="lead">Servlet name: ${servletName}</p>
+            <p class="lead">Status code: ${statusCode}</p>
+            <p class="lead">
+                <c:if test="${not empty exceptionName and exceptionName ne 'null'}">
+                    Exception: ${exceptionName}
+                </c:if>
+            </p>
+            <p class="lead">
+                <c:if test="${not empty exceptionMessage and exceptionMessage ne 'null'}">
+                    Message: ${exceptionMessage}
+                </c:if>
+            </p>
+            <hr class="my-4">
+            <a class="btn btn-primary font-weight-bold" href="<c:url value="${pageContext.request.contextPath}/booking/"/>" role="button">
+                Home page
+            </a>
+        </div>
+    </div>
 </body>
 </html>

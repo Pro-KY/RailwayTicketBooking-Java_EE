@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static com.proky.booking.util.constans.ExceptionsEnum.SERVICE_EXCEPTION;
-import static com.proky.booking.util.properties.ViewProperties.ERROR;
+import static com.proky.booking.util.properties.ViewProperties.ERROR_RUNTIME;
 
 public class GlobalExceptionHandler extends HttpServlet {
     private static final Logger log = LogManager.getLogger(GlobalExceptionHandler.class);
@@ -48,7 +48,7 @@ public class GlobalExceptionHandler extends HttpServlet {
             request.setAttribute(Attributes.ERROR_STATUS_CODE, errorData.getStatusCode());
             request.setAttribute(Attributes.ERROR_EXCEPTION_NAME, errorData.getExceptionName());
             request.setAttribute(Attributes.ERROR_EXCEPTION_MSG, errorData.getExceptionMessage());
-            currentPage = ViewProperties.getValue(ERROR);
+            currentPage = ViewProperties.getValue(ERROR_RUNTIME);
         }
 
         request.getRequestDispatcher(currentPage).forward(request, response);

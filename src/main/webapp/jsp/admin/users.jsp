@@ -48,6 +48,7 @@
 
                 <tbody>
                     <c:forEach var="user" items="${model.pageList}">
+                        <jsp:useBean id="user" type="com.proky.booking.dto.UserDto"/>
                         <tr class="table-row clickable-row" data-href="/booking/?${Parameters.USER_ID}=${user.id}&command=${Commands.MANAGE_USER}">
                             <td>${user.id}</td>
                             <td>${user.firstName}</td>

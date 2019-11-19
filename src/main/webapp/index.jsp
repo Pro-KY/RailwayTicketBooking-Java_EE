@@ -6,18 +6,19 @@
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="i18n.messages" var = "rb" scope="session"/>
 
-<c:set var="pageDto" value="${sessionScope.pageDto}" scope="session"/>
+<c:set var="model" value="${sessionScope.model}" scope="session"/>
 <c:set var="findTrainCommand" value="${Commands.FIND_TRAIN}" scope="page"/>
 <c:set var="findTrainParameters" value="${Attributes.GOING_TO}=${param.goingTo}&${Attributes.DEPARTURE_DATE}=${param.departureDate}&${Attributes.DEPARTURE_TIME}=${param.departureTime}" scope="page"/>
 <fmt:message var="route" key="table.header.route" bundle="${rb}"/>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" scope="page"/>
 
 <html>
 <head>
     <title>Main page</title>
     <%@ include file="/WEB-INF/jspf/headImports.jspf" %>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/moment.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/tempusdominus-bootstrap-4.min.js"></script>
-    <link rel="stylesheet" href="<c:url value="/assets/css/tempusdominus-bootstrap-4.min.css"/>">
+    <script type="text/javascript" src="${contextPath}/assets/js/moment.js"></script>
+    <script type="text/javascript" src="${contextPath}/assets/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="<c:url value="${contextPath}/assets/css/tempusdominus-bootstrap-4.min.css"/>">
 </head>
 
 <body>
@@ -80,7 +81,7 @@
             </form>
         </div>
 
-        <%--            <c:if test="${not empty pageDto and not empty pageDto.pageList}">--%>
+        <%--            <c:if test="${not empty model and not empty model.pageList}">--%>
         <%--PAGE_SIZE--%>
         <div id="elementsAmountSelect" class="row">
             <div class="col-md-10"></div>
@@ -113,7 +114,7 @@
                 </thead>
                 <tbody>
 
-                <c:forEach var="train" items="${pageDto.pageList}">
+                <c:forEach var="train" items="${model.pageList}">
                     <jsp:useBean id="train" type="com.proky.booking.dto.TrainDto"/>
                     <tr class="table-row clickable-row" data-href="/booking/?${Parameters.TRAIN_ID}=${train.trainId}&command=${Commands.TRAIN_BOOKING}&">
                         <td>${train.trainId} ${train.trainType}</td>
@@ -136,7 +137,7 @@
         <%--TABLE--%>
 
         <%--PAGINATION--%>
-        <c:if test="${sessionScope.pageDto.allPagesAmount > 1}">
+        <c:if test="${sessionScope.model.allPagesAmount > 1}">
     <%--            <%@include file="/WEB-INF/jspf/pagination.jspf" %>--%>
             <div class="row mt-4">
                 <div class="col-md-3"></div>
@@ -145,18 +146,18 @@
                         <ul class="pagination" style="list-style-type: none;">
                             <div class="container-fluid">
                                 <div class="btn-group">
-                                    <li class="${sessionScope.pageDto.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                        <a class="page-link" href="booking/?${Parameters.PAGE_SIZE}=${sessionScope.pageDto.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}">Previous</a>
+                                    <li class="${sessionScope.model.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                                        <a class="page-link" href="booking/?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}">Previous</a>
                                     </li>
 
-                                    <c:forEach begin="${sessionScope.pageDto.startPageIndex}" end="${sessionScope.pageDto.endPageIndex}" varStatus="counter">
-                                        <li class="${(sessionScope.pageDto.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
-                                            <a class="page-link" href="booking/?${Parameters.PAGE_SIZE}=${sessionScope.pageDto.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${findTrainCommand}&${findTrainParameters}"> ${counter.index+1} </a>
+                                    <c:forEach begin="${sessionScope.model.startPageIndex}" end="${sessionScope.model.endPageIndex}" varStatus="counter">
+                                        <li class="${(sessionScope.model.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
+                                            <a class="page-link" href="booking/?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${findTrainCommand}&${findTrainParameters}"> ${counter.index+1} </a>
                                         </li>
                                     </c:forEach>
 
-                                    <li class="${sessionScope.pageDto.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                        <a class="page-link" href="booking/?${Parameters.PAGE_SIZE}=${sessionScope.pageDto.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}">Next</a>
+                                    <li class="${sessionScope.model.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                                        <a class="page-link" href="booking/?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}">Next</a>
                                     </li>
                                 </div>
                             </div>
@@ -169,12 +170,12 @@
 
         <%--TESTING PAGINATION--%>
         <div class="float-left">
-            <p>isLeftButtonDisabled : ${sessionScope.pageDto.isLeftButtonDisabled}</p>
-            <p>isRightButtonDisabled : ${sessionScope.pageDto.isRightButtonDisabled}</p>
-            <p>currentPageIndex ${sessionScope.pageDto.currentPageIndex}</p>
-            <p>allPagesAmount ${sessionScope.pageDto.allPagesAmount}</p>
-            <p>startPageIndex : ${sessionScope.pageDto.startPageIndex}</p>
-            <p>endPageIndex : ${sessionScope.pageDto.endPageIndex}</p>
+            <p>isLeftButtonDisabled : ${sessionScope.model.isLeftButtonDisabled}</p>
+            <p>isRightButtonDisabled : ${sessionScope.model.isRightButtonDisabled}</p>
+            <p>currentPageIndex ${sessionScope.model.currentPageIndex}</p>
+            <p>allPagesAmount ${sessionScope.model.allPagesAmount}</p>
+            <p>startPageIndex : ${sessionScope.model.startPageIndex}</p>
+            <p>endPageIndex : ${sessionScope.model.endPageIndex}</p>
         </div>
         <%--TESTING PAGINATION--%>
     </div>

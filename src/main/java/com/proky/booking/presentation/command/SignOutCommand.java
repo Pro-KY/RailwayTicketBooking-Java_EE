@@ -16,6 +16,6 @@ public class SignOutCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         request.getSession().invalidate();
-        return new URLBuilder(true, ViewProperties.getPath(INDEX)).buildURL();
+        return new URLBuilder(true, ViewProperties.getValue(INDEX)).buildURL();
     }
 }

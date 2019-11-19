@@ -31,8 +31,7 @@ public class PaginationService {
 
     private static final Logger log = LogManager.getLogger(PaginationService.class);
 
-    public PaginationService() {
-    }
+    public PaginationService() { }
 
     public PaginationService(PageDto pageDto) {
         this.pageDto = pageDto;

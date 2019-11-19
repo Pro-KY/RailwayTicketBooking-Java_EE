@@ -14,6 +14,9 @@ public class ViewProperties {
 
     public static final String INDEX = "INDEX";
     public static final String ERROR = "ERROR";
+    public static final String ERROR_ACCESS_DENIED = "ERROR_ACCESS_DENIED";
+    public static final String ERROR_NOT_FOUND = "ERROR_NOT_FOUND";
+
 
     public static final String ADMIN_USERS = "ADMIN_USERS";
     public static final String ADMIN_MANAGE_USER = "ADMIN_MANAGE_USER";
@@ -22,7 +25,7 @@ public class ViewProperties {
         viewPathProperties = PropertyResourceBundle.getBundle(fileName);
     }
 
-    public static String getPath(String propertyName) {
+    public static String getValue(String propertyName) {
         if (propertyName == null || propertyName.isEmpty()) {
             throw new IllegalArgumentException("propertyName can't be null or empty!");
         }

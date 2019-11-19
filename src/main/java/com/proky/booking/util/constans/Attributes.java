@@ -6,6 +6,7 @@ public class Attributes {
     public static final String VALIDATION = "validation";
     public static final String IS_USER_AUTHORIZED = "isUserAuthorized";
     public static final String USER = "user";
+    public static final String USER_TYPE = "userType";
 
     public static final String ALERT_ERROR = "alertError";
     public static final String ALERT_SUCCESS = "alertSuccess";

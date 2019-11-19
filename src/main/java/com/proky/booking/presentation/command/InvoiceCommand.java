@@ -3,7 +3,6 @@ package com.proky.booking.presentation.command;
 import com.proky.booking.dto.InvoiceDto;
 import com.proky.booking.dto.TicketBookingDto;
 import com.proky.booking.dto.UserDto;
-import com.proky.booking.persistence.entity.User;
 import com.proky.booking.service.InvoiceService;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.util.URLBuilder;
@@ -51,7 +50,7 @@ public class InvoiceCommand implements ICommand {
         log.info("invoiceDto {}", invoiceDto);
 
         request.getSession().setAttribute(Attributes.MODEL, invoiceDto);
-        final String viewPath = ViewProperties.getPath(INVOICE);
+        final String viewPath = ViewProperties.getValue(INVOICE);
         URLBuilder urlBuilder = new URLBuilder(true, viewPath);
 
         return urlBuilder.buildURL();

@@ -21,7 +21,7 @@ public class FindTrainsCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        final URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.getPath(INDEX));
+        final URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.getValue(INDEX));
 
         final String stationId = request.getParameter(GOING_TO);
         final String dateUI = request.getParameter(DEPARTURE_DATE);

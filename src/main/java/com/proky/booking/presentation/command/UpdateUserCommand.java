@@ -2,14 +2,11 @@ package com.proky.booking.presentation.command;
 
 import com.proky.booking.dto.PageDto;
 import com.proky.booking.dto.UserDto;
-import com.proky.booking.persistence.entity.User;
-import com.proky.booking.service.PaginationService;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.UserService;
 import com.proky.booking.util.URLBuilder;
 import com.proky.booking.util.command.HttpRequestDataBinder;
 import com.proky.booking.util.constans.Attributes;
-import com.proky.booking.util.constans.Parameters;
 import com.proky.booking.util.properties.MessageProperties;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
@@ -30,7 +27,7 @@ public class UpdateUserCommand implements ICommand {
 
         final HttpSession session = request.getSession();
 
-        final URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.getPath(ADMIN_USERS));
+        final URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.getValue(ADMIN_USERS));
 
         log.debug("update user data");
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();

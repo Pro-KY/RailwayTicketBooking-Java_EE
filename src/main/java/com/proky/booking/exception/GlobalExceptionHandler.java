@@ -1,10 +1,7 @@
 package com.proky.booking.exception;
 
 import com.proky.booking.dto.ErrorData;
-import com.proky.booking.util.URLBuilder;
 import com.proky.booking.util.constans.Attributes;
-import com.proky.booking.util.constans.Parameters;
-import com.proky.booking.util.properties.MessageProperties;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static com.proky.booking.util.constans.ExceptionsEnum.SERVICE_EXCEPTION;
-import static com.proky.booking.util.properties.MessageProperties.USER_CREATED;
-import static com.proky.booking.util.properties.MessageProperties.USER_DELETED;
 import static com.proky.booking.util.properties.ViewProperties.ERROR;
 
 public class GlobalExceptionHandler extends HttpServlet {
@@ -53,7 +48,7 @@ public class GlobalExceptionHandler extends HttpServlet {
             request.setAttribute(Attributes.ERROR_STATUS_CODE, errorData.getStatusCode());
             request.setAttribute(Attributes.ERROR_EXCEPTION_NAME, errorData.getExceptionName());
             request.setAttribute(Attributes.ERROR_EXCEPTION_MSG, errorData.getExceptionMessage());
-            currentPage = ViewProperties.getPath(ERROR);
+            currentPage = ViewProperties.getValue(ERROR);
         }
 
         request.getRequestDispatcher(currentPage).forward(request, response);

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import static com.proky.booking.util.properties.ViewProperties.INDEX;
-import static com.proky.booking.util.properties.ViewProperties.SIGN_IN;
 
 public class ChangeLanguageCommand implements ICommand {
     private static final Logger log = LogManager.getLogger(ChangeLanguageCommand.class);
@@ -21,7 +20,13 @@ public class ChangeLanguageCommand implements ICommand {
         final String chosenLanguage = request.getParameter(Parameters.LANGUAGE);
         final HttpSession session = request.getSession();
         session.setAttribute(Attributes.LANGUAGE, chosenLanguage);
-        return new URLBuilder(true, ViewProperties.getPath(INDEX)).buildURL();
+
+        String uri = request.getRequestURI();
+        log.info("uri: {}", uri);
+        String referer = request.getHeader("referer");
+        log.info("referer: {}", referer);
+
+        return new URLBuilder(true, ViewProperties.getValue(INDEX)).buildURL();
     }
 }
 

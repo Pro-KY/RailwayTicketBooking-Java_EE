@@ -7,7 +7,6 @@ import com.proky.booking.service.UserService;
 import com.proky.booking.util.URLBuilder;
 import com.proky.booking.util.command.HttpRequestDataBinder;
 import com.proky.booking.util.constans.Attributes;
-import com.proky.booking.util.constans.Parameters;
 import com.proky.booking.util.properties.MessageProperties;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import static com.proky.booking.util.properties.MessageProperties.USER_DELETED;
-import static com.proky.booking.util.properties.MessageProperties.USER_UPDATED;
 import static com.proky.booking.util.properties.ViewProperties.ADMIN_USERS;
 
 public class DeleteUserCommand implements ICommand {
@@ -27,6 +25,7 @@ public class DeleteUserCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
         final UserDto userDto = requestDataBinder.bindToDto(request, UserDto.class);
+        log.info(userDto.toString());
         final Long userId = Long.parseLong(userDto.getId());
         log.info("userId: {}", userId);
 
@@ -34,7 +33,7 @@ public class DeleteUserCommand implements ICommand {
         userService.deleteUser(userId);
 
         final HttpSession session = request.getSession();
-        final URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.getPath(ADMIN_USERS));
+        final URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.getValue(ADMIN_USERS));
         urlBuilder.setParameter(Attributes.ALERT_SUCCESS, true);
         urlBuilder.setParameter(Attributes.ALERT_MESSAGE, MessageProperties.getMessage(USER_DELETED));
 

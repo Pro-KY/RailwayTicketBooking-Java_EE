@@ -5,21 +5,18 @@
          version="4.0">
 
     <welcome-file-list>
-<!--        <welcome-file>index.jsp</welcome-file>-->
         <welcome-file>index</welcome-file>
-<!--        <welcome-file>booking</welcome-file>-->
     </welcome-file-list>
 
     <servlet>
         <servlet-name>frontController</servlet-name>
         <servlet-class>com.proky.booking.presentation.controller.FrontController</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>frontController</servlet-name>
         <url-pattern>/index</url-pattern>
-<!--        <url-pattern>/booking</url-pattern>-->
         <url-pattern>/booking/*</url-pattern>
-<!--        <url-pattern/>-->
     </servlet-mapping>
 
     <servlet>
@@ -31,14 +28,13 @@
         <url-pattern>/errorHandler</url-pattern>
     </servlet-mapping>
 
-
     <error-page>
         <error-code>404</error-code>
-        <location>/jsp/error.jsp</location>
+        <location>/jsp/errors/notFound.jsp</location>
     </error-page>
 
     <error-page>
-        <location>/jsp/error.jsp</location>
+        <location>/jsp/errors/runTime.jsp</location>
     </error-page>
 
     <error-page>
@@ -50,6 +46,7 @@
         <session-timeout>10</session-timeout>
     </session-config>
 
+    <!--FILTERS-->
     <filter>
         <filter-name>encodingfilter</filter-name>
         <filter-class>com.proky.booking.filter.EncodingFilter</filter-class>
@@ -62,4 +59,31 @@
         <filter-name>encodingfilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <filter>
+        <filter-name>securityFilter</filter-name>
+        <filter-class>com.proky.booking.filter.ServletSecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>securityFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>pageRedirectFilter</filter-name>
+        <filter-class>com.proky.booking.filter.PageRedirectSecurityFilter</filter-class>
+        <init-param>
+            <param-name>indexPath</param-name>
+            <param-value>/index.jsp</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>pageRedirectFilter</filter-name>
+<!--        <url-pattern>/*</url-pattern>-->
+<!--        <url-pattern>/jsp/admin/*</url-pattern>-->
+
+        <url-pattern>/jsp/*</url-pattern>
+<!--        <url-pattern>/*</url-pattern>-->
+    </filter-mapping>
+    <!--FILTERS-->
 </web-app>

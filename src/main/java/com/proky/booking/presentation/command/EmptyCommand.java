@@ -3,7 +3,6 @@ package com.proky.booking.presentation.command;
 import com.proky.booking.persistence.entity.Station;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.StationService;
-import com.proky.booking.util.constans.Attributes;
 import com.proky.booking.util.constans.Commands;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
@@ -29,6 +28,6 @@ public class EmptyCommand implements ICommand {
         session.setAttribute("stations", allStations);
 //        session.setAttribute(Attributes.CURRENT_FRAGMENT, ViewProperties.getPath(FRAGMENT_MAIN));
 
-        return Commands.REDIRECT + ViewProperties.getPath(INDEX);
+        return Commands.REDIRECT + ViewProperties.getValue(INDEX);
     }
 }

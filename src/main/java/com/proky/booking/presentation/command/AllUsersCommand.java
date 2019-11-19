@@ -1,14 +1,10 @@
 package com.proky.booking.presentation.command;
 
 import com.proky.booking.dto.PageDto;
-import com.proky.booking.dto.UserDto;
 import com.proky.booking.service.PaginationService;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.UserService;
-import com.proky.booking.util.URLBuilder;
-import com.proky.booking.util.command.HttpRequestDataBinder;
 import com.proky.booking.util.constans.Attributes;
-import com.proky.booking.util.properties.MessageProperties;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,9 +12,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static com.proky.booking.util.properties.MessageProperties.USER_UPDATED;
 import static com.proky.booking.util.properties.ViewProperties.ADMIN_USERS;
-import static com.proky.booking.util.properties.ViewProperties.INDEX;
 
 
 public class AllUsersCommand implements ICommand {
@@ -34,6 +28,6 @@ public class AllUsersCommand implements ICommand {
         final PageDto foundUsersPerPage = userService.findAllRegisteredUsers(sessionPageDto);
         session.setAttribute(Attributes.MODEL, foundUsersPerPage);
 
-        return ViewProperties.getPath(ADMIN_USERS);
+        return ViewProperties.getValue(ADMIN_USERS);
     }
 }

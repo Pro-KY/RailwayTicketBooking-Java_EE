@@ -29,6 +29,6 @@ public class TrainBookingCommand implements ICommand {
         request.setAttribute(Parameters.FOUND_TRAIN, trainDto);
 
 //        return new URLBuilder(true, ViewProperties.getPath(FRAGMENT_TICKET_BOOKING)).buildURL();
-        return ViewProperties.getPath(TRAIN_BOOKING);
+        return ViewProperties.getValue(TRAIN_BOOKING);
     }
 }

@@ -11,6 +11,7 @@ public class Commands {
     public static final String TRAIN_BOOKING = "trainBooking";
     public static final String INVOICE = "invoice";
 
+    // ADMIN COMMANDS
     public static final String MANAGE_USER = "manageUser";
     public static final String DELETE_USER = "deleteUser";
     public static final String UPDATE_USER = "updateUser";

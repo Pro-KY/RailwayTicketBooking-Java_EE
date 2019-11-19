@@ -10,7 +10,7 @@ import com.proky.booking.service.ValidationService;
 import com.proky.booking.util.URLBuilder;
 import com.proky.booking.util.command.HttpRequestDataBinder;
 import com.proky.booking.util.constans.Attributes;
-import com.proky.booking.util.constans.Commands;
+import com.proky.booking.util.constans.UserTypeEnum;
 import com.proky.booking.util.properties.MessageProperties;
 import com.proky.booking.util.properties.ViewProperties;
 import com.proky.booking.validation.ValidationResult;
@@ -31,7 +31,7 @@ public class SignInCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         final HttpSession session = request.getSession();
 
-        URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.getPath(INDEX));
+        URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.getValue(INDEX));
         final SignInService signInService = ServiceFactory.getInstance().getSignInService();
         final UserService userService = ServiceFactory.getInstance().getUserService();
 
@@ -40,7 +40,7 @@ public class SignInCommand implements ICommand {
         final UserDto enteredUserData = requestDataBinder.bindToDto(request, UserDto.class);
 //        log.debug(enteredUserData);
 
-        session.setAttribute(Attributes.CURRENT_PAGE, ViewProperties.getPath(SIGN_IN));
+        session.setAttribute(Attributes.CURRENT_PAGE, ViewProperties.getValue(SIGN_IN));
 
         final ValidationService validationService = ValidationService.getInstance();
         final ValidationResult validation = validationService.validate(enteredUserData, "email", "password");
@@ -49,17 +49,19 @@ public class SignInCommand implements ICommand {
             final User authenticatedUser = signInService.signIn(enteredUserData);
             final boolean isAdministrator = userService.isAdministrator(authenticatedUser);
             final UserDto userDto = userService.mapUserToDto(authenticatedUser);
+            UserTypeEnum userTypeEnum = isAdministrator ? UserTypeEnum.ADMIN : UserTypeEnum.USER;
             log.debug("mapped userDto {}", userDto);
 
             if (isAdministrator) {
                 PageDto pageDto = new PageDto();
                 final PageDto usersPerPage = userService.findAllRegisteredUsers(pageDto);
                 session.setAttribute(Attributes.MODEL, usersPerPage);
-                urlBuilder.setViewPath(ViewProperties.getPath(ADMIN_USERS));
+                urlBuilder.setViewPath(ViewProperties.getValue(ADMIN_USERS));
             }
 
+            session.setAttribute(Attributes.USER_TYPE, userTypeEnum);
             session.setAttribute(Attributes.USER, userDto);
-            session.setAttribute(Attributes.IS_USER_AUTHORIZED, true);
+//            session.setAttribute(Attributes.IS_USER_AUTHORIZED, true);
         } else {
             request.setAttribute(Attributes.ALERT_ERROR, true);
             request.setAttribute(Attributes.ALERT_MESSAGE, MessageProperties.getMessage(AUTHORIZATION_ERROR));

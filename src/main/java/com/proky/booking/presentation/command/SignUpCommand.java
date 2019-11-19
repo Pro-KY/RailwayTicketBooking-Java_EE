@@ -7,7 +7,6 @@ import com.proky.booking.service.ValidationService;
 import com.proky.booking.util.URLBuilder;
 import com.proky.booking.util.command.HttpRequestDataBinder;
 import com.proky.booking.util.constans.Attributes;
-import com.proky.booking.util.constans.Parameters;
 import com.proky.booking.util.properties.MessageProperties;
 import com.proky.booking.util.properties.ViewProperties;
 import com.proky.booking.validation.ValidationResult;
@@ -27,8 +26,8 @@ public class SignUpCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         final HttpSession session = request.getSession();
-        final String signUpViewpath = ViewProperties.getPath(SIGN_UP);
-        final String signInViewpath = ViewProperties.getPath(SIGN_IN);
+        final String signUpViewpath = ViewProperties.getValue(SIGN_UP);
+        final String signInViewpath = ViewProperties.getValue(SIGN_IN);
 
         session.setAttribute(Attributes.CURRENT_PAGE, signUpViewpath);
         final URLBuilder urlBuilder = new URLBuilder(true, signUpViewpath);

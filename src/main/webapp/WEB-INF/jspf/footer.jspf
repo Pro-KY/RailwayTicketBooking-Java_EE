@@ -1,5 +1,6 @@
 <c:set var="isAlertSuccess" value="${not empty alertSuccess and alertSuccess eq true}" scope="page"/>
 <c:set var="isAlertError" value="${not empty alertError and alertError eq true}" scope="page"/>
+<%@ taglib prefix="mytag" uri="/WEB-INF/company.tld" %>
 
 <div class="container-fluid mb-4 fixed-bottom">
     <!-- ALERT -->
@@ -11,7 +12,9 @@
 
 <div class="container-fluid p-2 fixed-bottom" id="footer">
     <div class="row">
-        <div class="col-4 d-flex justify-content-start">Railway Ticket Booking, 2019</div>
+        <div class="col-4 d-flex justify-content-start">
+            <mytag:company name="Railway Ticket Booking"/>
+        </div>
         <div class="col-4"></div>
         <div class="col-4 d-flex justify-content-end">
             <ul class="navbar-nav ml-auto">

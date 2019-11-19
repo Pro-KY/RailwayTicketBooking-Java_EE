@@ -34,7 +34,7 @@ public class ServletSecurityFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        log.debug("in ServletSecurityFilter");
+//        log.debug("in ServletSecurityFilter");
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession(false);
@@ -45,8 +45,8 @@ public class ServletSecurityFilter implements Filter {
         String command = httpRequest.getParameter(Parameters.COMMAND);
         final String contextPath = httpRequest.getContextPath();
 
-        log.debug("SECURITY Resource: {}", URI);
-        log.debug("SECURITY URL: {}", URL);
+//        log.debug("SECURITY Resource: {}", URI);
+//        log.debug("SECURITY URL: {}", URL);
 
         final UserTypeEnum currentUserType = getCurrentUserType(session);
         if (!currentUserType.equals(UserTypeEnum.GUEST)) {
@@ -57,7 +57,7 @@ public class ServletSecurityFilter implements Filter {
 
         if (isForbiddenCommand && !currentUserType.equals(UserTypeEnum.ADMIN)) {
             httpRequest.getRequestDispatcher(contextPath + accessDeniedErrorPath).forward(httpRequest, httpResponse);
-            log.debug("forbidden command! Only admin can do the command!");
+//            log.debug("forbidden command! Only admin can do the command!");
         } else {
             chain.doFilter(request, response);
         }

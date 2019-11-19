@@ -35,20 +35,20 @@ public class PageRedirectSecurityFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        log.info("in PageRedirectSecurityFilter");
+//        log.info("in PageRedirectSecurityFilter");
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession(false);
 
         final String contextPath = httpRequest.getContextPath();
         String uri = httpRequest.getRequestURI();
-        log.info("REDIRECT Resource: {}", uri);
+//        log.info("REDIRECT Resource: {}", uri);
 
         String adminPath = contextPath + "/jsp/admin";
-        log.info("adminPath {}", adminPath);
+//        log.info("adminPath {}", adminPath);
 
         UserTypeEnum userType = ServletSecurityFilter.getCurrentUserType(session);
-        log.info("userType is {}", userType);
+//        log.info("userType is {}", userType);
 
         final boolean isAdmin = userType.equals(UserTypeEnum.ADMIN);
         final boolean isUser = userType.equals(UserTypeEnum.USER);
@@ -64,7 +64,7 @@ public class PageRedirectSecurityFilter implements Filter {
                 httpRequest.getRequestDispatcher(contextPath + notFoundErrorPath).forward(request, response);
             }
         } else if(isSignInOrSignUp && (isUser || isAdmin)) {
-            log.debug("signed_in user tried to sign_in or sign_up again!");
+//            log.debug("signed_in user tried to sign_in or sign_up again!");
             httpResponse.sendRedirect(contextPath + indexPath);
 //            httpRequest.getRequestDispatcher(contextPath + indexPath).forward(request, response);
         } else {

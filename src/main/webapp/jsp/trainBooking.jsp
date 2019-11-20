@@ -15,8 +15,7 @@
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <!-- HEADER -->
 
-
-    <div class="container float-left ml-3">
+    <div class="container float-left ml-3 mt-5 pt-3">
         <form method="POST" action ="booking/" name="ticketBooking">
             <input type="hidden" name="command" value="${Commands.INVOICE}">
             <input type="hidden" name="${Parameters.TRAIN_ID}" value="${train.trainId}">
@@ -27,23 +26,23 @@
                     <c:if test="${empty sessionScope.user}">
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="inputFirstName">FirstName</label>
+                                <label for="inputFirstName"><fmt:message key="user.firstName" bundle="${rb}"/></label>
                                 <input type="text" class="form-control" id="inputFirstName" placeholder="${firstName}" name="${Parameters.USER_FIRST_NAME}">
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label for="inputLastName">LastName</label>
+                                <label for="inputLastName"><fmt:message key="user.lastName" bundle="${rb}"/></label>
                                 <input type="text" class="form-control" id="inputLastName" placeholder="${lastName}" name="${Parameters.USER_LAST_NAME}">
                             </div>
                         </div>
-
                     </c:if>
+
                     <div class="form-group">
-                        <label for="numberInput">Seats</label>
+                        <label for="numberInput"><fmt:message key="seats" bundle="${rb}"/></label>
                         <input class="form-control" type="number" value="1" id="numberInput" min="1" max="5" name="${Parameters.SEATS_AMOUNT}">
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 mt-5">
                     <table class="table">
                         <thead>
                         <tr>

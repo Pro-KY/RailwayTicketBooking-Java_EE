@@ -7,7 +7,6 @@
 </head>
 <body>
 <div class="container mt-5">
-
     <div class="row">
         <div class="col d-flex justify-content-center">
             <h1>Oops!</h1>

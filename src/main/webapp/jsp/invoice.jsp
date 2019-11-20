@@ -18,7 +18,7 @@
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <!-- HEADER -->
 
-    <div class="container float-left ml-3">
+    <div class="container float-left ml-3 mt-3">
         <div class="row">
             <div class="col-md-9">
                 <table class="table">
@@ -36,11 +36,11 @@
                     </tr>
                     <tr class="table-row">
                         <td>${departure} ${date}/${time}</td>
-                        <td>${model.routeDepartureDate} ${model.routeDepartureTime}</td>
+                        <td>${model.routeDepartureDate} / ${model.routeDepartureTime}</td>
                     </tr>
                     <tr class="table-row">
                         <td> ${arrival} ${date}/${time}</td>
-                        <td>${model.routeArrivalDate} ${model.routeArrivalTime}</td>
+                        <td>${model.routeArrivalDate} / ${model.routeArrivalTime}</td>
                     </tr>
                     <tr class="table-row">
                         <td><fmt:message key="invoice.seats.amount" bundle="${rb}"/></td>

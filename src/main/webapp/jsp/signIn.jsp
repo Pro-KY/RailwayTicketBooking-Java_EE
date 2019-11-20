@@ -15,7 +15,7 @@
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <!-- HEADER -->
 
-    <div class="container pt-md-3">
+    <div class="container pt-md-5 mt-5">
         <div class="row justify-content-sm-center">
             <div class="col-sm-6 col-md-4">
                 <div class="card border-info">
@@ -24,16 +24,16 @@
                             <input type="hidden" name="command" value="${Commands.SIGN_IN}">
 
                             <div class="form-group">
-                                <label for="inputEmail">${email}</label>
-                                <input type="email" class="form-control" id="inputEmail" placeholder="${email}" name="${Parameters.EMAIL}">
+                                <label class="ml-3" for="inputEmail">${email}</label>
+                                <input type="email" required class="form-control" id="inputEmail" placeholder="${email}" name="${Parameters.EMAIL}">
                             </div>
 
                             <div class="form-group">
-                                <label for="inputPassword">${password}</label>
-                                <input type="password" class="form-control" id="inputPassword" placeholder="${password}" name="${Parameters.PASSWORD}">
+                                <label class="ml-3" for="inputPassword">${password}</label>
+                                <input type="password" required class="form-control" id="inputPassword" placeholder="${password}" name="${Parameters.PASSWORD}">
                             </div>
 
-                            <button type="submit" class="btn btn-primary col-12" data-dismiss="modal">Enter</button>
+                            <button type="submit" class="btn btn-primary col-12" data-dismiss="modal"><fmt:message key="enter" bundle="${rb}"/></button>
                         </form>
                         <div class="row justify-content-center">
                             <div><fmt:message key="msg.signup" bundle="${rb}"/> <a href="${pageContext.request.contextPath}/jsp/signUp.jsp"><fmt:message key="sing.up" bundle="${rb}"/></a></div>

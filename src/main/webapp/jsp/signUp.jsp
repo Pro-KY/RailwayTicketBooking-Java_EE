@@ -17,7 +17,7 @@
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <!-- HEADER -->
 
-    <div class="container pt-md-3">
+    <div class="container pt-md-3 mt-5">
         <div class="row justify-content-center">
             <div class="col-sm-6 col-md-4">
                 <div class="card border-info">
@@ -26,20 +26,20 @@
                             <input type="hidden" name="command" value="${Commands.SIGN_UP}">
 
                             <div class="form-group">
-                                <label for="firstName">${firstName}</label>
-                                <input type="text" class="form-control m-1" placeholder="${firstName}" id="firstName" name="${Parameters.USER_FIRST_NAME}">
+                                <label class="ml-3" for="firstName">${firstName}</label>
+                                <input type="text" required class="form-control m-1" placeholder="${firstName}" id="firstName" name="${Parameters.USER_FIRST_NAME}">
                             </div>
                             <div class=" form-group">
-                                <label for="firstName">${lastName}</label>
-                                <input type="text" class="form-control m-1" placeholder="${lastName}" name="${Parameters.USER_LAST_NAME}">
+                                <label class="ml-3" for="lastName">${lastName}</label>
+                                <input type="text" required class="form-control m-1" placeholder="${lastName}" id="lastName" name="${Parameters.USER_LAST_NAME}">
                             </div>
                             <div class=" form-group">
-                                <label for="firstName">${email}</label>
-                                <input type="text" class="form-control m-1" placeholder="${email}" name="${Parameters.EMAIL}">
+                                <label class="ml-3" for="email">${email}</label>
+                                <input type="text" required class="form-control m-1" placeholder="${email}" id="email" name="${Parameters.EMAIL}">
                             </div>
                             <div class=" form-group">
-                                <label for="firstName">${password}</label>
-                                <input type="password" class="form-control m-1" placeholder="${password}" name="${Parameters.PASSWORD}">
+                                <label class="ml-3" for="password">${password}</label>
+                                <input type="password" required class="form-control m-1" placeholder="${password}" id="password" name="${Parameters.PASSWORD}">
                             </div>
 
                             <div class="row justify-content-center">

@@ -39,7 +39,6 @@ public class TrainDaoImpl implements ITrainDao {
         final TrainMapper trainMapper = new TrainMapper(true);
         trainMapper.mapRouteRelation(new RouteMapper(true));
         trainMapper.mapTrainTypeRelation(new TrainTypeMapper(true));
-
         return jdbcTemplate.findAll(sqlQuery, trainMapper, departureDate, departureTime, departureTime, station.getId(), pageSize, offSet);
     }
 
@@ -49,32 +48,31 @@ public class TrainDaoImpl implements ITrainDao {
     }
 
     @Override
-    public Optional<Train> findTrainById(Long id) {
-        final String sqlQuery = SqlProperties.getValue(FIND_TRAIN_BY_ID);
-        final TrainMapper trainMapper = new TrainMapper(true);
-        trainMapper.mapRouteRelation(new RouteMapper(true));
-        trainMapper.mapTrainTypeRelation(new TrainTypeMapper(true));
-
-        return jdbcTemplate.findByQuery(sqlQuery, trainMapper, id);
-    }
-
-    @Override
     public Long save(Train entity) {
-        return null;
+        Object[] params = {entity.getTrainType().getId(), entity.getRoute().getId()};
+        final String query = SqlProperties.getValue(SAVE_TRAIN);
+        return jdbcTemplate.saveOrUpdate(query, params);
     }
 
     @Override
     public Long update(Train entity) {
-        return null;
+        Object[] params = {entity.getTrainType().getId(), entity.getRoute().getId(), entity.getId()};
+        String sqlQuery = SqlProperties.getValue(UPDATE_TRAIN_BY_ID);
+        return jdbcTemplate.saveOrUpdate(sqlQuery, params);
     }
 
     @Override
     public boolean delete(Train entity) {
-        return false;
+        final String sqlQuery = SqlProperties.getValue(DELETE_TRAIN_BY_ID);
+        return jdbcTemplate.delete(sqlQuery, entity.getId());
     }
 
     @Override
     public Optional<Train> findById(Long id) {
-        return Optional.empty();
+        final String sqlQuery = SqlProperties.getValue(FIND_TRAIN_BY_ID);
+        final TrainMapper trainMapper = new TrainMapper(true);
+        trainMapper.mapRouteRelation(new RouteMapper(true));
+        trainMapper.mapTrainTypeRelation(new TrainTypeMapper(true));
+        return jdbcTemplate.findByQuery(sqlQuery, trainMapper, id);
     }
 }

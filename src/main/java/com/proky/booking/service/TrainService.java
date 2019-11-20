@@ -63,7 +63,7 @@ public class TrainService {
 
     public TrainDto findTrainById(Long id) {
         final ITrainDao trainDao = daoFactory.getTrainDao();
-        final Train train = trainDao.findTrainById(id).orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
+        final Train train = trainDao.findById(id).orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
         final ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(train, TrainDto.class);
     }

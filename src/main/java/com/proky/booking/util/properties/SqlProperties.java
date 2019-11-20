@@ -18,6 +18,10 @@ public class SqlProperties {
 
     // USER_TYPE
     public static final String FIND_USER_TYPE_BY_TYPE = "FIND_USER_TYPE_BY_TYPE";
+    public static final String UPDATE_USER_TYPE_BY_ID = "UPDATE_USER_TYPE_BY_ID";
+    public static final String DELETE_USER_TYPE_BY_ID = "DELETE_USER_TYPE_BY_ID";
+    public static final String SAVE_USER_TYPE = "SAVE_USER_TYPE";
+    public static final String FIND_USER_TYPE_BY_ID = "FIND_USER_TYPE_BY_ID";
 
     // STATION
     public static final String FIND_ALL_STATIONS = "FIND_ALL_STATIONS";
@@ -30,6 +34,9 @@ public class SqlProperties {
     public static final String FIND_TRAIN_BY_ID = "FIND_TRAIN_BY_ID";
     public static final String FIND_TRAINS_BY_DATE_TIME_STATION = "FIND_TRAINS_BY_DATE_TIME_STATION";
     public static final String COUNT_TRAINS_BY_DATE_TIME_STATION = "COUNT_TRAINS_BY_DATE_TIME_STATION";
+    public static final String UPDATE_TRAIN_BY_ID = "UPDATE_TRAIN_BY_ID";
+    public static final String DELETE_TRAIN_BY_ID = "DELETE_TRAIN_BY_ID";
+    public static final String SAVE_TRAIN = "SAVE_TRAIN";
 
     // INVOICE
     public static final String SAVE_INVOICE = "SAVE_INVOICE";

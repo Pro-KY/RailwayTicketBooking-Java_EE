@@ -1,10 +1,8 @@
 package com.proky.booking.persistence.dao.mysql;
 
 import com.proky.booking.persistence.dao.ITrainDao;
-import com.proky.booking.persistence.dao.IUserDao;
 import com.proky.booking.persistence.entity.Station;
 import com.proky.booking.persistence.entity.Train;
-import com.proky.booking.persistence.entity.User;
 import com.proky.booking.persistence.jdbc.JdbcTemplate;
 import com.proky.booking.persistence.mapper.*;
 import com.proky.booking.util.properties.SqlProperties;
@@ -37,7 +35,7 @@ public class TrainDaoImpl implements ITrainDao {
 
     @Override
     public List<Train> findTrainsByDateAndTimeAndStation(Date departureDate, Time departureTime, Station station, long pageSize, long offSet) {
-        final String sqlQuery = SqlProperties.getQuery(FIND_TRAINS_BY_DATE_TIME_STATION);
+        final String sqlQuery = SqlProperties.getValue(FIND_TRAINS_BY_DATE_TIME_STATION);
         final TrainMapper trainMapper = new TrainMapper(true);
         trainMapper.mapRouteRelation(new RouteMapper(true));
         trainMapper.mapTrainTypeRelation(new TrainTypeMapper(true));
@@ -46,13 +44,13 @@ public class TrainDaoImpl implements ITrainDao {
     }
 
     public long countTrainsByDateAndTimeAndStation(Date departureDate, Time departureTime, Station station) {
-        final String sqlQuery = SqlProperties.getQuery(COUNT_TRAINS_BY_DATE_TIME_STATION);
+        final String sqlQuery = SqlProperties.getValue(COUNT_TRAINS_BY_DATE_TIME_STATION);
         return jdbcTemplate.countRows(sqlQuery, departureDate, departureTime, departureTime, station.getId());
     }
 
     @Override
     public Optional<Train> findTrainById(Long id) {
-        final String sqlQuery = SqlProperties.getQuery(FIND_TRAIN_BY_ID);
+        final String sqlQuery = SqlProperties.getValue(FIND_TRAIN_BY_ID);
         final TrainMapper trainMapper = new TrainMapper(true);
         trainMapper.mapRouteRelation(new RouteMapper(true));
         trainMapper.mapTrainTypeRelation(new TrainTypeMapper(true));

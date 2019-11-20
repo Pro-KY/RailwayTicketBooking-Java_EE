@@ -1,6 +1,6 @@
 package com.proky.booking.dto;
 
-import com.proky.booking.util.constans.Parameters;
+import com.proky.booking.util.constans.http.Parameters;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

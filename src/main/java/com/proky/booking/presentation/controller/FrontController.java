@@ -1,7 +1,7 @@
 package com.proky.booking.presentation.controller;
 import com.proky.booking.presentation.command.CommandFactory;
 import com.proky.booking.presentation.command.ICommand;
-import com.proky.booking.util.constans.Commands;
+import com.proky.booking.util.constans.http.Commands;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

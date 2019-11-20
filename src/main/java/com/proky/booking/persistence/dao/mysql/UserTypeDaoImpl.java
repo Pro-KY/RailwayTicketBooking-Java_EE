@@ -36,7 +36,7 @@ public class UserTypeDaoImpl implements IUserTypeDao {
 
     @Override
     public Optional<UserType> findByType(String type) {
-        final String sqlQuery = SqlProperties.getQuery(FIND_USER_TYPE_BY_TYPE);
+        final String sqlQuery = SqlProperties.getValue(FIND_USER_TYPE_BY_TYPE);
         final UserTypeMapper userMapper = new UserTypeMapper(false);
         return jdbcTemplate.findByQuery(sqlQuery, userMapper, type);
     }

@@ -31,7 +31,7 @@ public class RouteStationDaoImpl implements IRouteStationDao {
 
     @Override
     public List<RouteStation> findAllByRouteId(Long routeId) {
-        final String sqlQuery = SqlProperties.getQuery(FIND_ROUTE_STATION_BY_ROUTE_ID);
+        final String sqlQuery = SqlProperties.getValue(FIND_ROUTE_STATION_BY_ROUTE_ID);
 
         final RouteStationMapper routeStationMapper = new RouteStationMapper(true);
         routeStationMapper.mapStationRelation(new StationMapper(true));

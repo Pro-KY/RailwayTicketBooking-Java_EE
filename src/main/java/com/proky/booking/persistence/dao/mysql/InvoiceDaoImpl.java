@@ -1,19 +1,15 @@
 package com.proky.booking.persistence.dao.mysql;
 
 import com.proky.booking.persistence.dao.IInvoiceDao;
-import com.proky.booking.persistence.dao.ITrainDao;
 import com.proky.booking.persistence.entity.Invoice;
-import com.proky.booking.persistence.entity.Station;
-import com.proky.booking.persistence.entity.Train;
 import com.proky.booking.persistence.jdbc.JdbcTemplate;
-import com.proky.booking.persistence.mapper.*;
+import com.proky.booking.persistence.mapper.InvoiceMapper;
+import com.proky.booking.persistence.mapper.TrainMapper;
+import com.proky.booking.persistence.mapper.UserMapper;
 import com.proky.booking.util.properties.SqlProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.util.List;
 import java.util.Optional;
 
 import static com.proky.booking.util.properties.SqlProperties.*;
@@ -37,22 +33,31 @@ public class InvoiceDaoImpl implements IInvoiceDao {
     @Override
     public Long save(Invoice entity) {
         Object[] params = {entity.getUser().getId(), entity.getTrain().getId(), entity.getSeatsAmount(), entity.getPrice(), entity.getDateTime()};
-        final String query = SqlProperties.getQuery(SAVE_INVOICE);
+        final String query = SqlProperties.getValue(SAVE_INVOICE);
         return jdbcTemplate.saveOrUpdate(query, params);
     }
 
     @Override
     public Long update(Invoice entity) {
-        return null;
+        Object[] params = {entity.getUser().getId(), entity.getTrain().getId(), entity.getSeatsAmount(), entity.getPrice(), entity.getDateTime(), entity.getId()};
+
+        String sqlQuery = SqlProperties.getValue(UPDATE_INVOICE);
+        final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
+        return jdbcTemplate.saveOrUpdate(sqlQuery, params);
     }
 
     @Override
     public boolean delete(Invoice entity) {
-        return false;
+        final String sqlQuery = SqlProperties.getValue(DELETE_INVOICE);
+        return jdbcTemplate.delete(sqlQuery, entity.getId());
     }
 
     @Override
     public Optional<Invoice> findById(Long id) {
-        return Optional.empty();
+        final String sqlQuery = SqlProperties.getValue(FIND_INVOICE_BY_ID);
+        final InvoiceMapper invoiceMapper = new InvoiceMapper(true);
+        invoiceMapper.mapTrainRelation(new TrainMapper(true));
+        invoiceMapper.mapUserRelation(new UserMapper(true));
+        return jdbcTemplate.findByQuery(sqlQuery, invoiceMapper, id);
     }
 }

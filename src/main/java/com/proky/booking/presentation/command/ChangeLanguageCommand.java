@@ -1,8 +1,8 @@
 package com.proky.booking.presentation.command;
 
 import com.proky.booking.util.URLBuilder;
-import com.proky.booking.util.constans.Attributes;
-import com.proky.booking.util.constans.Parameters;
+import com.proky.booking.util.constans.http.Attributes;
+import com.proky.booking.util.constans.http.Parameters;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

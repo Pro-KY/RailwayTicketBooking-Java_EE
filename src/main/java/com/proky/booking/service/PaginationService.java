@@ -1,7 +1,7 @@
 package com.proky.booking.service;
 
 import com.proky.booking.dto.PageDto;
-import com.proky.booking.util.constans.Attributes;
+import com.proky.booking.util.constans.http.Attributes;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

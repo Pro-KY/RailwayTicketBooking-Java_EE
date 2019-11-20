@@ -23,16 +23,19 @@ public class SqlProperties {
     public static final String FIND_USER_BY_ID = "FIND_USER_BY_ID";
 
     public static final String SAVE_INVOICE = "SAVE_INVOICE";
+    public static final String UPDATE_INVOICE = "UPDATE_INVOICE";
+    public static final String DELETE_INVOICE = "DELETE_INVOICE";
+    public static final String FIND_INVOICE_BY_ID = "FIND_INVOICE_BY_ID";
 
     static {
         viewPathProperties = PropertyResourceBundle.getBundle(fileName);
     }
 
-    public static String getQuery(String propertyName) {
-        if (propertyName == null || propertyName.isEmpty()) {
+    public static String getValue(String key) {
+        if (key == null || key.isEmpty()) {
             throw new IllegalArgumentException(MessageProperties.NOT_VALID_PROPERTY);
         }
 
-       return viewPathProperties.getString(propertyName);
+       return viewPathProperties.getString(key);
     }
 }

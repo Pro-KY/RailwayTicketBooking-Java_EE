@@ -1,7 +1,7 @@
 package com.proky.booking.filter;
 
-import com.proky.booking.util.constans.Attributes;
-import com.proky.booking.util.constans.Parameters;
+import com.proky.booking.util.constans.http.Attributes;
+import com.proky.booking.util.constans.http.Parameters;
 import com.proky.booking.util.constans.UserTypeEnum;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.proky.booking.util.constans.Commands.*;
+import static com.proky.booking.util.constans.http.Commands.*;
 import static com.proky.booking.util.properties.ViewProperties.*;
 
 public class ServletSecurityFilter implements Filter {

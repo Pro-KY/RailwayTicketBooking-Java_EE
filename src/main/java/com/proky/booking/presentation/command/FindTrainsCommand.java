@@ -5,7 +5,7 @@ import com.proky.booking.service.PaginationService;
 import com.proky.booking.service.TrainService;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.util.URLBuilder;
-import com.proky.booking.util.constans.Attributes;
+import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static com.proky.booking.util.constans.Parameters.*;
+import static com.proky.booking.util.constans.http.Parameters.*;
 import static com.proky.booking.util.properties.ViewProperties.INDEX;
 
 public class FindTrainsCommand implements ICommand {

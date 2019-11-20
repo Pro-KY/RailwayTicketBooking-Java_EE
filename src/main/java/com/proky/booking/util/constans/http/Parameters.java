@@ -1,4 +1,4 @@
-package com.proky.booking.util.constans;
+package com.proky.booking.util.constans.http;
 
 public class Parameters {
     public static final String PASSWORD = "password";

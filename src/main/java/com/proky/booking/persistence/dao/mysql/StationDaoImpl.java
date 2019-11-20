@@ -11,25 +11,25 @@ import java.util.Optional;
 
 import static com.proky.booking.util.properties.SqlProperties.FIND_ALL_STATIONS;
 
-public class IStationDaoImpl implements IStationDao {
+public class StationDaoImpl implements IStationDao {
     private JdbcTemplate jdbcTemplate;
 
-    private static IStationDaoImpl mInstance;
+    private static StationDaoImpl mInstance;
 
-    private IStationDaoImpl() {
+    private StationDaoImpl() {
         this.jdbcTemplate = JdbcTemplate.getInstance();
     }
 
-    public static IStationDaoImpl getInstance() {
+    public static StationDaoImpl getInstance() {
         if (mInstance == null) {
-            mInstance = new IStationDaoImpl();
+            mInstance = new StationDaoImpl();
         }
         return mInstance;
     }
 
     @Override
     public List<Station> findAll() {
-        final String query = SqlProperties.getQuery(FIND_ALL_STATIONS);
+        final String query = SqlProperties.getValue(FIND_ALL_STATIONS);
         final StationMapper stationMapper = new StationMapper(false);
 
         return jdbcTemplate.findAll(query, stationMapper);

@@ -1,7 +1,7 @@
 package com.proky.booking.exception;
 
 import com.proky.booking.dto.ErrorData;
-import com.proky.booking.util.constans.Attributes;
+import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

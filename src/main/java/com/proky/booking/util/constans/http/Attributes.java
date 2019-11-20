@@ -1,4 +1,4 @@
-package com.proky.booking.util.constans;
+package com.proky.booking.util.constans.http;
 
 public class Attributes {
     public static final String CURRENT_PAGE = "currentPage";

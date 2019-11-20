@@ -1,17 +1,12 @@
 package com.proky.booking.util;
-import com.proky.booking.exception.GlobalExceptionHandler;
-import com.proky.booking.util.constans.Attributes;
-import com.proky.booking.util.properties.MessageProperties;
+import com.proky.booking.util.constans.http.Attributes;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.proky.booking.util.constans.Commands.REDIRECT;
-import static com.proky.booking.util.properties.MessageProperties.USER_CREATED;
+import static com.proky.booking.util.constans.http.Commands.REDIRECT;
 
 public class URLBuilder {
     private static final Logger log = LogManager.getLogger(URLBuilder.class);

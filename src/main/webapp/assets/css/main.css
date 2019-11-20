@@ -1,9 +1,11 @@
 #footer {
     background-color: #9fcdff;
+
 }
 
 #header {
     background-color: #9fcdff;
+    position: relative;
 }
 
 
@@ -19,10 +21,10 @@
     color: white;
 }
 
-/*.table-row{*/
-/*    cursor:pointer;*/
-/*}*/
-
-/*.table-row:hover {*/
-/*    background-color: #ebf1f7;*/
-/*}*/
+#logo {
+    width: 105px;
+    height: 60px;
+    top: 10%;
+    left: 1%;
+    position: absolute;
+}

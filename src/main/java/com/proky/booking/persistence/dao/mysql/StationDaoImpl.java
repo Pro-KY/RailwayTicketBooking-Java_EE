@@ -28,11 +28,9 @@ public class StationDaoImpl implements IStationDao {
         return mInstance;
     }
 
-    @Override
     public List<Station> findAll() {
         final String query = SqlProperties.getValue(FIND_ALL_STATIONS);
         final StationMapper stationMapper = new StationMapper(false);
-
         return jdbcTemplate.findAll(query, stationMapper);
     }
 

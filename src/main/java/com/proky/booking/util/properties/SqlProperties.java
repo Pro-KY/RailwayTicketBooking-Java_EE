@@ -39,6 +39,10 @@ public class SqlProperties {
 
     // ROUTE_STATION
     public static final String FIND_ROUTE_STATION_BY_ROUTE_ID = "FIND_ROUTE_STATION_BY_ROUTE_ID";
+    public static final String UPDATE_ROUTE_STATION_BY_ID = "UPDATE_ROUTE_STATION_BY_ID";
+    public static final String DELETE_ROUTE_STATION_BY_ID = "DELETE_ROUTE_STATION_BY_ID";
+    public static final String SAVE_ROUTE_STATION = "SAVE_ROUTE_STATION";
+    public static final String FIND_ROUTE_STATION_BY_ID = "FIND_ROUTE_STATION_BY_ID";
 
 
     static {

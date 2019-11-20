@@ -41,21 +41,30 @@ public class RouteStationDaoImpl implements IRouteStationDao {
 
     @Override
     public Long save(RouteStation entity) {
-        return null;
+        Object[] params = {entity.getRoute().getId(), entity.getStation().getId()};
+        final String query = SqlProperties.getValue(SAVE_ROUTE_STATION);
+        return jdbcTemplate.saveOrUpdate(query, params);
     }
 
     @Override
     public Long update(RouteStation entity) {
-        return null;
+        Object[] params = {entity.getRoute().getId(), entity.getStation().getId(), entity.getId()};
+        String sqlQuery = SqlProperties.getValue(UPDATE_ROUTE_STATION_BY_ID);
+        return jdbcTemplate.saveOrUpdate(sqlQuery, params);
     }
 
     @Override
     public boolean delete(RouteStation entity) {
-        return false;
+        final String sqlQuery = SqlProperties.getValue(DELETE_ROUTE_STATION_BY_ID);
+        return jdbcTemplate.delete(sqlQuery, entity.getId());
     }
 
     @Override
     public Optional<RouteStation> findById(Long id) {
-        return null;
+        final String sqlQuery = SqlProperties.getValue(FIND_ROUTE_STATION_BY_ID);
+        final RouteStationMapper routeStationMapper = new RouteStationMapper(true);
+        routeStationMapper.mapRouteRelation(new RouteMapper(true));
+        routeStationMapper.mapStationRelation(new StationMapper(true));
+        return jdbcTemplate.findByQuery(sqlQuery, routeStationMapper, id);
     }
 }

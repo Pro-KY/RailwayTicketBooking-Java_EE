@@ -40,9 +40,7 @@ public class InvoiceDaoImpl implements IInvoiceDao {
     @Override
     public Long update(Invoice entity) {
         Object[] params = {entity.getUser().getId(), entity.getTrain().getId(), entity.getSeatsAmount(), entity.getPrice(), entity.getDateTime(), entity.getId()};
-
         String sqlQuery = SqlProperties.getValue(UPDATE_INVOICE);
-        final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
         return jdbcTemplate.saveOrUpdate(sqlQuery, params);
     }
 

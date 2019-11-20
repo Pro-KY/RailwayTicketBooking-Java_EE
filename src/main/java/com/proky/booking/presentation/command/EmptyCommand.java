@@ -26,8 +26,6 @@ public class EmptyCommand implements ICommand {
 
         final HttpSession session = request.getSession();
         session.setAttribute("stations", allStations);
-//        session.setAttribute(Attributes.CURRENT_FRAGMENT, ViewProperties.getPath(FRAGMENT_MAIN));
-
         return Commands.REDIRECT + ViewProperties.getValue(INDEX);
     }
 }

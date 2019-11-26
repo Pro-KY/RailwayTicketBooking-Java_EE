@@ -28,7 +28,7 @@
                     </tr>
                     <tr class="table-row">
                         <td><fmt:message key="table.header.route" bundle="${rb}"/></td>
-                        <td>${model.routeName}</td>
+                        <td><fmt:message key="station.${model.departureStationId}" bundle="${rb}"/> - <fmt:message key="station.${model.arrivalStationId}" bundle="${rb}"/></td>
                     </tr>
                     <tr class="table-row">
                         <td><fmt:message key="table.header.train" bundle="${rb}"/></td>

@@ -11,7 +11,11 @@ public class InvoiceDto implements Serializable {
     private String userLastName;
     private Long trainId;
     private String trainType;
-    private String routeName;
+//    private String routeName;
+
+    private Long departureStationId;
+    private Long arrivalStationId;
+
     private Date routeDepartureDate;
     private Date routeArrivalDate;
     private Time routeDepartureTime;
@@ -20,6 +24,22 @@ public class InvoiceDto implements Serializable {
     private BigDecimal sum;
 
     public InvoiceDto() {}
+
+    public Long getDepartureStationId() {
+        return departureStationId;
+    }
+
+    public void setDepartureStationId(Long departureStationId) {
+        this.departureStationId = departureStationId;
+    }
+
+    public Long getArrivalStationId() {
+        return arrivalStationId;
+    }
+
+    public void setArrivalStationId(Long arrivalStationId) {
+        this.arrivalStationId = arrivalStationId;
+    }
 
     public String getUserFirstName() {
         return userFirstName;
@@ -53,13 +73,13 @@ public class InvoiceDto implements Serializable {
         this.trainType = trainType;
     }
 
-    public String getRouteName() {
-        return routeName;
-    }
-
-    public void setRouteName(String routeName) {
-        this.routeName = routeName;
-    }
+//    public String getRouteName() {
+//        return routeName;
+//    }
+//
+//    public void setRouteName(String routeName) {
+//        this.routeName = routeName;
+//    }
 
     public Date getRouteDepartureDate() {
         return routeDepartureDate;
@@ -125,7 +145,9 @@ public class InvoiceDto implements Serializable {
                 ", userLastName='" + userLastName + '\'' +
                 ", trainId=" + trainId +
                 ", trainType='" + trainType + '\'' +
-                ", routeName='" + routeName + '\'' +
+                ", departureStationId='" + departureStationId + '\'' +
+                ", arrivalStationId='" + arrivalStationId + '\'' +
+//                ", routeName='" + routeName + '\'' +
                 ", routeDepartureDate=" + routeDepartureDate +
                 ", routeArrivalDate=" + routeArrivalDate +
                 ", routeDepartureTime=" + routeDepartureTime +

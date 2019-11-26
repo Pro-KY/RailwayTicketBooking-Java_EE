@@ -73,7 +73,9 @@ public class TrainDaoImpl implements ITrainDao {
     public Optional<Train> findById(Long id) {
         final String sqlQuery = SqlProperties.getValue(FIND_TRAIN_BY_ID);
         final TrainMapper trainMapper = new TrainMapper(true);
-        trainMapper.mapRouteRelation(new RouteMapper(true));
+        final RouteMapper routeMapper = new RouteMapper(true);
+        routeMapper.mapDepartureArrivalStationRelations(new StationMapper(true));
+        trainMapper.mapRouteRelation(routeMapper);
         trainMapper.mapTrainTypeRelation(new TrainTypeMapper(true));
         return jdbcTemplate.findByQuery(sqlQuery, trainMapper, id);
     }

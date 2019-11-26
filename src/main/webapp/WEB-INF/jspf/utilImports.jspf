@@ -4,7 +4,6 @@
 <%@ page import="com.proky.booking.util.constans.http.Parameters" %>
 <%@ page import="com.proky.booking.util.constans.http.Attributes" %>
 
-<c:set var="user" value="${sessionScope.user}" scope="session"/>
 <c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : 'en'}" scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="i18n.messages" var = "rb" scope="session"/>

@@ -9,16 +9,17 @@ import com.proky.booking.persistence.dao.ITrainDao;
 import com.proky.booking.persistence.dao.factory.DaoFactory;
 import com.proky.booking.persistence.entity.Station;
 import com.proky.booking.persistence.entity.Train;
+import com.proky.booking.util.ModelMapperWrapper;
 import com.proky.booking.util.SqlDateTimeConverter;
 import com.proky.booking.util.properties.MessageProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class TrainService {
@@ -67,13 +68,13 @@ public class TrainService {
     public TrainDto findTrainById(Long id) {
         final ITrainDao trainDao = daoFactory.getTrainDao();
         final Train train = trainDao.findById(id).orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
-        final ModelMapper modelMapper = new ModelMapper();
+        final ModelMapper modelMapper = ModelMapperWrapper.getInstance().getModelMapper();
         return modelMapper.map(train, TrainDto.class);
     }
 
     private TrainDto mapTrainToDto(Train train) {
         final IRouteStationDao routeStationDao = daoFactory.getRouteStationDao();
-        final ModelMapper modelMapper = new ModelMapper();
+        final ModelMapper modelMapper = ModelMapperWrapper.getInstance().getModelMapper();
         final TrainDto trainDto = modelMapper.map(train, TrainDto.class);
 
         final List<StationDto> routeStations = routeStationDao

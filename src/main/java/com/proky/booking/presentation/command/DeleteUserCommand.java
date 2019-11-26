@@ -5,7 +5,7 @@ import com.proky.booking.dto.UserDto;
 import com.proky.booking.presentation.command.databinder.HttpRequestDataBinder;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.UserService;
-import com.proky.booking.util.URLBuilder;
+import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.properties.MessageProperties;
 import com.proky.booking.util.properties.ViewProperties;
@@ -33,7 +33,7 @@ public class DeleteUserCommand implements ICommand {
         userService.deleteUser(userId);
 
         final HttpSession session = request.getSession();
-        final URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.getValue(ADMIN_USERS));
+        final UrlBuilder urlBuilder = new UrlBuilder(true, ViewProperties.getValue(ADMIN_USERS));
         urlBuilder.setParameter(Attributes.ALERT_SUCCESS, true);
         urlBuilder.setParameter(Attributes.ALERT_MESSAGE, MessageProperties.getMessage(USER_DELETED));
 

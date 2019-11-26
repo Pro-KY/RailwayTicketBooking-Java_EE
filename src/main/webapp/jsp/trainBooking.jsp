@@ -55,7 +55,7 @@
                         <tbody>
                         <tr class="table-row">
                             <td>${train.trainId} ${train.trainType}</td>
-                            <td>${train.routeName}</td>
+                            <td><fmt:message key="station.${train.departureStationId}" bundle="${rb}"/> - <fmt:message key="station.${train.arrivalStationId}" bundle="${rb}"/></td>
                             <td>${train.routeDepartureDate} <br> ${train.routeArrivalDate}</td>
                             <td>${train.routeDepartureTime} <br> ${train.routeArrivalTime}</td>
                         </tr>

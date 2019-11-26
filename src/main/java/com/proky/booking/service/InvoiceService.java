@@ -8,6 +8,7 @@ import com.proky.booking.persistence.dao.factory.DaoFactory;
 import com.proky.booking.persistence.entity.Invoice;
 import com.proky.booking.persistence.entity.Train;
 import com.proky.booking.persistence.entity.User;
+import com.proky.booking.util.ModelMapperWrapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.*;
@@ -34,7 +35,7 @@ public class InvoiceService {
         final ServiceFactory serviceFactory = ServiceFactory.getInstance();
         final TrainDto trainDto = serviceFactory.getTrainService().findTrainById(trainId);
 
-        final ModelMapper modelMapper = new ModelMapper();
+        final ModelMapper modelMapper = ModelMapperWrapper.getInstance().getModelMapper();
         final InvoiceDto invoiceDto = modelMapper.map(trainDto, InvoiceDto.class);
 
         final BigDecimal seatsAmount = BigDecimal.valueOf(Long.parseLong(ticketBookingDto.getSeatsAmount()));

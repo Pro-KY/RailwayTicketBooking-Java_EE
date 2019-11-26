@@ -5,7 +5,7 @@ import com.proky.booking.presentation.command.databinder.HttpRequestDataBinder;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.SignUpService;
 import com.proky.booking.service.ValidationService;
-import com.proky.booking.util.URLBuilder;
+import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.properties.MessageProperties;
 import com.proky.booking.util.properties.ViewProperties;
@@ -29,8 +29,8 @@ public class SignUpCommand implements ICommand {
         final String signUpViewpath = ViewProperties.getValue(SIGN_UP);
         final String signInViewpath = ViewProperties.getValue(SIGN_IN);
 
-        session.setAttribute(Attributes.CURRENT_PAGE, signUpViewpath);
-        final URLBuilder urlBuilder = new URLBuilder(true, signUpViewpath);
+//        session.setAttribute(Attributes.CURRENT_PAGE, signUpViewpath);
+        final UrlBuilder urlBuilder = new UrlBuilder(true, signUpViewpath);
 
         log.info("user sign up");
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
@@ -46,7 +46,7 @@ public class SignUpCommand implements ICommand {
 
             urlBuilder.setAlertParameters(true, MessageProperties.getMessage(USER_CREATED));
             urlBuilder.setViewPath(signInViewpath);
-            session.setAttribute(Attributes.CURRENT_PAGE, signInViewpath);
+//            session.setAttribute(Attributes.CURRENT_PAGE, signInViewpath);
         } else {
             urlBuilder.setRedirect(false);
             request.setAttribute(Attributes.ALERT_ERROR, true);

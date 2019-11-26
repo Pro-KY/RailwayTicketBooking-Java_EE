@@ -23,6 +23,7 @@ $(document).ready(function($) {
     });
 });
 
-$('.example-popover').popover({
-    trigger: 'focus'
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
 });

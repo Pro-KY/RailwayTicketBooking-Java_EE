@@ -15,7 +15,7 @@
 
     <!--MAIN CONTENT-->
     <%--    row mr-1 ml-1--%>
-    <div class="container float-left ml-3">
+    <div class="container float-left ml-4 mt-5 pt-4">
         <%--PAGE_SIZE--%>
         <div id="elementsAmountSelect" class="row">
             <div class="col-md-10"></div>

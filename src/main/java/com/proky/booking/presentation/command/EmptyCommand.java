@@ -22,8 +22,8 @@ public class EmptyCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         log.debug("empty command called");
-        final ServiceFactory instance = ServiceFactory.getInstance();
-        final StationService stationService = instance.getStationService();
+        final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+        final StationService stationService = serviceFactory.getStationService();
         final List<Station> allStations = stationService.findAllStations();
 
         final HttpSession session = request.getSession();

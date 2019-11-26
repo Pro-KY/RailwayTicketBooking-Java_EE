@@ -8,30 +8,30 @@ import java.util.Map;
 
 import static com.proky.booking.util.constans.http.Commands.REDIRECT;
 
-public class URLBuilder {
-    private static final Logger log = LogManager.getLogger(URLBuilder.class);
+public class UrlBuilder {
+    private static final Logger log = LogManager.getLogger(UrlBuilder.class);
 
     private StringBuilder sb = new StringBuilder();
     private Map<String, Object> parameters = new HashMap<>();
     private String viewPath;
     private boolean redirect;
 
-    public URLBuilder(String viewPath) {
+    public UrlBuilder(String viewPath) {
         this.viewPath = viewPath;
     }
 
 
-    public URLBuilder(boolean redirect, String viewPath) {
+    public UrlBuilder(boolean redirect, String viewPath) {
         this.viewPath = viewPath;
         this.redirect = redirect;
     }
 
-    public URLBuilder(String viewPath, Map<String, Object> parameters) {
+    public UrlBuilder(String viewPath, Map<String, Object> parameters) {
         this.viewPath = viewPath;
         this.parameters = parameters;
     }
 
-    public URLBuilder(boolean redirect, String viewPath, Map<String, Object> parameters) {
+    public UrlBuilder(boolean redirect, String viewPath, Map<String, Object> parameters) {
         this.viewPath = viewPath;
         this.parameters = parameters;
         this.redirect = redirect;

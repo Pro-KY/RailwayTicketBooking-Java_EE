@@ -5,7 +5,7 @@ import com.proky.booking.dto.UserDto;
 import com.proky.booking.presentation.command.databinder.HttpRequestDataBinder;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.UserService;
-import com.proky.booking.util.URLBuilder;
+import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.properties.MessageProperties;
 import com.proky.booking.util.properties.ViewProperties;
@@ -26,7 +26,7 @@ public class UpdateUserCommand implements ICommand {
 
         final HttpSession session = request.getSession();
 
-        final URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.getValue(ADMIN_USERS));
+        final UrlBuilder urlBuilder = new UrlBuilder(true, ViewProperties.getValue(ADMIN_USERS));
 
         log.debug("update user data");
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();

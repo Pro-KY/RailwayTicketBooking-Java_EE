@@ -1,10 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/jspf/utilImports.jspf" %>
 
-<%--<c:set var="user" value="${sessionScope.user}" scope="session"/>--%>
-<%--<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : 'en'}" scope="session"/>--%>
-<%--<fmt:setLocale value="${language}"/>--%>
-<%--<fmt:setBundle basename="i18n.messages" var = "rb" scope="session"/>--%>
+<c:set var="user" value="${sessionScope.user}" scope="session"/>
 
 <c:set var="model" value="${sessionScope.model}" scope="session"/>
 <c:set var="findTrainCommand" value="${Commands.FIND_TRAIN}" scope="page"/>
@@ -123,7 +120,9 @@
                                 <fmt:message var ="station" key="station.${st.stationId}" bundle="${rb}" scope="page"/>
                                 <c:set var="stations" value="${stations += station} "/>
                             </c:forEach>
-                            <button type="button" class="btn btn-link example-popover" data-toggle="popover" title="${route}" data-content="${stations}">${train.routeName}</button>
+                            <button type="button" class="btn btn-link example-popover" data-trigger="hover" data-toggle="popover" title="${route}" data-content="${stations}">
+                                <fmt:message key="station.${train.departureStationId}" bundle="${rb}"/> - <fmt:message key="station.${train.arrivalStationId}" bundle="${rb}"/>
+                            </button>
                         </td>
                         <td>${train.routeDepartureDate} <br> ${train.routeArrivalDate}</td>
                         <td>${train.routeDepartureTime} <br> ${train.routeArrivalTime}</td>

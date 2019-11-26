@@ -4,7 +4,7 @@ import com.proky.booking.dto.PageDto;
 import com.proky.booking.service.PaginationService;
 import com.proky.booking.service.TrainService;
 import com.proky.booking.service.ServiceFactory;
-import com.proky.booking.util.URLBuilder;
+import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
@@ -21,7 +21,7 @@ public class FindTrainsCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        final URLBuilder urlBuilder = new URLBuilder(true, ViewProperties.getValue(INDEX));
+        final UrlBuilder urlBuilder = new UrlBuilder(true, ViewProperties.getValue(INDEX));
 
         final String stationId = request.getParameter(GOING_TO);
         final String dateUI = request.getParameter(DEPARTURE_DATE);

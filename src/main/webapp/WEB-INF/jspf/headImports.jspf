@@ -1,9 +1,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<link rel="stylesheet" href="<c:url value="/assets/css/bootstrap/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="${pageContext.request.contextPath}/assets/css/bootstrap/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="${pageContext.request.contextPath}/assets/css/main.css"/>">
-<link rel="stylesheet" href="<c:url value="/assets/fonts/fontawesome/css/font-awesome.min.css"/>"/>
+<link rel="stylesheet" href="<c:url value="${pageContext.request.contextPath}/assets/fonts/fontawesome/css/font-awesome.min.css"/>"/>
 
-<script src="<c:url value="/assets/jquery/jquery.js"/>"></script>
-<script src="<c:url value="/assets/js/bootstrap/popper.js"/>"></script>
-<script src="<c:url value="/assets/js/bootstrap/bootstrap.min.js"/>"></script>
+<script src="<c:url value="${pageContext.request.contextPath}/assets/jquery/jquery.js"/>"></script>
+<script src="<c:url value="${pageContext.request.contextPath}/assets/js/bootstrap/popper.js"/>"></script>
+<script src="<c:url value="${pageContext.request.contextPath}/assets/js/bootstrap/bootstrap.min.js"/>"></script>

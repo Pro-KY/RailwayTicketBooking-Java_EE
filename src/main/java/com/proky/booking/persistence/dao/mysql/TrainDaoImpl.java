@@ -37,7 +37,9 @@ public class TrainDaoImpl implements ITrainDao {
     public List<Train> findTrainsByDateAndTimeAndStation(Date departureDate, Time departureTime, Station station, long pageSize, long offSet) {
         final String sqlQuery = SqlProperties.getValue(FIND_TRAINS_BY_DATE_TIME_STATION);
         final TrainMapper trainMapper = new TrainMapper(true);
-        trainMapper.mapRouteRelation(new RouteMapper(true));
+        final RouteMapper routeMapper = new RouteMapper(true);
+        routeMapper.mapDepartureArrivalStationRelations(new StationMapper(true));
+        trainMapper.mapRouteRelation(routeMapper);
         trainMapper.mapTrainTypeRelation(new TrainTypeMapper(true));
         return jdbcTemplate.findAll(sqlQuery, trainMapper, departureDate, departureTime, departureTime, station.getId(), pageSize, offSet);
     }

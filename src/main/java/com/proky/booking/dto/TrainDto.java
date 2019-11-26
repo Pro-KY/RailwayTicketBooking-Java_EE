@@ -5,16 +5,19 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
-import java.util.Map;
 
 public class TrainDto implements Serializable {
     private Integer trainId;
     private String trainType;
-//    private String trainSeatPrice;
     private BigDecimal trainSeatPrice;
 
+//    private String departureStationName;
+//    private String arrivalStationName;
+
+    private Long departureStationId;
+    private Long arrivalStationId;
+
     private Long routeId;
-    private String routeName;
     private Date routeDepartureDate;
     private Date routeArrivalDate;
     private Time routeDepartureTime;
@@ -24,6 +27,23 @@ public class TrainDto implements Serializable {
     private List<StationDto> stations;
 
     public TrainDto() {}
+
+
+    public Long getDepartureStationId() {
+        return departureStationId;
+    }
+
+    public void setDepartureStationId(Long departureStationId) {
+        this.departureStationId = departureStationId;
+    }
+
+    public Long getArrivalStationId() {
+        return arrivalStationId;
+    }
+
+    public void setArrivalStationId(Long arrivalStationId) {
+        this.arrivalStationId = arrivalStationId;
+    }
 
     public List<StationDto> getStations() {
         return stations;
@@ -55,14 +75,6 @@ public class TrainDto implements Serializable {
 
     public void setRouteId(Long routeId) {
         this.routeId = routeId;
-    }
-
-    public String getRouteName() {
-        return routeName;
-    }
-
-    public void setRouteName(String routeName) {
-        this.routeName = routeName;
     }
 
     public Date getRouteDepartureDate() {
@@ -120,7 +132,8 @@ public class TrainDto implements Serializable {
                 "trainType='" + trainType + '\'' +
                 ", trainSeatPrice='" + trainSeatPrice + '\'' +
                 ", routeId=" + routeId +
-                ", routeName='" + routeName + '\'' +
+                ", departureStationName=" + departureStationId +
+                ", arrivalStationName=" + arrivalStationId +
                 ", departureDate='" + routeDepartureDate + '\'' +
                 ", arrivalDate='" + routeArrivalDate + '\'' +
                 ", departureTime='" + routeDepartureTime + '\'' +

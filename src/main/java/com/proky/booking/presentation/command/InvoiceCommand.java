@@ -6,7 +6,7 @@ import com.proky.booking.dto.UserDto;
 import com.proky.booking.presentation.command.databinder.HttpRequestDataBinder;
 import com.proky.booking.service.InvoiceService;
 import com.proky.booking.service.ServiceFactory;
-import com.proky.booking.util.URLBuilder;
+import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
@@ -51,7 +51,7 @@ public class InvoiceCommand implements ICommand {
 
         request.getSession().setAttribute(Attributes.MODEL, invoiceDto);
         final String viewPath = ViewProperties.getValue(INVOICE);
-        URLBuilder urlBuilder = new URLBuilder(true, viewPath);
+        UrlBuilder urlBuilder = new UrlBuilder(true, viewPath);
 
         return urlBuilder.buildURL();
     }

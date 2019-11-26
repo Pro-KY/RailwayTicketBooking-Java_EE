@@ -75,7 +75,6 @@ public class PaginationService {
         this.allRowsAmount = allRowsAmount;
     }
 
-
     public void calculateAllPagesAmount() {
         allPagesAmount = allRowsAmount / this.pageSize;
         log.info("exp: {}", allPagesAmount % this.pageSize);

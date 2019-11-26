@@ -1,8 +1,10 @@
 package com.proky.booking.presentation.command;
 
+import com.proky.booking.persistence.dao.factory.MysqlDaoFactory;
 import com.proky.booking.persistence.entity.Station;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.StationService;
+import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.constans.http.Commands;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
@@ -19,13 +21,13 @@ public class EmptyCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        log.info("empty command");
+        log.debug("empty command called");
         final ServiceFactory instance = ServiceFactory.getInstance();
         final StationService stationService = instance.getStationService();
         final List<Station> allStations = stationService.findAllStations();
 
         final HttpSession session = request.getSession();
-        session.setAttribute("stations", allStations);
+        session.setAttribute(Attributes.STATIONS, allStations);
         return Commands.REDIRECT + ViewProperties.getValue(INDEX);
     }
 }

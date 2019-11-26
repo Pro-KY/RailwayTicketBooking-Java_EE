@@ -5,16 +5,18 @@ import java.sql.Time;
 import java.util.Objects;
 
 public class Route extends Entity<Long> {
-    private String name;
+    private Station departureStation;
+    private Station arrivalStation;
     private Date departureDate;
     private Date arrivalDate;
     private Time departureTime;
     private Time arrivalTime;
     private Double routeLengthFactor;
 
-    public Route(Long id, String name, Date departureDate, Date arrivalDate, Time departureTime, Time arrivalTime, Double routeLengthFactor) {
+    public Route(Long id, Station departureStation, Station arrivalStation, Date departureDate, Date arrivalDate, Time departureTime, Time arrivalTime, Double routeLengthFactor) {
         super(id);
-        this.name = name;
+        this.departureStation = departureStation;
+        this.arrivalStation = arrivalStation;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
         this.departureTime = departureTime;
@@ -24,14 +26,6 @@ public class Route extends Entity<Long> {
 
     public Route(Long id) {
         super(id);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public java.sql.Date getDepartureDate() {
@@ -78,13 +72,29 @@ public class Route extends Entity<Long> {
         this.routeLengthFactor = routeLengthFactor;
     }
 
+    public Station getDepartureStation() {
+        return departureStation;
+    }
+
+    public void setDepartureStation(Station departureStation) {
+        this.departureStation = departureStation;
+    }
+
+    public Station getArrivalStation() {
+        return arrivalStation;
+    }
+
+    public void setArrivalStation(Station arrivalStation) {
+        this.arrivalStation = arrivalStation;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Route route = (Route) o;
-        return Objects.equals(this.getId(), route.getId()) &&
-                Objects.equals(name, route.name) &&
+        return Objects.equals(departureStation, route.departureStation) &&
+                Objects.equals(arrivalStation, route.arrivalStation) &&
                 Objects.equals(departureDate, route.departureDate) &&
                 Objects.equals(arrivalDate, route.arrivalDate) &&
                 Objects.equals(departureTime, route.departureTime) &&
@@ -94,6 +104,20 @@ public class Route extends Entity<Long> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getId(), name, departureDate, arrivalDate, departureTime, arrivalTime, routeLengthFactor);
+        return Objects.hash(departureStation, arrivalStation, departureDate, arrivalDate, departureTime, arrivalTime, routeLengthFactor);
+    }
+
+    @Override
+    public String toString() {
+        return "Route{" +
+                "departureStation=" + departureStation +
+                ", arrivalStation=" + arrivalStation +
+                ", departureDate=" + departureDate +
+                ", arrivalDate=" + arrivalDate +
+                ", departureTime=" + departureTime +
+                ", arrivalTime=" + arrivalTime +
+                ", routeLengthFactor=" + routeLengthFactor +
+                ", id=" + id +
+                '}';
     }
 }

@@ -13,7 +13,7 @@ public abstract class EntityMapper<T> {
         this.columnNames = columnNames;
     }
 
-    public void setColumnNameAliesAtIndex(String colName, int index) {
+    public void setColumnNameAliasAtIndex(String colName, int index) {
         columnNames[index] = colName;
     }
 

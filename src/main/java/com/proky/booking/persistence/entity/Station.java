@@ -34,4 +34,12 @@ public class Station extends Entity<Long> {
     public int hashCode() {
         return Objects.hash(this.getId(), name);
     }
+
+    @Override
+    public String toString() {
+        return "Station{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }

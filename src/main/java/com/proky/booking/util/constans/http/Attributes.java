@@ -29,4 +29,6 @@ public class Attributes {
     public static final String ERROR_EXCEPTION_NAME = "exceptionName";
     public static final String ERROR_EXCEPTION_MSG = "exceptionMessage";
 
+    public static final String STATIONS = "stations";
+
 }

@@ -44,4 +44,9 @@ public class MysqlDaoFactory implements DaoFactory {
     public IInvoiceDao getInvoiceDao() {
         return InvoiceDaoImpl.getInstance();
     }
+
+    @Override
+    public IRouteDao getRouteDao() {
+        return RouteDaoImpl.getInstance();
+    }
 }

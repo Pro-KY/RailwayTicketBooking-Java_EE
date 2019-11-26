@@ -49,8 +49,11 @@ public class TrainService {
         final long offSet = paginationService.getOffSet();
         final long pageSize = paginationService.getPageSize();
 
-        final List<TrainDto> foundTrains = trainDao.findTrainsByDateAndTimeAndStation(date, time, station, pageSize, offSet)
-                .stream().map(this::mapTrainToDto).collect(Collectors.toList());
+        final List<TrainDto> foundTrains = trainDao.
+                findTrainsByDateAndTimeAndStation(date, time, station, pageSize, offSet)
+                .stream()
+                .map(this::mapTrainToDto)
+                .collect(Collectors.toList());
 
 //        foundTrains.forEach(trainDto -> log.info((trainDto.toString())));
         pageDto.setPageList(foundTrains);
@@ -73,11 +76,13 @@ public class TrainService {
         final ModelMapper modelMapper = new ModelMapper();
         final TrainDto trainDto = modelMapper.map(train, TrainDto.class);
 
-        final List<StationDto> routeStations = routeStationDao.findAllByRouteId(trainDto.getRouteId())
-                .stream().map(routeStation -> modelMapper.map(routeStation, StationDto.class)).collect(Collectors.toList());
+        final List<StationDto> routeStations = routeStationDao
+                .findAllByRouteId(trainDto.getRouteId())
+                .stream()
+                .map(routeStation -> modelMapper.map(routeStation, StationDto.class))
+                .collect(Collectors.toList());
 
         trainDto.setStations(routeStations);
         return trainDto;
     }
-
 }

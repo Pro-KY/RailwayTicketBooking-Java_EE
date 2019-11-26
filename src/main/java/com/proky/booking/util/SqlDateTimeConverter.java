@@ -48,7 +48,6 @@ public class SqlDateTimeConverter {
         return time;
     }
 
-
 //    public Time convertToSqlTime(String timeUI) {
 //        String zeroSeconds = "00";
 //        final String timeUISubstring = timeUI.substring(0, timeUI.indexOf(" "));

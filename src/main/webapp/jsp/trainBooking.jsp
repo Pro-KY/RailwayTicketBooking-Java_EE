@@ -27,12 +27,12 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="inputFirstName"><fmt:message key="user.firstName" bundle="${rb}"/></label>
-                                <input type="text" class="form-control" id="inputFirstName" placeholder="${firstName}" name="${Parameters.USER_FIRST_NAME}">
+                                <input type="text" required class="form-control" id="inputFirstName" placeholder="${firstName}" name="${Parameters.USER_FIRST_NAME}">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="inputLastName"><fmt:message key="user.lastName" bundle="${rb}"/></label>
-                                <input type="text" class="form-control" id="inputLastName" placeholder="${lastName}" name="${Parameters.USER_LAST_NAME}">
+                                <input type="text" required class="form-control" id="inputLastName" placeholder="${lastName}" name="${Parameters.USER_LAST_NAME}">
                             </div>
                         </div>
                     </c:if>

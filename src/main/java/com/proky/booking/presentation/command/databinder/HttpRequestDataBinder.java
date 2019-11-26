@@ -1,4 +1,4 @@
-package com.proky.booking.util.command;
+package com.proky.booking.presentation.command.databinder;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,7 +21,6 @@ public class HttpRequestDataBinder {
         }
         return mInstance;
     }
-
 
     public <T> T bindToDto(HttpServletRequest request, Class<T> tClass) {
         return bindToEntity(request, tClass);

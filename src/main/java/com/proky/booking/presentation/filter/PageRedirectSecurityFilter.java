@@ -1,4 +1,4 @@
-package com.proky.booking.filter;
+package com.proky.booking.presentation.filter;
 
 import com.proky.booking.util.constans.UserTypeEnum;
 import com.proky.booking.util.properties.ViewProperties;

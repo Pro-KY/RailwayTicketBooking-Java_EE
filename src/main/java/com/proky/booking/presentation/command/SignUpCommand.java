@@ -1,11 +1,11 @@
 package com.proky.booking.presentation.command;
 
 import com.proky.booking.persistence.entity.User;
+import com.proky.booking.presentation.command.databinder.HttpRequestDataBinder;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.SignUpService;
 import com.proky.booking.service.ValidationService;
 import com.proky.booking.util.URLBuilder;
-import com.proky.booking.util.command.HttpRequestDataBinder;
 import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.properties.MessageProperties;
 import com.proky.booking.util.properties.ViewProperties;

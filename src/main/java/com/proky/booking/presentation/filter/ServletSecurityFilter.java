@@ -1,4 +1,4 @@
-package com.proky.booking.filter;
+package com.proky.booking.presentation.filter;
 
 import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.constans.http.Parameters;

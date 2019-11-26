@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/jspf/utilImports.jspf" %>
 
-<c:set var="user" value="${sessionScope.user}" scope="session"/>
-<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : 'en'}" scope="session"/>
-<fmt:setLocale value="${language}"/>
-<fmt:setBundle basename="i18n.messages" var = "rb" scope="session"/>
+<%--<c:set var="user" value="${sessionScope.user}" scope="session"/>--%>
+<%--<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : 'en'}" scope="session"/>--%>
+<%--<fmt:setLocale value="${language}"/>--%>
+<%--<fmt:setBundle basename="i18n.messages" var = "rb" scope="session"/>--%>
 
 <c:set var="model" value="${sessionScope.model}" scope="session"/>
 <c:set var="findTrainCommand" value="${Commands.FIND_TRAIN}" scope="page"/>

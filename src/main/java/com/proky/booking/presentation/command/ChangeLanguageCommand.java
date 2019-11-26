@@ -21,12 +21,8 @@ public class ChangeLanguageCommand implements ICommand {
         final HttpSession session = request.getSession();
         session.setAttribute(Attributes.LANGUAGE, chosenLanguage);
 
-        String uri = request.getRequestURI();
-        log.info("uri: {}", uri);
-        String referer = request.getHeader("referer");
-        log.info("referer: {}", referer);
-
-        return new URLBuilder(true, ViewProperties.getValue(INDEX)).buildURL();
+//        return new URLBuilder(true, ViewProperties.getValue(INDEX)).buildURL();
+        return new URLBuilder(true, request.getHeader("referer")).buildURL();
     }
 }
 

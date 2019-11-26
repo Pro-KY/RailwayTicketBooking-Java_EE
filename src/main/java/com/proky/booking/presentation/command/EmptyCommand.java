@@ -27,6 +27,7 @@ public class EmptyCommand implements ICommand {
         final List<Station> allStations = stationService.findAllStations();
 
         final HttpSession session = request.getSession();
+        session.removeAttribute(Attributes.MODEL);
         session.setAttribute(Attributes.STATIONS, allStations);
         return Commands.REDIRECT + ViewProperties.getValue(INDEX);
     }

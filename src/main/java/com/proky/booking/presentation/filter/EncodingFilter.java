@@ -1,4 +1,4 @@
-package com.proky.booking.filter;
+package com.proky.booking.presentation.filter;
 
 import javax.servlet.*;
 import java.io.IOException;

@@ -167,14 +167,14 @@
         <%--PAGINATION--%>
 
         <%--TESTING PAGINATION--%>
-        <div class="float-left">
-            <p>isLeftButtonDisabled : ${sessionScope.model.isLeftButtonDisabled}</p>
-            <p>isRightButtonDisabled : ${sessionScope.model.isRightButtonDisabled}</p>
-            <p>currentPageIndex ${sessionScope.model.currentPageIndex}</p>
-            <p>allPagesAmount ${sessionScope.model.allPagesAmount}</p>
-            <p>startPageIndex : ${sessionScope.model.startPageIndex}</p>
-            <p>endPageIndex : ${sessionScope.model.endPageIndex}</p>
-        </div>
+<%--        <div class="float-left">--%>
+<%--            <p>isLeftButtonDisabled : ${sessionScope.model.isLeftButtonDisabled}</p>--%>
+<%--            <p>isRightButtonDisabled : ${sessionScope.model.isRightButtonDisabled}</p>--%>
+<%--            <p>currentPageIndex ${sessionScope.model.currentPageIndex}</p>--%>
+<%--            <p>allPagesAmount ${sessionScope.model.allPagesAmount}</p>--%>
+<%--            <p>startPageIndex : ${sessionScope.model.startPageIndex}</p>--%>
+<%--            <p>endPageIndex : ${sessionScope.model.endPageIndex}</p>--%>
+<%--        </div>--%>
         <%--TESTING PAGINATION--%>
     </div>
     <!--MAIN CONTENT-->

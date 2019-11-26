@@ -11,8 +11,6 @@ public class InvoiceDto implements Serializable {
     private String userLastName;
     private Long trainId;
     private String trainType;
-//    private String routeName;
-
     private Long departureStationId;
     private Long arrivalStationId;
 
@@ -72,14 +70,6 @@ public class InvoiceDto implements Serializable {
     public void setTrainType(String trainType) {
         this.trainType = trainType;
     }
-
-//    public String getRouteName() {
-//        return routeName;
-//    }
-//
-//    public void setRouteName(String routeName) {
-//        this.routeName = routeName;
-//    }
 
     public Date getRouteDepartureDate() {
         return routeDepartureDate;

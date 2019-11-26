@@ -1,5 +1,6 @@
 package com.proky.booking.service;
 
+import com.proky.booking.annotation.Transactional;
 import com.proky.booking.dto.PageDto;
 import com.proky.booking.dto.StationDto;
 import com.proky.booking.dto.TrainDto;
@@ -30,7 +31,7 @@ public class TrainService {
         this.daoFactory = daoFactory;
     }
 
-    //TODO: add transactional
+    @Transactional(readOnly = true)
     public PageDto findTrains(final PageDto pageDto, String dateUI, String timeUI, String stationId) {
         final ITrainDao trainDao = daoFactory.getTrainDao();
 
@@ -40,12 +41,10 @@ public class TrainService {
         final Station station = new Station(Long.valueOf(stationId));
 
         final long foundTrainsAmount = trainDao.countTrainsByDateAndTimeAndStation(date, time, station);
-//        log.debug("foundTrainsAmount: {}", foundTrainsAmount);
 
         final PaginationService paginationService = new PaginationService(pageDto);
         paginationService.setAllRowsAmount(foundTrainsAmount);
         paginationService.calculatePagination();
-//        log.debug("after calculatePagination: {}", paginationService.getpageDto().toString());
 
         final long offSet = paginationService.getOffSet();
         final long pageSize = paginationService.getPageSize();
@@ -56,11 +55,9 @@ public class TrainService {
                 .map(this::mapTrainToDto)
                 .collect(Collectors.toList());
 
-//        foundTrains.forEach(trainDto -> log.info((trainDto.toString())));
         pageDto.setPageList(foundTrains);
         paginationService.updatePageDto();
 
-//        log.debug("pageDto: {}", pageDto.toString());
 
         return pageDto;
     }

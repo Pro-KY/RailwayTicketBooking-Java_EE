@@ -36,11 +36,7 @@ public class TrainDaoImpl implements ITrainDao {
     @Override
     public List<Train> findTrainsByDateAndTimeAndStation(Date departureDate, Time departureTime, Station station, long pageSize, long offSet) {
         final String sqlQuery = SqlProperties.getValue(FIND_TRAINS_BY_DATE_TIME_STATION);
-        final TrainMapper trainMapper = new TrainMapper(true);
-        final RouteMapper routeMapper = new RouteMapper(true);
-        routeMapper.mapDepartureArrivalStationRelations(new StationMapper(true));
-        trainMapper.mapRouteRelation(routeMapper);
-        trainMapper.mapTrainTypeRelation(new TrainTypeMapper(true));
+        final TrainMapper trainMapper = getCustomTrainMapper();
         return jdbcTemplate.findAll(sqlQuery, trainMapper, departureDate, departureTime, departureTime, station.getId(), pageSize, offSet);
     }
 
@@ -72,11 +68,16 @@ public class TrainDaoImpl implements ITrainDao {
     @Override
     public Optional<Train> findById(Long id) {
         final String sqlQuery = SqlProperties.getValue(FIND_TRAIN_BY_ID);
+        final TrainMapper trainMapper = getCustomTrainMapper();
+        return jdbcTemplate.findByQuery(sqlQuery, trainMapper, id);
+    }
+
+    private TrainMapper getCustomTrainMapper() {
         final TrainMapper trainMapper = new TrainMapper(true);
         final RouteMapper routeMapper = new RouteMapper(true);
         routeMapper.mapDepartureArrivalStationRelations(new StationMapper(true));
         trainMapper.mapRouteRelation(routeMapper);
         trainMapper.mapTrainTypeRelation(new TrainTypeMapper(true));
-        return jdbcTemplate.findByQuery(sqlQuery, trainMapper, id);
+        return trainMapper;
     }
 }

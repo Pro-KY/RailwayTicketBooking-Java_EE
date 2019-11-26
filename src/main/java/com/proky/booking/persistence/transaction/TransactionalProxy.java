@@ -30,6 +30,8 @@ public class TransactionalProxy {
 
     private MethodInterceptor getMethodInterceptorCallback() {
         return (obj, method, args, proxy) -> {
+            log.debug("method call in service via proxy");
+
             Object object;
 
             if(method.isAnnotationPresent(Transactional.class)) {
@@ -39,7 +41,6 @@ public class TransactionalProxy {
                 TransactionManager tm = MysqlTransactionManager.getInstance();
                 tm.startTransaction();
                 tm.setReadOnly(readOnly);
-                log.debug("run in proxytest.transaction start");
                 try {
                     object =  proxy.invokeSuper(obj, args);
                     tm.commit();
@@ -50,10 +51,8 @@ public class TransactionalProxy {
                     tm.setReadOnly(false);
                     tm.endTransaction();
                 }
-
-                log.debug("run in proxytest.transaction endTransaction");
             } else {
-                log.debug("just simple method call");
+                log.debug("simple method call in service");
                 object =  proxy.invokeSuper(obj, args);
             }
             return object;

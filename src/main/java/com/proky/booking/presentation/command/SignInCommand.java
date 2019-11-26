@@ -38,7 +38,6 @@ public class SignInCommand implements ICommand {
         log.debug("user signed in");
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
         final UserDto enteredUserData = requestDataBinder.bindToDto(request, UserDto.class);
-//        log.debug(enteredUserData);
 
         session.setAttribute(Attributes.CURRENT_PAGE, ViewProperties.getValue(SIGN_IN));
 

@@ -17,18 +17,14 @@ public class TrainBookingCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        log.info("TrainBookingCommand CALLED");
-        final String trainId = request.getParameter(Parameters.TRAIN_ID); // TODO: validate
+        final String trainId = request.getParameter(Parameters.TRAIN_ID); // TODO: validate data
 
         final ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
         final TrainService trainService = serviceFactory.getTrainService();
         final TrainDto trainDto = trainService.findTrainById(Long.parseLong(trainId));
 
-//        request.getSession().setAttribute(Attributes.CURRENT_FRAGMENT, ViewProperties.getPath(FRAGMENT_TICKET_BOOKING));
         request.setAttribute(Parameters.FOUND_TRAIN, trainDto);
-
-//        return new URLBuilder(true, ViewProperties.getPath(FRAGMENT_TICKET_BOOKING)).buildURL();
         return ViewProperties.getValue(TRAIN_BOOKING);
     }
 }

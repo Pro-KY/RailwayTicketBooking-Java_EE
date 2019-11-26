@@ -29,13 +29,11 @@ public class SignUpCommand implements ICommand {
         final String signUpViewpath = ViewProperties.getValue(SIGN_UP);
         final String signInViewpath = ViewProperties.getValue(SIGN_IN);
 
-//        session.setAttribute(Attributes.CURRENT_PAGE, signUpViewpath);
         final UrlBuilder urlBuilder = new UrlBuilder(true, signUpViewpath);
 
-        log.info("user sign up");
+        log.debug("user signed up");
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
         final User user = requestDataBinder.bindToEntity(request, User.class);
-        log.info(user);
 
         final ValidationService validationService = ValidationService.getInstance();
         final ValidationResult validation = validationService.validate(user);
@@ -46,7 +44,6 @@ public class SignUpCommand implements ICommand {
 
             urlBuilder.setAlertParameters(true, MessageProperties.getMessage(USER_CREATED));
             urlBuilder.setViewPath(signInViewpath);
-//            session.setAttribute(Attributes.CURRENT_PAGE, signInViewpath);
         } else {
             urlBuilder.setRedirect(false);
             request.setAttribute(Attributes.ALERT_ERROR, true);

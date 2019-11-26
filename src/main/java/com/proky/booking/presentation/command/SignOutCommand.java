@@ -28,12 +28,6 @@ public class SignOutCommand implements ICommand {
         final List<Station> allStations = stationService.findAllStations();
 
         request.getSession().setAttribute(Attributes.STATIONS, allStations);
-
-//        request.setAttribute(Attributes.STATIONS, allStations);
-//
-//        return ViewProperties.getValue(INDEX);
-
         return new UrlBuilder(true, ViewProperties.getValue(INDEX)).buildURL();
-//        return new URLBuilder(false, ViewProperties.getValue(INDEX)).buildURL();
     }
 }

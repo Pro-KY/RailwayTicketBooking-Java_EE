@@ -55,7 +55,6 @@ public class HttpRequestDataBinder {
 
             bindParametersToFields(fields, parameterMap, object);
 
-//            final Class<? super T> superclass = tClass.getSuperclass();
             final Field[] superClassFields = tClass.getSuperclass().getDeclaredFields();
             if (superClassFields.length > 0) {
                 log.debug("superClass fields length, {}", superClassFields.length);

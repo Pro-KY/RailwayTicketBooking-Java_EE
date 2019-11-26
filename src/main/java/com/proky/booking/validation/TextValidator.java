@@ -26,7 +26,7 @@ public class TextValidator extends Validator {
 
             if (notValid) {
                 validatedField = field.getName();
-                log.info("validatedField - {}", validatedField);
+                log.debug("validatedField - {}", validatedField);
                 errorMessage = "Text should not be empty and only consist of letters!";
             }
 

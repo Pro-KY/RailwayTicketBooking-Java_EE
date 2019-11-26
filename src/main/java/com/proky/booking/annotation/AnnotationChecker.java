@@ -20,6 +20,4 @@ public class AnnotationChecker {
 
         return isAnnotationPresent;
     }
-
-//    public Predicate<Annotation> p = annotation -> (annotation instanceof Transactional);
 }

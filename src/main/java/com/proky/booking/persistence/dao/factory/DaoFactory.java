@@ -11,5 +11,4 @@ public interface DaoFactory {
     IStationDao getStationDao();
     IInvoiceDao getInvoiceDao();
     IRouteDao getRouteDao();
-
 }

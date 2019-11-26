@@ -47,13 +47,4 @@ public class SqlDateTimeConverter {
         System.out.println(time);
         return time;
     }
-
-//    public Time convertToSqlTime(String timeUI) {
-//        String zeroSeconds = "00";
-//        final String timeUISubstring = timeUI.substring(0, timeUI.indexOf(" "));
-//        final Time time = Time.valueOf(timeUISubstring.concat(timeSeparator).concat(zeroSeconds));
-//        System.out.println(time);
-//        return time;
-//    }
-
 }

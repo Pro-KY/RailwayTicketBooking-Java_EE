@@ -25,9 +25,7 @@ public class DeleteUserCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
         final UserDto userDto = requestDataBinder.bindToDto(request, UserDto.class);
-        log.info(userDto.toString());
         final Long userId = Long.parseLong(userDto.getId());
-        log.info("userId: {}", userId);
 
         final UserService userService = ServiceFactory.getInstance().getUserService();
         userService.deleteUser(userId);

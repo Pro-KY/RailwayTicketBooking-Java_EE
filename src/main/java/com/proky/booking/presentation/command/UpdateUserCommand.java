@@ -28,28 +28,19 @@ public class UpdateUserCommand implements ICommand {
 
         final UrlBuilder urlBuilder = new UrlBuilder(true, ViewProperties.getValue(ADMIN_USERS));
 
-        log.debug("update user data");
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
         final UserDto user = requestDataBinder.bindToDto(request, UserDto.class);
-        log.debug("mapped form-user: {}", user);
 
         final UserService userService = ServiceFactory.getInstance().getUserService();
         userService.updateUser(user);
 
-
         urlBuilder.setParameter(Attributes.ALERT_SUCCESS, true);
         urlBuilder.setParameter(Attributes.ALERT_MESSAGE, MessageProperties.getMessage(USER_UPDATED));
-
-//        request.setAttribute(Attributes.ALERT_SUCCESS, true);
-//        request.setAttribute(Attributes.ALERT_MESSAGE, MessageProperties.getMessage(USER_UPDATED));
 
         PageDto pageDto = new PageDto();
         final PageDto allRegisteredUsers = userService.findAllRegisteredUsers(pageDto);
         session.setAttribute(Attributes.MODEL, allRegisteredUsers);
 
         return urlBuilder.buildURL();
-//        urlBuilder.setRedirect(false);
-
-//         return new URLBuilder(true, ViewProperties.getPath(ViewProperties.ADMIN_USERS)).buildURL();
     }
 }

@@ -101,6 +101,7 @@ public class UserService {
         userDao.update(user);
     }
 
+    @Transactional
     public boolean deleteUser(Long userId) {
         final User user = daoFactory.getUserDao().findById(userId).orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
         final IUserDao userDao = daoFactory.getUserDao();

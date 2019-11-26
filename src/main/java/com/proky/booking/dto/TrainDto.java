@@ -11,9 +11,6 @@ public class TrainDto implements Serializable {
     private String trainType;
     private BigDecimal trainSeatPrice;
 
-//    private String departureStationName;
-//    private String arrivalStationName;
-
     private Long departureStationId;
     private Long arrivalStationId;
 

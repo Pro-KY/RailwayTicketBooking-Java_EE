@@ -24,7 +24,7 @@ public class MysqlTransactionManager implements TransactionManager {
 
     @Override
     public void setReadOnly(boolean readOnly) {
-        log.info("set readOnly - {}", readOnly);
+        log.debug("set readOnly transaction mode: {}", readOnly);
         connectionWrapper.setReadOnly(readOnly);
     }
 
@@ -46,7 +46,6 @@ public class MysqlTransactionManager implements TransactionManager {
     public void endTransaction() {
         connectionWrapper.useInTransaction(false);
         connectionWrapper.close();
-        log.info("END OF TRANSACTION!");
     }
 
     @Override

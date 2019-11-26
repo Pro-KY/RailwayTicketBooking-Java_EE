@@ -55,7 +55,6 @@ public class InvoiceService {
                 invoiceDto.getSeatsAmount().intValue(),
                 invoiceDto.getSum(),
                 new Timestamp(System.currentTimeMillis()));
-        log.info("invoice, {}", invoice);
 
         final IInvoiceDao invoiceDao = daoFactory.getInvoiceDao();
         invoiceDao.save(invoice);

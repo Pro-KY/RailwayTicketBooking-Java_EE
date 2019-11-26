@@ -25,7 +25,6 @@ public class ServiceFactory {
 
 
     private ServiceFactory() {
-//        DaoFactory daoFactory = MysqlDaoFactory.getInstance();
         final SignUpService signUpService = new SignUpService(daoFactory);
         final SignInService signInService = new SignInService(daoFactory);
         final TrainService trainService = new TrainService(daoFactory);
@@ -56,7 +55,6 @@ public class ServiceFactory {
         T service;
 
         if (isPresent) {
-//            final MysqlDaoFactory daoFactory = MysqlDaoFactory.getInstance();
             TransactionalProxy tTransactionalProxy = new TransactionalProxy(daoFactory);
             service = aClass.cast(tTransactionalProxy.createProxy(aClass));
             log.info("create proxy");

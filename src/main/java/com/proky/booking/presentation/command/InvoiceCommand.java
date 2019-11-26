@@ -27,9 +27,8 @@ public class InvoiceCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         final HttpSession session = request.getSession();
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
+        //TODO:validate data
         final TicketBookingDto ticketBookingDto = requestDataBinder.bindToDto(request, TicketBookingDto.class);
-        //TODO:validate input data
-        log.info(ticketBookingDto);
 
         final ServiceFactory serviceFactory = ServiceFactory.getInstance();
         final InvoiceService invoiceService = serviceFactory.getInvoiceService();
@@ -47,7 +46,6 @@ public class InvoiceCommand implements ICommand {
         String lastName = isUserPresent ? userDto.getLastName() : ticketBookingDto.getLastName();
         invoiceDto.setUserFirstName(firstName);
         invoiceDto.setUserLastName(lastName);
-        log.info("invoiceDto {}", invoiceDto);
 
         request.getSession().setAttribute(Attributes.MODEL, invoiceDto);
         final String viewPath = ViewProperties.getValue(INVOICE);

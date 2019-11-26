@@ -1,5 +1,9 @@
 package com.proky.booking.persistence.database;
 
+import com.proky.booking.persistence.dao.mysql.UserTypeDaoImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -7,6 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class MysqlDataSource {
+    private static final Logger log = LogManager.getLogger(MysqlDataSource.class);
     private static MysqlDataSource instance;
     private DataSource dataSource;
 
@@ -18,7 +23,6 @@ public class MysqlDataSource {
     }
 
     private MysqlDataSource() {
-        System.out.println("MysqlDataSource private const is called");
         initDataSource();
     }
 
@@ -40,7 +44,7 @@ public class MysqlDataSource {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.err.println("Can't get DB connection: " + e.toString());
+            log.error("Can't get DB connection: {}" + e.toString());
         }
 
         return conn;

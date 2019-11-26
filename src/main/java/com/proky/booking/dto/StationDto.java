@@ -29,9 +29,4 @@ public class StationDto implements Serializable {
     public void setStationName(String stationName) {
         this.stationName = stationName;
     }
-
-//    @Override
-//    public String toString() {
-//       return stationName;
-//    }
 }

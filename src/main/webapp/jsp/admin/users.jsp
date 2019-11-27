@@ -34,35 +34,37 @@
         </div>
         <%--PAGE_SIZE--%>
 
-        <%--TABLE--%>
-        <div style="border: #0b2e13" class="row">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col"><fmt:message key="user.id" bundle="${rb}"/></th>
-                        <th scope="col"><fmt:message key="user.firstName" bundle="${rb}"/></th>
-                        <th scope="col"><fmt:message key="user.lastName" bundle="${rb}"/></th>
-                        <th scope="col"><fmt:message key="user.email" bundle="${rb}"/></th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <c:forEach var="user" items="${model.pageList}">
-                        <jsp:useBean id="user" type="com.proky.booking.dto.UserDto"/>
-                        <tr class="table-row clickable-row" data-href="/booking/?${Parameters.USER_ID}=${user.id}&command=${Commands.MANAGE_USER}">
-                            <td>${user.id}</td>
-                            <td>${user.firstName}</td>
-                            <td>${user.lastName}</td>
-                            <td>${user.email}</td>
+        <c:if test="${sessionScope.model != null and sessionScope.model.allPagesAmount > 0}">
+            <%--TABLE--%>
+            <div style="border: #0b2e13" class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"><fmt:message key="user.id" bundle="${rb}"/></th>
+                            <th scope="col"><fmt:message key="user.firstName" bundle="${rb}"/></th>
+                            <th scope="col"><fmt:message key="user.lastName" bundle="${rb}"/></th>
+                            <th scope="col"><fmt:message key="user.email" bundle="${rb}"/></th>
                         </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </div>
-        <%--TABLE--%>
+                    </thead>
+
+                    <tbody>
+                        <c:forEach var="user" items="${model.pageList}">
+                            <jsp:useBean id="user" type="com.proky.booking.dto.UserDto"/>
+                            <tr class="table-row clickable-row" data-href="/booking/?${Parameters.USER_ID}=${user.id}&command=${Commands.MANAGE_USER}">
+                                <td>${user.id}</td>
+                                <td>${user.firstName}</td>
+                                <td>${user.lastName}</td>
+                                <td>${user.email}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+            <%--TABLE--%>
+        </c:if>
 
         <%--PAGINATION--%>
-        <c:if test="${sessionScope.model.allPagesAmount > 1}">
+        <c:if test="${sessionScope.model != null and sessionScope.model.allPagesAmount > 1}">
         <div class="row mt-4">
             <div class="col-md-3"></div>
             <div class="col-md-6">

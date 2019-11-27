@@ -48,7 +48,7 @@
                         <div class="form-group">
                             <label for="dateInput"><fmt:message key="departure.date" bundle="${rb}"/></label>
                             <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                <input type="text" id="dateInput" class="form-control datetimepicker-input" data-target="#datetimepicker4" name="${Parameters.DEPARTURE_DATE}"/>
+                                <input type="text" id="dateInput" class="form-control datetimepicker-input" value="${param.departureDate}" data-target="#datetimepicker4" name="${Parameters.DEPARTURE_DATE}"/>
                                 <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
@@ -61,7 +61,7 @@
                         <div class="form-group">
                             <label for="timeInput"><fmt:message key="departure.time" bundle="${rb}"/></label>
                             <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
-                                <input type="text" id = "timeInput" class="form-control datetimepicker-input" data-target="#datetimepicker3" name="${Parameters.DEPARTURE_TIME}"/>
+                                <input type="text" id = "timeInput" value="${param.departureTime}" class="form-control datetimepicker-input" data-target="#datetimepicker3" name="${Parameters.DEPARTURE_TIME}"/>
                                 <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
                                 </div>
@@ -77,7 +77,7 @@
             </form>
         </div>
 
-        <c:if test="${sessionScope.model != null and sessionScope.model.pageList != null}">
+        <c:if test="${sessionScope.model != null and sessionScope.model.allPagesAmount > 0}">
             <%--PAGE_SIZE--%>
             <div id="elementsAmountSelect" class="row">
                 <div class="col-md-10"></div>
@@ -136,7 +136,7 @@
         </c:if>
 
         <%--PAGINATION--%>
-        <c:if test="${sessionScope.model.allPagesAmount > 1}">
+        <c:if test="${sessionScope.model != null and sessionScope.model.allPagesAmount > 1}">
     <%--            <%@include file="/WEB-INF/jspf/pagination.jspf" %>--%>
             <div class="row mt-4">
                 <div class="col-md-3"></div>

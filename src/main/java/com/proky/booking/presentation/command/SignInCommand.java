@@ -47,13 +47,11 @@ public class SignInCommand implements ICommand {
             final boolean isAdministrator = userService.isAdministrator(authenticatedUser);
             final UserDto userDto = userService.mapUserToDto(authenticatedUser);
             UserTypeEnum userTypeEnum = isAdministrator ? UserTypeEnum.ADMIN : UserTypeEnum.USER;
-            log.debug("mapped userDto {}", userDto);
 
             if (isAdministrator) {
                 PageDto pageDto = new PageDto();
                 final PageDto usersPerPage = userService.findAllRegisteredUsers(pageDto);
                 session.setAttribute(Attributes.MODEL, usersPerPage);
-                log.info(request.getContextPath());
                 urlBuilder.setViewPath(request.getContextPath() + ViewProperties.getValue(ADMIN_USERS));
             }
 

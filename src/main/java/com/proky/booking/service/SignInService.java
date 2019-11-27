@@ -22,16 +22,14 @@ public class SignInService {
         this.daoFactory = daoFactory;
     }
 
-    //tODO: refactor later
     public User signIn(UserDto enteredData) {
         final IUserDao userDao = daoFactory.getUserDao();
         final Optional<User> foundUser = userDao.findByEmail(enteredData.getEmail());
 
         return foundUser.filter(user -> {
             final String enteredPassword = enteredData.getPassword();
-//            final String encryptedPassword = PasswordEncryptor.getInstance().encrypt(enteredPassword);
-//            return encryptedPassword.equals(user.getPassword()); // true
-            return enteredPassword.equals(user.getPassword());
+            final String encryptedPassword = PasswordEncryptor.getInstance().encrypt(enteredPassword);
+            return encryptedPassword.equals(user.getPassword());
         }).orElseThrow(() -> new ServiceException(MessageProperties.getMessage(AUTHORIZATION_ERROR)));
     }
 }

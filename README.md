@@ -38,3 +38,6 @@ WHERE sql file PATH is: src/main/resources/sqlScripts/create_db.sql
 * after that copy booking.war from the target folder to the Tomcat/webapps directory
 * run Tomcat using bat file or via services
 * navigate to the application URL - http://localhost:8080/booking
+
+##### Main page UI
+![Main page UI](/misc/main_page.png)

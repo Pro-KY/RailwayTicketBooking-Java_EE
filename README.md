@@ -1,6 +1,6 @@
 # RailwayTicketBooking - Java EE
 ##### Description:
-* №22: Railway Ticket Booking*
+**№22: Railway Ticket Booking**  
 Passenger makes a request for a ticket with a specific time and date to the destination station.
 System searches for a suitable Train.   
 Passenger makes a choice of Train and receives a invoice for payment.
@@ -27,7 +27,7 @@ user:
 
 ##### Installation instructions:
 1.Click "Clone or download" button, Download ZIP and unzip archive
-or if you have installed "git", type git clone 'link' in a command line
+or if you have installed "git", type git clone 'link' in a command line  
 2.In MySQL command line type these commands:
  - set names 'utf8';
  - source 'sql file PATH'; (without brackets)

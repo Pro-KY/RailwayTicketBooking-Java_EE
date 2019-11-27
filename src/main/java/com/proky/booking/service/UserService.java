@@ -2,7 +2,6 @@ package com.proky.booking.service;
 
 import com.proky.booking.annotation.Transactional;
 import com.proky.booking.dto.PageDto;
-import com.proky.booking.dto.TrainDto;
 import com.proky.booking.dto.UserDto;
 import com.proky.booking.exception.ServiceException;
 import com.proky.booking.persistence.dao.IUserDao;
@@ -10,16 +9,13 @@ import com.proky.booking.persistence.dao.IUserTypeDao;
 import com.proky.booking.persistence.dao.factory.DaoFactory;
 import com.proky.booking.persistence.entity.User;
 import com.proky.booking.persistence.entity.UserType;
-import com.proky.booking.util.PasswordEncryptor;
 import com.proky.booking.util.constans.UserTypeEnum;
 import com.proky.booking.util.properties.MessageProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.internal.bytebuddy.dynamic.loading.ClassInjector;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class UserService {

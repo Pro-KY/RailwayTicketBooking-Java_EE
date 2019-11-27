@@ -22,7 +22,8 @@
             <div class="col-sm-6 col-md-4">
                 <div class="card border-info">
                     <div class="card-body">
-                        <form name="SignUpForm" method="POST" action ="${pageContext.request.contextPath}/booking/">
+<%--                        <form name="SignUpForm" method="POST" action ="${pageContext.request.contextPath}">--%>
+                        <form name="SignUpForm" method="POST" action ="${pageContext.request.contextPath}/">
                             <input type="hidden" name="command" value="${Commands.SIGN_UP}">
 
                             <div class="form-group">

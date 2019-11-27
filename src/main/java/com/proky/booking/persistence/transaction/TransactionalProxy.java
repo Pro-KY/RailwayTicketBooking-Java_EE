@@ -45,6 +45,7 @@ public class TransactionalProxy {
                     object =  proxy.invokeSuper(obj, args);
                     tm.commit();
                 } catch (Throwable throwable) {
+                    throwable.printStackTrace();
                     tm.rollback();
                     throw new TransactionException(MessageProperties.getMessage(TRANSACTION_ERROR), throwable.getCause());
                 } finally {

@@ -16,7 +16,6 @@ import com.proky.booking.util.properties.MessageProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -58,8 +57,7 @@ public class TrainService {
         pageDto.setPageList(foundTrains);
         paginationService.updatePageDto();
 
-
-        return pageDto;
+        return paginationService.getpageDto();
     }
 
     public TrainDto findTrainById(Long id) {

@@ -34,8 +34,8 @@ public class UpdateUserCommand implements ICommand {
         final UserService userService = ServiceFactory.getInstance().getUserService();
         userService.updateUser(user);
 
-        urlBuilder.setParameter(Attributes.ALERT_SUCCESS, true);
-        urlBuilder.setParameter(Attributes.ALERT_MESSAGE, MessageProperties.getMessage(USER_UPDATED));
+        urlBuilder.setAttribute(Attributes.ALERT_SUCCESS, true);
+        urlBuilder.setAttribute(Attributes.ALERT_MESSAGE, MessageProperties.getMessage(USER_UPDATED));
 
         PageDto pageDto = new PageDto();
         final PageDto allRegisteredUsers = userService.findAllRegisteredUsers(pageDto);

@@ -1,6 +1,5 @@
 package com.proky.booking.tag;
 
-import com.proky.booking.presentation.filter.PageRedirectSecurityFilter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

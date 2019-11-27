@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpSession;
+import java.util.Enumeration;
 
 public class PaginationService {
     private long pageSize;
@@ -90,7 +91,7 @@ public class PaginationService {
         } else if (allPagesAmount < DEFAULT_END_INDEX) {
             endVisibleIndex = allPagesAmount - 1;
         }
-        log.debug("endVisibleIndex after - {}", endVisibleIndex);
+        log.debug("endVisibleIndex after: {}", endVisibleIndex);
     }
 
     public void calculateOffset() { // 2
@@ -128,8 +129,8 @@ public class PaginationService {
         currentPageIndex += forward ? 1 : -1;
 
         log.debug("shift indexes");
-        log.debug("startVisibleIndex - {}", startVisibleIndex);
-        log.debug("endVisibleIndex - {}", endVisibleIndex);
+        log.debug("startVisibleIndex: {}", startVisibleIndex);
+        log.debug("endVisibleIndex: {}", endVisibleIndex);
     }
 
     public long getPageSize() {
@@ -143,6 +144,7 @@ public class PaginationService {
     public static PageDto getCurrentPageDto(HttpSession session) {
         PageDto currentPageDto = (PageDto) session.getAttribute(Attributes.MODEL);
         if (currentPageDto == null) {
+            log.info("currentPageDto is NULL");
             currentPageDto = new PageDto();
         }
         return currentPageDto;

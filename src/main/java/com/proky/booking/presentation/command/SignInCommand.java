@@ -39,8 +39,6 @@ public class SignInCommand implements ICommand {
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
         final UserDto enteredUserData = requestDataBinder.bindToDto(request, UserDto.class);
 
-        session.setAttribute(Attributes.CURRENT_PAGE, ViewProperties.getValue(SIGN_IN));
-
         final ValidationService validationService = ValidationService.getInstance();
         final ValidationResult validation = validationService.validate(enteredUserData, "email", "password");
 
@@ -55,7 +53,8 @@ public class SignInCommand implements ICommand {
                 PageDto pageDto = new PageDto();
                 final PageDto usersPerPage = userService.findAllRegisteredUsers(pageDto);
                 session.setAttribute(Attributes.MODEL, usersPerPage);
-                urlBuilder.setViewPath(ViewProperties.getValue(ADMIN_USERS));
+                log.info(request.getContextPath());
+                urlBuilder.setViewPath(request.getContextPath() + ViewProperties.getValue(ADMIN_USERS));
             }
 
             final ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -65,9 +64,8 @@ public class SignInCommand implements ICommand {
             session.setAttribute(Attributes.USER, userDto);
             session.setAttribute(Attributes.STATIONS, allStations);
         } else {
-            request.setAttribute(Attributes.ALERT_ERROR, true);
-            request.setAttribute(Attributes.ALERT_MESSAGE, MessageProperties.getMessage(AUTHORIZATION_ERROR));
-            urlBuilder.setRedirect(false);
+            urlBuilder.setViewPath(request.getHeader("referer"));
+            urlBuilder.setAlertParameters(false, MessageProperties.getMessage(AUTHORIZATION_ERROR));
         }
 
         return urlBuilder.buildURL();

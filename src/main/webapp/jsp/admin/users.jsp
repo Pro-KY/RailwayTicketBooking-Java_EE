@@ -71,17 +71,17 @@
                         <div class="container-fluid">
                             <div class="btn-group">
                                 <li class="${sessionScope.model.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                    <a class="page-link" href="${contextPath}/booking/?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${Commands.ALL_USERS}">Previous</a>
+                                    <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${Commands.ALL_USERS}">Previous</a>
                                 </li>
 
                                 <c:forEach begin="${sessionScope.model.startPageIndex}" end="${sessionScope.model.endPageIndex}" varStatus="counter">
                                     <li class="${(sessionScope.model.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
-                                        <a class="page-link" href="${contextPath}/booking/?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${Commands.ALL_USERS}"> ${counter.index+1} </a>
+                                        <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${Commands.ALL_USERS}"> ${counter.index+1} </a>
                                     </li>
                                 </c:forEach>
 
                                 <li class="${sessionScope.model.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                    <a class="page-link" href="${contextPath}/booking/?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${Commands.ALL_USERS}">Next</a>
+                                    <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${Commands.ALL_USERS}">Next</a>
                                 </li>
                             </div>
                         </div>

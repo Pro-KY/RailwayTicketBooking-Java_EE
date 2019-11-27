@@ -15,7 +15,7 @@
     <%@ include file="/WEB-INF/jspf/headImports.jspf" %>
     <script type="text/javascript" src="${contextPath}/assets/js/moment.js"></script>
     <script type="text/javascript" src="${contextPath}/assets/js/tempusdominus-bootstrap-4.min.js"></script>
-    <link rel="stylesheet" href="<c:url value="${contextPath}/assets/css/tempusdominus-bootstrap-4.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/tempusdominus-bootstrap-4.min.css"/>">
 </head>
 
 <body>
@@ -37,7 +37,7 @@
                             <label for="usertype"><fmt:message key="going.to" bundle="${rb}"/></label>
                             <select class="form-control" id="usertype" name="${Parameters.GOING_TO}">
                                 <c:forEach var="station" items="${sessionScope.stations}">
-                                    <option value="${station.id}" selected><fmt:message key="station.${station.id}" bundle="${rb}"/></option>
+                                    <option value="${station.id}" ${station.id == '1' ? 'selected' : ''}><fmt:message key="station.${station.id}" bundle="${rb}"/></option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -77,62 +77,63 @@
             </form>
         </div>
 
-        <%--            <c:if test="${not empty model and not empty model.pageList}">--%>
-        <%--PAGE_SIZE--%>
-        <div id="elementsAmountSelect" class="row">
-            <div class="col-md-10"></div>
-            <div class="col-md-2">
-                <div class="dropdown show">
-                    <a class="dropdown-toggle nav-link" href="#" id="pageSizeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <fmt:message key="sent.reports.page.size" bundle="${rb}"/>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="pageSizeDropdown">
-                        <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=3&command=${findTrainCommand}&${findTrainParameters}"/>"> 3 </a>
-                        <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=5&command=${findTrainCommand}&${findTrainParameters}"/>"> 5 </a>
-                        <a class="dropdown-item" href="<c:url value="/booking/?${Parameters.PAGE_SIZE}=10&command=${findTrainCommand}&${findTrainParameters}"/>">10</a>
+        <c:if test="${sessionScope.model != null and sessionScope.model.pageList != null}">
+            <%--PAGE_SIZE--%>
+            <div id="elementsAmountSelect" class="row">
+                <div class="col-md-10"></div>
+                <div class="col-md-2">
+                    <div class="dropdown show">
+                        <a class="dropdown-toggle nav-link" href="#" id="pageSizeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <fmt:message key="sent.reports.page.size" bundle="${rb}"/>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="pageSizeDropdown">
+                            <a class="dropdown-item" href="<c:url value="booking/?${Parameters.PAGE_SIZE}=3&command=${findTrainCommand}&${findTrainParameters}"/>"> 3 </a>
+                            <a class="dropdown-item" href="<c:url value="booking/?${Parameters.PAGE_SIZE}=5&command=${findTrainCommand}&${findTrainParameters}"/>"> 5 </a>
+                            <a class="dropdown-item" href="<c:url value="booking/?${Parameters.PAGE_SIZE}=10&command=${findTrainCommand}&${findTrainParameters}"/>">10</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <%--PAGE_SIZE--%>
+            <%--PAGE_SIZE--%>
 
-        <%--TABLE--%>
-        <div style="border: #0b2e13" class="row">
-            <%--<div style="border: #0b2e13" class="row">--%>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col"><fmt:message key="table.header.train" bundle="${rb}"/></th>
-                    <th scope="col"><fmt:message key="table.header.route" bundle="${rb}"/></th>
-                    <th scope="col"><fmt:message key="table.header.date" bundle="${rb}"/></th>
-                    <th scope="col"><fmt:message key="table.header.time" bundle="${rb}"/></th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <c:forEach var="train" items="${model.pageList}">
-                    <jsp:useBean id="train" type="com.proky.booking.dto.TrainDto"/>
-                    <tr class="table-row clickable-row" data-href="/booking/?${Parameters.TRAIN_ID}=${train.trainId}&command=${Commands.TRAIN_BOOKING}">
-                        <td>${train.trainId} ${train.trainType}</td>
-                        <td>
-                            <c:set var="stations" value="" />
-                            <c:forEach var="st" items="${train.stations}">
-                                <fmt:message var ="station" key="station.${st.stationId}" bundle="${rb}" scope="page"/>
-                                <c:set var="stations" value="${stations += station} "/>
-                            </c:forEach>
-                            <button type="button" class="btn btn-link example-popover" data-trigger="hover" data-toggle="popover" title="${route}" data-content="${stations}">
-                                <fmt:message key="station.${train.departureStationId}" bundle="${rb}"/> - <fmt:message key="station.${train.arrivalStationId}" bundle="${rb}"/>
-                            </button>
-                        </td>
-                        <td>${train.routeDepartureDate} <br> ${train.routeArrivalDate}</td>
-                        <td>${train.routeDepartureTime} <br> ${train.routeArrivalTime}</td>
+            <%--TABLE--%>
+            <div style="border: #0b2e13" class="row">
+                <%--<div style="border: #0b2e13" class="row">--%>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col"><fmt:message key="table.header.train" bundle="${rb}"/></th>
+                        <th scope="col"><fmt:message key="table.header.route" bundle="${rb}"/></th>
+                        <th scope="col"><fmt:message key="table.header.date" bundle="${rb}"/></th>
+                        <th scope="col"><fmt:message key="table.header.time" bundle="${rb}"/></th>
                     </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-            <%--</div>--%>
-        </div>
-        <%--TABLE--%>
+                    </thead>
+                    <tbody>
+
+                    <c:forEach var="train" items="${model.pageList}">
+                        <jsp:useBean id="train" type="com.proky.booking.dto.TrainDto"/>
+                        <tr class="table-row clickable-row" data-href="${contextPath}/booking/?${Parameters.TRAIN_ID}=${train.trainId}&command=${Commands.TRAIN_BOOKING}">
+                            <td>${train.trainId} ${train.trainType}</td>
+                            <td>
+                                <c:set var="stations" value="" />
+                                <c:forEach var="st" items="${train.stations}">
+                                    <fmt:message var ="station" key="station.${st.stationId}" bundle="${rb}" scope="page"/>
+                                    <c:set var="stations" value="${stations += station} "/>
+                                </c:forEach>
+                                <button type="button" class="btn btn-link example-popover" data-trigger="hover" data-toggle="popover" title="${route}" data-content="${stations}">
+                                    <fmt:message key="station.${train.departureStationId}" bundle="${rb}"/> - <fmt:message key="station.${train.arrivalStationId}" bundle="${rb}"/>
+                                </button>
+                            </td>
+                            <td>${train.routeDepartureDate} <br> ${train.routeArrivalDate}</td>
+                            <td>${train.routeDepartureTime} <br> ${train.routeArrivalTime}</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+                <%--</div>--%>
+            </div>
+            <%--TABLE--%>
+        </c:if>
 
         <%--PAGINATION--%>
         <c:if test="${sessionScope.model.allPagesAmount > 1}">
@@ -145,17 +146,17 @@
                             <div class="container-fluid">
                                 <div class="btn-group">
                                     <li class="${sessionScope.model.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                        <a class="page-link" href="booking/?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}"><fmt:message key="pagination.previous" bundle="${rb}"/></a>
+                                        <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}"><fmt:message key="pagination.previous" bundle="${rb}"/></a>
                                     </li>
 
                                     <c:forEach begin="${sessionScope.model.startPageIndex}" end="${sessionScope.model.endPageIndex}" varStatus="counter">
                                         <li class="${(sessionScope.model.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
-                                            <a class="page-link" href="booking/?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${findTrainCommand}&${findTrainParameters}"> ${counter.index+1} </a>
+                                            <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${findTrainCommand}&${findTrainParameters}"> ${counter.index+1} </a>
                                         </li>
                                     </c:forEach>
 
                                     <li class="${sessionScope.model.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                        <a class="page-link" href="booking/?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}"><fmt:message key="pagination.next" bundle="${rb}"/></a>
+                                        <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}"><fmt:message key="pagination.next" bundle="${rb}"/></a>
                                     </li>
                                 </div>
                             </div>

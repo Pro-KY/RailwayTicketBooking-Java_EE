@@ -10,6 +10,7 @@ public class Commands {
 
     public static final String TRAIN_BOOKING = "trainBooking";
     public static final String INVOICE = "invoice";
+    public static final String HOME = "home";
 
     // ADMIN COMMANDS
     public static final String MANAGE_USER = "manageUser";

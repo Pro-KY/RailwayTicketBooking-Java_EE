@@ -12,7 +12,7 @@
         <div class="jumbotron mt-4 pb-4 text-center">
             <h1 class="display-4 text-danger">Oops.. An error occured! </h1>
 
-            <p class="lead">Request from ${requestURI} is failed</p>
+            <p class="lead">Request from URI is failed: ${requestURI} </p>
             <p class="lead">Servlet name: ${servletName}</p>
             <p class="lead">Status code: ${statusCode}</p>
             <p class="lead">
@@ -26,7 +26,7 @@
                 </c:if>
             </p>
             <hr class="my-4">
-            <a class="btn btn-primary font-weight-bold" href="<c:url value="${pageContext.request.contextPath}/booking/"/>" role="button">
+            <a class="btn btn-primary font-weight-bold" href="<c:url value="${pageContext.request.contextPath}/"/>" role="button">
                 Home page
             </a>
         </div>

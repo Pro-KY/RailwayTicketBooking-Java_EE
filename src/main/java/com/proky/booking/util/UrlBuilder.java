@@ -12,7 +12,7 @@ public class UrlBuilder {
     private static final Logger log = LogManager.getLogger(UrlBuilder.class);
 
     private StringBuilder sb = new StringBuilder();
-    private Map<String, Object> parameters = new HashMap<>();
+    private Map<String, Object> attributes = new HashMap<>();
     private String viewPath;
     private boolean redirect;
 
@@ -26,14 +26,14 @@ public class UrlBuilder {
         this.redirect = redirect;
     }
 
-    public UrlBuilder(String viewPath, Map<String, Object> parameters) {
+    public UrlBuilder(String viewPath, Map<String, Object> attributes) {
         this.viewPath = viewPath;
-        this.parameters = parameters;
+        this.attributes = attributes;
     }
 
-    public UrlBuilder(boolean redirect, String viewPath, Map<String, Object> parameters) {
+    public UrlBuilder(boolean redirect, String viewPath, Map<String, Object> attributes) {
         this.viewPath = viewPath;
-        this.parameters = parameters;
+        this.attributes = attributes;
         this.redirect = redirect;
     }
 
@@ -45,14 +45,14 @@ public class UrlBuilder {
         this.redirect = redirect;
     }
 
-    public void setParameter(String name, Object value) {
-        parameters.put(name, value);
+    public void setAttribute(String name, Object value) {
+        attributes.put(name, value);
     }
 
     public void setAlertParameters(boolean alertSuccess, String alertMessage) {
         String alertType = alertSuccess ? Attributes.ALERT_SUCCESS : Attributes.ALERT_ERROR;
-        setParameter(alertType, true);
-        setParameter(Attributes.ALERT_MESSAGE, alertMessage);
+        setAttribute(alertType, true);
+        setAttribute(Attributes.ALERT_MESSAGE, alertMessage);
     }
 
     public String buildURL() {
@@ -62,11 +62,11 @@ public class UrlBuilder {
 
         sb.append(viewPath);
 
-        if (parameters.size() > 0) {
+        if (attributes.size() > 0) {
             sb.append("?");
 
             boolean isFirst = true;
-            for (Map.Entry<String, Object> entry : parameters.entrySet()) {
+            for (Map.Entry<String, Object> entry : attributes.entrySet()) {
                 String parameter = entry.getKey();
                 Object value = entry.getValue();
 

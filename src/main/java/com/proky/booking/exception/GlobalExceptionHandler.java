@@ -1,6 +1,7 @@
 package com.proky.booking.exception;
 
 import com.proky.booking.dto.ErrorData;
+import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
@@ -29,28 +30,25 @@ public class GlobalExceptionHandler extends HttpServlet {
     }
 
     private void handleError(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        log.debug("handle error data");
         ErrorData errorData = new ErrorData(request);
         final String exceptionMessage = errorData.getExceptionMessage();
 
-        String currentPage = (String)request.getSession().getAttribute(Attributes.CURRENT_PAGE);
+        String currentPage = request.getHeader("referer");
+        final UrlBuilder urlBuilder = new UrlBuilder(currentPage);
 
         if(exceptionMessage != null && exceptionMessage.startsWith(SERVICE_EXCEPTION.name)) {
-            log.debug("handle {}", SERVICE_EXCEPTION.name);
+            log.debug("handle service exception name");
             errorData.setExceptionMessage(exceptionMessage.replace(SERVICE_EXCEPTION.name, ""));
-
-            request.setAttribute(Attributes.ALERT_ERROR, true);
-            request.setAttribute(Attributes.ALERT_MESSAGE, errorData.getExceptionMessage());
-            request.getRequestDispatcher(currentPage).forward(request, response);
+            urlBuilder.setAlertParameters(false, errorData.getExceptionMessage());
+            response.sendRedirect(urlBuilder.buildURL());
         } else {
+            log.debug("handle runtime error");
             request.setAttribute(Attributes.ERROR_REQUEST_URI, errorData.getRequestURI());
             request.setAttribute(Attributes.ERROR_SERVLET_NAME, errorData.getServletName());
             request.setAttribute(Attributes.ERROR_STATUS_CODE, errorData.getStatusCode());
             request.setAttribute(Attributes.ERROR_EXCEPTION_NAME, errorData.getExceptionName());
             request.setAttribute(Attributes.ERROR_EXCEPTION_MSG, errorData.getExceptionMessage());
-            currentPage = ViewProperties.getValue(ERROR_RUNTIME);
+            request.getRequestDispatcher(ViewProperties.getValue(ERROR_RUNTIME)).forward(request,response);
         }
-
-        request.getRequestDispatcher(currentPage).forward(request, response);
     }
 }

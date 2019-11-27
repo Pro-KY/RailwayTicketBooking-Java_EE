@@ -1,6 +1,5 @@
 package com.proky.booking.presentation.command;
 
-import com.proky.booking.persistence.dao.factory.MysqlDaoFactory;
 import com.proky.booking.persistence.entity.Station;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.StationService;
@@ -14,24 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-import static com.proky.booking.util.properties.ViewProperties.*;
+import static com.proky.booking.util.properties.ViewProperties.INDEX;
 
-public class EmptyCommand implements ICommand {
-    private static final Logger log = LogManager.getLogger(EmptyCommand.class);
+public class HomeCommand implements ICommand {
+    private static final Logger log = LogManager.getLogger(HomeCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
-        log.debug("empty command called");
-
+        log.debug("home command called");
         final HttpSession session = request.getSession();
-
-        if (session.getAttribute(Attributes.STATIONS) == null) {
-            final ServiceFactory serviceFactory = ServiceFactory.getInstance();
-            final StationService stationService = serviceFactory.getStationService();
-            final List<Station> allStations = stationService.findAllStations();
-            session.setAttribute(Attributes.STATIONS, allStations);
-        }
-
+        session.removeAttribute(Attributes.MODEL);
         return Commands.REDIRECT + ViewProperties.getValue(INDEX);
     }
 }

@@ -1,8 +1,8 @@
 <div class="container-fluid p-0 fixed-top">
     <nav class="navbar navbar-expand-lg navbar-light" id="header">
         <div class="collapse navbar-collapse">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/booking/">
-                <img alt="LOGO" class="z-index: 1050 !default" id="logo" src="${contextPath}/assets/img/logo.png">
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/booking/?command=home">
+                <img alt="LOGO" class="z-index: 1050 !default" id="logo" src="${pageContext.request.contextPath}/assets/img/logo.png">
             </a>
         </div>
         <span class="navbar-text mr-3">
@@ -14,7 +14,7 @@
         </span>
 
         <c:if test="${sessionScope.user eq null}">
-            <a class="btn btn-link" href="<c:url value="${pageContext.request.contextPath}/jsp/signIn.jsp"/>" role="button">
+            <a class="btn btn-link" href="<c:url value="/jsp/signIn.jsp"/>" role="button">
                 <fmt:message key="header.authorize" bundle="${rb}"/>
             </a>
         </c:if>

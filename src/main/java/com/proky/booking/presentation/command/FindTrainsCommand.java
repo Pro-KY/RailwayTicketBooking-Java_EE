@@ -13,6 +13,8 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.util.Enumeration;
+
 import static com.proky.booking.util.constans.http.Parameters.*;
 import static com.proky.booking.util.properties.ViewProperties.INDEX;
 
@@ -33,12 +35,12 @@ public class FindTrainsCommand implements ICommand {
 
         final TrainService trainService = ServiceFactory.getInstance().getTrainService();
         final PageDto foundTrainsPerPage = trainService.findTrains(sessionPageDto, dateUI, timeUI, stationId);
-
         session.setAttribute(Attributes.MODEL, foundTrainsPerPage);
 
-        urlBuilder.setParameter(GOING_TO, stationId);
-        urlBuilder.setParameter(DEPARTURE_DATE, dateUI);
-        urlBuilder.setParameter(DEPARTURE_TIME, timeUI);
+
+        urlBuilder.setAttribute(GOING_TO, stationId);
+        urlBuilder.setAttribute(DEPARTURE_DATE, dateUI);
+        urlBuilder.setAttribute(DEPARTURE_TIME, timeUI);
 
         return urlBuilder.buildURL();
     }

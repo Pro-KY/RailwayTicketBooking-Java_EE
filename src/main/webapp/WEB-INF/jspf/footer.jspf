@@ -12,14 +12,14 @@
 
 <div class="container-fluid p-2 fixed-bottom" id="footer">
     <div class="row">
-        <div class="col-4 d-flex justify-content-start">
+        <div class="col-4 d-flex justify-content-start main_color">
             <mytag:company name="Railway Ticket Booking"/>
         </div>
         <div class="col-4"></div>
         <div class="col-4 d-flex justify-content-end">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle  main_color" href="#" id="navbardrop" data-toggle="dropdown">
                         <i class="fa fa-language" aria-hidden="true"></i>
                         ${language eq 'en' ? 'EN' : 'RU'}
                     </a>

@@ -19,7 +19,7 @@ public class CommandFactory {
         commandHashMap.put(Commands.SIGN_IN, new SignInCommand());
         commandHashMap.put(Commands.FIND_TRAIN, new FindTrainsCommand());
         commandHashMap.put(Commands.TRAIN_BOOKING, new TrainBookingCommand());
-        commandHashMap.put(Commands.CHANGE_LANGUAGE, new ChangeLanguageCommand());
+        commandHashMap.put(Commands.CHANGE_LANGUAGE, new LanguageCommand());
         commandHashMap.put(Commands.INVOICE, new InvoiceCommand());
         commandHashMap.put(Commands.MANAGE_USER, new ManageUserCommand());
         commandHashMap.put(Commands.UPDATE_USER, new UpdateUserCommand());

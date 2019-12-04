@@ -22,6 +22,10 @@ public class MessageProperties {
     public static final String USER_DELETED = "USER_DELETED";
     public static final String USER_CREATED = "USER_CREATED";
 
+    public static final String CANT_ACCESS_FIELD = "CANT_ACCESS_FIELD";
+    public static final String LENGTH_VALIDATION = "LENGTH_VALIDATION";
+    public static final String SIZE_VALIDATION = "SIZE_VALIDATION";
+
     static {
         messageProperties = PropertyResourceBundle.getBundle(fileName);
     }

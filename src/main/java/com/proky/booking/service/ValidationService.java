@@ -1,9 +1,10 @@
 package com.proky.booking.service;
 
-import com.proky.booking.annotation.Email;
-import com.proky.booking.annotation.NotNull;
-import com.proky.booking.annotation.Text;
+import com.proky.booking.validation.annotation.Email;
 import com.proky.booking.validation.*;
+import com.proky.booking.validation.annotation.Length;
+import com.proky.booking.validation.annotation.Size;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -72,12 +73,10 @@ public class ValidationService {
     private Validator getValidator(Annotation annotation) {
         Validator validator = null;
 
-        if (annotation instanceof NotNull) {
-            validator = new NullValidator();
-        } else if (annotation instanceof Number) {
-            validator = new NumberValidator();
-        } else if (annotation instanceof Text) {
-            validator = new TextValidator();
+        if (annotation instanceof Length) {
+            validator = new LengthValidator();
+        } else if (annotation instanceof Size) {
+            validator = new SizeValidator();
         } else if (annotation instanceof Email) {
             validator = new EmailValidator();
         }

@@ -1,6 +1,6 @@
 package com.proky.booking.service;
 
-import com.proky.booking.annotation.Transactional;
+import com.proky.booking.persistence.transaction.Transactional;
 import com.proky.booking.dto.PageDto;
 import com.proky.booking.dto.StationDto;
 import com.proky.booking.dto.TrainDto;

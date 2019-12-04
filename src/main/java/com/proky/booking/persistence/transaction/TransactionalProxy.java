@@ -1,6 +1,5 @@
 package com.proky.booking.persistence.transaction;
 
-import com.proky.booking.annotation.Transactional;
 import com.proky.booking.exception.TransactionException;
 import com.proky.booking.persistence.dao.factory.DaoFactory;
 import com.proky.booking.util.properties.MessageProperties;

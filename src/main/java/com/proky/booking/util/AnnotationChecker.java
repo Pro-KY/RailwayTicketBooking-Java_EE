@@ -1,4 +1,4 @@
-package com.proky.booking.annotation;
+package com.proky.booking.util;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

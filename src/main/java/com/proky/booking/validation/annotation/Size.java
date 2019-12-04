@@ -1,4 +1,4 @@
-package com.proky.booking.annotation;
+package com.proky.booking.validation.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Number {
-    String pattern() default "\\d{1,3}(\\.\\d{1,3})?";
+public @interface Size {
+    int min() default 1;
+    int max() default 10;
 }

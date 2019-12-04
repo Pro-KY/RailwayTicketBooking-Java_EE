@@ -1,7 +1,7 @@
 package com.proky.booking.service;
 
-import com.proky.booking.annotation.AnnotationChecker;
-import com.proky.booking.annotation.Transactional;
+import com.proky.booking.util.AnnotationChecker;
+import com.proky.booking.persistence.transaction.Transactional;
 import com.proky.booking.persistence.dao.factory.DaoFactory;
 import com.proky.booking.persistence.dao.factory.MysqlDaoFactory;
 import com.proky.booking.persistence.transaction.TransactionalProxy;

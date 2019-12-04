@@ -1,12 +1,20 @@
 package com.proky.booking.dto;
 
+import com.proky.booking.validation.annotation.Email;
+import com.proky.booking.validation.annotation.Length;
+
 import java.io.Serializable;
 
 public class UserDto implements Serializable {
    private String id;
    private String firstName;
    private String lastName;
+
+   @Email
+   @Length(min = 8, max = 20)
    private String email;
+
+   @Length(min = 8, max = 20)
    private String password;
    private String userTypeId;
 

@@ -1,6 +1,6 @@
 package com.proky.booking.service;
 
-import com.proky.booking.annotation.Transactional;
+import com.proky.booking.persistence.transaction.Transactional;
 import com.proky.booking.dto.PageDto;
 import com.proky.booking.dto.UserDto;
 import com.proky.booking.exception.ServiceException;
@@ -9,6 +9,7 @@ import com.proky.booking.persistence.dao.IUserTypeDao;
 import com.proky.booking.persistence.dao.factory.DaoFactory;
 import com.proky.booking.persistence.entity.User;
 import com.proky.booking.persistence.entity.UserType;
+import com.proky.booking.util.ModelMapperWrapper;
 import com.proky.booking.util.constans.UserTypeEnum;
 import com.proky.booking.util.properties.MessageProperties;
 import org.apache.logging.log4j.LogManager;
@@ -48,7 +49,7 @@ public class UserService {
         log.info("pageSize {}", pageSize);
         log.info("offSet {}", offSet);
 
-        final ModelMapper modelMapper = new ModelMapper();
+        final ModelMapper modelMapper = ModelMapperWrapper.getInstance().getModelMapper();
 
         final List<UserDto> allPassengers = userDao
                 .findAllByType(userType, pageSize, offSet)

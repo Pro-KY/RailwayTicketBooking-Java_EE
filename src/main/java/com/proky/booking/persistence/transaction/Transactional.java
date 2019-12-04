@@ -1,4 +1,4 @@
-package com.proky.booking.annotation;
+package com.proky.booking.persistence.transaction;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface Text {
-    String pattern() default "^[a-zA-Z ]*$";
+@Target(ElementType.METHOD)
+public @interface Transactional {
+    boolean readOnly() default false;
 }

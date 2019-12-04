@@ -37,13 +37,13 @@ public class SignInCommand implements ICommand {
 
         log.debug("user signed in");
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
-        final UserDto enteredUserData = requestDataBinder.bindToDto(request, UserDto.class);
+        final UserDto enteredUserCredentials = requestDataBinder.bindToDto(request, UserDto.class);
 
         final ValidationService validationService = ValidationService.getInstance();
-        final ValidationResult validation = validationService.validate(enteredUserData, "email", "password");
+        final ValidationResult validation = validationService.validate(enteredUserCredentials, "email", "password");
 
         if (validation.isSuccessfull()) {
-            final User authenticatedUser = signInService.signIn(enteredUserData);
+            final User authenticatedUser = signInService.signIn(enteredUserCredentials);
             final boolean isAdministrator = userService.isAdministrator(authenticatedUser);
             final UserDto userDto = userService.mapUserToDto(authenticatedUser);
             UserTypeEnum userTypeEnum = isAdministrator ? UserTypeEnum.ADMIN : UserTypeEnum.USER;

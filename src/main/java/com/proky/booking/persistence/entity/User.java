@@ -1,17 +1,11 @@
 package com.proky.booking.persistence.entity;
 
-import com.proky.booking.annotation.Email;
-import com.proky.booking.annotation.NotNull;
-import com.proky.booking.annotation.Text;
+import com.proky.booking.validation.annotation.Email;
 
 import java.util.Objects;
 
 public class User extends Entity<Long> {
-    @NotNull
-    @Text
     private String firstName;
-    @NotNull
-    @Text
     private String lastName;
     @Email
     private String email;

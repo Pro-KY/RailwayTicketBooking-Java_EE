@@ -1,7 +1,7 @@
 package com.proky.booking.validation;
 
 
-import com.proky.booking.annotation.Email;
+import com.proky.booking.validation.annotation.Email;
 
 import java.lang.reflect.Field;
 import java.util.regex.Pattern;

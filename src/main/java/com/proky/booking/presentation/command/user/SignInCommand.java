@@ -11,6 +11,7 @@ import com.proky.booking.service.*;
 import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.constans.UserTypeEnum;
+import com.proky.booking.util.constans.http.Commands;
 import com.proky.booking.util.properties.ViewProperties;
 import com.proky.booking.validation.ValidationResult;
 import org.apache.logging.log4j.LogManager;
@@ -49,18 +50,16 @@ public class SignInCommand implements ICommand {
             UserTypeEnum userTypeEnum = isAdministrator ? UserTypeEnum.ADMIN : UserTypeEnum.USER;
 
             if (isAdministrator) {
-                PageDto pageDto = new PageDto();
-                final PageDto usersPerPage = userService.findAllRegisteredUsers(pageDto);
-                session.setAttribute(Attributes.MODEL, usersPerPage);
-                urlBuilder.setViewPath(request.getContextPath() + ViewProperties.getValue(ADMIN_USERS));
+                urlBuilder.setAttribute(Attributes.COMMAND, Commands.ALL_USERS);
+            }  else {
+                final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+                final StationService stationService = serviceFactory.getStationService();
+                final List<Station> allStations = stationService.findAllStations();
+                session.setAttribute(Attributes.STATIONS, allStations);
             }
 
-            final ServiceFactory serviceFactory = ServiceFactory.getInstance();
-            final StationService stationService = serviceFactory.getStationService();
-            final List<Station> allStations = stationService.findAllStations();
             session.setAttribute(Attributes.USER_TYPE, userTypeEnum);
             session.setAttribute(Attributes.USER, userDto);
-            session.setAttribute(Attributes.STATIONS, allStations);
         } else {
             urlBuilder.setViewPath(CommandUtil.getReferer(request));
             CommandUtil.setValidationResultToSession(session, validation);

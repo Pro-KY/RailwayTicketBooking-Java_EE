@@ -29,7 +29,6 @@ public class TransactionalProxy {
 
     private MethodInterceptor getMethodInterceptorCallback() {
         return (obj, method, args, proxy) -> {
-            log.debug("method call in service via proxy");
 
             Object object;
 
@@ -52,7 +51,6 @@ public class TransactionalProxy {
                     tm.endTransaction();
                 }
             } else {
-                log.debug("simple method call in service");
                 object =  proxy.invokeSuper(obj, args);
             }
             return object;

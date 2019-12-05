@@ -13,7 +13,6 @@ public class AnnotationChecker {
         for (Method method : declaredMethods) {
             final Annotation[] declaredAnnotations = method.getDeclaredAnnotations();
             for (Annotation declaredAnnotation : declaredAnnotations) {
-                System.out.println(declaredAnnotation.toString());
                 isAnnotationPresent = predicate.test(declaredAnnotation);
             }
         }

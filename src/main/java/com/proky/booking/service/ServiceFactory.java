@@ -57,10 +57,8 @@ public class ServiceFactory {
         if (isPresent) {
             TransactionalProxy tTransactionalProxy = new TransactionalProxy(daoFactory);
             service = aClass.cast(tTransactionalProxy.createProxy(aClass));
-            log.info("create proxy");
         } else {
             service = instance;
-            log.info("create instance");
         }
         return service;
     }

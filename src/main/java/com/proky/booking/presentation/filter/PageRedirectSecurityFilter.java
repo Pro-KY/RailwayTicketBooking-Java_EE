@@ -1,5 +1,6 @@
 package com.proky.booking.presentation.filter;
 
+import com.proky.booking.presentation.command.CommandUtil;
 import com.proky.booking.util.constans.UserTypeEnum;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
@@ -47,7 +48,7 @@ public class PageRedirectSecurityFilter implements Filter {
         String adminPath = contextPath + "/jsp/admin";
 //        log.info("adminPath {}", adminPath);
 
-        UserTypeEnum userType = ServletSecurityFilter.getCurrentUserType(session);
+        UserTypeEnum userType = CommandUtil.getCurrentUserType(session);
 //        log.info("userType is {}", userType);
 
         final boolean isAdmin = userType.equals(UserTypeEnum.ADMIN);

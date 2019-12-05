@@ -1,5 +1,6 @@
 package com.proky.booking.presentation.command;
 
+import com.proky.booking.util.constans.UserTypeEnum;
 import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.validation.ValidationResult;
 
@@ -15,4 +16,16 @@ public class CommandUtil {
     public static void setValidationResultToSession(HttpSession session, ValidationResult validationResult) {
         session.setAttribute(Attributes.VALIDATION, validationResult);
     }
+
+    public static UserTypeEnum getCurrentUserType(HttpSession session) {
+        UserTypeEnum userType = UserTypeEnum.GUEST;
+        if (session != null) {
+            final Object userTypeAttribute = session.getAttribute(Attributes.USER_TYPE);
+            if (userTypeAttribute != null) {
+                userType = (UserTypeEnum) session.getAttribute(Attributes.USER_TYPE);
+            }
+        }
+        return userType;
+    }
+
 }

@@ -25,6 +25,7 @@ public class MessageProperties {
     public static final String CANT_ACCESS_FIELD = "CANT_ACCESS_FIELD";
     public static final String LENGTH_VALIDATION = "LENGTH_VALIDATION";
     public static final String SIZE_VALIDATION = "SIZE_VALIDATION";
+    public static final String EMAIL_VALIDATION = "EMAIL_VALIDATION";
 
     static {
         messageProperties = PropertyResourceBundle.getBundle(fileName);

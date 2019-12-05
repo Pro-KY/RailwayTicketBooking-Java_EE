@@ -2,8 +2,10 @@ package com.proky.booking.util.constans.http;
 
 public class Attributes {
     public static final String CURRENT_PAGE = "currentPage";
+    public static final String COMMAND = "command";
 
     public static final String VALIDATION = "validation";
+    public static final String ERROR = "error";
     public static final String IS_USER_AUTHORIZED = "isUserAuthorized";
     public static final String USER = "user";
     public static final String USER_TYPE = "userType";

@@ -11,10 +11,10 @@ public class UserDto implements Serializable {
    private String lastName;
 
    @Email
-   @Length(min = 8, max = 20)
+   @Length(min = 6, max = 30)
    private String email;
 
-   @Length(min = 8, max = 20)
+   @Length(min = 6, max = 30)
    private String password;
    private String userTypeId;
 

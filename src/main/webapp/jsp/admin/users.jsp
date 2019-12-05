@@ -8,6 +8,8 @@
     <%@ include file="/WEB-INF/jspf/headImports.jspf" %>
 </head>
 
+<c:set var="userName" value="${sessionScope.userName}" scope="session" />
+
 <body>
     <!-- HEADER -->
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
@@ -33,6 +35,8 @@
             </div>
         </div>
         <%--PAGE_SIZE--%>
+            <c:out value="${userName == null}" />
+            <c:out value="${userName}" />
 
         <c:if test="${sessionScope.model != null and sessionScope.model.allPagesAmount > 0}">
             <%--TABLE--%>
@@ -95,6 +99,8 @@
         <%--PAGINATION--%>
     </div>
     <!--MAIN CONTENT-->
+
+    <c:remove var="userName" scope="session" />
 
     <!-- FOOTER -->
     <%@ include file="/WEB-INF/jspf/footer.jspf" %>

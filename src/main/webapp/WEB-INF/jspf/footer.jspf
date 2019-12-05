@@ -1,10 +1,12 @@
 <c:set var="isAlertSuccess" value="${not empty param.alertSuccess and param.alertSuccess eq true}" scope="page"/>
 <c:set var="isAlertError" value="${not empty param.alertError and param.alertError eq true}" scope="page"/>
+<c:set var="validation" value="${sessionScope.validation}" scope="session" />
+
 <%@ taglib prefix="mytag" uri="/WEB-INF/company.tld" %>
 
 <div class="container-fluid mb-4 fixed-bottom">
     <!-- ALERT -->
-    <c:if test="${isAlertSuccess or isAlertError or (not empty param.validation)}">
+    <c:if test="${isAlertSuccess or isAlertError or (not empty sessionScope.validation)}">
         <%@ include file="/WEB-INF/jspf/alert.jspf"%>
     </c:if>
     <!-- ALERT -->
@@ -32,3 +34,6 @@
         </div>
     </div>
 </div>
+
+<c:remove var="validation" scope="session" />
+

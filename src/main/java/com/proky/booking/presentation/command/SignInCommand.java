@@ -9,7 +9,7 @@ import com.proky.booking.service.*;
 import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.constans.UserTypeEnum;
-import com.proky.booking.util.properties.MessageProperties;
+import com.proky.booking.util.constans.http.Commands;
 import com.proky.booking.util.properties.ViewProperties;
 import com.proky.booking.validation.ValidationResult;
 import org.apache.logging.log4j.LogManager;
@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
 
 import java.util.List;
 
-import static com.proky.booking.util.properties.MessageProperties.AUTHORIZATION_ERROR;
 import static com.proky.booking.util.properties.ViewProperties.*;
 
 
@@ -62,8 +61,9 @@ public class SignInCommand implements ICommand {
             session.setAttribute(Attributes.USER, userDto);
             session.setAttribute(Attributes.STATIONS, allStations);
         } else {
-            urlBuilder.setViewPath(request.getHeader("referer"));
-            urlBuilder.setAlertParameters(false, MessageProperties.getMessage(AUTHORIZATION_ERROR));
+            urlBuilder.setViewPath(CommandUtil.getReferer(request));
+            CommandUtil.setValidationResultToSession(session, validation);
+            urlBuilder.setAttribute(Attributes.ERROR, true);
         }
 
         return urlBuilder.buildURL();

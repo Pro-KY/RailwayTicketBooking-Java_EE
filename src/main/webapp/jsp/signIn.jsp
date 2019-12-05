@@ -23,6 +23,12 @@
                         <form name="signIn" method="POST" action ="${pageContext.request.contextPath}/booking/">
                             <input type="hidden" name="command" value="${Commands.SIGN_IN}">
 
+                            <c:if test="${param.error}">
+                                <div class="alert alert-danger" role="alert">
+                                    <fmt:message key="error.authorizatioin" bundle="${rb}"/>
+                                </div>
+                            </c:if>
+
                             <div class="form-group">
                                 <label class="ml-3" for="inputEmail">${email}</label>
                                 <input type="email" required class="form-control" id="inputEmail" placeholder="${email}" name="${Parameters.EMAIL}">

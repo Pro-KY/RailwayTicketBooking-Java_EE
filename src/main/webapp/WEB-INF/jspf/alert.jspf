@@ -1,13 +1,14 @@
+
 <div class="container-fluid mb-3 row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
-        <div class="alert ${isAlertSuccess ? "alert-success" : "alert-danger"} alert-dismissible fade show" type="alert">
+        <div class="alert ${isAlertSuccess ? "alert-success" : "alert-danger"} alert-dismissible fade show text-center" type="alert">
             <c:if test="${not empty param.alertMessage}">
                 ${param.alertMessage}
             </c:if>
-            <c:if test="${not empty param.validation}">
-                <c:forEach items="${param.validation.errorMessages}" var="message">
-                    ${message.key} - ${message.value}
+            <c:if test="${not empty validation}">
+                <c:forEach items="${validation.errorMessages}" var="message">
+                    ${message.key} - ${message.value} <br>
                 </c:forEach>
             </c:if>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -17,3 +18,4 @@
     </div>
     <div class="col-md-3"></div>
 </div>
+

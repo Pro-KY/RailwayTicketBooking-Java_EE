@@ -1,8 +1,9 @@
-package com.proky.booking.presentation.command;
+package com.proky.booking.presentation.command.admin;
 
 import com.proky.booking.dto.PageDto;
 import com.proky.booking.dto.UserDto;
-import com.proky.booking.presentation.command.databinder.HttpRequestDataBinder;
+import com.proky.booking.util.HttpRequestDataBinder;
+import com.proky.booking.presentation.command.ICommand;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.UserService;
 import com.proky.booking.util.UrlBuilder;
@@ -15,27 +16,25 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static com.proky.booking.util.properties.MessageProperties.USER_UPDATED;
+import static com.proky.booking.util.properties.MessageProperties.USER_DELETED;
 import static com.proky.booking.util.properties.ViewProperties.ADMIN_USERS;
 
-public class UpdateUserCommand implements ICommand {
-    private static final Logger log = LogManager.getLogger(UpdateUserCommand.class);
+public class DeleteUserCommand implements ICommand {
+    private static final Logger log = LogManager.getLogger(DeleteUserCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
-
-        final HttpSession session = request.getSession();
-
-        final UrlBuilder urlBuilder = new UrlBuilder(true, ViewProperties.getValue(ADMIN_USERS));
-
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
-        final UserDto user = requestDataBinder.bindToDto(request, UserDto.class);
+        final UserDto userDto = requestDataBinder.bindToDto(request, UserDto.class);
+        final Long userId = Long.parseLong(userDto.getId());
 
         final UserService userService = ServiceFactory.getInstance().getUserService();
-        userService.updateUser(user);
+        userService.deleteUser(userId);
 
+        final HttpSession session = request.getSession();
+        final UrlBuilder urlBuilder = new UrlBuilder(true, ViewProperties.getValue(ADMIN_USERS));
         urlBuilder.setAttribute(Attributes.ALERT_SUCCESS, true);
-        urlBuilder.setAttribute(Attributes.ALERT_MESSAGE, MessageProperties.getMessage(USER_UPDATED));
+        urlBuilder.setAttribute(Attributes.ALERT_MESSAGE, MessageProperties.getMessage(USER_DELETED));
 
         PageDto pageDto = new PageDto();
         final PageDto allRegisteredUsers = userService.findAllRegisteredUsers(pageDto);

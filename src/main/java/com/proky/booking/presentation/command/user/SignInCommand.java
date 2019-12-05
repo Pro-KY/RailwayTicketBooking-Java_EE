@@ -1,15 +1,16 @@
-package com.proky.booking.presentation.command;
+package com.proky.booking.presentation.command.user;
 
 import com.proky.booking.dto.PageDto;
 import com.proky.booking.dto.UserDto;
 import com.proky.booking.persistence.entity.Station;
 import com.proky.booking.persistence.entity.User;
-import com.proky.booking.presentation.command.databinder.HttpRequestDataBinder;
+import com.proky.booking.presentation.command.CommandUtil;
+import com.proky.booking.util.HttpRequestDataBinder;
+import com.proky.booking.presentation.command.ICommand;
 import com.proky.booking.service.*;
 import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.constans.UserTypeEnum;
-import com.proky.booking.util.constans.http.Commands;
 import com.proky.booking.util.properties.ViewProperties;
 import com.proky.booking.validation.ValidationResult;
 import org.apache.logging.log4j.LogManager;

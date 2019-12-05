@@ -1,6 +1,7 @@
-package com.proky.booking.presentation.command;
+package com.proky.booking.presentation.command.admin;
 
 import com.proky.booking.dto.PageDto;
+import com.proky.booking.presentation.command.ICommand;
 import com.proky.booking.service.PaginationService;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.UserService;
@@ -8,7 +9,6 @@ import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.w3c.dom.Attr;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

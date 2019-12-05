@@ -1,7 +1,8 @@
-package com.proky.booking.presentation.command;
+package com.proky.booking.presentation.command.admin;
 
 import com.proky.booking.dto.UserDto;
 import com.proky.booking.persistence.entity.User;
+import com.proky.booking.presentation.command.ICommand;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.UserService;
 import com.proky.booking.util.constans.http.Attributes;
@@ -11,7 +12,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 public class ManageUserCommand implements ICommand {

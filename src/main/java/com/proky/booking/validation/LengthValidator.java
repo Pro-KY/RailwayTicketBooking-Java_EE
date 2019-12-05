@@ -1,7 +1,6 @@
 package com.proky.booking.validation;
 
 
-import com.proky.booking.presentation.command.SignInCommand;
 import com.proky.booking.util.properties.MessageProperties;
 import com.proky.booking.validation.annotation.Length;
 import org.apache.logging.log4j.LogManager;

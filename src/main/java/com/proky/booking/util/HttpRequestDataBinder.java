@@ -1,4 +1,4 @@
-package com.proky.booking.presentation.command.databinder;
+package com.proky.booking.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

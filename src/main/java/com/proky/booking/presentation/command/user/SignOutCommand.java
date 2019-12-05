@@ -1,6 +1,7 @@
-package com.proky.booking.presentation.command;
+package com.proky.booking.presentation.command.user;
 
 import com.proky.booking.persistence.entity.Station;
+import com.proky.booking.presentation.command.ICommand;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.StationService;
 import com.proky.booking.util.UrlBuilder;

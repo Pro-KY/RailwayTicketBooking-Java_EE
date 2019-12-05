@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-class CommandUtil {
-    static String getReferer(HttpServletRequest request) {
+public class CommandUtil {
+    public static String getReferer(HttpServletRequest request) {
         return request.getHeader("referer");
     }
 
-    static void setValidationResultToSession(HttpSession session, ValidationResult validationResult) {
+    public static void setValidationResultToSession(HttpSession session, ValidationResult validationResult) {
         session.setAttribute(Attributes.VALIDATION, validationResult);
     }
 }

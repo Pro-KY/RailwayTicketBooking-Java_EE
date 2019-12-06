@@ -27,7 +27,7 @@ public class AllUsersCommand implements ICommand {
 
         final UserService userService = ServiceFactory.getInstance().getUserService();
         final PageDto foundUsersPerPage = userService.findAllRegisteredUsers(sessionPageDto);
-        session.setAttribute(Attributes.MODEL, foundUsersPerPage);
+        session.setAttribute(Attributes.USERS_PAGE_DTO, foundUsersPerPage);
 
         return ViewProperties.getValue(ADMIN_USERS);
     }

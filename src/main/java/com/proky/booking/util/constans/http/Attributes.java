@@ -14,8 +14,9 @@ public class Attributes {
     public static final String ALERT_SUCCESS = "alertSuccess";
     public static final String ALERT_MESSAGE = "alertMessage";
 
-    public static final String PAGE_DTO = "pageDto";
-    public static final String ERROR_DATA = "errorData";
+    public static final String TRAINS_PAGE_DTO = "trainsPageDto";
+    public static final String USERS_PAGE_DTO = "usersPageDto";
+    public static final String INVOICE_DTO = "invoiceDto";
 
     public static final String GOING_TO = "goingTo";
     public static final String DEPARTURE_DATE = "departureDate";

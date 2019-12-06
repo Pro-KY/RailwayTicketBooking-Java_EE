@@ -5,7 +5,7 @@
 <fmt:message var ="time" key="invoice.time" bundle="${rb}"/>
 <fmt:message var ="departure" key="invoice.departure" bundle="${rb}"/>
 <fmt:message var ="arrival" key="invoice.arrival" bundle="${rb}"/>
-<c:set var="model" value="${sessionScope.model}" scope="page"/>
+<c:set var="invoiceDto" value="${sessionScope.invoiceDto}" scope="session"/>
 
 <html>
 <head>
@@ -24,31 +24,31 @@
                 <table class="table">
                     <tr class="table-row">
                         <td><fmt:message key="user.firstName" bundle="${rb}"/> <fmt:message key="user.lastName" bundle="${rb}"/></td>
-                        <td>${model.userFirstName} ${model.userLastName}</td>
+                        <td>${invoiceDto.userFirstName} ${invoiceDto.userLastName}</td>
                     </tr>
                     <tr class="table-row">
                         <td><fmt:message key="table.header.route" bundle="${rb}"/></td>
-                        <td><fmt:message key="station.${model.departureStationId}" bundle="${rb}"/> - <fmt:message key="station.${model.arrivalStationId}" bundle="${rb}"/></td>
+                        <td><fmt:message key="station.${invoiceDto.departureStationId}" bundle="${rb}"/> - <fmt:message key="station.${invoiceDto.arrivalStationId}" bundle="${rb}"/></td>
                     </tr>
                     <tr class="table-row">
                         <td><fmt:message key="table.header.train" bundle="${rb}"/></td>
-                        <td>${model.trainId} ${model.trainType}</td>
+                        <td>${invoiceDto.trainId} ${invoiceDto.trainType}</td>
                     </tr>
                     <tr class="table-row">
                         <td>${departure} ${date}/${time}</td>
-                        <td>${model.routeDepartureDate} / ${model.routeDepartureTime}</td>
+                        <td>${invoiceDto.routeDepartureDate} / ${invoiceDto.routeDepartureTime}</td>
                     </tr>
                     <tr class="table-row">
                         <td> ${arrival} ${date}/${time}</td>
-                        <td>${model.routeArrivalDate} / ${model.routeArrivalTime}</td>
+                        <td>${invoiceDto.routeArrivalDate} / ${invoiceDto.routeArrivalTime}</td>
                     </tr>
                     <tr class="table-row">
                         <td><fmt:message key="invoice.seats.amount" bundle="${rb}"/></td>
-                        <td>${model.seatsAmount}</td>
+                        <td>${invoiceDto.seatsAmount}</td>
                     </tr>
                     <tr class="table-row">
                         <td><fmt:message key="invoice.sum" bundle="${rb}"/></td>
-                        <td>${model.sum}</td>
+                        <td>${invoiceDto.sum}</td>
                     </tr>
                 </table>
             </div>
@@ -63,4 +63,4 @@
 </body>
 </html>
 
-
+<c:remove var="invoiceDto" scope="session" />

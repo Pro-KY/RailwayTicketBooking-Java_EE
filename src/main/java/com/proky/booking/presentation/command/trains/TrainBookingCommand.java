@@ -21,7 +21,6 @@ public class TrainBookingCommand implements ICommand {
         final String trainId = request.getParameter(Parameters.TRAIN_ID); // TODO: validate data
 
         final ServiceFactory serviceFactory = ServiceFactory.getInstance();
-
         final TrainService trainService = serviceFactory.getTrainService();
         final TrainDto trainDto = trainService.findTrainById(Long.parseLong(trainId));
 

@@ -34,7 +34,7 @@ public class TransactionalProxy {
                 final Transactional annotation = method.getAnnotation(Transactional.class);
                 final boolean readOnly = annotation.readOnly();
 
-                TransactionManager tm = MysqlTransactionManager.getInstance();
+                TransactionManager tm = TransactionManagerImpl.getInstance();
                 tm.startTransaction();
                 tm.setReadOnly(readOnly);
                 try {

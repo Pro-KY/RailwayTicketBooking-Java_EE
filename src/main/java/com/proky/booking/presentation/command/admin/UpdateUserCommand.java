@@ -24,9 +24,11 @@ public class UpdateUserCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
 
-        final HttpSession session = request.getSession();
+        final String contextPath = request.getContextPath();
+        log.info(contextPath);
 
-        final UrlBuilder urlBuilder = new UrlBuilder(true, ViewProperties.getValue(ADMIN_USERS));
+        final HttpSession session = request.getSession();
+        final UrlBuilder urlBuilder = new UrlBuilder(true, request.getContextPath(), ViewProperties.getValue(ADMIN_USERS));
 
         final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
         final UserDto user = requestDataBinder.bindToDto(request, UserDto.class);

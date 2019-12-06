@@ -6,25 +6,25 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 
-public class MysqlTransactionManager implements TransactionManager {
-    private static MysqlTransactionManager mInstance;
+public class TransactionManagerImpl implements TransactionManager {
+    private static TransactionManagerImpl mInstance;
     private ConnectionWrapper connectionWrapper;
-    private static final Logger log = LogManager.getLogger(MysqlTransactionManager.class);
+    private static final Logger log = LogManager.getLogger(TransactionManagerImpl.class);
 
-    private MysqlTransactionManager() {
+    private TransactionManagerImpl() {
         connectionWrapper = ConnectionWrapper.getInstance();
     }
 
-    public static MysqlTransactionManager getInstance() {
+    public static TransactionManagerImpl getInstance() {
         if (mInstance == null) {
-            mInstance = new MysqlTransactionManager();
+            mInstance = new TransactionManagerImpl();
         }
         return mInstance;
     }
 
     @Override
     public void setReadOnly(boolean readOnly) {
-        log.debug("set readOnly transaction mode: {}", readOnly);
+//        log.debug("set readOnly transaction mode: {}", readOnly);
         connectionWrapper.setReadOnly(readOnly);
     }
 

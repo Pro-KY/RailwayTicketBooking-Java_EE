@@ -2,9 +2,10 @@
 <%@ include file="/WEB-INF/jspf/utilImports.jspf" %>
 
 <c:set var="user" value="${sessionScope.user}" scope="session"/>
+<c:set var="stations" value="${sessionScope.stations}" scope="session"/>
 
-<c:set var="model" value="${sessionScope.model}" scope="session"/>
-<c:set var="findTrainCommand" value="${Commands.FIND_TRAIN}" scope="page"/>
+<c:set var="trainsPageDto" value="${sessionScope.trainsPageDto}" scope="session"/>
+<c:set var="findTrainsCommand" value="${Commands.FIND_TRAINS}" scope="page"/>
 <c:set var="findTrainParameters" value="${Attributes.GOING_TO}=${param.goingTo}&${Attributes.DEPARTURE_DATE}=${param.departureDate}&${Attributes.DEPARTURE_TIME}=${param.departureTime}" scope="page"/>
 <fmt:message var="route" key="table.header.route" bundle="${rb}"/>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" scope="page"/>
@@ -28,7 +29,7 @@
     <div class="container float-left ml-3 mt-5 pt-4">
         <div class="row justify">
             <form name = "findTrain" method="POST"  action="booking/">
-                <input type="hidden" name="command" value="${findTrainCommand}">
+                <input type="hidden" name="command" value="${findTrainsCommand}">
 
                 <div class="row">
                     <%--GOING_TO--%>
@@ -36,7 +37,7 @@
                         <div class="form-group">
                             <label for="usertype"><fmt:message key="going.to" bundle="${rb}"/></label>
                             <select class="form-control" id="usertype" name="${Parameters.GOING_TO}">
-                                <c:forEach var="station" items="${sessionScope.stations}">
+                                <c:forEach var="station" items="${stations}">
                                     <option value="${station.id}" ${station.id == '1' ? 'selected' : ''}><fmt:message key="station.${station.id}" bundle="${rb}"/></option>
                                 </c:forEach>
                             </select>
@@ -77,7 +78,7 @@
             </form>
         </div>
 
-        <c:if test="${sessionScope.model != null and sessionScope.model.allPagesAmount > 0}">
+        <c:if test="${trainsPageDto != null and trainsPageDto.allPagesAmount > 0}">
             <%--PAGE_SIZE--%>
             <div id="elementsAmountSelect" class="row">
                 <div class="col-md-10"></div>
@@ -110,7 +111,7 @@
                     </thead>
                     <tbody>
 
-                    <c:forEach var="train" items="${model.pageList}">
+                    <c:forEach var="train" items="${trainsPageDto.pageList}">
                         <jsp:useBean id="train" type="com.proky.booking.dto.TrainDto"/>
                         <tr class="table-row clickable-row" data-href="${contextPath}/booking/?${Parameters.TRAIN_ID}=${train.trainId}&command=${Commands.TRAIN_BOOKING}">
                             <td>${train.trainId} ${train.trainType}</td>
@@ -136,7 +137,7 @@
         </c:if>
 
         <%--PAGINATION--%>
-        <c:if test="${sessionScope.model != null and sessionScope.model.allPagesAmount > 1}">
+        <c:if test="${trainsPageDto != null and trainsPageDto.allPagesAmount > 1}">
     <%--            <%@include file="/WEB-INF/jspf/pagination.jspf" %>--%>
             <div class="row mt-4">
                 <div class="col-md-3"></div>
@@ -145,18 +146,18 @@
                         <ul class="pagination" style="list-style-type: none;">
                             <div class="container-fluid">
                                 <div class="btn-group">
-                                    <li class="${sessionScope.model.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                        <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}"><fmt:message key="pagination.previous" bundle="${rb}"/></a>
+                                    <li class="${trainsPageDto.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                                        <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${trainsPageDto.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}"><fmt:message key="pagination.previous" bundle="${rb}"/></a>
                                     </li>
 
-                                    <c:forEach begin="${sessionScope.model.startPageIndex}" end="${sessionScope.model.endPageIndex}" varStatus="counter">
-                                        <li class="${(sessionScope.model.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
-                                            <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${findTrainCommand}&${findTrainParameters}"> ${counter.index+1} </a>
+                                    <c:forEach begin="${trainsPageDto.startPageIndex}" end="${trainsPageDto.endPageIndex}" varStatus="counter">
+                                        <li class="${(trainsPageDto.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
+                                            <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${trainsPageDto.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${findTrainCommand}&${findTrainParameters}"> ${counter.index+1} </a>
                                         </li>
                                     </c:forEach>
 
-                                    <li class="${sessionScope.model.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                        <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}"><fmt:message key="pagination.next" bundle="${rb}"/></a>
+                                    <li class="${trainsPageDto.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                                        <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${trainsPageDto.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${findTrainCommand}&${findTrainParameters}"><fmt:message key="pagination.next" bundle="${rb}"/></a>
                                     </li>
                                 </div>
                             </div>
@@ -185,7 +186,9 @@
             <%@ include file="/WEB-INF/jspf/footer.jspf" %>
         <!-- FOOTER -->
 <%--    </div>--%>
-
     <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 </body>
 </html>
+
+<c:remove var="stations" scope="session" />
+<c:remove var="trainsPageDto" scope="session" />

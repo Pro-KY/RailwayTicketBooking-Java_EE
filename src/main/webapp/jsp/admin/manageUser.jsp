@@ -13,7 +13,7 @@
     <!-- HEADER -->
 
     <!--MAIN CONTENT-->
-    <div class="container float-left ml-3">
+    <div class="container float-left ml-3 mt-5 pt-4">
         <form name="userCredentials" method="POST" action ="${pageContext.request.contextPath}/booking/">
             <input type="hidden" name="command" value="${Commands.UPDATE_USER}">
             <input type="hidden" name="${Parameters.ID}" value="${model.id}">

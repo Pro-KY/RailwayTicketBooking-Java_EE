@@ -32,7 +32,7 @@ public class SignInCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         final HttpSession session = request.getSession();
 
-        UrlBuilder urlBuilder = new UrlBuilder(true, ViewProperties.getValue(INDEX));
+        UrlBuilder urlBuilder = new UrlBuilder(true, request.getContextPath());
         final SignInService signInService = ServiceFactory.getInstance().getSignInService();
         final UserService userService = ServiceFactory.getInstance().getUserService();
 
@@ -49,15 +49,8 @@ public class SignInCommand implements ICommand {
             final UserDto userDto = userService.mapUserToDto(authenticatedUser);
             UserTypeEnum userTypeEnum = isAdministrator ? UserTypeEnum.ADMIN : UserTypeEnum.USER;
 
-            if (isAdministrator) {
-                urlBuilder.setViewPath(request.getContextPath());
-                urlBuilder.setAttribute(Attributes.COMMAND, Commands.ALL_USERS);
-            }  else {
-                final ServiceFactory serviceFactory = ServiceFactory.getInstance();
-                final StationService stationService = serviceFactory.getStationService();
-                final List<Station> allStations = stationService.findAllStations();
-                session.setAttribute(Attributes.STATIONS, allStations);
-            }
+            String command = isAdministrator ? Commands.ALL_USERS : Commands.HOME;
+            urlBuilder.setAttribute(Attributes.COMMAND, command);
 
             session.setAttribute(Attributes.USER_TYPE, userTypeEnum);
             session.setAttribute(Attributes.USER, userDto);

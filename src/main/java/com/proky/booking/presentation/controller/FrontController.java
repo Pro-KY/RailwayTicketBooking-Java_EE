@@ -39,6 +39,7 @@ public class FrontController extends HttpServlet {
             response.sendRedirect(ViewProperties.getValue(ERROR_RUNTIME));
         } else if (viewPath.startsWith(Commands.REDIRECT)) {
             log.debug("REDIRECT!!!");
+            log.info(viewPath);
             response.sendRedirect(viewPath.replace(Commands.REDIRECT, ""));
         } else {
             log.debug("FORWARD!!!");

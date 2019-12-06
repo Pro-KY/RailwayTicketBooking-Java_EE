@@ -14,6 +14,7 @@ public class CommandUtil {
         return request.getHeader("referer");
     }
 
+
     public static void setValidationResultToSession(HttpSession session, ValidationResult validationResult) {
         session.setAttribute(Attributes.VALIDATION, validationResult);
     }

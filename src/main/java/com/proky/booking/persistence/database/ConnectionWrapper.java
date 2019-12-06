@@ -40,7 +40,7 @@ public class ConnectionWrapper implements AutoCloseable {
     }
 
     public void useInTransaction(boolean useInTransaction) {
-        log.debug("useInTransaction = {}", useInTransaction);
+//        log.debug("useInTransaction = {}", useInTransaction);
         usedInTransactionThreadLocal.set(useInTransaction);
 //        log.debug("usedInTransactionThreadLocal.get() = {}", usedInTransactionThreadLocal.get());
         setAutoCommit(!useInTransaction);

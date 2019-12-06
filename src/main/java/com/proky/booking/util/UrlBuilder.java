@@ -15,11 +15,18 @@ public class UrlBuilder {
     private Map<String, Object> attributes = new HashMap<>();
     private String viewPath;
     private boolean redirect;
+    private String contextPath;
 
     public UrlBuilder(String viewPath) {
         this.viewPath = viewPath;
     }
 
+
+    public UrlBuilder(boolean redirect, String contextPath, String viewPath) {
+        this.viewPath = viewPath;
+        this.redirect = redirect;
+        this.contextPath = contextPath;
+    }
 
     public UrlBuilder(boolean redirect, String viewPath) {
         this.viewPath = viewPath;
@@ -37,6 +44,10 @@ public class UrlBuilder {
         this.redirect = redirect;
     }
 
+    public void setContextPath(String contextPath) {
+        this.contextPath = contextPath;
+    }
+
     public void setViewPath(String viewPath) {
         this.viewPath = viewPath;
     }
@@ -49,15 +60,13 @@ public class UrlBuilder {
         attributes.put(name, value);
     }
 
-    public void setAlertParameters(boolean alertSuccess, String alertMessage) {
-        String alertType = alertSuccess ? Attributes.ALERT_SUCCESS : Attributes.ALERT_ERROR;
-        setAttribute(alertType, true);
-        setAttribute(Attributes.ALERT_MESSAGE, alertMessage);
-    }
-
     public String buildURL() {
         if (redirect) {
             sb.append(REDIRECT);
+        }
+
+        if (contextPath != null) {
+            sb.append(contextPath);
         }
 
         sb.append(viewPath);

@@ -9,6 +9,7 @@
 </head>
 
 <c:set var="userName" value="${sessionScope.userName}" scope="session" />
+<c:set var="usersPageDto" value="${sessionScope.usersPageDto}" scope="session"/>
 
 <body>
     <!-- HEADER -->
@@ -35,10 +36,8 @@
             </div>
         </div>
         <%--PAGE_SIZE--%>
-            <c:out value="${userName == null}" />
-            <c:out value="${userName}" />
 
-        <c:if test="${sessionScope.model != null and sessionScope.model.allPagesAmount > 0}">
+        <c:if test="${usersPageDto != null and usersPageDto.allPagesAmount > 0}">
             <%--TABLE--%>
             <div style="border: #0b2e13" class="row">
                 <table class="table">
@@ -52,7 +51,7 @@
                     </thead>
 
                     <tbody>
-                        <c:forEach var="user" items="${model.pageList}">
+                        <c:forEach var="user" items="${usersPageDto.pageList}">
                             <jsp:useBean id="user" type="com.proky.booking.dto.UserDto"/>
                             <tr class="table-row clickable-row" data-href="/booking/?${Parameters.USER_ID}=${user.id}&command=${Commands.MANAGE_USER}">
                                 <td>${user.id}</td>
@@ -68,7 +67,7 @@
         </c:if>
 
         <%--PAGINATION--%>
-        <c:if test="${sessionScope.model != null and sessionScope.model.allPagesAmount > 1}">
+        <c:if test="${usersPageDto != null and usersPageDto.allPagesAmount > 1}">
         <div class="row mt-4">
             <div class="col-md-3"></div>
             <div class="col-md-6">
@@ -76,18 +75,18 @@
                     <ul class="pagination" style="list-style-type: none;">
                         <div class="container-fluid">
                             <div class="btn-group">
-                                <li class="${sessionScope.model.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                    <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${Commands.ALL_USERS}">Previous</a>
+                                <li class="${usersPageDto.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                                    <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${usersPageDto.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${Commands.ALL_USERS}">Previous</a>
                                 </li>
 
-                                <c:forEach begin="${sessionScope.model.startPageIndex}" end="${sessionScope.model.endPageIndex}" varStatus="counter">
-                                    <li class="${(sessionScope.model.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
-                                        <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${Commands.ALL_USERS}"> ${counter.index+1} </a>
+                                <c:forEach begin="${usersPageDto.startPageIndex}" end="${usersPageDto.endPageIndex}" varStatus="counter">
+                                    <li class="${(usersPageDto.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
+                                        <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${usersPageDto.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${Commands.ALL_USERS}"> ${counter.index+1} </a>
                                     </li>
                                 </c:forEach>
 
-                                <li class="${sessionScope.model.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                    <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.model.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${Commands.ALL_USERS}">Next</a>
+                                <li class="${usersPageDto.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                                    <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${usersPageDto.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${Commands.ALL_USERS}">Next</a>
                                 </li>
                             </div>
                         </div>
@@ -105,7 +104,8 @@
     <!-- FOOTER -->
     <%@ include file="/WEB-INF/jspf/footer.jspf" %>
     <!-- FOOTER -->
-
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 </body>
 </html>
+
+<c:remove var="usersPageDto" scope="session" />

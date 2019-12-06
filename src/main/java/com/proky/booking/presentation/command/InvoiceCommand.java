@@ -47,10 +47,7 @@ public class InvoiceCommand implements ICommand {
         invoiceDto.setUserFirstName(firstName);
         invoiceDto.setUserLastName(lastName);
 
-        request.getSession().setAttribute(Attributes.MODEL, invoiceDto);
-        final String viewPath = ViewProperties.getValue(INVOICE);
-        UrlBuilder urlBuilder = new UrlBuilder(true, viewPath);
-
-        return urlBuilder.buildURL();
+        request.getSession().setAttribute(Attributes.INVOICE_DTO, invoiceDto);
+        return new UrlBuilder(true, request.getContextPath(), ViewProperties.getValue(INVOICE)).buildURL();
     }
 }

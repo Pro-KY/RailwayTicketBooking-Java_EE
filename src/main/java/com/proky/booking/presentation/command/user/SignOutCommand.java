@@ -6,6 +6,7 @@ import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.StationService;
 import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.http.Attributes;
+import com.proky.booking.util.constans.http.Commands;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,11 +25,8 @@ public class SignOutCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         request.getSession().invalidate();
 
-        final ServiceFactory serviceFactory = ServiceFactory.getInstance();
-        final StationService stationService = serviceFactory.getStationService();
-        final List<Station> allStations = stationService.findAllStations();
-
-        request.getSession().setAttribute(Attributes.STATIONS, allStations);
-        return new UrlBuilder(true, ViewProperties.getValue(INDEX)).buildURL();
+        UrlBuilder urlBuilder = new UrlBuilder(true, request.getContextPath());
+        urlBuilder.setAttribute(Attributes.COMMAND, Commands.HOME);
+        return urlBuilder.buildURL();
     }
 }

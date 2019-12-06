@@ -26,7 +26,7 @@ public class CommandFactory {
     static {
         commandHashMap.put(Commands.SIGN_UP, new SignUpCommand());
         commandHashMap.put(Commands.SIGN_IN, new SignInCommand());
-        commandHashMap.put(Commands.FIND_TRAIN, new FindTrainsCommand());
+        commandHashMap.put(Commands.FIND_TRAINS, new FindTrainsCommand());
         commandHashMap.put(Commands.TRAIN_BOOKING, new TrainBookingCommand());
         commandHashMap.put(Commands.CHANGE_LANGUAGE, new LanguageCommand());
         commandHashMap.put(Commands.INVOICE, new InvoiceCommand());
@@ -43,6 +43,6 @@ public class CommandFactory {
         log.debug("======= COMMAND name : {} ======= ", clientCommand);
 
         boolean isCommandInvalid = clientCommand == null || clientCommand.isEmpty() || commandHashMap.get(clientCommand) == null;
-        return isCommandInvalid ? new EmptyCommand() : commandHashMap.get(clientCommand);
+        return isCommandInvalid ? new HomeCommand() : commandHashMap.get(clientCommand);
     }
 }

@@ -65,7 +65,7 @@ public class SqlProperties {
 
     public static String getValue(String key) {
         if (key == null || key.isEmpty()) {
-            throw new IllegalArgumentException(MessageProperties.NOT_VALID_PROPERTY);
+            throw new IllegalArgumentException("Property key can't be null or empty!");
         }
 
        return viewPathProperties.getString(key);

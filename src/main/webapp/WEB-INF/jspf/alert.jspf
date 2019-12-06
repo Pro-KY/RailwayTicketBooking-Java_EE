@@ -2,19 +2,34 @@
 <div class="container-fluid mb-3 row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
+
+    <c:if test="${not empty alertMessageKey or not empty validation}">
         <div class="alert ${isAlertSuccess ? "alert-success" : "alert-danger"} alert-dismissible fade show text-center" type="alert">
-            <c:if test="${not empty param.alertMessage}">
-                ${param.alertMessage}
+            <c:if test="${not empty alertMessageKey}">
+                <%--                ${param.alertMessage}--%>
+                <fmt:message key="${alertMessageKey}" bundle="${rb}"/>
             </c:if>
-            <c:if test="${not empty validation}">
-                <c:forEach items="${validation.errorMessages}" var="message">
-                    ${message.key} - ${message.value} <br>
+
+<%--            <c:if test="${not empty validation}">--%>
+                <c:forEach items="${validation.errorMessages}" var="messageEntry">
+                    <c:set var="errorMessage" value="${messageEntry.value}" />
+
+                    ${messageEntry.key} -
+                    <fmt:message key="${errorMessage.msgKey}" bundle="${rb}">
+                        <c:forEach items="${errorMessage.params}" var="p">
+                            <fmt:param value="${p}"/>
+                        </c:forEach>
+                    </fmt:message>
+                    <br>
                 </c:forEach>
-            </c:if>
+<%--            </c:if>--%>
+
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+    </c:if>
+
     </div>
     <div class="col-md-3"></div>
 </div>

@@ -4,6 +4,10 @@
 <fmt:message var="email" key="user.email" bundle="${rb}" scope="page"/>
 <fmt:message var="password" key="user.password" bundle="${rb}" scope="page"/>
 
+<c:set var="emailError" value="${sessionScope.email}" scope="session" />
+<c:set var="passwordError" value="${sessionScope.password}" scope="session" />
+
+
 <html>
 <head>
     <title>Sign In</title>
@@ -22,12 +26,6 @@
                     <div class="card-body">
                         <form name="signIn" method="POST" action ="${pageContext.request.contextPath}/booking/">
                             <input type="hidden" name="command" value="${Commands.SIGN_IN}">
-
-                            <c:if test="${param.error}">
-                                <div class="alert alert-danger" role="alert">
-                                    <fmt:message key="error.authorizatioin" bundle="${rb}"/>
-                                </div>
-                            </c:if>
 
                             <div class="form-group">
                                 <label class="ml-3" for="inputEmail">${email}</label>
@@ -50,6 +48,8 @@
         </div>
     </div>
 
+    <c:remove var="emailError" scope="session" />
+    <c:remove var="passwordError" scope="session" />
     <!-- FOOTER -->
     <%@ include file="/WEB-INF/jspf/footer.jspf" %>
     <!-- FOOTER -->

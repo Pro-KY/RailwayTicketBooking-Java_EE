@@ -2,13 +2,13 @@ package com.proky.booking.presentation.command.admin;
 
 import com.proky.booking.dto.PageDto;
 import com.proky.booking.dto.UserDto;
+import com.proky.booking.presentation.command.CommandUtil;
 import com.proky.booking.util.HttpRequestDataBinder;
 import com.proky.booking.presentation.command.ICommand;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.UserService;
 import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.http.Attributes;
-import com.proky.booking.util.properties.MessageProperties;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +16,6 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static com.proky.booking.util.properties.MessageProperties.USER_DELETED;
 import static com.proky.booking.util.properties.ViewProperties.ADMIN_USERS;
 
 public class DeleteUserCommand implements ICommand {
@@ -33,8 +32,7 @@ public class DeleteUserCommand implements ICommand {
 
         final HttpSession session = request.getSession();
         final UrlBuilder urlBuilder = new UrlBuilder(true, ViewProperties.getValue(ADMIN_USERS));
-        urlBuilder.setAttribute(Attributes.ALERT_SUCCESS, true);
-        urlBuilder.setAttribute(Attributes.ALERT_MESSAGE, MessageProperties.getMessage(USER_DELETED));
+        CommandUtil.setAlertAttributes(true, "alert.user.deleted", session);
 
         PageDto pageDto = new PageDto();
         final PageDto allRegisteredUsers = userService.findAllRegisteredUsers(pageDto);

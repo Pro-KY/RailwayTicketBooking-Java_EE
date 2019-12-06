@@ -50,6 +50,7 @@ public class SignInCommand implements ICommand {
             UserTypeEnum userTypeEnum = isAdministrator ? UserTypeEnum.ADMIN : UserTypeEnum.USER;
 
             if (isAdministrator) {
+                urlBuilder.setViewPath(request.getContextPath());
                 urlBuilder.setAttribute(Attributes.COMMAND, Commands.ALL_USERS);
             }  else {
                 final ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -63,7 +64,6 @@ public class SignInCommand implements ICommand {
         } else {
             urlBuilder.setViewPath(CommandUtil.getReferer(request));
             CommandUtil.setValidationResultToSession(session, validation);
-            urlBuilder.setAttribute(Attributes.ERROR, true);
         }
 
         return urlBuilder.buildURL();

@@ -55,13 +55,6 @@
     <!--MAIN CONTENT-->
 
     <div class="container-fluid row">
-        <!-- ALERT -->
-        <c:if test="${(not empty alertError and alertError eq true) or
-             (not empty alertSuccess and alertSuccess eq true)}">
-            <%@ include file="/WEB-INF/jspf/alert.jspf"%>
-        </c:if>
-        <!-- ALERT -->
-
         <!-- FOOTER -->
         <%@ include file="/WEB-INF/jspf/footer.jspf" %>
         <!-- FOOTER -->

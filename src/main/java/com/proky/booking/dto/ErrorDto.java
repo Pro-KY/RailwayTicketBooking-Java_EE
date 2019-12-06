@@ -3,16 +3,16 @@ package com.proky.booking.dto;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
-public class ErrorData implements Serializable {
+public class ErrorDto implements Serializable {
     private String requestURI;
     private String servletName;
     private Integer statusCode;
     private String exceptionName;
     private String exceptionMessage;
 
-    public ErrorData() {}
+    public ErrorDto() {}
 
-    public ErrorData(String requestURI, String servletName, Integer statusCode, String exceptionName, String exceptionMessage) {
+    public ErrorDto(String requestURI, String servletName, Integer statusCode, String exceptionName, String exceptionMessage) {
         this.requestURI = requestURI;
         this.servletName = servletName;
         this.statusCode = statusCode;
@@ -20,7 +20,7 @@ public class ErrorData implements Serializable {
         this.exceptionMessage = exceptionMessage;
     }
 
-    public ErrorData(HttpServletRequest request) {
+    public ErrorDto(HttpServletRequest request) {
         Throwable throwable = (Throwable) request.getAttribute("javax.servlet.error.exception");
         exceptionName = throwable.getClass().getName();
         exceptionMessage = throwable.getMessage();

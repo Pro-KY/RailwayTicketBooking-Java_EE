@@ -2,13 +2,11 @@ package com.proky.booking.persistence.transaction;
 
 import com.proky.booking.exception.TransactionException;
 import com.proky.booking.persistence.dao.factory.DaoFactory;
-import com.proky.booking.util.properties.MessageProperties;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static com.proky.booking.util.properties.MessageProperties.TRANSACTION_ERROR;
 
 public class TransactionalProxy {
     private static final Logger log = LogManager.getLogger(TransactionalProxy.class);
@@ -45,7 +43,7 @@ public class TransactionalProxy {
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                     tm.rollback();
-                    throw new TransactionException(MessageProperties.getMessage(TRANSACTION_ERROR), throwable.getCause());
+                    throw new TransactionException("can't commit transaction due to an error!", throwable.getCause());
                 } finally {
                     tm.setReadOnly(false);
                     tm.endTransaction();

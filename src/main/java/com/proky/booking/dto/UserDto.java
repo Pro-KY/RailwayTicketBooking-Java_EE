@@ -7,7 +7,11 @@ import java.io.Serializable;
 
 public class UserDto implements Serializable {
    private String id;
+
+   @Length(min = 2, max = 30)
    private String firstName;
+
+   @Length(min = 2, max = 30)
    private String lastName;
 
    @Email
@@ -16,10 +20,10 @@ public class UserDto implements Serializable {
 
    @Length(min = 6, max = 30)
    private String password;
+
    private String userTypeId;
 
    public UserDto() {}
-
 
    public String getId() {
       return id;

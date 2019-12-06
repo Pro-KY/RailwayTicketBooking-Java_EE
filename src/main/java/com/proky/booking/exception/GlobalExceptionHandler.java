@@ -1,6 +1,7 @@
 package com.proky.booking.exception;
 
-import com.proky.booking.dto.ErrorData;
+import com.proky.booking.dto.ErrorDto;
+import com.proky.booking.presentation.command.CommandUtil;
 import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.properties.ViewProperties;
@@ -30,24 +31,24 @@ public class GlobalExceptionHandler extends HttpServlet {
     }
 
     private void handleError(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        ErrorData errorData = new ErrorData(request);
-        final String exceptionMessage = errorData.getExceptionMessage();
+        ErrorDto errorDto = new ErrorDto(request);
+        final String exceptionMessage = errorDto.getExceptionMessage();
 
-        String currentPage = request.getHeader("referer");
+        String currentPage = CommandUtil.getReferer(request);
         final UrlBuilder urlBuilder = new UrlBuilder(currentPage);
 
         if(exceptionMessage != null && exceptionMessage.startsWith(SERVICE_EXCEPTION.name)) {
-            log.debug("handle service exception name");
-            errorData.setExceptionMessage(exceptionMessage.replace(SERVICE_EXCEPTION.name, ""));
-            urlBuilder.setAlertParameters(false, errorData.getExceptionMessage());
+            log.debug("handle service exception");
+            errorDto.setExceptionMessage(exceptionMessage.replace(SERVICE_EXCEPTION.name, ""));
+            CommandUtil.setAlertAttributes(false, errorDto.getExceptionMessage(), request.getSession());
             response.sendRedirect(urlBuilder.buildURL());
         } else {
             log.debug("handle runtime error");
-            request.setAttribute(Attributes.ERROR_REQUEST_URI, errorData.getRequestURI());
-            request.setAttribute(Attributes.ERROR_SERVLET_NAME, errorData.getServletName());
-            request.setAttribute(Attributes.ERROR_STATUS_CODE, errorData.getStatusCode());
-            request.setAttribute(Attributes.ERROR_EXCEPTION_NAME, errorData.getExceptionName());
-            request.setAttribute(Attributes.ERROR_EXCEPTION_MSG, errorData.getExceptionMessage());
+            request.setAttribute(Attributes.ERROR_REQUEST_URI, errorDto.getRequestURI());
+            request.setAttribute(Attributes.ERROR_SERVLET_NAME, errorDto.getServletName());
+            request.setAttribute(Attributes.ERROR_STATUS_CODE, errorDto.getStatusCode());
+            request.setAttribute(Attributes.ERROR_EXCEPTION_NAME, errorDto.getExceptionName());
+            request.setAttribute(Attributes.ERROR_EXCEPTION_MSG, errorDto.getExceptionMessage());
             request.getRequestDispatcher(ViewProperties.getValue(ERROR_RUNTIME)).forward(request,response);
         }
     }

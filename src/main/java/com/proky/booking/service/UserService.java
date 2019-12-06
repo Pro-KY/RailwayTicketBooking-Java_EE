@@ -11,7 +11,6 @@ import com.proky.booking.persistence.entity.User;
 import com.proky.booking.persistence.entity.UserType;
 import com.proky.booking.util.ModelMapperWrapper;
 import com.proky.booking.util.constans.UserTypeEnum;
-import com.proky.booking.util.properties.MessageProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
@@ -21,7 +20,6 @@ import java.util.stream.Collectors;
 
 public class UserService {
     private static final Logger log = LogManager.getLogger(UserService.class);
-
     private DaoFactory daoFactory;
 
     UserService(DaoFactory daoFactory) {
@@ -36,7 +34,7 @@ public class UserService {
 
         final UserType userType = userTypeDao.
                 findByType(UserTypeEnum.USER.type)
-                .orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
+                .orElseThrow(() -> new ServiceException("alert.entity.notfound"));
 
         final Long allUsersAmount = userDao.countAllByType(userType);
 
@@ -72,13 +70,13 @@ public class UserService {
 
         final UserType adminUserType = userTypeDao.
                 findByType(UserTypeEnum.ADMIN.type)
-                .orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
+                .orElseThrow(() -> new ServiceException("alert.entity.notfound"));
 
         return userType.equals(adminUserType);
     }
 
     public User findUserById(Long id) {
-        return daoFactory.getUserDao().findById(id).orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
+        return daoFactory.getUserDao().findById(id).orElseThrow(() -> new ServiceException("alert.entity.notfound"));
     }
 
     public UserDto mapUserToDto(User user) {
@@ -100,7 +98,10 @@ public class UserService {
 
     @Transactional
     public boolean deleteUser(Long userId) {
-        final User user = daoFactory.getUserDao().findById(userId).orElseThrow(() -> new ServiceException(MessageProperties.NOT_FOUND_ENTITY));
+        final User user = daoFactory.getUserDao()
+                .findById(userId)
+                .orElseThrow(() -> new ServiceException("alert.entity.notfound"));
+
         final IUserDao userDao = daoFactory.getUserDao();
         return userDao.delete(user);
     }

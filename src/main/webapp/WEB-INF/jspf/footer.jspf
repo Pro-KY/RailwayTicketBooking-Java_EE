@@ -1,6 +1,8 @@
-<c:set var="isAlertSuccess" value="${not empty param.alertSuccess and param.alertSuccess eq true}" scope="page"/>
-<c:set var="isAlertError" value="${not empty param.alertError and param.alertError eq true}" scope="page"/>
+<c:set var="isAlertSuccess" value="${not empty sessionScope.alertSuccess and sessionScope.alertSuccess eq true}" scope="session"/>
+<c:set var="isAlertError" value="${not empty sessionScope.alertError and sessionScope.alertError eq true}" scope="session"/>
+<c:set var="alertMessageKey" value="${sessionScope.alertMessage}" scope="session" />
 <c:set var="validation" value="${sessionScope.validation}" scope="session" />
+
 
 <%@ taglib prefix="mytag" uri="/WEB-INF/company.tld" %>
 
@@ -16,6 +18,7 @@
     <div class="row">
         <div class="col-4 d-flex justify-content-start main_color">
             <mytag:company name="Railway Ticket Booking"/>
+<%--            ${isAlertError} ${isAlertSuccess}  ${alertMessageKey}  ${validation}--%>
         </div>
         <div class="col-4"></div>
         <div class="col-4 d-flex justify-content-end">
@@ -36,4 +39,7 @@
 </div>
 
 <c:remove var="validation" scope="session" />
+<c:remove var="isAlertSuccess" scope="session" />
+<c:remove var="isAlertError" scope="session" />
+<c:remove var="alertMessage" scope="session" />
 

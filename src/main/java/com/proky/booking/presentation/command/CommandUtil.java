@@ -1,5 +1,6 @@
 package com.proky.booking.presentation.command;
 
+import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.UserTypeEnum;
 import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.validation.ValidationResult;
@@ -26,6 +27,12 @@ public class CommandUtil {
             }
         }
         return userType;
+    }
+
+    public static void setAlertAttributes(boolean alertSuccess, String messageKey, HttpSession session) {
+        String alertType = alertSuccess ? Attributes.ALERT_SUCCESS : Attributes.ALERT_ERROR;
+        session.setAttribute(alertType, true);
+        session.setAttribute(Attributes.ALERT_MESSAGE, messageKey);
     }
 
 }

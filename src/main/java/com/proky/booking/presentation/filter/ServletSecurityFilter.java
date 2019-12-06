@@ -58,11 +58,13 @@ public class ServletSecurityFilter implements Filter {
 //        log.debug("SECURITY URL: {}", URL);
 
         final UserTypeEnum currentUserType = CommandUtil.getCurrentUserType(session);
+        log.info(currentUserType);
         if (!currentUserType.equals(UserTypeEnum.GUEST)) {
             session.setAttribute(Attributes.USER_TYPE, currentUserType);
         }
 
         final boolean isForbiddenCommand = isForbiddenCommand(command);
+        log.info(isForbiddenCommand);
 
         if (isForbiddenCommand && !currentUserType.equals(UserTypeEnum.ADMIN)) {
             httpRequest.getRequestDispatcher(contextPath + accessDeniedErrorPath).forward(httpRequest, httpResponse);

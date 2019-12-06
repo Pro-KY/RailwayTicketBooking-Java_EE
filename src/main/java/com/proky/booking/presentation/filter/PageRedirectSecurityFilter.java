@@ -36,13 +36,13 @@ public class PageRedirectSecurityFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-//        log.info("in PageRedirectSecurityFilter");
+        log.info("in PageRedirectSecurityFilter");
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession(false);
 
         final String contextPath = httpRequest.getContextPath();
-        String uri = httpRequest.getRequestURI();
+        String uri = httpRequest.getRequestURI().replace(contextPath, "");
 //        log.info("REDIRECT Resource: {}", uri);
 
         String adminPath = contextPath + "/jsp/admin";
@@ -53,6 +53,7 @@ public class PageRedirectSecurityFilter implements Filter {
 
         final boolean isAdmin = userType.equals(UserTypeEnum.ADMIN);
         final boolean isUser = userType.equals(UserTypeEnum.USER);
+        log.info(isAdmin);
 
         final boolean isForbidden = isForbiddenURI(uri);
         final boolean isSignInOrSignUp = isSignInOrSignUp(uri);
@@ -62,7 +63,9 @@ public class PageRedirectSecurityFilter implements Filter {
             if (isAdmin) {
                 chain.doFilter(request, response);
             } else {
-                httpRequest.getRequestDispatcher(contextPath + notFoundErrorPath).forward(request, response);
+                log.info("not found");
+                httpRequest.getRequestDispatcher(notFoundErrorPath).forward(request, response);
+//                httpRequest.getRequestDispatcher(contextPath + notFoundErrorPath).forward(request, response);
             }
         } else if(isSignInOrSignUp && (isUser || isAdmin)) {
 //            log.debug("signed_in user tried to sign_in or sign_up again!");
@@ -78,6 +81,8 @@ public class PageRedirectSecurityFilter implements Filter {
     }
 
     private boolean isForbiddenURI(String uri) {
+        log.info(uri);
+
         boolean isForbidden = false;
         for (String forbiddenPath : forbiddenViewPaths) {
             if (uri.startsWith(forbiddenPath)) {

@@ -27,7 +27,14 @@ public class ValidationService {
         return validate(object, new String[] {});
     }
 
-    private <T> ValidationResult validateSpecific(Field[] fields, String[] requiredFields, T object) {
+    public <T> ValidationResult validate(T object, String...requiredFields) {
+        final Class<?> aClass = object.getClass();
+        Field[] fields = aClass.getDeclaredFields();
+
+        return (requiredFields.length == 0) ? validateAll(fields, object) : validateSpecificFields(fields, requiredFields, object);
+    }
+
+    private <T> ValidationResult validateSpecificFields(Field[] fields, String[] requiredFields, T object) {
         final ValidationResult validationResult = new ValidationResult();
         Set<String> requiredFieldsSet = new HashSet<>(Arrays.asList(requiredFields));
 
@@ -61,13 +68,6 @@ public class ValidationService {
             validateSingleField(validationResult, field, object);
         }
         return validationResult;
-    }
-
-    public <T> ValidationResult validate(T object, String...requiredFields) {
-        final Class<?> aClass = object.getClass();
-        Field[] fields = aClass.getDeclaredFields();
-
-        return (requiredFields.length == 0) ? validateAll(fields, object) : validateSpecific(fields, requiredFields, object);
     }
 
     private Validator getValidator(Annotation annotation) {

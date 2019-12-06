@@ -35,6 +35,6 @@ public class HomeCommand implements ICommand {
             log.info("stations is not null");
         }
 
-        return new UrlBuilder(true, request.getContextPath(), ViewProperties.getValue(INDEX)).buildURL();
+        return new UrlBuilder(true, request.getContextPath(),ViewProperties.getValue(INDEX)).buildURL();
     }
 }

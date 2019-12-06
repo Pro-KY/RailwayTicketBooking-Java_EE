@@ -1,11 +1,20 @@
 package com.proky.booking.dto;
 
+import com.proky.booking.validation.annotation.Length;
+import com.proky.booking.validation.annotation.Size;
+
 import java.io.Serializable;
 
 public class TicketBookingDto implements Serializable {
     private String trainId;
+
+    @Length(min = 3, max = 20)
     private String firstName;
+
+    @Length(min = 3, max = 20)
     private String lastName;
+
+    @Size(max = 3)
     private String seatsAmount;
 
     public TicketBookingDto() {}

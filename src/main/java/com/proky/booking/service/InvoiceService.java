@@ -3,6 +3,7 @@ package com.proky.booking.service;
 import com.proky.booking.dto.InvoiceDto;
 import com.proky.booking.dto.TicketBookingDto;
 import com.proky.booking.dto.TrainDto;
+import com.proky.booking.dto.UserDto;
 import com.proky.booking.persistence.dao.IInvoiceDao;
 import com.proky.booking.persistence.dao.factory.DaoFactory;
 import com.proky.booking.persistence.entity.Invoice;
@@ -29,7 +30,7 @@ public class InvoiceService {
         this.daoFactory = daoFactory;
     }
 
-    public InvoiceDto calculateInvoice(TicketBookingDto ticketBookingDto) {
+    public InvoiceDto calculateInvoice(TicketBookingDto ticketBookingDto, UserDto userDto) {
         final Long trainId = Long.parseLong(ticketBookingDto.getTrainId());
 
         final ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -44,6 +45,12 @@ public class InvoiceService {
         BigDecimal sum = seatsAmount.multiply(seatPrice).multiply(routeLengthFactor).setScale(2, RoundingMode.CEILING);
         invoiceDto.setSum(sum);
         invoiceDto.setSeatsAmount(seatsAmount);
+
+        final boolean isUserPresent = Objects.nonNull(userDto);
+        String firstName = isUserPresent ? userDto.getFirstName() : ticketBookingDto.getFirstName();
+        String lastName = isUserPresent ? userDto.getLastName() : ticketBookingDto.getLastName();
+        invoiceDto.setUserFirstName(firstName);
+        invoiceDto.setUserLastName(lastName);
 
         return invoiceDto;
     }

@@ -43,9 +43,6 @@ public class FindTrainsCommand implements ICommand {
 
         session.setAttribute(Attributes.TRAINS_PAGE_DTO, foundTrainsPerPage);
 
-        final Object attribute = session.getAttribute(Attributes.STATIONS);
-        log.info(attribute == null);
-
         final List<Station> allStations = serviceFactory.getStationService().findAllStations();
         session.setAttribute(Attributes.STATIONS, allStations);
 

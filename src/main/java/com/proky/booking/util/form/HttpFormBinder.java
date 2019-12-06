@@ -1,4 +1,4 @@
-package com.proky.booking.util;
+package com.proky.booking.util.form;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,16 +8,16 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-public class HttpRequestDataBinder {
-    private static final Logger log = LogManager.getLogger(HttpRequestDataBinder.class);
+public class HttpFormBinder {
+    private static final Logger log = LogManager.getLogger(HttpFormBinder.class);
 
-    private static HttpRequestDataBinder mInstance;
+    private static HttpFormBinder mInstance;
 
-    private HttpRequestDataBinder() {}
+    private HttpFormBinder() {}
 
-    public static HttpRequestDataBinder getInstance() {
+    public static HttpFormBinder getInstance() {
         if (mInstance == null) {
-            mInstance = new HttpRequestDataBinder();
+            mInstance = new HttpFormBinder();
         }
         return mInstance;
     }

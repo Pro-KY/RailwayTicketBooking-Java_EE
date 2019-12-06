@@ -3,7 +3,7 @@ package com.proky.booking.presentation.command.admin;
 import com.proky.booking.dto.PageDto;
 import com.proky.booking.dto.UserDto;
 import com.proky.booking.presentation.command.CommandUtil;
-import com.proky.booking.util.HttpRequestDataBinder;
+import com.proky.booking.util.form.HttpFormBinder;
 import com.proky.booking.presentation.command.ICommand;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.UserService;
@@ -23,7 +23,7 @@ public class DeleteUserCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
+        final HttpFormBinder requestDataBinder = HttpFormBinder.getInstance();
         final UserDto userDto = requestDataBinder.bindToDto(request, UserDto.class);
         final Long userId = Long.parseLong(userDto.getId());
 

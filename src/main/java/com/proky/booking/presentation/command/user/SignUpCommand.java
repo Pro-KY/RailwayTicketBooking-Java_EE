@@ -2,13 +2,12 @@ package com.proky.booking.presentation.command.user;
 
 import com.proky.booking.dto.UserDto;
 import com.proky.booking.presentation.command.CommandUtil;
-import com.proky.booking.util.HttpRequestDataBinder;
+import com.proky.booking.util.form.HttpFormBinder;
 import com.proky.booking.presentation.command.ICommand;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.SignUpService;
 import com.proky.booking.service.ValidationService;
 import com.proky.booking.util.UrlBuilder;
-import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.properties.ViewProperties;
 import com.proky.booking.validation.ValidationResult;
 import org.apache.logging.log4j.LogManager;
@@ -29,7 +28,7 @@ public class SignUpCommand implements ICommand {
         final UrlBuilder urlBuilder = new UrlBuilder(true, ViewProperties.getValue(SIGN_UP));
 
         log.debug("user is signed up");
-        final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
+        final HttpFormBinder requestDataBinder = HttpFormBinder.getInstance();
         final UserDto user = requestDataBinder.bindToDto(request, UserDto.class);
 
         final ValidationService validationService = ValidationService.getInstance();

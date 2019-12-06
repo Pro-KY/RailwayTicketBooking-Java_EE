@@ -17,10 +17,13 @@ public class UrlBuilder {
     private boolean redirect;
     private String contextPath;
 
+    public UrlBuilder(boolean redirect) {
+        this.redirect = redirect;
+    }
+
     public UrlBuilder(String viewPath) {
         this.viewPath = viewPath;
     }
-
 
     public UrlBuilder(boolean redirect, String contextPath, String viewPath) {
         this.viewPath = viewPath;
@@ -29,8 +32,8 @@ public class UrlBuilder {
     }
 
     public UrlBuilder(boolean redirect, String viewPath) {
-        this.viewPath = viewPath;
         this.redirect = redirect;
+        this.viewPath = viewPath;
     }
 
     public UrlBuilder(String viewPath, Map<String, Object> attributes) {
@@ -69,7 +72,9 @@ public class UrlBuilder {
             sb.append(contextPath);
         }
 
-        sb.append(viewPath);
+        if (viewPath != null) {
+            sb.append(viewPath);
+        }
 
         if (attributes.size() > 0) {
             sb.append("?");

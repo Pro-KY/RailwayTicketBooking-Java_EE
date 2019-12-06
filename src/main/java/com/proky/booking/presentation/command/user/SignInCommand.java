@@ -1,28 +1,21 @@
 package com.proky.booking.presentation.command.user;
 
-import com.proky.booking.dto.PageDto;
 import com.proky.booking.dto.UserDto;
-import com.proky.booking.persistence.entity.Station;
 import com.proky.booking.persistence.entity.User;
 import com.proky.booking.presentation.command.CommandUtil;
-import com.proky.booking.util.HttpRequestDataBinder;
+import com.proky.booking.util.form.HttpFormBinder;
 import com.proky.booking.presentation.command.ICommand;
 import com.proky.booking.service.*;
 import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.constans.UserTypeEnum;
 import com.proky.booking.util.constans.http.Commands;
-import com.proky.booking.util.properties.ViewProperties;
 import com.proky.booking.validation.ValidationResult;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import java.util.List;
-
-import static com.proky.booking.util.properties.ViewProperties.*;
 
 
 public class SignInCommand implements ICommand {
@@ -32,12 +25,12 @@ public class SignInCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         final HttpSession session = request.getSession();
 
-        UrlBuilder urlBuilder = new UrlBuilder(true, request.getContextPath());
+        UrlBuilder urlBuilder = new UrlBuilder(true);
         final SignInService signInService = ServiceFactory.getInstance().getSignInService();
         final UserService userService = ServiceFactory.getInstance().getUserService();
 
         log.debug("user signed in");
-        final HttpRequestDataBinder requestDataBinder = HttpRequestDataBinder.getInstance();
+        final HttpFormBinder requestDataBinder = HttpFormBinder.getInstance();
         final UserDto enteredUserCredentials = requestDataBinder.bindToDto(request, UserDto.class);
 
         final ValidationService validationService = ValidationService.getInstance();
@@ -51,6 +44,8 @@ public class SignInCommand implements ICommand {
 
             String command = isAdministrator ? Commands.ALL_USERS : Commands.HOME;
             urlBuilder.setAttribute(Attributes.COMMAND, command);
+            urlBuilder.setContextPath(request.getContextPath());
+            log.info(request.getContextPath());
 
             session.setAttribute(Attributes.USER_TYPE, userTypeEnum);
             session.setAttribute(Attributes.USER, userDto);

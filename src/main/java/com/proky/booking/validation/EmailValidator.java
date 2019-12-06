@@ -1,16 +1,12 @@
 package com.proky.booking.validation;
 
 
-import com.proky.booking.util.properties.MessageProperties;
 import com.proky.booking.validation.annotation.Email;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Field;
-import java.text.MessageFormat;
 import java.util.regex.Pattern;
-
-import static com.proky.booking.util.properties.MessageProperties.*;
 
 public class EmailValidator extends Validator {
     private static final Logger log = LogManager.getLogger(EmailValidator.class);
@@ -18,6 +14,7 @@ public class EmailValidator extends Validator {
     @Override
     public boolean validate(Field field, Object validationObject) {
         field.setAccessible(true);
+        validatedField = field.getName();
 
         final Email declaredAnnotation = field.getDeclaredAnnotation(Email.class);
         final String emailRegExpPattern = declaredAnnotation.pattern();
@@ -28,13 +25,12 @@ public class EmailValidator extends Validator {
             log.info("email notValid: {}", notValid);
 
             if (notValid) {
-                validatedField = field.getName();
-                errorMessage = MessageFormat.format(MessageProperties.getMessage(EMAIL_VALIDATION), emailValue);
+                message =  new ErrorMessage("error.email");
             }
 
             return notValid;
         } catch (IllegalAccessException e) {
-            throw new RuntimeException(MessageProperties.getMessage(CANT_ACCESS_FIELD));
+            throw new RuntimeException("Can not get access to the "+ validatedField +" value.");
         }
     }
 }

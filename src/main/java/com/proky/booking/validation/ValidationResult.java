@@ -1,12 +1,14 @@
 package com.proky.booking.validation;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ValidationResult {
     private boolean isSuccessfull = true;
     // field, ErrorMessage
-    private Map<String, String> errorMessages = new HashMap<>();
+//    private Map<String, String> errorMessages = new HashMap<>();
+    private Map<String, ErrorMessage> errorMessages = new HashMap<>();
 
     public boolean isSuccessfull() {
         return isSuccessfull;
@@ -16,11 +18,12 @@ public class ValidationResult {
         this.isSuccessfull = successfull;
     }
 
-    public void addErrorMessage(String fieldName, String message) {
+
+    public void addErrorMessage(String fieldName, ErrorMessage message) {
         errorMessages.put(fieldName, message);
     }
 
-    public Map<String, String> getErrorMessages() {
+    public Map<String, ErrorMessage> getErrorMessages() {
         return errorMessages;
     }
 }

@@ -26,7 +26,6 @@ public class SignInCommand implements ICommand {
         final HttpSession session = request.getSession();
 
         UrlBuilder urlBuilder = new UrlBuilder(true);
-        final SignInService signInService = ServiceFactory.getInstance().getSignInService();
         final UserService userService = ServiceFactory.getInstance().getUserService();
 
         log.debug("user signed in");
@@ -37,9 +36,9 @@ public class SignInCommand implements ICommand {
         final ValidationResult validation = validationService.validate(enteredUserCredentials, "email", "password");
 
         if (validation.isSuccessfull()) {
-            final User authenticatedUser = signInService.signIn(enteredUserCredentials);
+            final User authenticatedUser = userService.signIn(enteredUserCredentials);
             final boolean isAdministrator = userService.isAdministrator(authenticatedUser);
-            final UserDto userDto = userService.mapUserToDto(authenticatedUser);
+            final UserDto userDto = userService.getUserDtoByUser(authenticatedUser);
             UserTypeEnum userTypeEnum = isAdministrator ? UserTypeEnum.ADMIN : UserTypeEnum.USER;
 
             String command = isAdministrator ? Commands.ALL_USERS : Commands.HOME;

@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TrainService {
-    private static final Logger log = LogManager.getLogger(SignInService.class);
+    private static final Logger log = LogManager.getLogger(TrainService.class);
     private DaoFactory daoFactory;
 
     TrainService(DaoFactory daoFactory) {

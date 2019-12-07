@@ -2,10 +2,10 @@ package com.proky.booking.presentation.command.user;
 
 import com.proky.booking.dto.UserDto;
 import com.proky.booking.presentation.command.CommandUtil;
+import com.proky.booking.service.UserService;
 import com.proky.booking.util.HttpFormBinder;
 import com.proky.booking.presentation.command.ICommand;
 import com.proky.booking.service.ServiceFactory;
-import com.proky.booking.service.SignUpService;
 import com.proky.booking.service.ValidationService;
 import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.properties.ViewProperties;
@@ -35,8 +35,8 @@ public class SignUpCommand implements ICommand {
         final ValidationResult validation = validationService.validate(user);
 
         if (validation.isSuccessfull()) {
-            final SignUpService signUpService = ServiceFactory.getInstance().getSignUpService();
-            signUpService.signUp(user);
+            final UserService userService = ServiceFactory.getInstance().getUserService();
+            userService.signUp(user);
             CommandUtil.setAlertAttributes(true, "alert.user.created", session);
             urlBuilder.setViewPath(ViewProperties.getValue(SIGN_IN));
         } else {

@@ -12,8 +12,6 @@ import java.util.HashMap;
 
 public class ServiceFactory {
     private static final Logger log = LogManager.getLogger(ServiceFactory.class);
-    private Class<SignUpService> signUpServiceClass = SignUpService.class;
-    private Class<SignInService> signInServiceClass = SignInService.class;
     private Class<TrainService> trainServiceClass = TrainService.class;
     private Class<StationService> stationServiceClass = StationService.class;
     private Class<InvoiceService> invoiceServiceClass = InvoiceService.class;
@@ -25,15 +23,11 @@ public class ServiceFactory {
 
 
     private ServiceFactory() {
-        final SignUpService signUpService = new SignUpService(daoFactory);
-        final SignInService signInService = new SignInService(daoFactory);
         final TrainService trainService = new TrainService(daoFactory);
         final StationService stationService = new StationService(daoFactory);
         final InvoiceService invoiceService = new InvoiceService(daoFactory);
         final UserService userService = new UserService(daoFactory);
 
-        servicesMap.put(signUpServiceClass, signUpService);
-        servicesMap.put(signInServiceClass, signInService);
         servicesMap.put(trainServiceClass, trainService);
         servicesMap.put(stationServiceClass, stationService);
         servicesMap.put(invoiceServiceClass, invoiceService);
@@ -46,7 +40,6 @@ public class ServiceFactory {
         }
         return mInstance;
     }
-
 
     private static <T> T getService(T instance, Class<? extends T> aClass) {
         AnnotationChecker annotationChecker = new AnnotationChecker();
@@ -66,15 +59,6 @@ public class ServiceFactory {
 
     private <T> T getServiceFromMap(Class<? extends T> aClass) {
         return aClass.cast(servicesMap.get(aClass));
-    }
-
-
-    public SignUpService getSignUpService() {
-        return getService(getServiceFromMap(signUpServiceClass), signUpServiceClass);
-    }
-
-    public SignInService getSignInService() {
-        return getService(getServiceFromMap(signInServiceClass), signInServiceClass);
     }
 
     public TrainService getTrainService() {

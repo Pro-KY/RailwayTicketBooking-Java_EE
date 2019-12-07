@@ -10,12 +10,14 @@ import com.proky.booking.persistence.dao.factory.DaoFactory;
 import com.proky.booking.persistence.entity.User;
 import com.proky.booking.persistence.entity.UserType;
 import com.proky.booking.util.ModelMapperWrapper;
+import com.proky.booking.util.PasswordEncryptor;
 import com.proky.booking.util.constans.UserTypeEnum;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class UserService {
@@ -79,8 +81,8 @@ public class UserService {
         return daoFactory.getUserDao().findById(id).orElseThrow(() -> new ServiceException("alert.entity.notfound"));
     }
 
-    public UserDto mapUserToDto(User user) {
-        return new ModelMapper().map(user, UserDto.class);
+    public UserDto getUserDtoByUser(User user) {
+        return ModelMapperWrapper.getInstance().getModelMapper().map(user, UserDto.class);
     }
 
     @Transactional
@@ -104,6 +106,42 @@ public class UserService {
 
         final IUserDao userDao = daoFactory.getUserDao();
         return userDao.delete(user);
+    }
+
+    public User signIn(UserDto enteredData) {
+        final IUserDao userDao = daoFactory.getUserDao();
+        final Optional<User> foundUser = userDao.findByEmail(enteredData.getEmail());
+
+        return foundUser.filter(user -> {
+            final String enteredPassword = enteredData.getPassword();
+            final String encryptedPassword = PasswordEncryptor.getInstance().encrypt(enteredPassword);
+            return encryptedPassword.equals(user.getPassword());
+        }).orElseThrow(() -> new ServiceException("alert.authorization"));
+    }
+
+    public void signUp(UserDto userDto) {
+        final IUserDao userDao = daoFactory.getUserDao();
+        final IUserTypeDao userTypeDao = daoFactory.getUserTypeDao();
+
+        final Optional<User> foundUser = userDao.findByEmail(userDto.getEmail());
+        if (foundUser.isPresent()) {
+            throw new ServiceException("alert.user.exist");
+        } else {
+            final PasswordEncryptor passwordEncryptor = PasswordEncryptor.getInstance();
+            final String encryptedPassword = passwordEncryptor.encrypt(userDto.getPassword());
+            final UserType userType = userTypeDao
+                    .findByType(UserTypeEnum.USER.type)
+                    .orElseThrow(() -> new ServiceException("alert.entity.notfound"));
+
+            final ModelMapper modelMapper = ModelMapperWrapper.getInstance().getModelMapper();
+            final User newUser = modelMapper.map(userDto, User.class);
+            newUser.setPassword(encryptedPassword);
+            newUser.setUserType(userType);
+
+            log.info(newUser);
+
+            userDao.save(newUser);
+        }
     }
 }
 

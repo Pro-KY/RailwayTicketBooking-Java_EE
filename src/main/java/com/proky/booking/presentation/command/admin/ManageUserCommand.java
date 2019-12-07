@@ -27,7 +27,7 @@ public class ManageUserCommand implements ICommand {
         final User user = userService.findUserById(Long.parseLong(userId));
         final UserDto userDto = userService.mapUserToDto(user);
 
-        request.setAttribute(Attributes.MODEL, userDto);
+        request.setAttribute(Attributes.USER_DTO, userDto);
         return ViewProperties.getValue(ViewProperties.ADMIN_MANAGE_USER);
     }
 }

@@ -37,9 +37,8 @@ public class UpdateUserCommand implements ICommand {
         userService.updateUser(user);
 
         CommandUtil.setAlertAttributes(true, "alert.user.updated", session);
-        PageDto pageDto = new PageDto();
-        final PageDto allRegisteredUsers = userService.findAllRegisteredUsers(pageDto);
-        session.setAttribute(Attributes.MODEL, allRegisteredUsers);
+        final PageDto allRegisteredUsers = userService.findAllRegisteredUsers(new PageDto());
+        session.setAttribute(Attributes.USERS_PAGE_DTO, allRegisteredUsers);
 
         return urlBuilder.buildURL();
     }

@@ -34,9 +34,8 @@ public class DeleteUserCommand implements ICommand {
         final UrlBuilder urlBuilder = new UrlBuilder(true, request.getContextPath(), ViewProperties.getValue(ADMIN_USERS));
         CommandUtil.setAlertAttributes(true, "alert.user.deleted", session);
 
-        PageDto pageDto = new PageDto();
-        final PageDto allRegisteredUsers = userService.findAllRegisteredUsers(pageDto);
-        session.setAttribute(Attributes.MODEL, allRegisteredUsers);
+        final PageDto allRegisteredUsers = userService.findAllRegisteredUsers(new PageDto());
+        session.setAttribute(Attributes.USERS_PAGE_DTO, allRegisteredUsers);
 
         return urlBuilder.buildURL();
     }

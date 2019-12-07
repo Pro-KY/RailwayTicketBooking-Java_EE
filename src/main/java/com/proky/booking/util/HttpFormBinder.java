@@ -1,4 +1,4 @@
-package com.proky.booking.util.form;
+package com.proky.booking.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,26 +23,6 @@ public class HttpFormBinder {
     }
 
     public <T> T bindToDto(HttpServletRequest request, Class<T> tClass) {
-        return bindToEntity(request, tClass);
-    }
-
-    private void bindParametersToFields(Field[] fields, Map<String, String[]> parameterMap, Object object) throws IllegalAccessException {
-        for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
-            for (Field field : fields) {
-
-                final String parameterName = entry.getKey();
-
-                if (field.getName().equals(parameterName)) {
-                    field.setAccessible(true);
-                    final Object value = entry.getValue()[0];
-                    field.set(object, value);
-                    break;
-                }
-            }
-        }
-    }
-
-    public <T> T bindToEntity(HttpServletRequest request, Class<T> tClass) {
         final Map<String, String[]> parameterMap = request.getParameterMap();
 
         T result = null;
@@ -67,5 +47,21 @@ public class HttpFormBinder {
         }
 
         return result;
+    }
+
+    private void bindParametersToFields(Field[] fields, Map<String, String[]> parameterMap, Object object) throws IllegalAccessException {
+        for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+            for (Field field : fields) {
+
+                final String parameterName = entry.getKey();
+
+                if (field.getName().equals(parameterName)) {
+                    field.setAccessible(true);
+                    final Object value = entry.getValue()[0];
+                    field.set(object, value);
+                    break;
+                }
+            }
+        }
     }
 }

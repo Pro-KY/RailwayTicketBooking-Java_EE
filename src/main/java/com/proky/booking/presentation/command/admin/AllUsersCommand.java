@@ -22,12 +22,12 @@ public class AllUsersCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         final HttpSession session = request.getSession();
-        final PageDto sessionPageDto = PaginationService.getCurrentPageDto(session);
-        sessionPageDto.setRequestParameters(request);
+        final PageDto requestPageDto = new PageDto();
+        requestPageDto.setRequestParameters(request);
 
         final UserService userService = ServiceFactory.getInstance().getUserService();
-        final PageDto foundUsersPerPage = userService.findAllRegisteredUsers(sessionPageDto);
-        session.setAttribute(Attributes.USERS_PAGE_DTO, foundUsersPerPage);
+        final PageDto currentPageDto = userService.findAllRegisteredUsers(requestPageDto);
+        session.setAttribute(Attributes.USERS_PAGE_DTO, currentPageDto);
 
         return ViewProperties.getValue(ADMIN_USERS);
     }

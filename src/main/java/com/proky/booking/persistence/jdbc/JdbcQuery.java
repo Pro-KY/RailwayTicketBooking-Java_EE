@@ -13,7 +13,7 @@ public class JdbcQuery {
     private String sql;
     private int rowsAffected;
 
-     ResultSet getResult() {
+    ResultSet getResult() {
         return rs;
     }
 
@@ -34,7 +34,7 @@ public class JdbcQuery {
     }
 
      Long saveOrUpdate(Object... parameters) {
-        performModyfingQuery(parameters);
+        performModifyingQuery(parameters);
         long generatedKey = 0L;
 
         try {
@@ -49,11 +49,11 @@ public class JdbcQuery {
     }
 
     public boolean delete(Object... parameters) {
-        performModyfingQuery(parameters);
+        performModifyingQuery(parameters);
         return rowsAffected > 0;
     }
 
-    private void performModyfingQuery(Object... parameters) {
+    private void performModifyingQuery(Object... parameters) {
         try {
             ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             setParameters(parameters);
@@ -96,7 +96,7 @@ public class JdbcQuery {
         return rowsAffected > 0;
     }
 
-     Statement getStatement() {
+    Statement getStatement() {
         return statement;
     }
 

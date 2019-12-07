@@ -3,7 +3,7 @@ package com.proky.booking.presentation.command.admin;
 import com.proky.booking.dto.PageDto;
 import com.proky.booking.dto.UserDto;
 import com.proky.booking.presentation.command.CommandUtil;
-import com.proky.booking.util.form.HttpFormBinder;
+import com.proky.booking.util.HttpFormBinder;
 import com.proky.booking.presentation.command.ICommand;
 import com.proky.booking.service.ServiceFactory;
 import com.proky.booking.service.UserService;

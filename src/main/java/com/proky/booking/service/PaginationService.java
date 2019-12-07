@@ -142,13 +142,4 @@ public class PaginationService {
     public long getOffSet() {
         return offSet;
     }
-
-    public static PageDto getCurrentPageDto(HttpSession session) {
-        PageDto currentPageDto = (PageDto) session.getAttribute(Attributes.MODEL);
-        if (currentPageDto == null) {
-            log.info("currentPageDto is NULL");
-            currentPageDto = new PageDto();
-        }
-        return currentPageDto;
-    }
 }

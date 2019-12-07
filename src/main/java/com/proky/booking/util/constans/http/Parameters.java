@@ -9,7 +9,7 @@ public class Parameters {
     public static final String USER_LAST_NAME = "lastName";
     public static final String SIGN_UP_FRAGMENT = "signUpFragment";
 
-    public static final String GOING_TO = "goingTo";
+    public static final String GOING_TO_ID = "goingToId";
     public static final String DEPARTURE_DATE = "departureDate";
     public static final String DEPARTURE_TIME = "departureTime";
 

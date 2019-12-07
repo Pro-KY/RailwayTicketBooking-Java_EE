@@ -76,17 +76,23 @@
                         <div class="container-fluid">
                             <div class="btn-group">
                                 <li class="${usersPageDto.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                    <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${usersPageDto.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${Commands.ALL_USERS}">Previous</a>
+                                    <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${usersPageDto.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${Commands.ALL_USERS}&${Parameters.SELECTED_PAGE_INDEX}=${usersPageDto.currentPageIndex}">
+                                        <fmt:message key="pagination.previous" bundle="${rb}"/>
+                                    </a>
                                 </li>
 
                                 <c:forEach begin="${usersPageDto.startPageIndex}" end="${usersPageDto.endPageIndex}" varStatus="counter">
                                     <li class="${(usersPageDto.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
-                                        <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${usersPageDto.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${Commands.ALL_USERS}"> ${counter.index+1} </a>
+                                        <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${usersPageDto.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${Commands.ALL_USERS}">
+                                            ${counter.index+1}
+                                        </a>
                                     </li>
                                 </c:forEach>
 
                                 <li class="${usersPageDto.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                    <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${usersPageDto.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${Commands.ALL_USERS}">Next</a>
+                                    <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${usersPageDto.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${Commands.ALL_USERS}&${Parameters.SELECTED_PAGE_INDEX}=${usersPageDto.currentPageIndex}">
+                                        <fmt:message key="pagination.next" bundle="${rb}"/>
+                                    </a>
                                 </li>
                             </div>
                         </div>

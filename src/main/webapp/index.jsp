@@ -147,17 +147,23 @@
                             <div class="container-fluid">
                                 <div class="btn-group">
                                     <li class="${trainsPageDto.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                        <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${trainsPageDto.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${findTrainsCommand}&${findTrainParameters}&${Parameters.SELECTED_PAGE_INDEX}=${trainsPageDto.currentPageIndex}"><fmt:message key="pagination.previous" bundle="${rb}"/></a>
+                                        <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${trainsPageDto.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${findTrainsCommand}&${findTrainParameters}&${Parameters.SELECTED_PAGE_INDEX}=${trainsPageDto.currentPageIndex}">
+                                            <fmt:message key="pagination.previous" bundle="${rb}"/>
+                                        </a>
                                     </li>
 
                                     <c:forEach begin="${trainsPageDto.startPageIndex}" end="${trainsPageDto.endPageIndex}" varStatus="counter">
                                         <li class="${(trainsPageDto.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
-                                            <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${trainsPageDto.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${findTrainsCommand}&${findTrainParameters}"> ${counter.index+1} </a>
+                                            <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${trainsPageDto.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${findTrainsCommand}&${findTrainParameters}">
+                                                ${counter.index+1}
+                                            </a>
                                         </li>
                                     </c:forEach>
 
                                     <li class="${trainsPageDto.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                        <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${trainsPageDto.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${findTrainsCommand}&${findTrainParameters}&${Parameters.SELECTED_PAGE_INDEX}=${trainsPageDto.currentPageIndex}"><fmt:message key="pagination.next" bundle="${rb}"/></a>
+                                        <a class="page-link" href="${contextPath}?${Parameters.PAGE_SIZE}=${trainsPageDto.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${findTrainsCommand}&${findTrainParameters}&${Parameters.SELECTED_PAGE_INDEX}=${trainsPageDto.currentPageIndex}">
+                                            <fmt:message key="pagination.next" bundle="${rb}"/>
+                                        </a>
                                     </li>
                                 </div>
                             </div>

@@ -2,13 +2,11 @@ package com.proky.booking.presentation.command.trains;
 
 import com.proky.booking.dto.FindTrainDto;
 import com.proky.booking.dto.PageDto;
-import com.proky.booking.dto.TicketBookingDto;
 import com.proky.booking.persistence.entity.Station;
 import com.proky.booking.presentation.command.CommandUtil;
 import com.proky.booking.presentation.command.ICommand;
-import com.proky.booking.service.PaginationService;
 import com.proky.booking.service.ServiceFactory;
-import com.proky.booking.service.ValidationService;
+import com.proky.booking.validation.ValidationService;
 import com.proky.booking.util.HttpFormBinder;
 import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.http.Attributes;

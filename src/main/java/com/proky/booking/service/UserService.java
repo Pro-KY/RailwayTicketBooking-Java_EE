@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -30,7 +31,6 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public PageDto findAllRegisteredUsers(PageDto pageDto) {
-
         final IUserDao userDao = daoFactory.getUserDao();
         final IUserTypeDao userTypeDao = daoFactory.getUserTypeDao();
 
@@ -46,8 +46,6 @@ public class UserService {
 
         final long pageSize = paginationService.getPageSize();
         final long offSet = paginationService.getOffSet();
-        log.info("pageSize {}", pageSize);
-        log.info("offSet {}", offSet);
 
         final ModelMapper modelMapper = ModelMapperWrapper.getInstance().getModelMapper();
 
@@ -61,9 +59,8 @@ public class UserService {
         pageDto.setPageList(allPassengers);
         paginationService.updatePageDto();
 
-        log.info("pageDto: {}", pageDto.toString());
 
-        return pageDto;
+        return paginationService.getpageDto();
     }
 
     public boolean isAdministrator(User authenticatedUser) {
@@ -87,24 +84,27 @@ public class UserService {
 
     @Transactional
     public void updateUser(UserDto userDto) {
+        final IUserDao userDao = daoFactory.getUserDao();
+
+        log.info("update called");
         final Long userId = Long.parseLong(userDto.getId());
-        final User user = findUserById(userId);
+        final User user = userDao.findById(userId).orElseThrow(() -> new ServiceException("alert.entity.notfound"));
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
 
-        final IUserDao userDao = daoFactory.getUserDao();
         userDao.update(user);
     }
 
     @Transactional
     public boolean deleteUser(Long userId) {
-        final User user = daoFactory.getUserDao()
+        final IUserDao userDao = daoFactory.getUserDao();
+
+        final User user = userDao
                 .findById(userId)
                 .orElseThrow(() -> new ServiceException("alert.entity.notfound"));
 
-        final IUserDao userDao = daoFactory.getUserDao();
         return userDao.delete(user);
     }
 
@@ -112,16 +112,24 @@ public class UserService {
         final IUserDao userDao = daoFactory.getUserDao();
         final Optional<User> foundUser = userDao.findByEmail(enteredData.getEmail());
 
-        return foundUser.filter(user -> {
-            final String enteredPassword = enteredData.getPassword();
-            final String encryptedPassword = PasswordEncryptor.getInstance().encrypt(enteredPassword);
-            return encryptedPassword.equals(user.getPassword());
-        }).orElseThrow(() -> new ServiceException("alert.authorization"));
+        return foundUser
+                .filter(user -> checkIfPasswordsTheSame(enteredData, user))
+                .orElseThrow(() -> new ServiceException("alert.authorization"));
+    }
+
+    private boolean checkIfPasswordsTheSame(UserDto userDto, User existingUser) {
+        final String enteredPassword = userDto.getPassword();
+        final String encryptedPassword = PasswordEncryptor.getInstance().encrypt(enteredPassword);
+        return encryptedPassword.equals(existingUser.getPassword());
     }
 
     public void signUp(UserDto userDto) {
         final IUserDao userDao = daoFactory.getUserDao();
         final IUserTypeDao userTypeDao = daoFactory.getUserTypeDao();
+
+        if (Objects.isNull(userDto.getEmail()) || Objects.isNull(userDto.getPassword())) {
+            throw new IllegalArgumentException("invalid email or password values!");
+        }
 
         final Optional<User> foundUser = userDao.findByEmail(userDto.getEmail());
         if (foundUser.isPresent()) {
@@ -139,7 +147,6 @@ public class UserService {
             newUser.setUserType(userType);
 
             log.info(newUser);
-
             userDao.save(newUser);
         }
     }

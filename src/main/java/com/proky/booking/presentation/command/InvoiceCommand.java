@@ -5,7 +5,7 @@ import com.proky.booking.dto.TicketBookingDto;
 import com.proky.booking.dto.UserDto;
 import com.proky.booking.service.InvoiceService;
 import com.proky.booking.service.ServiceFactory;
-import com.proky.booking.service.ValidationService;
+import com.proky.booking.validation.ValidationService;
 import com.proky.booking.util.HttpFormBinder;
 import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.constans.http.Attributes;

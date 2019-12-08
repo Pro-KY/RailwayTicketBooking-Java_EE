@@ -5,6 +5,8 @@ import java.util.Objects;
 public class UserType extends Entity<Long> {
     private String type;
 
+    public UserType() {}
+
     public UserType(Long id) {
         super(id);
     }

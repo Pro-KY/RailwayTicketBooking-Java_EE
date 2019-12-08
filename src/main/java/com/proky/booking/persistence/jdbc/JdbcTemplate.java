@@ -35,8 +35,8 @@ public class JdbcTemplate {
         try(final ResultSet result = jdbcQuery.select(parameters)) {
 
             while (result.next()) {
-                final T t = entityMapper.mapToEntity(result);
-                resultList.add(t);
+                final T entity = entityMapper.mapToEntity(result);
+                resultList.add(entity);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -51,17 +51,17 @@ public class JdbcTemplate {
     public <T> Optional<T> findByQuery(String sql, EntityMapper<T> entityMapper, Object... parameters) {
         final Connection connection = connectionWrapper.getConnection();
         final JdbcQuery jdbcQuery = new JdbcQuery(connection, sql);
-        Optional<T> t = Optional.empty();
+        Optional<T> entity = Optional.empty();
         try (ResultSet result = jdbcQuery.select(parameters)) {
             if(result.next()) {
-                t = Optional.ofNullable(entityMapper.mapToEntity(result));
+                entity = Optional.ofNullable(entityMapper.mapToEntity(result));
             }
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
         }  finally {
             connectionWrapper.close();
         }
-        return t;
+        return entity;
     }
 
     public Long countRows(String sql, Object...parameters) {

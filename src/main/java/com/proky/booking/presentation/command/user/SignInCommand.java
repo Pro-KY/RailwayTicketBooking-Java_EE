@@ -11,6 +11,7 @@ import com.proky.booking.util.constans.http.Attributes;
 import com.proky.booking.util.constans.UserTypeEnum;
 import com.proky.booking.util.constans.http.Commands;
 import com.proky.booking.validation.ValidationResult;
+import com.proky.booking.validation.ValidationService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

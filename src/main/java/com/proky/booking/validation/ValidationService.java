@@ -1,7 +1,6 @@
-package com.proky.booking.service;
+package com.proky.booking.validation;
 
 import com.proky.booking.validation.annotation.Email;
-import com.proky.booking.validation.*;
 import com.proky.booking.validation.annotation.Length;
 import com.proky.booking.validation.annotation.Size;
 

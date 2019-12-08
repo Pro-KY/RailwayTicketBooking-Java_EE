@@ -4,6 +4,7 @@ import com.proky.booking.validation.annotation.Email;
 import com.proky.booking.validation.annotation.Length;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class UserDto implements Serializable {
    private String id;
@@ -24,6 +25,15 @@ public class UserDto implements Serializable {
    private String userTypeId;
 
    public UserDto() {}
+
+   private UserDto(Builder builder) {
+      setId(builder.id);
+      setFirstName(builder.firstName);
+      setLastName(builder.lastName);
+      setEmail(builder.email);
+      setPassword(builder.password);
+      setUserTypeId(builder.userTypeId);
+   }
 
    public String getId() {
       return id;
@@ -72,6 +82,71 @@ public class UserDto implements Serializable {
    public void setPassword(String password) {
       this.password = password;
    }
+
+   public static final class Builder {
+      private String id;
+      private String firstName;
+      private String lastName;
+      private String email;
+      private String password;
+      private String userTypeId;
+
+      public Builder() {
+      }
+
+      public Builder id(String val) {
+         id = val;
+         return this;
+      }
+
+      public Builder firstName(String val) {
+         firstName = val;
+         return this;
+      }
+
+      public Builder lastName(String val) {
+         lastName = val;
+         return this;
+      }
+
+      public Builder email(String val) {
+         email = val;
+         return this;
+      }
+
+      public Builder password(String val) {
+         password = val;
+         return this;
+      }
+
+      public Builder userTypeId(String val) {
+         userTypeId = val;
+         return this;
+      }
+
+      public UserDto build() {
+         return new UserDto(this);
+      }
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+      UserDto userDto = (UserDto) o;
+      return Objects.equals(id, userDto.id) &&
+              Objects.equals(firstName, userDto.firstName) &&
+              Objects.equals(lastName, userDto.lastName) &&
+              Objects.equals(email, userDto.email) &&
+              Objects.equals(password, userDto.password) &&
+              Objects.equals(userTypeId, userDto.userTypeId);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(id, firstName, lastName, email, password, userTypeId);
+   }
+
 
    @Override
    public String toString() {

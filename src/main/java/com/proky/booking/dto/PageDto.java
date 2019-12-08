@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public class PageDto implements Serializable {
     private static final Logger log = LogManager.getLogger(PageDto.class);
@@ -22,8 +23,21 @@ public class PageDto implements Serializable {
     private Long endPageIndex;
     private long allPagesAmount;
 
-    private Long userId;
+//    private Long userId;
     private List pageList;
+
+    private PageDto(Builder builder) {
+        setCurrentPageIndex(builder.currentPageIndex);
+        isNextClicked = builder.isNextClicked;
+        isPreviousClicked = builder.isPreviousClicked;
+        setPageSize(builder.pageSize);
+        setLeftButtonDisabled(builder.isLeftButtonDisabled);
+        setRightButtonDisabled(builder.isRightButtonDisabled);
+        startPageIndex = builder.startPageIndex;
+        endPageIndex = builder.endPageIndex;
+        setAllPagesAmount(builder.allPagesAmount);
+        setPageList(builder.pageList);
+    }
 
     public void setRequestParameters(HttpServletRequest request) {
         String selectedPageIndex = request.getParameter(Parameters.SELECTED_PAGE_INDEX);
@@ -87,13 +101,13 @@ public class PageDto implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+//    public Long getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(Long userId) {
+//        this.userId = userId;
+//    }
 
     public boolean getIsLeftButtonDisabled() {
         return isLeftButtonDisabled;
@@ -150,4 +164,97 @@ public class PageDto implements Serializable {
                 ", paginationListSize=" + (pageList != null ? pageList.size() : "empty") +
                 '}';
     }
+
+
+    public static final class Builder {
+        private Long currentPageIndex;
+        private Boolean isNextClicked;
+        private Boolean isPreviousClicked;
+        private String pageSize;
+        private boolean isLeftButtonDisabled;
+        private boolean isRightButtonDisabled;
+        private Long startPageIndex;
+        private Long endPageIndex;
+        private long allPagesAmount;
+        private List pageList;
+
+        public Builder() {
+        }
+
+        public Builder currentPageIndex(Long val) {
+            currentPageIndex = val;
+            return this;
+        }
+
+        public Builder isNextClicked(Boolean val) {
+            isNextClicked = val;
+            return this;
+        }
+
+        public Builder isPreviousClicked(Boolean val) {
+            isPreviousClicked = val;
+            return this;
+        }
+
+        public Builder pageSize(String val) {
+            pageSize = val;
+            return this;
+        }
+
+        public Builder isLeftButtonDisabled(boolean val) {
+            isLeftButtonDisabled = val;
+            return this;
+        }
+
+        public Builder isRightButtonDisabled(boolean val) {
+            isRightButtonDisabled = val;
+            return this;
+        }
+
+        public Builder startPageIndex(Long val) {
+            startPageIndex = val;
+            return this;
+        }
+
+        public Builder endPageIndex(Long val) {
+            endPageIndex = val;
+            return this;
+        }
+
+        public Builder allPagesAmount(long val) {
+            allPagesAmount = val;
+            return this;
+        }
+
+        public Builder pageList(List val) {
+            pageList = val;
+            return this;
+        }
+
+        public PageDto build() {
+            return new PageDto(this);
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PageDto pageDto = (PageDto) o;
+        return isLeftButtonDisabled == pageDto.isLeftButtonDisabled &&
+                isRightButtonDisabled == pageDto.isRightButtonDisabled &&
+                allPagesAmount == pageDto.allPagesAmount &&
+                Objects.equals(currentPageIndex, pageDto.currentPageIndex) &&
+                Objects.equals(isNextClicked, pageDto.isNextClicked) &&
+                Objects.equals(isPreviousClicked, pageDto.isPreviousClicked) &&
+                Objects.equals(pageSize, pageDto.pageSize) &&
+                Objects.equals(startPageIndex, pageDto.startPageIndex) &&
+                Objects.equals(endPageIndex, pageDto.endPageIndex);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(currentPageIndex, isNextClicked, isPreviousClicked, pageSize, isLeftButtonDisabled, isRightButtonDisabled, startPageIndex, endPageIndex, allPagesAmount);
+    }
+
 }

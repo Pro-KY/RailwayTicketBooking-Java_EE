@@ -6,7 +6,7 @@ import com.proky.booking.service.UserService;
 import com.proky.booking.util.HttpFormBinder;
 import com.proky.booking.presentation.command.ICommand;
 import com.proky.booking.service.ServiceFactory;
-import com.proky.booking.service.ValidationService;
+import com.proky.booking.validation.ValidationService;
 import com.proky.booking.util.UrlBuilder;
 import com.proky.booking.util.properties.ViewProperties;
 import com.proky.booking.validation.ValidationResult;

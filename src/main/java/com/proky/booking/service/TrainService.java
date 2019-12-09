@@ -33,12 +33,12 @@ public class TrainService {
     public PageDto findTrains(final PageDto pageDto, String dateUI, String timeUI, String stationId) {
         final ITrainDao trainDao = daoFactory.getTrainDao();
 
-        final SqlDateTimeConverter instance = SqlDateTimeConverter.getInstance();
-        final Time time = instance.convertToSqlTime(timeUI);
-        final Date date = instance.convertToSqlDate(dateUI);
-        final Station station = new Station(Long.valueOf(stationId));
+        final SqlDateTimeConverter sqlDateTimeConverter = SqlDateTimeConverter.getInstance();
+        final Time departureTime = sqlDateTimeConverter.convertToSqlTime(timeUI);
+        final Date departureDate = sqlDateTimeConverter.convertToSqlDate(dateUI);
+        final Station goingToStation = new Station(Long.valueOf(stationId));
 
-        final long foundTrainsAmount = trainDao.countTrainsByDateAndTimeAndStation(date, time, station);
+        final long foundTrainsAmount = trainDao.countTrainsByDateAndTimeAndStation(departureDate, departureTime, goingToStation);
 
         final PaginationService paginationService = new PaginationService(pageDto);
         paginationService.setAllRowsAmount(foundTrainsAmount);
@@ -48,7 +48,7 @@ public class TrainService {
         final long pageSize = paginationService.getPageSize();
 
         final List<TrainDto> foundTrains = trainDao.
-                findTrainsByDateAndTimeAndStation(date, time, station, pageSize, offSet)
+                findTrainsByDateAndTimeAndStation(departureDate, departureTime, goingToStation, pageSize, offSet)
                 .stream()
                 .map(this::mapTrainToDto)
                 .collect(Collectors.toList());

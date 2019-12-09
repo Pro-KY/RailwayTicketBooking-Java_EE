@@ -13,7 +13,8 @@ public class Route extends Entity<Long> {
     private Time arrivalTime;
     private Double routeLengthFactor;
 
-    public Route(Long id, Station departureStation, Station arrivalStation, Date departureDate, Date arrivalDate, Time departureTime, Time arrivalTime, Double routeLengthFactor) {
+    public Route(Long id, Station departureStation, Station arrivalStation, Date departureDate,
+                 Date arrivalDate, Time departureTime, Time arrivalTime, Double routeLengthFactor) {
         super(id);
         this.departureStation = departureStation;
         this.arrivalStation = arrivalStation;

@@ -4,7 +4,9 @@ import com.proky.booking.dto.InvoiceDto;
 import com.proky.booking.dto.TicketBookingDto;
 import com.proky.booking.dto.TrainDto;
 import com.proky.booking.dto.UserDto;
+import com.proky.booking.exception.ServiceException;
 import com.proky.booking.persistence.dao.IInvoiceDao;
+import com.proky.booking.persistence.dao.ITrainDao;
 import com.proky.booking.persistence.dao.factory.DaoFactory;
 import com.proky.booking.persistence.entity.Invoice;
 import com.proky.booking.persistence.entity.Train;
@@ -32,17 +34,19 @@ public class InvoiceService {
 
     public InvoiceDto calculateInvoice(TicketBookingDto ticketBookingDto, UserDto userDto) {
         final Long trainId = Long.parseLong(ticketBookingDto.getTrainId());
-
-        final ServiceFactory serviceFactory = ServiceFactory.getInstance();
-        final TrainDto trainDto = serviceFactory.getTrainService().findTrainById(trainId);
-
         final ModelMapper modelMapper = ModelMapperWrapper.getInstance().getModelMapper();
+
+        final ITrainDao trainDao = daoFactory.getTrainDao();
+        final Train train = trainDao.findById(trainId).orElseThrow(() -> new ServiceException("alert.entity.notfound"));
+        final TrainDto trainDto = modelMapper.map(train, TrainDto.class);
+
         final InvoiceDto invoiceDto = modelMapper.map(trainDto, InvoiceDto.class);
 
         final BigDecimal seatsAmount = BigDecimal.valueOf(Long.parseLong(ticketBookingDto.getSeatsAmount()));
         final BigDecimal seatPrice = trainDto.getTrainSeatPrice();
         final BigDecimal routeLengthFactor = BigDecimal.valueOf(trainDto.getRouteLengthFactor());
         BigDecimal sum = seatsAmount.multiply(seatPrice).multiply(routeLengthFactor).setScale(2, RoundingMode.CEILING);
+        System.out.println(sum);
         invoiceDto.setSum(sum);
         invoiceDto.setSeatsAmount(seatsAmount);
 

@@ -1,6 +1,5 @@
 package com.proky.booking.stub;
 
-import com.proky.booking.dto.PageDto;
 import com.proky.booking.dto.UserDto;
 import com.proky.booking.persistence.entity.User;
 import com.proky.booking.persistence.entity.UserType;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserEntityDtoStubProvider {
+public class UserDataStubProvider {
     private final PasswordEncryptor passwordEncryptor = PasswordEncryptor.getInstance();
     private final ModelMapper modelMapper = ModelMapperWrapper.getInstance().getModelMapper();
 
@@ -20,13 +19,13 @@ public class UserEntityDtoStubProvider {
     private final String SECOND_USER_HASHED_PASSWORD = "be0342d0b45a010fee5b58b8b697cd4a1230c404f9ef0259b956496730788ee4";
     private final String THIRD_USER_HASHED_PASSWORD = "82ce47b23e77e9c53e777172aacbccf2576c9141b8de2bbe4194bdd77035e09d";
 
-    private static UserEntityDtoStubProvider mInstance;
+    private static UserDataStubProvider mInstance;
 
-    private UserEntityDtoStubProvider() { }
+    private UserDataStubProvider() { }
 
-    public static UserEntityDtoStubProvider getInstance() {
+    public static UserDataStubProvider getInstance() {
         if (mInstance == null) {
-            mInstance = new UserEntityDtoStubProvider();
+            mInstance = new UserDataStubProvider();
         }
         return mInstance;
     }

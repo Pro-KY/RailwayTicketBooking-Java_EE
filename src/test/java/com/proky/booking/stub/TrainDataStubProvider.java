@@ -1,12 +1,9 @@
 package com.proky.booking.stub;
 
-import com.proky.booking.dto.PageDto;
 import com.proky.booking.dto.TrainDto;
-import com.proky.booking.dto.UserDto;
 import com.proky.booking.persistence.entity.*;
 import com.proky.booking.util.ModelMapperWrapper;
 import com.proky.booking.util.PasswordEncryptor;
-import org.junit.Test;
 import org.modelmapper.ModelMapper;
 
 import java.math.BigDecimal;
@@ -14,26 +11,24 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class TrainEntityDtoStubProvider {
+public class TrainDataStubProvider {
 
-
-    private static TrainEntityDtoStubProvider mInstance;
+    private static TrainDataStubProvider mInstance;
     private final PasswordEncryptor passwordEncryptor = PasswordEncryptor.getInstance();
     private final ModelMapper modelMapper = ModelMapperWrapper.getInstance().getModelMapper();
 
-    private TrainEntityDtoStubProvider() {
+    private TrainDataStubProvider() {
     }
 
-    public static TrainEntityDtoStubProvider getInstance() {
+    public static TrainDataStubProvider getInstance() {
         if (mInstance == null) {
-            mInstance = new TrainEntityDtoStubProvider();
+            mInstance = new TrainDataStubProvider();
         }
         return mInstance;
     }
 
-    public TrainDto getSingleTrainDto() {
+    public TrainDto getTrainDtoStub() {
         return new TrainDto.Builder().trainType("Люкс")
                 .trainSeatPrice(new BigDecimal(100.00)).routeId(2L)
                 .departureStationId(9L).arrivalStationId(1L)
@@ -42,7 +37,7 @@ public class TrainEntityDtoStubProvider {
                 .routeLengthFactor(0.7).trainId(1).build();
     }
 
-    public Train getSingleTrain() {
+    public Train getTrainStub() {
         final TrainType luxeTrainType = new TrainType(1L, "Люкс", new BigDecimal(100.00));
         final Route route = new Route(2L, new Station(9L), new Station(1L), Date.valueOf("2019-01-10"), Date.valueOf("2019-11-01"),
                 Time.valueOf("21:15:00"), Time.valueOf("05:58:00"), 0.7);

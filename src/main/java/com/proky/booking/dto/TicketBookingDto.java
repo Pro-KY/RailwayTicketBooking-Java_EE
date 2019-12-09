@@ -19,6 +19,13 @@ public class TicketBookingDto implements Serializable {
 
     public TicketBookingDto() {}
 
+    private TicketBookingDto(Builder builder) {
+        setTrainId(builder.trainId);
+        setFirstName(builder.firstName);
+        setLastName(builder.lastName);
+        setSeatsAmount(builder.seatsAmount);
+    }
+
     public String getTrainId() {
         return trainId;
     }
@@ -49,6 +56,40 @@ public class TicketBookingDto implements Serializable {
 
     public void setSeatsAmount(String seatsAmount) {
         this.seatsAmount = seatsAmount;
+    }
+
+    public static final class Builder {
+        private String trainId;
+        private String firstName;
+        private String lastName;
+        private String seatsAmount;
+
+        public Builder() {
+        }
+
+        public Builder trainId(String val) {
+            trainId = val;
+            return this;
+        }
+
+        public Builder firstName(String val) {
+            firstName = val;
+            return this;
+        }
+
+        public Builder lastName(String val) {
+            lastName = val;
+            return this;
+        }
+
+        public Builder seatsAmount(String val) {
+            seatsAmount = val;
+            return this;
+        }
+
+        public TicketBookingDto build() {
+            return new TicketBookingDto(this);
+        }
     }
 
     @Override

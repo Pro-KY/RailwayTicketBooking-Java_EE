@@ -6,11 +6,10 @@ import com.proky.booking.exception.ServiceException;
 import com.proky.booking.persistence.dao.IRouteStationDao;
 import com.proky.booking.persistence.dao.ITrainDao;
 import com.proky.booking.persistence.dao.factory.DaoFactory;
-import com.proky.booking.persistence.entity.RouteStation;
 import com.proky.booking.persistence.entity.Station;
 import com.proky.booking.persistence.entity.Train;
 import com.proky.booking.stub.PageDtoStubProvider;
-import com.proky.booking.stub.TrainEntityDtoStubProvider;
+import com.proky.booking.stub.TrainDataStubProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -20,7 +19,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,15 +42,15 @@ public class TrainServiceTest {
     private TrainService trainService;
 
     private final PageDtoStubProvider pageDtoStubProvider = PageDtoStubProvider.getInstance();
-    private final TrainEntityDtoStubProvider trainEntityDtoStubProvider = TrainEntityDtoStubProvider.getInstance();
+    private final TrainDataStubProvider trainDataStubProvider = TrainDataStubProvider.getInstance();
 
 
     @Test
     public void findTrainsWithDefaultPageDtoAndValidParameters() {
         final Long expectedTrainsAmount = 4L;
 
-        final List<Train> trains = trainEntityDtoStubProvider.getTrains();
-        final List<TrainDto> expectedTrainsDto = trainEntityDtoStubProvider.getTrainsDto();
+        final List<Train> trains = trainDataStubProvider.getTrains();
+        final List<TrainDto> expectedTrainsDto = trainDataStubProvider.getTrainsDto();
 
         String departureDateFromRequest = "10/31/2019";
         String departureTimeFromRequest = "9:15 PM";
@@ -82,8 +80,8 @@ public class TrainServiceTest {
     public void findTrainsWithDefaultPageDtoAndIncorrectDateTimeParameters() {
         final Long expectedTrainsAmount = 4L;
 
-        final List<Train> trains = trainEntityDtoStubProvider.getTrains();
-        final List<TrainDto> expectedTrainsDto = trainEntityDtoStubProvider.getTrainsDto();
+        final List<Train> trains = trainDataStubProvider.getTrains();
+        final List<TrainDto> expectedTrainsDto = trainDataStubProvider.getTrainsDto();
 
         String incorrectDepartureDateFromRequest = "1031/2019";
         String incorrectDepartureTimeFromRequest = "915PM";
@@ -107,8 +105,8 @@ public class TrainServiceTest {
     public void findTrainByIdWithCorrectId() {
         Long correctId = 1L;
         when(daoFactory.getTrainDao()).thenReturn(trainDao);
-        final TrainDto expectedTrainDto = trainEntityDtoStubProvider.getSingleTrainDto();
-        final Optional<Train> optionalTrain = Optional.of(trainEntityDtoStubProvider.getSingleTrain());
+        final TrainDto expectedTrainDto = trainDataStubProvider.getTrainDtoStub();
+        final Optional<Train> optionalTrain = Optional.of(trainDataStubProvider.getTrainStub());
         when(trainDao.findById(correctId)).thenReturn(optionalTrain);
 
         final TrainDto actualTrainDto = trainService.findTrainById(correctId);

@@ -9,7 +9,7 @@ import com.proky.booking.persistence.dao.factory.DaoFactory;
 import com.proky.booking.persistence.entity.User;
 import com.proky.booking.persistence.entity.UserType;
 import com.proky.booking.stub.PageDtoStubProvider;
-import com.proky.booking.stub.UserEntityDtoStubProvider;
+import com.proky.booking.stub.UserDataStubProvider;
 import com.proky.booking.util.constans.UserTypeEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,14 +38,14 @@ public class UserServiceTest {
 
     @InjectMocks
     private UserService userService;
-    private final UserEntityDtoStubProvider userEntityDtoStubProvider = UserEntityDtoStubProvider.getInstance();
+    private final UserDataStubProvider userDataStubProvider = UserDataStubProvider.getInstance();
     private final PageDtoStubProvider pageDtoStubProvider = PageDtoStubProvider.getInstance();
 
 
     @Test
     public void isAdministratorWithAdministratorTest() {
 
-        final User adminStub = userEntityDtoStubProvider.getAdminStub();
+        final User adminStub = userDataStubProvider.getAdminStub();
         final String adminType = UserTypeEnum.ADMIN.type;
         final Optional<UserType> optionalAdminType = Optional.of(new UserType(2L, adminType));
 
@@ -58,7 +58,7 @@ public class UserServiceTest {
 
     @Test
     public void isAdministratorWithNotAdministratorTest() {
-        final User userStub = userEntityDtoStubProvider.getUserStub();
+        final User userStub = userDataStubProvider.getUserStub();
         final String adminType = UserTypeEnum.ADMIN.type;
         final Optional<UserType> optionalAdminType = Optional.of(new UserType(2L, adminType));
 
@@ -71,7 +71,7 @@ public class UserServiceTest {
 
     @Test(expected = ServiceException.class)
     public void isAdministratorWithIncorrectUserTypeTest() {
-        final User adminStub = userEntityDtoStubProvider.getAdminStub();
+        final User adminStub = userDataStubProvider.getAdminStub();
         final String incorrectUserType = "incorrectType";
 
         when(daoFactory.getUserTypeDao()).thenReturn(userTypeDao);
@@ -82,7 +82,7 @@ public class UserServiceTest {
 
     @Test
     public void findUserByIdWhenUserIsFoundTest() {
-        final Optional<User> expected = Optional.of(userEntityDtoStubProvider.getAdminStub());
+        final Optional<User> expected = Optional.of(userDataStubProvider.getAdminStub());
         when(daoFactory.getUserDao()).thenReturn(userDao);
         when(userDao.findById(adminId)).thenReturn(expected);
 
@@ -100,8 +100,8 @@ public class UserServiceTest {
 
     @Test
     public void updateUserTest() {
-        final UserDto userDto = userEntityDtoStubProvider.getUserDto();
-        final Optional<User> expected = Optional.of(userEntityDtoStubProvider.getUserStub());
+        final UserDto userDto = userDataStubProvider.getUserDto();
+        final Optional<User> expected = Optional.of(userDataStubProvider.getUserStub());
         when(daoFactory.getUserDao()).thenReturn(userDao);
         when(userDao.findById(userId)).thenReturn(expected);
 
@@ -111,8 +111,8 @@ public class UserServiceTest {
 
     @Test
     public void deleteUserWithValidUserId() {
-        final Optional<User> expectedOptionalUser = Optional.of(userEntityDtoStubProvider.getUserStub());
-        final User expectedUser = UserEntityDtoStubProvider.getInstance().getUserStub();
+        final Optional<User> expectedOptionalUser = Optional.of(userDataStubProvider.getUserStub());
+        final User expectedUser = UserDataStubProvider.getInstance().getUserStub();
         when(daoFactory.getUserDao()).thenReturn(userDao);
         when(userDao.findById(userId)).thenReturn(expectedOptionalUser);
         when(userDao.delete(expectedUser)).thenReturn(true);
@@ -135,8 +135,8 @@ public class UserServiceTest {
 
     @Test
     public void signInWithValidEmailAndPasswordTest() {
-        final Optional<User> expectedOptionalUser = Optional.of(userEntityDtoStubProvider.getUserStub());
-        final UserDto userDto = userEntityDtoStubProvider.getUserDtoWithValidEmailAndPassword();
+        final Optional<User> expectedOptionalUser = Optional.of(userDataStubProvider.getUserStub());
+        final UserDto userDto = userDataStubProvider.getUserDtoWithValidEmailAndPassword();
 
         when(daoFactory.getUserDao()).thenReturn(userDao);
         when(userDao.findByEmail(userDto.getEmail())).thenReturn(expectedOptionalUser);
@@ -149,7 +149,7 @@ public class UserServiceTest {
 
     @Test(expected = ServiceException.class)
     public void signInWithInvalidPasswordTest() {
-        final UserDto userDtoWithInvalidPassword = userEntityDtoStubProvider.getUserDtoWithInvalidPassword();
+        final UserDto userDtoWithInvalidPassword = userDataStubProvider.getUserDtoWithInvalidPassword();
         when(daoFactory.getUserDao()).thenReturn(userDao);
         when(userDao.findByEmail(userDtoWithInvalidPassword.getEmail())).thenReturn(Optional.empty());
 
@@ -160,7 +160,7 @@ public class UserServiceTest {
 
     @Test(expected = ServiceException.class)
     public void signInWithInvalidEmailTest() {
-        final UserDto userDtoWithInvalidPassword = userEntityDtoStubProvider.getUserDtoWithInvalidEmail();
+        final UserDto userDtoWithInvalidPassword = userDataStubProvider.getUserDtoWithInvalidEmail();
         when(daoFactory.getUserDao()).thenReturn(userDao);
         when(userDao.findByEmail(userDtoWithInvalidPassword.getEmail())).thenReturn(Optional.empty());
 
@@ -173,8 +173,8 @@ public class UserServiceTest {
     public void signUpWithTheSameEmailTest() {
         when(daoFactory.getUserDao()).thenReturn(userDao);
 
-        final Optional<User> expectedOptionalUser = Optional.of(userEntityDtoStubProvider.getUserStub());
-        final UserDto userDto = userEntityDtoStubProvider.getUserDtoWithValidEmailAndPassword();
+        final Optional<User> expectedOptionalUser = Optional.of(userDataStubProvider.getUserStub());
+        final UserDto userDto = userDataStubProvider.getUserDtoWithValidEmailAndPassword();
         when(userDao.findByEmail(userDto.getEmail())).thenReturn(expectedOptionalUser);
 
         userService.signUp(userDto);
@@ -186,7 +186,7 @@ public class UserServiceTest {
         when(daoFactory.getUserDao()).thenReturn(userDao);
         when(daoFactory.getUserTypeDao()).thenReturn(userTypeDao);
 
-        final UserDto userDto = userEntityDtoStubProvider.getUserDtoWithNullEmail();
+        final UserDto userDto = userDataStubProvider.getUserDtoWithNullEmail();
         when(userDao.findByEmail(userDto.getEmail())).thenReturn(Optional.empty());
 
         userService.signUp(userDto);
@@ -198,7 +198,7 @@ public class UserServiceTest {
         when(daoFactory.getUserDao()).thenReturn(userDao);
         when(daoFactory.getUserTypeDao()).thenReturn(userTypeDao);
 
-        final UserDto userDto = userEntityDtoStubProvider.getUserDtoWithNullPassword();
+        final UserDto userDto = userDataStubProvider.getUserDtoWithNullPassword();
         when(userDao.findByEmail(userDto.getEmail())).thenReturn(Optional.empty());
 
         userService.signUp(userDto);
@@ -209,8 +209,8 @@ public class UserServiceTest {
     public void signUpWithValidParametersTest() {
         when(daoFactory.getUserDao()).thenReturn(userDao);
         when(daoFactory.getUserTypeDao()).thenReturn(userTypeDao);
-        final UserDto validUserToSignUp = userEntityDtoStubProvider.getUserDto();
-        final Optional<UserType> userUserType = userEntityDtoStubProvider.getOptionalUserUserType();
+        final UserDto validUserToSignUp = userDataStubProvider.getUserDto();
+        final Optional<UserType> userUserType = userDataStubProvider.getOptionalUserUserType();
 
         when(userDao.findByEmail(validUserToSignUp.getEmail())).thenReturn(Optional.empty());
         when(userTypeDao.findByType(UserTypeEnum.USER.type)).thenReturn(userUserType);
@@ -229,9 +229,9 @@ public class UserServiceTest {
         final int registeredPassengersDtosSize = 3;
         final PageDto defaultPageDto = pageDtoStubProvider.getDefaultPageDto();
 
-        final UserType userUserType = userEntityDtoStubProvider.getUserUserType();
-        final List<User> expectedPassengersList = userEntityDtoStubProvider.getRegisteredPassengers();
-        final List<UserDto> registeredPassengersDtos = userEntityDtoStubProvider.getRegisteredPassengersDtos();
+        final UserType userUserType = userDataStubProvider.getUserUserType();
+        final List<User> expectedPassengersList = userDataStubProvider.getRegisteredPassengers();
+        final List<UserDto> registeredPassengersDtos = userDataStubProvider.getRegisteredPassengersDtos();
 
         when(daoFactory.getUserDao()).thenReturn(userDao);
         when(daoFactory.getUserTypeDao()).thenReturn(userTypeDao);

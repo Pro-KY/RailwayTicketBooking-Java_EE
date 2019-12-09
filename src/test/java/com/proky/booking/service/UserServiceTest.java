@@ -8,6 +8,7 @@ import com.proky.booking.persistence.dao.IUserTypeDao;
 import com.proky.booking.persistence.dao.factory.DaoFactory;
 import com.proky.booking.persistence.entity.User;
 import com.proky.booking.persistence.entity.UserType;
+import com.proky.booking.stub.PageDtoStubProvider;
 import com.proky.booking.stub.UserEntityDtoStubProvider;
 import com.proky.booking.util.constans.UserTypeEnum;
 import org.junit.Test;
@@ -19,8 +20,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -39,7 +39,46 @@ public class UserServiceTest {
     @InjectMocks
     private UserService userService;
     private final UserEntityDtoStubProvider userEntityDtoStubProvider = UserEntityDtoStubProvider.getInstance();
+    private final PageDtoStubProvider pageDtoStubProvider = PageDtoStubProvider.getInstance();
 
+
+    @Test
+    public void isAdministratorWithAdministratorTest() {
+
+        final User adminStub = userEntityDtoStubProvider.getAdminStub();
+        final String adminType = UserTypeEnum.ADMIN.type;
+        final Optional<UserType> optionalAdminType = Optional.of(new UserType(2L, adminType));
+
+        when(daoFactory.getUserTypeDao()).thenReturn(userTypeDao);
+        when(userTypeDao.findByType(adminType)).thenReturn(optionalAdminType);
+
+        assertTrue(userService.isAdministrator(adminStub));
+        verify(userTypeDao, times(1)).findByType(anyString());
+    }
+
+    @Test
+    public void isAdministratorWithNotAdministratorTest() {
+        final User userStub = userEntityDtoStubProvider.getUserStub();
+        final String adminType = UserTypeEnum.ADMIN.type;
+        final Optional<UserType> optionalAdminType = Optional.of(new UserType(2L, adminType));
+
+        when(daoFactory.getUserTypeDao()).thenReturn(userTypeDao);
+        when(userTypeDao.findByType(adminType)).thenReturn(optionalAdminType);
+
+        assertFalse(userService.isAdministrator(userStub));
+        verify(userTypeDao, times(1)).findByType(anyString());
+    }
+
+    @Test(expected = ServiceException.class)
+    public void isAdministratorWithIncorrectUserTypeTest() {
+        final User adminStub = userEntityDtoStubProvider.getAdminStub();
+        final String incorrectUserType = "incorrectType";
+
+        when(daoFactory.getUserTypeDao()).thenReturn(userTypeDao);
+        when(userTypeDao.findByType(incorrectUserType)).thenReturn(Optional.empty());
+
+        userService.isAdministrator(adminStub);
+    }
 
     @Test
     public void findUserByIdWhenUserIsFoundTest() {
@@ -185,9 +224,10 @@ public class UserServiceTest {
 
 
     @Test
-    public void findAllRegisteredUsersTest() {
+    public void findAllRegisteredUsersWithDefaultPageDto() {
         final Long expectedUsersAmount = 4L;
-        final PageDto defaultPageDto = userEntityDtoStubProvider.getDefaultPageDto();
+        final int registeredPassengersDtosSize = 3;
+        final PageDto defaultPageDto = pageDtoStubProvider.getDefaultPageDto();
 
         final UserType userUserType = userEntityDtoStubProvider.getUserUserType();
         final List<User> expectedPassengersList = userEntityDtoStubProvider.getRegisteredPassengers();
@@ -213,6 +253,7 @@ public class UserServiceTest {
                 .pageList(registeredPassengersDtos).build();
 
         final PageDto actualPageDto = userService.findAllRegisteredUsers(defaultPageDto);
+        assertEquals(registeredPassengersDtosSize, actualPageDto.getPageList().size());
         assertEquals(expectedPageDto, actualPageDto);
     }
 }

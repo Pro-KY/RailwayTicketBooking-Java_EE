@@ -117,8 +117,6 @@ public class UserEntityDtoStubProvider {
         return userDtos;
     }
 
-    public PageDto getDefaultPageDto() {
-        return new PageDto.Builder().currentPageIndex(0L).isNextClicked(false).isPreviousClicked(false).pageSize("3").build();
-    }
+
 
 }

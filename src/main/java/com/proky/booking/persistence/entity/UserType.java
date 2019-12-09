@@ -29,12 +29,11 @@ public class UserType extends Entity<Long> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserType userType = (UserType) o;
-        return  Objects.equals(this.getId(), userType.getId()) &&
-                Objects.equals(type, userType.type);
+        return  Objects.equals(this.getId(), userType.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getId(), type);
+        return Objects.hash(this.getId());
     }
 }

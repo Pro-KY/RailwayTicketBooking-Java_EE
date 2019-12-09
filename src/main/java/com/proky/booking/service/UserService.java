@@ -59,7 +59,6 @@ public class UserService {
         pageDto.setPageList(allPassengers);
         paginationService.updatePageDto();
 
-
         return paginationService.getpageDto();
     }
 

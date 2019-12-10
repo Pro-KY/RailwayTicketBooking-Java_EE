@@ -48,6 +48,10 @@ public class InvoiceServiceTest {
         final TicketBookingDto ticketBookingDto = new TicketBookingDto.Builder().seatsAmount("2").trainId("1").build();
         final Train trainStub = trainDataStubProvider.getTrainStub();
         final UserDto userDto = userDataStubProvider.getUserDto();
+
+        when(daoFactory.getTrainDao()).thenReturn(trainDao);
+        when(trainDao.findById(anyLong())).thenReturn(Optional.of(trainStub));
+
         final InvoiceDto actualInvoiceDto = invoiceService.calculateInvoice(ticketBookingDto, userDto);
 
         final BigDecimal seatPrice = trainStub.getTrainType().getSeatPrice();
@@ -58,9 +62,6 @@ public class InvoiceServiceTest {
                 .multiply(seatPrice)
                 .multiply(BigDecimal.valueOf(routeLengthFactor))
                 .setScale(2, RoundingMode.CEILING);
-
-        when(daoFactory.getTrainDao()).thenReturn(trainDao);
-        when(trainDao.findById(anyLong())).thenReturn(Optional.of(trainStub));
 
         final BigDecimal actualPrice = actualInvoiceDto.getSum();
 
@@ -74,6 +75,9 @@ public class InvoiceServiceTest {
         final Train trainStub = trainDataStubProvider.getTrainStub();
         final UserDto userDto = userDataStubProvider.getUserDto();
 
+        when(daoFactory.getTrainDao()).thenReturn(trainDao);
+        when(trainDao.findById(anyLong())).thenReturn(Optional.of(trainStub));
+
         final BigDecimal seatPrice = trainStub.getTrainType().getSeatPrice();
         final double routeLengthFactor = trainStub.getRoute().getRouteLengthFactor();
         final BigDecimal seatsAmount = BigDecimal.valueOf(Long.parseLong("2"));
@@ -82,9 +86,6 @@ public class InvoiceServiceTest {
                 .multiply(seatPrice)
                 .multiply(BigDecimal.valueOf(routeLengthFactor))
                 .setScale(2, RoundingMode.CEILING);
-
-        when(daoFactory.getTrainDao()).thenReturn(trainDao);
-        when(trainDao.findById(anyLong())).thenReturn(Optional.of(trainStub));
 
         final InvoiceDto actualInvoiceDto = invoiceService.calculateInvoice(ticketBookingDto, userDto);
         final BigDecimal actualPrice = actualInvoiceDto.getSum();

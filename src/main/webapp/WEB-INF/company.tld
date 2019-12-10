@@ -11,7 +11,7 @@
 
     <tag>
         <name>company</name>
-        <tag-class>com.proky.booking.tag.CompanyTag</tag-class>
+        <tag-class>com.proky.booking.presentation.tag.CompanyTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>name</name>

@@ -1,4 +1,4 @@
-package com.proky.booking.tag;
+package com.proky.booking.presentation.tag;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

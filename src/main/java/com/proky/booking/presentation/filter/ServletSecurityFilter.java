@@ -1,18 +1,12 @@
 package com.proky.booking.presentation.filter;
 
-import com.proky.booking.persistence.entity.Station;
 import com.proky.booking.presentation.command.CommandUtil;
-import com.proky.booking.service.ServiceFactory;
-import com.proky.booking.service.StationService;
-import com.proky.booking.util.UrlBuilder;
-import com.proky.booking.util.constans.http.Attributes;
-import com.proky.booking.util.constans.http.Commands;
-import com.proky.booking.util.constans.http.Parameters;
 import com.proky.booking.util.constans.UserTypeEnum;
+import com.proky.booking.util.constans.http.Attributes;
+import com.proky.booking.util.constans.http.Parameters;
 import com.proky.booking.util.properties.ViewProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sun.plugin.dom.core.Attr;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static com.proky.booking.util.constans.http.Commands.*;
-import static com.proky.booking.util.properties.ViewProperties.*;
+import static com.proky.booking.util.properties.ViewProperties.ERROR_ACCESS_DENIED;
 
 /**
  * The class restricts access to forbidden commands.

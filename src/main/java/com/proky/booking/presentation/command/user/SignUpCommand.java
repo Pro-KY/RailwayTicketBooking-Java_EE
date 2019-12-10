@@ -27,7 +27,6 @@ public class SignUpCommand implements ICommand {
         final HttpSession session = request.getSession();
         final UrlBuilder urlBuilder = new UrlBuilder(true, request.getContextPath(), ViewProperties.getValue(SIGN_UP));
 
-        log.debug("user is signed up");
         final HttpFormBinder requestDataBinder = HttpFormBinder.getInstance();
         final UserDto user = requestDataBinder.bindToDto(request, UserDto.class);
 

@@ -72,10 +72,7 @@ public class UserServiceTest {
     @Test(expected = ServiceException.class)
     public void isAdministratorWithIncorrectUserTypeTest() {
         final User adminStub = userDataStubProvider.getAdminStub();
-        final String incorrectUserType = "incorrectType";
-
         when(daoFactory.getUserTypeDao()).thenReturn(userTypeDao);
-//        when(userTypeDao.findByType(incorrectUserType)).thenReturn(Optional.empty());
 
         userService.isAdministrator(adminStub);
     }
@@ -187,7 +184,6 @@ public class UserServiceTest {
         when(daoFactory.getUserTypeDao()).thenReturn(userTypeDao);
 
         final UserDto userDto = userDataStubProvider.getUserDtoWithNullEmail();
-//        when(userDao.findByEmail(userDto.getEmail())).thenReturn(Optional.empty());
 
         userService.signUp(userDto);
         verify(userDao, times(0)).findByEmail(any(String.class));
@@ -199,7 +195,6 @@ public class UserServiceTest {
         when(daoFactory.getUserTypeDao()).thenReturn(userTypeDao);
 
         final UserDto userDto = userDataStubProvider.getUserDtoWithNullPassword();
-//        when(userDao.findByEmail(userDto.getEmail())).thenReturn(Optional.empty());
 
         userService.signUp(userDto);
         verify(userDao, times(0)).findByEmail(any(String.class));

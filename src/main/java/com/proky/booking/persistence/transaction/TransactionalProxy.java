@@ -38,7 +38,6 @@ public class TransactionalProxy {
         return enhancer.create(new Class[]{DaoFactory.class}, new Object[] {daoFactory});
     }
 
-
     private MethodInterceptor getMethodInterceptorCallback() {
         return (obj, method, args, proxy) -> {
 

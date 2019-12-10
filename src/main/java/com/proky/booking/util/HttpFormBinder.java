@@ -34,13 +34,11 @@ public class HttpFormBinder {
             Constructor constructor = tClass.getConstructor();
             final Object object = constructor.newInstance();
             final Field[] fields = tClass.getDeclaredFields();
-            log.debug("fields amount, {}", fields.length);
 
             bindParametersToFields(fields, parameterMap, object);
 
             final Field[] superClassFields = tClass.getSuperclass().getDeclaredFields();
             if (superClassFields.length > 0) {
-                log.debug("superClass fields length, {}", superClassFields.length);
                 bindParametersToFields(superClassFields, parameterMap, object);
             }
 

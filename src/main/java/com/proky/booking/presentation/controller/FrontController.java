@@ -26,14 +26,12 @@ public class FrontController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.debug("doGet");
         handleRequest(req, resp);
     }
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.debug("doPost");
         handleRequest(req, resp);
     }
 
@@ -49,11 +47,8 @@ public class FrontController extends HttpServlet {
         if (viewPath == null) {
             response.sendRedirect(ViewProperties.getValue(ERROR_RUNTIME));
         } else if (viewPath.startsWith(Commands.REDIRECT)) {
-            log.debug("REDIRECT!!!");
-            log.info(viewPath);
             response.sendRedirect(viewPath.replace(Commands.REDIRECT, ""));
         } else {
-            log.debug("FORWARD!!!");
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(viewPath);
             dispatcher.forward(request, response);
         }

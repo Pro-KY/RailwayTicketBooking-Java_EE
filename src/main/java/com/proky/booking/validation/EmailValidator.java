@@ -22,7 +22,6 @@ public class EmailValidator extends Validator {
         try {
             final String emailValue = (String) field.get(validationObject);
             boolean notValid = !Pattern.matches(emailRegExpPattern, emailValue);
-            log.info("email notValid: {}", notValid);
 
             if (notValid) {
                 message =  new ErrorMessage("error.email");
@@ -33,4 +32,5 @@ public class EmailValidator extends Validator {
             throw new RuntimeException("Can not get access to the "+ validatedField +" value.");
         }
     }
+
 }

@@ -88,11 +88,6 @@ public class TrainServiceTest {
         String stationIdFromRequest = "1";
 
         when(daoFactory.getTrainDao()).thenReturn(trainDao);
-//        when(daoFactory.getRouteStationDao()).thenReturn(routeStationDao);
-
-//        when(trainDao.findTrainsByDateAndTimeAndStation(any(Date.class), any(Time.class), any(Station.class), anyLong(), anyLong())).thenReturn(trains);
-//        when(trainDao.countTrainsByDateAndTimeAndStation(any(Date.class), any(Time.class), any(Station.class))).thenReturn(expectedTrainsAmount);
-//        when(routeStationDao.findAllByRouteId(anyLong())).thenReturn(new ArrayList<>());
 
         final PageDto defaultPageDto = pageDtoStubProvider.getDefaultPageDto();
         trainService.findTrains(defaultPageDto, incorrectDepartureDateFromRequest, incorrectDepartureTimeFromRequest, stationIdFromRequest);

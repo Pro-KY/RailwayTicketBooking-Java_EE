@@ -80,12 +80,10 @@ public class PaginationService {
 
     public void calculateAllPagesAmount() {
         allPagesAmount = allRowsAmount / this.pageSize;
-        log.info("exp: {}", allPagesAmount % this.pageSize);
         allPagesAmount += allRowsAmount % this.pageSize > 0 ? 1 : 0;
     }
 
     public void calculateEndVisibleIndex() {
-        log.debug("endVisibleIndex before: {}", endVisibleIndex);
         if (allPagesAmount == 0) {
             endVisibleIndex = 0;
         } else if (endVisibleIndex == 0 & allPagesAmount > DEFAULT_END_INDEX) {
@@ -93,7 +91,6 @@ public class PaginationService {
         } else if (allPagesAmount < DEFAULT_END_INDEX) {
             endVisibleIndex = allPagesAmount - 1;
         }
-        log.debug("endVisibleIndex after: {}", endVisibleIndex);
     }
 
     public void calculateOffset() { // 2
@@ -129,10 +126,6 @@ public class PaginationService {
         startVisibleIndex += forward ? 1 : -1;
         endVisibleIndex += forward ? 1 : -1;
         currentPageIndex += forward ? 1 : -1;
-
-        log.debug("shift indexes");
-        log.debug("startVisibleIndex: {}", startVisibleIndex);
-        log.debug("endVisibleIndex: {}", endVisibleIndex);
     }
 
     public long getPageSize() {

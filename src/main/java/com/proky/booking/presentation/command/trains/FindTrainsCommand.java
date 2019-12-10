@@ -39,7 +39,6 @@ public class FindTrainsCommand implements ICommand {
         if (validationResult.isSuccessfull()) {
             final PageDto requestPageDto = new PageDto();
             requestPageDto.setRequestParameters(request);
-            log.info("pageDto in {}", requestPageDto);
 
             final String departureDate = findTrainDto.getDepartureDate();
             final String departureTime = findTrainDto.getDepartureTime();
@@ -48,8 +47,6 @@ public class FindTrainsCommand implements ICommand {
             final ServiceFactory serviceFactory = ServiceFactory.getInstance();
             final PageDto currentPageDto = serviceFactory.getTrainService()
                     .findTrains(requestPageDto, departureDate, departureTime, goingToId);
-
-            log.info("pageDto out {}", currentPageDto);
 
             session.setAttribute(Attributes.TRAINS_PAGE_DTO, currentPageDto);
 

@@ -29,7 +29,6 @@ public class SignInCommand implements ICommand {
         UrlBuilder urlBuilder = new UrlBuilder(true);
         final UserService userService = ServiceFactory.getInstance().getUserService();
 
-        log.debug("user signed in");
         final HttpFormBinder requestDataBinder = HttpFormBinder.getInstance();
         final UserDto enteredUserCredentials = requestDataBinder.bindToDto(request, UserDto.class);
 
@@ -45,7 +44,6 @@ public class SignInCommand implements ICommand {
             String command = isAdministrator ? Commands.ALL_USERS : Commands.HOME;
             urlBuilder.setAttribute(Attributes.COMMAND, command);
             urlBuilder.setContextPath(request.getContextPath());
-            log.info(request.getContextPath());
 
             session.setAttribute(Attributes.USER_TYPE, userTypeEnum);
             session.setAttribute(Attributes.USER, userDto);

@@ -23,7 +23,6 @@ public class PageDto implements Serializable {
     private Long endPageIndex;
     private long allPagesAmount;
 
-//    private Long userId;
     private List pageList;
 
     private PageDto(Builder builder) {
@@ -101,14 +100,6 @@ public class PageDto implements Serializable {
         this.pageSize = pageSize;
     }
 
-//    public Long getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(Long userId) {
-//        this.userId = userId;
-//    }
-
     public boolean getIsLeftButtonDisabled() {
         return isLeftButtonDisabled;
     }
@@ -147,22 +138,6 @@ public class PageDto implements Serializable {
 
     public void setAllPagesAmount(long allPagesAmount) {
         this.allPagesAmount = allPagesAmount;
-    }
-
-    @Override
-    public String toString() {
-        return "PaginationDto{" +
-                "isLeftButtonDisabled=" + isLeftButtonDisabled +
-                ", isRightButtonDisabled=" + isRightButtonDisabled +
-                ", startPageIndex=" + startPageIndex +
-                ", endPageIndex=" + endPageIndex +
-                ", currentPageIndex=" + currentPageIndex +
-                ", isNextClicked=" + isNextClicked +
-                ", isPreviousClicked=" + isPreviousClicked +
-                ", allPagesAmount=" + allPagesAmount +
-                ", pageSize=" + pageSize +
-                ", paginationListSize=" + (pageList != null ? pageList.size() : "empty") +
-                '}';
     }
 
 
@@ -257,4 +232,19 @@ public class PageDto implements Serializable {
         return Objects.hash(currentPageIndex, isNextClicked, isPreviousClicked, pageSize, isLeftButtonDisabled, isRightButtonDisabled, startPageIndex, endPageIndex, allPagesAmount);
     }
 
+    @Override
+    public String toString() {
+        return "PaginationDto{" +
+                "isLeftButtonDisabled=" + isLeftButtonDisabled +
+                ", isRightButtonDisabled=" + isRightButtonDisabled +
+                ", startPageIndex=" + startPageIndex +
+                ", endPageIndex=" + endPageIndex +
+                ", currentPageIndex=" + currentPageIndex +
+                ", isNextClicked=" + isNextClicked +
+                ", isPreviousClicked=" + isPreviousClicked +
+                ", allPagesAmount=" + allPagesAmount +
+                ", pageSize=" + pageSize +
+                ", paginationListSize=" + (pageList != null ? pageList.size() : "empty") +
+                '}';
+    }
 }

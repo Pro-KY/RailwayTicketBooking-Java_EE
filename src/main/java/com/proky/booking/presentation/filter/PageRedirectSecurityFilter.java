@@ -45,17 +45,11 @@ public class PageRedirectSecurityFilter implements Filter {
 
         final String contextPath = httpRequest.getContextPath();
         String uri = httpRequest.getRequestURI().replace(contextPath, "");
-//        log.info("REDIRECT Resource: {}", uri);
-
-        String adminPath = contextPath + "/jsp/admin";
-//        log.info("adminPath {}", adminPath);
 
         UserTypeEnum userType = CommandUtil.getCurrentUserType(session);
-//        log.info("userType is {}", userType);
 
         final boolean isAdmin = userType.equals(UserTypeEnum.ADMIN);
         final boolean isUser = userType.equals(UserTypeEnum.USER);
-        log.info(isAdmin);
 
         final boolean isForbidden = isForbiddenURI(uri);
         final boolean isSignInOrSignUp = isSignInOrSignUp(uri);
@@ -67,12 +61,9 @@ public class PageRedirectSecurityFilter implements Filter {
             } else {
                 log.info("not found");
                 httpRequest.getRequestDispatcher(notFoundErrorPath).forward(request, response);
-//                httpRequest.getRequestDispatcher(contextPath + notFoundErrorPath).forward(request, response);
             }
         } else if(isSignInOrSignUp && (isUser || isAdmin)) {
-//            log.debug("signed_in user tried to sign_in or sign_up again!");
             httpResponse.sendRedirect(contextPath + indexPath);
-//            httpRequest.getRequestDispatcher(contextPath + indexPath).forward(request, response);
         } else {
             chain.doFilter(request, response);
         }

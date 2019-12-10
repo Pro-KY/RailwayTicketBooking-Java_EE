@@ -21,18 +21,14 @@ public class HomeCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        log.debug("home command called");
 
         final HttpSession session = request.getSession();
 
         if (session.getAttribute(Attributes.STATIONS) == null) {
-            log.info("stations is null");
             final ServiceFactory serviceFactory = ServiceFactory.getInstance();
             final StationService stationService = serviceFactory.getStationService();
             final List<Station> allStations = stationService.findAllStations();
             session.setAttribute(Attributes.STATIONS, allStations);
-        } else {
-            log.info("stations is not null");
         }
 
         return new UrlBuilder(true, request.getContextPath(),ViewProperties.getValue(INDEX)).buildURL();

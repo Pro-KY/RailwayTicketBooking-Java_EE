@@ -40,7 +40,6 @@ public class CommandFactory {
 
     public static ICommand getCommand(HttpServletRequest request) {
         final String clientCommand = request.getParameter(Parameters.COMMAND);
-        log.debug("======= COMMAND name : {} ======= ", clientCommand);
 
         boolean isCommandInvalid = clientCommand == null || clientCommand.isEmpty() || commandHashMap.get(clientCommand) == null;
         return isCommandInvalid ? new HomeCommand() : commandHashMap.get(clientCommand);

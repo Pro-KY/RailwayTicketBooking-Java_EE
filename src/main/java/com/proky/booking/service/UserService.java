@@ -53,7 +53,6 @@ public class UserService {
                 .findAllByType(userType, pageSize, offSet)
                 .stream()
                 .map(user -> modelMapper.map(user, UserDto.class))
-                .peek(userDto -> log.info("userDto: {}", userDto))
                 .collect(Collectors.toList());
 
         pageDto.setPageList(allPassengers);
@@ -85,7 +84,6 @@ public class UserService {
     public void updateUser(UserDto userDto) {
         final IUserDao userDao = daoFactory.getUserDao();
 
-        log.info("update called");
         final Long userId = Long.parseLong(userDto.getId());
         final User user = userDao.findById(userId).orElseThrow(() -> new ServiceException("alert.entity.notfound"));
         user.setFirstName(userDto.getFirstName());

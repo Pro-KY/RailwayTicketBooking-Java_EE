@@ -13,7 +13,7 @@ import java.util.Calendar;
  */
 public class CompanyTag extends TagSupport {
     private static final Logger log = LogManager.getLogger(CompanyTag.class);
-    private String name; // attribute name
+    private String name;
 
     public String getName() {
         return name;

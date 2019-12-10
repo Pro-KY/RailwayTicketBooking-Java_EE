@@ -6,8 +6,6 @@ import java.util.Map;
 
 public class ValidationResult {
     private boolean isSuccessfull = true;
-    // field, ErrorMessage
-//    private Map<String, String> errorMessages = new HashMap<>();
     private Map<String, ErrorMessage> errorMessages = new HashMap<>();
 
     public boolean isSuccessfull() {

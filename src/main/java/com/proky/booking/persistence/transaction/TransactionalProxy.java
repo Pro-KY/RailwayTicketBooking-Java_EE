@@ -7,16 +7,29 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * The class extracts values from a ResultSet and map to an entity of T type
+ */
 
+/**
+ * The class creates proxy object at runtime that provides transaction functionality
+ * for methods marked with @{code Transactional} annotation
+ * @see Transactional
+ */
 public class TransactionalProxy {
     private static final Logger log = LogManager.getLogger(TransactionalProxy.class);
-
     private DaoFactory daoFactory;
 
     public TransactionalProxy(DaoFactory daoFactory) {
         this.daoFactory = daoFactory;
     }
 
+    /**
+     * Create a proxy object based on a Class object passed as an argument
+     *
+     * @param tClass an object that needs a transaction functionality
+     * @return a proxy object
+     */
     public Object createProxy(Class<?> tClass) {
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(tClass);
@@ -24,6 +37,7 @@ public class TransactionalProxy {
 
         return enhancer.create(new Class[]{DaoFactory.class}, new Object[] {daoFactory});
     }
+
 
     private MethodInterceptor getMethodInterceptorCallback() {
         return (obj, method, args, proxy) -> {

@@ -41,8 +41,18 @@ public class ServiceFactory {
         return mInstance;
     }
 
-    private static <T> T getService(T instance, Class<? extends T> aClass) {
-        AnnotationChecker annotationChecker = new AnnotationChecker();
+
+    /**
+     * Checks whether instance contain methods marked as Transactional and creates a proxy
+     * object based on passed instance as an argument
+     *
+     * @param aClass an auxiliary object to cast proxy object to required type T
+     * @param serviceObject previously created service object
+     * @param <T> type of a service object
+     * @return a proxy or simple service object
+     */
+    private static <T> T getService(T serviceObject, Class<? extends T> aClass) {
+        AnnotationChecker annotationChecker = AnnotationChecker.getInstance();
         final boolean isPresent = annotationChecker.isAnnotationInCLass(aClass, annotation -> (annotation instanceof Transactional));
 
         T service;
@@ -51,11 +61,10 @@ public class ServiceFactory {
             TransactionalProxy tTransactionalProxy = new TransactionalProxy(daoFactory);
             service = aClass.cast(tTransactionalProxy.createProxy(aClass));
         } else {
-            service = instance;
+            service = serviceObject;
         }
         return service;
     }
-
 
     private <T> T getServiceFromMap(Class<? extends T> aClass) {
         return aClass.cast(servicesMap.get(aClass));

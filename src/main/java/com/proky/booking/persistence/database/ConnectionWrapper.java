@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
 
+/**
+ * The class wraps a @{code Connection} to the data source for usage in in the multi-threading environment.
+ */
 public class ConnectionWrapper implements AutoCloseable {
     private static final Logger log = LogManager.getLogger(ConnectionWrapper.class);
     private static ConnectionWrapper mInstance;
@@ -22,7 +25,12 @@ public class ConnectionWrapper implements AutoCloseable {
         return mInstance;
     }
 
-
+    /**
+     * Binds new database connection to the current thread of execution if connection is not already bound and
+     * get the connection.
+     *
+     * @return a connection to a database
+     */
     public Connection getConnection() {
         initConnection();
         final Connection connection = connectionThreadLocal.get();
@@ -39,6 +47,11 @@ public class ConnectionWrapper implements AutoCloseable {
         }
     }
 
+    /**
+     * Set @{code boolean} flag that indicates whether a connection should be used in in a transaction
+     *
+     * @param useInTransaction true - use in a transaction, otherwise false
+     */
     public void useInTransaction(boolean useInTransaction) {
 //        log.debug("useInTransaction = {}", useInTransaction);
         usedInTransactionThreadLocal.set(useInTransaction);
@@ -46,6 +59,11 @@ public class ConnectionWrapper implements AutoCloseable {
         setAutoCommit(!useInTransaction);
     }
 
+    /**
+     * Enables or disables database connection read mode
+     *
+     * @param readOnly true - enable read only mode, false - disable read only mode
+     */
     public void setReadOnly(boolean readOnly) {
         try {
             getConnection().setReadOnly(readOnly);
@@ -54,6 +72,11 @@ public class ConnectionWrapper implements AutoCloseable {
         }
     }
 
+    /**
+     * Changes database connection auto commit mode
+     *
+     * @param autoCommit true - enable auto commit, false - disable it
+     */
     private void setAutoCommit(boolean autoCommit) {
         try {
             getConnection().setAutoCommit(autoCommit);
@@ -62,6 +85,9 @@ public class ConnectionWrapper implements AutoCloseable {
         }
     }
 
+    /**
+     * Return a database connection to connection pool and unbind from the current thread of execution
+     */
     @Override
     public void close() {
         if (!usedInTransactionThreadLocal.get()) {

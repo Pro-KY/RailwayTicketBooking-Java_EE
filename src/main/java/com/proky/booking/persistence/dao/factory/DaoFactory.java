@@ -3,6 +3,9 @@ package com.proky.booking.persistence.dao.factory;
 
 import com.proky.booking.persistence.dao.*;
 
+/**
+ * Factory for creating Dao objects.
+ */
 public interface DaoFactory {
     IUserDao getUserDao();
     IUserTypeDao getUserTypeDao();

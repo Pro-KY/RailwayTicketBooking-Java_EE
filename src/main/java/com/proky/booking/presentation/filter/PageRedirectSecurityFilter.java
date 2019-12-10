@@ -16,7 +16,9 @@ import java.util.Set;
 
 import static com.proky.booking.util.properties.ViewProperties.*;
 
-
+/**
+ * The class restricts access to forbidden URL paths.
+ */
 public class PageRedirectSecurityFilter implements Filter {
     private static final Logger log = LogManager.getLogger(PageRedirectSecurityFilter.class);
     private static final Set<String> forbiddenViewPaths = new HashSet<>();

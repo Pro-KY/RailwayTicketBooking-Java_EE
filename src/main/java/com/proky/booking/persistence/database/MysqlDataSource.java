@@ -1,6 +1,5 @@
 package com.proky.booking.persistence.database;
 
-import com.proky.booking.persistence.dao.mysql.UserTypeDaoImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,6 +9,11 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * The class is a wrapper of @{code DataSource} used to initialize @{code DataSource} and retrieve database connection.
+ *
+ * @see DataSource
+ */
 public class MysqlDataSource {
     private static final Logger log = LogManager.getLogger(MysqlDataSource.class);
     private static MysqlDataSource instance;
@@ -26,6 +30,9 @@ public class MysqlDataSource {
         initDataSource();
     }
 
+    /**
+     * Initialize @{code DataSource} using tomcat connection pool via JNDI mechanism.
+     */
     private void initDataSource() {
         try {
             final InitialContext ctx = new InitialContext();
@@ -35,6 +42,11 @@ public class MysqlDataSource {
         }
     }
 
+    /**
+     * get connection to the data source
+     *
+     * @return a connection to the data source or null if could not get connection from a pool
+     */
     public Connection getConnection() {
         Connection conn = null;
 

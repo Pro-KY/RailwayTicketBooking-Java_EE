@@ -3,6 +3,9 @@ package com.proky.booking.presentation.filter;
 import javax.servlet.*;
 import java.io.IOException;
 
+/**
+ * The class applies an encoding configured in web.xml to request content.
+ */
 public class EncodingFilter implements Filter {
     private String code;
 

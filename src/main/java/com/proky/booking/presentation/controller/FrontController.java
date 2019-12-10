@@ -15,6 +15,12 @@ import java.io.IOException;
 
 import static com.proky.booking.util.properties.ViewProperties.ERROR_RUNTIME;
 
+
+/**
+ * The class is a single entry point for a client request in the application. Used to receive requests
+ * and delegate them to the commands for actual processing
+ * and getting specific page. After that forward or redirect request to the URL.
+ */
 public class FrontController extends HttpServlet {
     private static final Logger log = LogManager.getLogger(FrontController.class);
 
@@ -24,12 +30,17 @@ public class FrontController extends HttpServlet {
         handleRequest(req, resp);
     }
 
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.debug("doPost");
         handleRequest(req, resp);
     }
 
+
+    /**
+     * Handle incoming request and forward or redirect to specific URL
+     */
     private void handleRequest (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final ICommand command = CommandFactory.getCommand(request);
 

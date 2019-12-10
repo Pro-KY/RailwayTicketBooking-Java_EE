@@ -1,12 +1,15 @@
 package com.proky.booking.exception;
-import static com.proky.booking.util.constans.ExceptionsEnum.SERVICE_EXCEPTION;
 
+/**
+ * The class represents custom exception thrown from the Service layer with message describing the cause.
+ */
 public class ServiceException extends RuntimeException {
+    public static final String NAME = "ServiceException";
 
     public ServiceException() {}
 
     public ServiceException(String message) {
-        super(SERVICE_EXCEPTION + message);
+        super(NAME + message);
     }
 
     public ServiceException(String message, Throwable cause) {

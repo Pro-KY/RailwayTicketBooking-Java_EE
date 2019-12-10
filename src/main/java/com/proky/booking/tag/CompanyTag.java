@@ -8,6 +8,9 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 import java.util.Calendar;
 
+/**
+ * Custom tag implementation for displaying company name with current year.
+ */
 public class CompanyTag extends TagSupport {
     private static final Logger log = LogManager.getLogger(CompanyTag.class);
     private String name; // attribute name

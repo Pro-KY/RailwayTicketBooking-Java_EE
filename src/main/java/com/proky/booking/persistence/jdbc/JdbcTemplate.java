@@ -1,7 +1,9 @@
 package com.proky.booking.persistence.jdbc;
 
+import com.proky.booking.exception.DataAccessException;
 import com.proky.booking.persistence.database.ConnectionWrapper;
 import com.proky.booking.persistence.mapper.EntityMapper;
+import com.proky.booking.util.properties.SqlProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/*
+ *  This class executes SQL queries or updates, iterates over ResultSets and maps it to List or entity of generic type T
+ *  through {@code EntityMapper<T>}
+ */
 public class JdbcTemplate {
     private static final Logger log = LogManager.getLogger(JdbcTemplate.class);
     private static JdbcTemplate instance;
@@ -39,8 +45,8 @@ public class JdbcTemplate {
                 resultList.add(entity);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            resultList = new ArrayList<>();
+            log.error(e.getMessage(), e);
+            throw new DataAccessException(e);
         } finally {
             connectionWrapper.close();
         }
@@ -51,6 +57,7 @@ public class JdbcTemplate {
     public <T> Optional<T> findByQuery(String sql, EntityMapper<T> entityMapper, Object... parameters) {
         final Connection connection = connectionWrapper.getConnection();
         final JdbcQuery jdbcQuery = new JdbcQuery(connection, sql);
+
         Optional<T> entity = Optional.empty();
         try (ResultSet result = jdbcQuery.select(parameters)) {
             if(result.next()) {
@@ -58,6 +65,7 @@ public class JdbcTemplate {
             }
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
+            throw new DataAccessException(e);
         }  finally {
             connectionWrapper.close();
         }
@@ -74,6 +82,7 @@ public class JdbcTemplate {
             }
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
+            throw new DataAccessException(e);
         }  finally {
             connectionWrapper.close();
         }
@@ -87,6 +96,8 @@ public class JdbcTemplate {
 
         try {
             insertedId = jdbcQuery.saveOrUpdate(parameters);
+        } catch (SQLException e) {
+            throw new DataAccessException(e);
         } finally {
             closeResultSet(jdbcQuery.getResult());
             connectionWrapper.close();
@@ -101,10 +112,14 @@ public class JdbcTemplate {
 
         try {
             isDeleted = jdbcQuery.delete(parameters);
+        } catch (SQLException e) {
+            log.error(e.getMessage(), e);
+            throw new DataAccessException(e);
         } finally {
             closeResultSet(jdbcQuery.getResult());
             connectionWrapper.close();
         }
+
         return isDeleted;
     }
 
@@ -114,7 +129,8 @@ public class JdbcTemplate {
                 resultSet.close();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
+            throw new DataAccessException(e);
         }
     }
 }

@@ -9,5 +9,12 @@ import java.sql.Time;
 import java.util.List;
 
 public interface IRouteStationDao extends IDao<RouteStation> {
+
+    /**
+     * Find all stations on a route by route identifier.
+     *
+     * @param routeId  route identifier
+     * @return list of found route stations
+     */
     List<RouteStation> findAllByRouteId(Long routeId);
 }

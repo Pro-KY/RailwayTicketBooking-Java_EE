@@ -1,10 +1,9 @@
 package com.proky.booking.exception;
 
-import java.sql.SQLException;
-
+/**
+ * The class represents custom exception used as a wrapper of SQLException thrown from the Dao layer.
+ */
 public class DataAccessException extends RuntimeException {
-    private int errorCode;
-    private String state;
 
     public DataAccessException(String message) {
         super(message);
@@ -12,25 +11,6 @@ public class DataAccessException extends RuntimeException {
 
     public DataAccessException(String message, Throwable cause) {
         super(message, cause);
-        getCodeAndState(cause);
-    }
-
-    private void getCodeAndState(Throwable cause) {
-        if (cause instanceof SQLException) {
-            errorCode = ((SQLException) cause).getErrorCode();
-            state = ((SQLException) cause).getSQLState();
-        } else {
-            errorCode = -1;
-            state = cause.getMessage();
-        }
-    }
-
-    public int getErrorCode() {
-        return errorCode;
-    }
-
-    public String getState() {
-        return state;
     }
 
     public DataAccessException(Throwable cause) {

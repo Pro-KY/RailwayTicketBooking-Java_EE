@@ -26,6 +26,9 @@ import java.util.Set;
 import static com.proky.booking.util.constans.http.Commands.*;
 import static com.proky.booking.util.properties.ViewProperties.*;
 
+/**
+ * The class restricts access to forbidden commands.
+ */
 public class ServletSecurityFilter implements Filter {
     private static final Logger log = LogManager.getLogger(ServletSecurityFilter.class);
     private static final Set<String> forbiddenCommands = new HashSet<>();
@@ -38,7 +41,7 @@ public class ServletSecurityFilter implements Filter {
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException { }
+    public void init(FilterConfig filterConfig) { }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
